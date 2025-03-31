@@ -375,20 +375,23 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 loading="lazy"
                             />
                         </h2>
-                        <p className="mb-4 md:mb-8 text-[18.07px] md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-[31.81px] tracking-[0.01em]">
+                        <p className="hidden lg:block mb-4 md:mb-8 text-[18.07px] md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-[31.81px] tracking-[0.01em]">
                             Ingresa tu email para obtener tus resultados y
                             recibir un email con un {" "}
-                            <strong>cupón exclusivo de 10% OFF</strong>{" "}
-                            <span className="ml-1 hidden lg:inline-flex">
-                                ¡Solo para ti!
-                            </span>
+                            <strong>cupón exclusivo de 10% OFF</strong> ¡Solo
+                            para ti!
                         </p>
+                        <p className="lg:hidden mb-4 md:mb-8 text-[18.07px] md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-[31.81px] tracking-[0.01em]">
+                            Ingresa tu email para tener tus resultados y un
+                            <strong>cupón exclusivo para ti!</strong>
+                        </p>
+
                         <div className=" w-full flex items-center justify-center ">
                             <input
                                 ref={emailRef}
                                 type="email"
                                 placeholder="Déjanos tu email aquí"
-                                className="bg-white w-full md:w-9/12 2xl:w-10/12 hover:bg-gray-100 text-[#FF9900] font-semibold  px-6 rounded-[20px] text-lg transition-colors border-2 border-[#FF9900] focus:ring-0 h-[80px] 2xl:h-[94px]  focus:outline-none text-[20.94px] placeholder:text-[20.94px] placeholder:text-[#FF9900] placeholder:text-center"
+                                className="bg-white w-full md:w-9/12 2xl:w-10/12 hover:bg-gray-100 text-[#FF9900] font-semibold  px-6  rounded-[14px] lg:rounded-[20px] text-lg transition-colors border-2 border-[#FF9900] focus:ring-0 h-[70px] lg:h-[80px] 2xl:h-[94px]  focus:outline-none text-[20.94px] placeholder:text-[20.94px] placeholder:text-[#FF9900] placeholder:text-center"
                             ></input>
                         </div>
                         {error && (
@@ -405,7 +408,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                             <button
                                 type="submit"
                                 disabled={saving}
-                                className="bg-white hover:!bg-[#FF9900] text-[#FF9900] hover:text-white font-semibold py-4 px-6 rounded-[20px] text-[20.13px] 2xl:text-[23.13px] tracking-[0.01em] transition-colors w-[393px] h-[80px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                                className="bg-white hover:!bg-[#FF9900] text-[#FF9900] hover:text-white font-semibold py-4 px-6 rounded-[14px] lg:rounded-[20px] text-[20.13px] 2xl:text-[23.13px] tracking-[0.01em] transition-colors w-[393px] h-[70px] lg:h-[80px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                             >
                                 {saving
                                     ? "Enviando..."
