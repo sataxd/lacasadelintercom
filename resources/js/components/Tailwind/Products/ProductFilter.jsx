@@ -261,29 +261,50 @@ const ProductFilter = ({ products, categories, anuncio }) => {
 
             <div className=" lg:hidden mx-auto gap-6">
                 {/* Grid de productos */}
-                <div className="w-full grid grid-cols-1  md:grid-cols-2 gap-4 gap-y-8">
+                <div className="w-full grid grid-cols-2 gap-4 gap-y-8">
                     {filteredProducts && filteredProducts.length > 0 ? (
                         filteredProducts.slice(0, 4).map((product, index) => (
                             <a
                                 key={index}
                                 href={`/product/${product.slug}`}
-                                className="rounded-lg w-full group cursor-pointer"
+                                className="rounded-lg w-full group cursor-pointer relative"
                             >
+                                {product.discount && (
+                                    <div className="absolute top-2 right-2 bg-[#212529] z-50 text-white text-base font-medium px-3 pt-[2px] pb-[4px] rounded-2xl">
+                                        <span className="text-[10.09px] text-center pt-1 flex w-full items-center justify-center  leading-[10.72px]">
+                                            Ahorras
+                                        </span>
+                                        <div className="flex items-center gap-1 ">
+                                            <img
+                                                src="https://i.ibb.co/S7R3V0tf/image.png"
+                                                className="w-2 mb-1"
+                                                alt="Descuento"
+                                            />
+                                            <p className="text-[10.08px]  font-bold leading-[13px]">
+                                                S/{" "}
+                                                {parseFloat(
+                                                    product.price -
+                                                        product.discount
+                                                ).toFixed(0)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                                 <img
                                     src={`/api/items/media/${product.image}`}
                                     alt={product.name}
-                                    className="bg-[#FAFAFA] w-full h-auto object-cover mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300"
+                                    className="bg-[#FAFAFA] w-full h-auto object-cover mb-2 md:mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300 rounded-md"
                                     onError={(e) =>
                                         (e.target.src =
                                             "/api/cover/thumbnail/null")
                                     }
                                 />
-                                <div className="px-6 text-[#212529]">
-                                    <div className="flex justify-between">
-                                        <h3 className="text-[29.44px] leading-[41.64px] font-semibold line-clamp-2">
-                                            {product.name}
+                                <div className="px-0 md:px-6 text-[#212529]">
+                                    <div className="flex justify-between items-center">
+                                        <h3 className="text-[20.44px] leading-[21.64px] md:text-[29.44px] md:leading-[41.64px] font-semibold line-clamp-2">
+                                            {product.name.split(" ")[0]}
                                         </h3>
-                                        <span className="md:text-[25.56px] xl:leading-[39.79px] 2xl:text-[32.56px] tracking-[-0.01em] font-bold text-[#FC58BE]">
+                                        <span className="text-[17.8px] md:text-[25.56px] xl:leading-[39.79px] 2xl:text-[32.56px] tracking-[-0.01em] font-bold text-[#FC58BE]">
                                             S/
                                             {Number(
                                                 product.final_price
@@ -292,26 +313,32 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                     </div>
                                     {/* Precio */}
                                     <div className="flex justify-between items-baseline gap-2">
-                                        {product.summary && (
-                                            <h4 className="text-[16.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                        {product.summary ? (
+                                            <h4 className="text-[9.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
                                                 ({product.summary})
                                             </h4>
+                                        ) : (
+                                            <h4 className="text-[9.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                                {product.name
+                                                    .split(" ")
+                                                    .slice(1)
+                                                    .join(" ")}
+                                            </h4>
                                         )}
-                                        <span className="text-[16.8px] text-[#9F9F9F] font-semibold1 line-through leading-[21.84px]">
+                                        <span className="text-[14.8px] text-[#9F9F9F] font-semibold1 line-through leading-[21.84px]">
                                             S/{Number(product.price).toFixed(2)}
                                         </span>
                                     </div>
                                     <a
                                         href={`/product/${product.slug}`}
-                                        className="block w-full flex gap-2 items-center justify-center fill-[#FDBB2E] border-2 border-[#FDBB2E] text-[#FDBB2E] font-medium py-4 px-4 rounded-xl group-hover:bg-[#FDBB2E] group-hover:fill-[#FFFFFF] group-hover:text-white transition-colors duration-300"
+                                        className="text-sm  w-full flex gap-2 items-center justify-center fill-[#FDBB2E] border-2 border-[#FDBB2E] text-[#FDBB2E] font-medium py-2 md:py-4 px-4 rounded-lg  md:rounded-xl group-hover:bg-[#FDBB2E] group-hover:fill-[#FFFFFF] group-hover:text-white transition-colors duration-300"
                                     >
                                         ¡Lo quiero!
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
-                                            width="17"
-                                            height="14"
                                             viewBox="0 0 17 14"
                                             fill="currrent"
+                                            className="w-3"
                                         >
                                             <path
                                                 d="M16.4986 7.82554C16.8518 7.47235 16.8518 6.89972 16.4986 6.54653L10.743 0.791003C10.3899 0.437815 9.81723 0.437815 9.46404 0.791003C9.11086 1.14419 9.11086 1.71682 9.46404 2.07001L14.5801 7.18604L9.46404 12.3021C9.11086 12.6552 9.11086 13.2279 9.46404 13.5811C9.81723 13.9343 10.3899 13.9343 10.743 13.5811L16.4986 7.82554ZM0.484375 8.09043H15.8591V6.28164H0.484375V8.09043Z"
@@ -342,7 +369,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                     )}
                     {/* Banner promocional */}
                     {anuncio && (
-                        <div className="text-white w-full md:col-span-2">
+                        <div className="text-white w-full col-span-2">
                             <img
                                 src={`/api/ads/media/${anuncio.image}`}
                                 className="w-full h-[200px]   md:h-[305px] object-cover"
@@ -359,19 +386,44 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                             <a
                                 key={index}
                                 href={`/product/${product.slug}`}
-                                className="rounded-lg w-full group cursor-pointer"
+                                className="rounded-lg w-full group cursor-pointer relative"
                             >
+                                {product.discount && (
+                                    <div className="absolute top-2 right-2 bg-[#212529] z-50 text-white text-base font-medium px-3 pt-[2px] pb-[4px] rounded-2xl">
+                                        <span className="text-[10.09px] text-center pt-1 flex w-full items-center justify-center  leading-[10.72px]">
+                                            Ahorras
+                                        </span>
+                                        <div className="flex items-center gap-1 ">
+                                            <img
+                                                src="https://i.ibb.co/S7R3V0tf/image.png"
+                                                className="w-2 mb-1"
+                                                alt="Descuento"
+                                            />
+                                            <p className="text-[10.08px]  font-bold leading-[13px]">
+                                                S/{" "}
+                                                {parseFloat(
+                                                    product.price -
+                                                        product.discount
+                                                ).toFixed(0)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                                 <img
                                     src={`/api/items/media/${product.image}`}
                                     alt={product.name}
-                                    className="bg-[#FAFAFA] w-full h-auto object-cover mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300"
+                                    className="bg-[#FAFAFA] w-full h-auto object-cover mb-2 md:mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300 rounded-md"
+                                    onError={(e) =>
+                                        (e.target.src =
+                                            "/api/cover/thumbnail/null")
+                                    }
                                 />
-                                <div className="px-6 text-[#212529]">
-                                    <div className="flex justify-between">
-                                        <h3 className="text-[29.44px] leading-[41.64px] font-semibold line-clamp-2">
-                                            {product.name}
+                                <div className="px-0 md:px-6 text-[#212529]">
+                                    <div className="flex justify-between items-center">
+                                        <h3 className="text-[20.44px] leading-[21.64px] md:text-[29.44px] md:leading-[41.64px] font-semibold line-clamp-2">
+                                            {product.name.split(" ")[0]}
                                         </h3>
-                                        <span className="md:text-[25.56px] xl:leading-[39.79px] 2xl:text-[32.56px] tracking-[-0.01em] font-bold text-[#FC58BE]">
+                                        <span className="text-[17.8px] md:text-[25.56px] xl:leading-[39.79px] 2xl:text-[32.56px] tracking-[-0.01em] font-bold text-[#FC58BE]">
                                             S/
                                             {Number(
                                                 product.final_price
@@ -380,24 +432,30 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                     </div>
                                     {/* Precio */}
                                     <div className="flex justify-between items-baseline gap-2">
-                                        {product.summary && (
-                                            <h4 className="text-[16.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                        {product.summary ? (
+                                            <h4 className="text-[9.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
                                                 ({product.summary})
                                             </h4>
+                                        ) : (
+                                            <h4 className="text-[9.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                                {product.name
+                                                    .split(" ")
+                                                    .slice(1)
+                                                    .join(" ")}
+                                            </h4>
                                         )}
-                                        <span className="text-[16.8px] text-[#9F9F9F] font-semibold1 line-through leading-[21.84px]">
+                                        <span className="text-[14.8px] text-[#9F9F9F] font-semibold1 line-through leading-[21.84px]">
                                             S/{Number(product.price).toFixed(2)}
                                         </span>
                                     </div>
                                     <a
                                         href={`/product/${product.slug}`}
-                                        className="block w-full flex gap-2 items-center justify-center fill-[#FDBB2E] border-2 border-[#FDBB2E] text-[#FDBB2E] font-medium py-4 px-4 rounded-xl group-hover:bg-[#FDBB2E] group-hover:fill-[#FFFFFF] group-hover:text-white transition-colors duration-300"
+                                        className="text-sm   w-full flex gap-2 items-center justify-center fill-[#FDBB2E] border-2 border-[#FDBB2E] text-[#FDBB2E] font-medium py-2 md:py-4 px-4 rounded-lg  md:rounded-xl group-hover:bg-[#FDBB2E] group-hover:fill-[#FFFFFF] group-hover:text-white transition-colors duration-300"
                                     >
                                         ¡Lo quiero!
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
-                                            width="17"
-                                            height="14"
+                                            className="w-3"
                                             viewBox="0 0 17 14"
                                             fill="currrent"
                                         >
