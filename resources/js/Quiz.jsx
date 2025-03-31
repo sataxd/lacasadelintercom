@@ -110,7 +110,7 @@ const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
                 <img
                     src="assets/img/quizz/quiz_1.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[25vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -178,7 +178,7 @@ const FirstQuiz = ({ setCurrentStep, handleAnswer }) => {
                 <img
                     src="assets/img/quizz/quiz_2.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[25vh] lg:h-[75vh] object-cover  lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover  lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -251,7 +251,7 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
                 <img
                     src="assets/img/quizz/quiz_3.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[25vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-bottom lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -329,7 +329,7 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
                 <img
                     src="assets/img/quizz/quiz_4.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[25vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -344,24 +344,26 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
         e.preventDefault();
         setSaving(true);
         if (!emailRef.current.value) {
-            setError(true);
+            // setError(true);
+            // setSaving(false);
+            // return;
+            handleResult();
+        } else {
+            const request = {
+                email: emailRef.current.value,
+            };
+            const result = await subscriptionsRest.save(request);
             setSaving(false);
-            return;
+
+            if (!result) return;
+
+            emailRef.current.value = null;
+            handleResult();
         }
-        const request = {
-            email: emailRef.current.value,
-        };
-        const result = await subscriptionsRest.save(request);
-        setSaving(false);
-
-        if (!result) return;
-
-        emailRef.current.value = null;
-        handleResult();
     };
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
-            <div className="flex py-4 md:py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
+            <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-0 lg:gap-5 2xl:gap-10">
                     <form onSubmit={onEmailSubmit}>
                         <h2 className="text-[20.27px] leading-[22.12px] md:text-[31.27px] lg:text-[25px] 2xl:text-[32.21px] lg:leading-[46.12px] tracking-[0.01em] font-semibold mb-4 gap-2">
@@ -418,7 +420,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                 <img
                     src="assets/img/quizz/quiz_5.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[25vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -469,7 +471,7 @@ const Result1Quiz = ({}) => {
                 <img
                     src="assets/img/quizz/quiz_6.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[25vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -496,13 +498,13 @@ const Result2Quiz = ({}) => {
                             loading="lazy"
                         />{" "}
                     </h1>
-                    <p className="text-[16.47px] mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em]">
+                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em]">
                         Una copa menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en el canal vaginal y te
                         permitirá moverte cómodamente, sin irritaciones ni
                         fugas.
                     </p>
-                    <p className="text-[16.47px] mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
+                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
                         ¡Revisa tu e-mail para obtener tu descuento exclusivo!
                     </p>
                     <div className="space-x-4 w-full flex justify-center mt-6">
@@ -520,7 +522,7 @@ const Result2Quiz = ({}) => {
                 <img
                     src="assets/img/quizz/quiz_7.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[25vh] lg:h-[75vh] object-cover object-top lg:object-top lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-bottom lg:object-center flex-shrink-0"
                 />
             </div>
         </div>

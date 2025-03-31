@@ -53,12 +53,12 @@ class BasicRest {
                     result?.message || "Ocurrio un error inesperado"
                 );
 
-            Notify.add({
+            /* Notify.add({
                 icon: "/assets/img/icon.png",
                 title: "Correcto",
                 body: result.message,
                 type: "success",
-            });
+            });*/
             callback?.();
             console.log(result);
             return result;
