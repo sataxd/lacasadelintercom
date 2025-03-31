@@ -361,8 +361,8 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
     };
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
-            <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
-                <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-5 2xl:gap-10">
+            <div className="flex py-4 md:py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
+                <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-0 lg:gap-5 2xl:gap-10">
                     <form onSubmit={onEmailSubmit}>
                         <h2 className="text-[20.27px] leading-[22.12px] md:text-[31.27px] lg:text-[25px] 2xl:text-[32.21px] lg:leading-[46.12px] tracking-[0.01em] font-semibold mb-4 gap-2">
                             ¡Genial! Hemos encontrado el producto menstrual
@@ -373,11 +373,13 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 loading="lazy"
                             />
                         </h2>
-                        <p className="mb-8 text-[18.07px] md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-[31.81px] tracking-[0.01em]">
+                        <p className="mb-4 md:mb-8 text-[18.07px] md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-[31.81px] tracking-[0.01em]">
                             Ingresa tu email para obtener tus resultados y
                             recibir un email con un {" "}
-                            <strong>cupón exclusivo de 10% OFF</strong> ¡Solo
-                            para ti!
+                            <strong>cupón exclusivo de 10% OFF</strong>{" "}
+                            <span className="ml-1 hidden lg:inline-flex">
+                                ¡Solo para ti!
+                            </span>
                         </p>
                         <div className=" w-full flex items-center justify-center ">
                             <input
@@ -393,7 +395,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 ...
                             </p>
                         )}
-                        <p className="mb-8 text-[15.78px] lg:text-[14px] 2xl:text-[16.26px]  leading-[22.84px] tracking-[0.01em] mt-6 text-[#000000]">
+                        <p className="mb-8 text-[15.78px] lg:text-[14px] 2xl:text-[16.26px]  leading-[22.84px] tracking-[0.01em] mt-4 md:mt-6 text-[#000000]">
                             Dejándonos tu e-mail aceptas recibir novedades y
                             promociones de wefem
                         </p>
