@@ -84,7 +84,7 @@ const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1 md:order-none flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] max-w-[44rem] lg:px-0 lg:max-w-lg 2xl:max-w-2xl text-center flex flex-col gap-5 2xl:gap-10">
-                    <h1 className="text-3xl md:text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
+                    <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
                     <h2 className="text-base md:text-lg lg:text-xl  2xl:text-[30.75px] tracking-[1%] font-semibold ">
@@ -106,11 +106,11 @@ const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-end  w-full md:w-1/2">
+            <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_1.png"
                     alt="weFem productos"
-                    className="w-full aspect-square 3xs:h-[50vh] md:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[30vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -122,10 +122,10 @@ const FirstQuiz = ({ setCurrentStep, handleAnswer }) => {
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1 md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] max-w-[44rem] lg:px-0 lg:max-w-lg 2xl:max-w-[44rem] text-center flex flex-col gap-5 2xl:gap-10">
-                    <h1 className="text-3xl md:text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
+                    <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <p className="text-xl lg:text-2xl 2xl:text-3xl font-semibold gap-2">
+                    <p className="text-base lg:text-2xl 2xl:text-3xl font-semibold gap-2">
                         ¿Esta es la primera vez que utilizarías un <br /> método
                         alternativo a toallas y tampones?
                         <img
@@ -174,11 +174,11 @@ const FirstQuiz = ({ setCurrentStep, handleAnswer }) => {
                 </div>
             </div>
 
-            <div className="flex justify-end  w-full md:w-1/2">
+            <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_2.png"
                     alt="weFem productos"
-                    className="w-full aspect-square 3xs:h-[50vh] md:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[30vh] lg:h-[75vh] object-cover object-top  lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -190,10 +190,10 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-5 2xl:gap-10">
-                    <h1 className="text-3xl md:text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
+                    <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <h2 className="text-xl lg:text-2xl 2xl:text-3xl font-semibold gap-2">
+                    <h2 className="text-base lg:text-2xl 2xl:text-3xl font-semibold gap-2">
                         ¿Cual es tu tipo de flujo?{" "}
                         <img
                             src="/assets/img/emojis/drop-of-blood.png"
@@ -247,11 +247,11 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
                 </div>
             </div>
 
-            <div className="flex justify-end  w-full md:w-1/2">
+            <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_3.png"
                     alt="weFem productos"
-                    className="w-full aspect-square 3xs:h-[50vh] md:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[30vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -263,10 +263,10 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-5 ">
-                    <h1 className="text-3xl md:text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
+                    <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <h2 className="text-xl lg:text-2xl 2xl:text-3xl font-semibold gap-2">
+                    <h2 className="text-base lg:text-2xl 2xl:text-3xl font-semibold gap-2">
                         ¿Te interesaría tener relaciones con <br /> la regla sin
                         que manche?{" "}
                         <img
@@ -325,11 +325,11 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
                 </div>
             </div>
 
-            <div className="flex justify-end  w-full md:w-1/2">
+            <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_4.png"
                     alt="weFem productos"
-                    className="w-full aspect-square 3xs:h-[50vh] md:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[30vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -412,11 +412,11 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                 </div>
             </div>
 
-            <div className="flex justify-end  w-full lg:w-1/2">
+            <div className="flex pt-4 lg:pt-0  justify-end    w-full lg:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_5.png"
                     alt="weFem productos"
-                    className="w-full aspect-square 3xs:h-[50vh] md:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[30vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -463,11 +463,11 @@ const Result1Quiz = ({}) => {
                 </div>
             </div>
 
-            <div className="flex justify-end  w-full lg:w-1/2">
+            <div className="flex pt-4 lg:pt-0  justify-end  w-full lg:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_6.png"
                     alt="weFem productos"
-                    className="w-full aspect-square 3xs:h-[50vh] md:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[30vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -514,11 +514,11 @@ const Result2Quiz = ({}) => {
                 </div>
             </div>
 
-            <div className="flex justify-end  w-full lg:w-1/2">
+            <div className="flex pt-4 lg:pt-0  justify-end  w-full lg:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_7.png"
                     alt="weFem productos"
-                    className="w-full aspect-square 3xs:h-[50vh] md:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[30vh] lg:h-[75vh] object-cover object-top lg:object-top lg:object-center flex-shrink-0"
                 />
             </div>
         </div>
