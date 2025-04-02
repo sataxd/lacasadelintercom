@@ -6,7 +6,7 @@ const QuizSection = () => {
             <div className="px-[5%] relative xl:px-0 md:max-w-5xl 2xl:max-w-7xl h-full mx-auto z-50">
                 <div className="h-full mx-auto flex items-center">
                     <div className="max-w-[12rem] md:max-w-sm py-4 md:py-0 xl:max-w-lg 2xl:max-w-xl flex items-center justify-center flex-col z-50">
-                        <h2 className="text-[24.71px] leading-[30px] lg:leading-[40px] md:text-[48.71px] xl:text-[58.82px] 2xl:text-[72.82px] md:leading-[70px] 2xl:leading-[80px] tracking-[0.01em] font-bold lg:mb-4 text-center">
+                        <h2 className="text-[24.71px] leading-[30px] lg:leading-[60px] md:text-[48.71px] xl:text-[58.82px] 2xl:text-[72.82px] md:leading-[70px] 2xl:leading-[80px] tracking-[0.01em] font-bold lg:mb-4 text-center">
                             ¿Aún no sabes cuál elegir?
                         </h2>
                         <p className="text-[7.5px] lg:pl-4 md:pl-0  leading-[14.92px] md:text-[15.26px] xl:text-[18.82px] 2xl:text-[22.82px] md:leading-[30.92px] tracking-[0.01em] mb-2 lg:mb-6 text-center">

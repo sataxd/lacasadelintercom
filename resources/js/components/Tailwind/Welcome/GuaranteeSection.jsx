@@ -42,14 +42,14 @@ const GuaranteeSection = () => {
                     </h2>
                 </div>
 
-                <p className="text-[12.95px] md:text-[22.95px] leading-[15.33px]  md:leading-[26.33px]  lg:text-[14px] xl:text-[14px]  2xl:text-[19px] xl:leading-[20.33px]  2xl:leading-[26.33px] tracking-[0.01em] w-full sm:w-10/12 lg:w-[38%]">
+                <p className="text-[12.95px] md:text-[22.95px] leading-[15.33px]  md:leading-[26.33px]  lg:text-[14px] xl:text-[15px]  2xl:text-[19px] xl:leading-[20.33px]  2xl:leading-[26.33px] tracking-[0.01em] w-full sm:w-10/12 lg:w-[38%]">
                     Si encuentras una copa o disco certificado a un mejor
                     precio,
                     <strong> nosotros te mejoramos la oferta.</strong>
                 </p>
                 {WhatsApp && (
                     <a
-                        className="w-[200.94px] lg:w-[311.94px] text-[14.77px] lg:text-[20.77px] h-[35px] md:h-[55.11px] xl:w-[268.06px] bg-transparent text-white font-semibold  border border-white rounded-xl shadow xl:h-[47.36px] flex items-center justify-center"
+                        className="w-[200.94px] lg:w-[311.94px] text-[14.77px] lg:text-[16.77px] 2xl:text-[18.77px] h-[35px] md:h-[50.11px] xl:w-[268.06px] bg-transparent text-white font-semibold  border border-white rounded-xl shadow xl:h-[45.36px] flex items-center justify-center"
                         target="_blank"
                         id="whatsapp-toggle"
                         href={WhatsApp.link}

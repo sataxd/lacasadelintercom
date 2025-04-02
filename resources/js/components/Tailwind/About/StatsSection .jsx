@@ -4,17 +4,17 @@ const StatsSection = ({ indicators }) => {
     const countersRef = useRef([]);
 
     useEffect(() => {
-        function animateCounter(element, target, duration) {
+        function animateCounter(element, target, suffix = "") {
             let start = 0;
-            let stepTime = Math.abs(Math.floor(duration / target));
+            let stepTime = Math.abs(Math.floor(2000 / target)); // Duración fija de 2000ms
 
             let timer = setInterval(() => {
                 start += 1;
-                element.textContent = `+${start}K`;
+                element.textContent = `+${start}${suffix}`;
 
                 if (start >= target) {
                     clearInterval(timer);
-                    element.textContent = `+${target}K`; // Asegura el valor final exacto
+                    element.textContent = `+${target}${suffix}`; // Asegura el valor final exacto
                 }
             }, stepTime);
         }
@@ -28,7 +28,8 @@ const StatsSection = ({ indicators }) => {
                             el.getAttribute("data-count"),
                             10
                         );
-                        animateCounter(el, target, 2000);
+                        const suffix = el.getAttribute("data-suffix") || "";
+                        animateCounter(el, target, suffix);
                         observer.unobserve(el);
                     }
                 });
@@ -91,6 +92,7 @@ const StatsSection = ({ indicators }) => {
                                         (countersRef.current[index] = el)
                                     }
                                     data-count={getNumericValue(stat.value)}
+                                    data-suffix={getSuffix(stat.value)}
                                 >
                                     +0{getSuffix(stat.value)}
                                 </div>
