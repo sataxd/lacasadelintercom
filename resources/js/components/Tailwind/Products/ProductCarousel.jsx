@@ -15,7 +15,7 @@ export default function ProductCarousel({ products, children }) {
     return (
         <section className="pb-10 lg:pb-16 lg:py-24 bg-white text-[#212529] font-poppins">
             <div className="mx-auto xl:px-[5%] text-center">
-                <div className="flex flex-col items-center pb-4">
+                <div className="flex flex-col items-center pb-2 lg:pb-4">
                     {children}
                 </div>
 
@@ -35,7 +35,7 @@ export default function ProductCarousel({ products, children }) {
                         modules={[Navigation]}
                         loop={true}
                         breakpoints={{
-                            0: { slidesPerView: 1.5, spaceBetween: 10 },
+                            0: { slidesPerView: 1.9, spaceBetween: 0 },
                             640: { slidesPerView: 2.5, spaceBetween: 10 },
                             1024: { slidesPerView: 3, spaceBetween: 0 },
                         }}
@@ -48,8 +48,8 @@ export default function ProductCarousel({ products, children }) {
                                 <div
                                     className={` ${
                                         index === activeIndex
-                                            ? "scale-90 opacity-100 lg:opacity-100 lg:scale-100 "
-                                            : "scale-100 opacity-50 lg:opacity-100 lg:scale-100 "
+                                            ? "scale-[.9] opacity-100 lg:opacity-100 lg:scale-100 "
+                                            : "scale-[1] opacity-50 lg:opacity-100 lg:scale-100 "
                                     }`}
                                 >
                                     <ProductCard
@@ -76,10 +76,10 @@ export default function ProductCarousel({ products, children }) {
                     </div>
                 </div>
 
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center -mt-5 lg:mt-6">
                     <a
                         href="/catalog"
-                        className="group bg-white h-[45.59px] lg:h-[55.59px] 2xl:h-[60.59px] w-[220px] lg:w-[300px] 2xl:w-[331px] text-[#FF9900] border-[0.9px] border-[#FF9900] text-[14.37px] md:text-[16.37px] 2xl:text-[19.37px] rounded-[10.57px] lg:rounded-[13.57px] font-semibold flex items-center justify-center gap-3 leading-[29.05px] hover:bg-[#FF9900] hover:text-white transition-colors duration-300"
+                        className="group bg-white h-[35.59px] lg:h-[55.59px] 2xl:h-[60.59px] w-[200px] lg:w-[300px] 2xl:w-[331px] text-[#FF9900] border-[0.9px] border-[#FF9900] text-[12.37px] md:text-[16.37px] 2xl:text-[19.37px] rounded-[7.57px] lg:rounded-[13.57px] font-semibold flex items-center justify-center gap-3 leading-[29.05px] hover:bg-[#FF9900] hover:text-white transition-colors duration-300"
                     >
                         Ver más productos
                         <svg

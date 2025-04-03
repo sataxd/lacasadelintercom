@@ -27,8 +27,8 @@ const WeLoversSection = ({ we_lovers }) => {
         });
     }, []);
     return (
-        <div className="py-8 px-4 bg-gradient-to-b from-[#6745BA] to-[#522EAA]">
-            <div className="md:max-w-4xl 2xl:max-w-6xl mx-auto text-center text-white">
+        <div className="pt-8 pb-16  lg:py-8 px-4 bg-gradient-to-b from-[#6745BA] to-[#522EAA]">
+            <div className="max-w-[18rem]  md:max-w-4xl 2xl:max-w-6xl mx-auto text-center text-white">
                 <h2 className="hidden text-white text-center md:text-[45.41px] 2xl:text-[55.41px]    2xl:leading-[83.11px] tracking-[0.01em] font-bold md:mb-8 2xl:mb-12 lg:flex items-center justify-center gap-2">
                     Nuestras weLovers{" "}
                     <img
@@ -139,10 +139,10 @@ const WeLoversSection = ({ we_lovers }) => {
                 </div>
 
                 {/* Mobile View */}
-                <div className="block lg:hidden !w-full mx-auto mt-6">
+                <div className="block lg:hidden !w-full mx-auto mt-2">
                     <div className="flex  justify-between gap-2 ">
                         {/* Thumbnails */}
-                        <div className="w-[20%] flex flex-col gap-4">
+                        <div className="w-[20%] flex flex-col gap-1">
                             {we_lovers.map((video, index) => (
                                 <div
                                     key={index}
@@ -159,7 +159,7 @@ const WeLoversSection = ({ we_lovers }) => {
                                     <img
                                         src={`https://img.youtube.com/vi/${video.description}/mqdefault.jpg`}
                                         alt={`Miniatura ${index}`}
-                                        className={`aspect-[9/16] object-cover !w-full rounded-lg `}
+                                        className={`aspect-[3/4] object-cover !w-full rounded-lg `}
                                     />
                                 </div>
                             ))}

@@ -78,11 +78,11 @@ const BenefitsSection = () => {
         fetchBenefits();
     }, []);
     return (
-        <div className="relative overflow-hidden pt-8 bg-[#EFE5FF]">
+        <div className="relative overflow-hidden pt-10 lg:pt-8 bg-[#EFE5FF]">
             <div className="bg-[#6745BA]">
                 <div className="relative w-full lg:max-w-5xl 2xl:max-w-7xl mx-auto text-white py-6 lg:py-10 px-6 lg:px-0 flex flex-col items-center text-center">
-                    <div className="max-w-[20rem] ml-28 md:ml-60 lg:ml-0 md:max-w-2xl mx-auto md:mx-0 relative z-10">
-                        <h2 className="text-[10.70px] md:text-[21.07px] leading-[25.28px] xl:text-[24.65px] 2xl:text-[27.65px] xl:leading-[33.18px] font-bold">
+                    <div className="max-w-[20rem] ml-[8.2rem] md:ml-60 lg:ml-0 md:max-w-2xl mx-auto md:mx-0 relative z-10">
+                        <h2 className="text-[12.0px] md:text-[21.07px] leading-[25.28px] xl:text-[24.65px] 2xl:text-[27.65px] xl:leading-[33.18px] font-bold">
                             Una copa o disco menstrual en 5 años
                         </h2>
                         <div className="flex justify-center gap-10 md:mt-4">
@@ -109,7 +109,7 @@ const BenefitsSection = () => {
                     <img
                         src="/assets/img/infobenefits/left.png"
                         alt="Copa menstrual"
-                        className="block absolute -left-16   md:-left-36 2xl:-left-16 bottom-0 -top-[50px] h-[260px] md:top-[-90px] md:h-[540px] z-0 transform scale-x-[-1]"
+                        className="block absolute -left-16   md:-left-36 2xl:-left-16 bottom-0 -top-[50px] h-[270px] md:top-[-90px] md:h-[540px] z-0 transform scale-x-[-1]"
                     />
                     <img
                         src="/assets/img/infobenefits/right.png"

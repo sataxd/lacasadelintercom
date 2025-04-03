@@ -24,18 +24,18 @@ const InstagramSection = ({ posts }) => {
     return (
         <section className="bg-white text-[#212529] 2xl:pt-16">
             {/* Header */}
-            <div className="max-w-6xl mx-auto text-center mb-12">
-                <h2 className="text-[32.94px] leading-[38.12px] font-bold mb-4">
+            <div className="max-w-6xl mx-auto text-center mb-2 lg:mb-12">
+                <h2 className="text-[18.94px] pt-2 lg:mt-0 lg:text-[32.94px] lg:leading-[38.12px] font-bold lg:mb-4">
                     ¡Juntxs, sin límites!
                 </h2>
                 <a
                     href="https://instagram.com/wefem.pe"
-                    className="inline-flex items-center font-semibold text-[#EF62BA] hover:opacity-90 transition-opacity leading-[35.75px] text-[30.89px]"
+                    className="inline-flex items-center font-semibold text-[#EF62BA] hover:opacity-90 transition-opacity lg:leading-[35.75px] text-[16.89px] lg:text-[30.89px]"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
                     <svg
-                        className="w-6 h-6 mr-2"
+                        className="h-5 lg:w-6 lg:h-6 mr-2"
                         viewBox="0 0 24 24"
                         fill="currentColor"
                     >
@@ -47,13 +47,20 @@ const InstagramSection = ({ posts }) => {
 
             {/* Instagram Grid */}
 
-            <div className="w-full   relative mt-6">
+            <div className="w-full   relative lg:mt-6">
                 <Swiper
                     slidesPerView={4}
                     spaceBetween={10}
+                    pagination={{
+                        type: "fraction",
+                    }}
                     loop={true}
                     breakpoints={{
-                        0: { slidesPerView: 1.5, spaceBetween: 10 },
+                        0: {
+                            slidesPerView: 2.5,
+                            spaceBetween: 3,
+                            centeredSlides: true,
+                        },
                         640: {
                             slidesPerView: 2.5,
                             spaceBetween: 10,

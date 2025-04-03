@@ -24,8 +24,8 @@ const GuaranteeSection = () => {
     );
 
     return (
-        <section className="bg-[#FF9900] text-white h-[208px] md:h-[308px] lg:h-[110.178px] 2xl:h-[164.178px] flex items-center">
-            <div className="px-[5%] w-full xl:max-w-[66rem] 2xl:max-w-7xl xl:px-0 mx-auto flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-6 xl:gap-6">
+        <section className="bg-[#FF9900] text-white mt-6 lg:mt-0 h-[168px] md:h-[308px] lg:h-[110.178px] 2xl:h-[164.178px] flex items-center">
+            <div className="px-[5%] w-full xl:max-w-[66rem] 2xl:max-w-7xl xl:px-0 mx-auto flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-2 lg:gap-6 xl:gap-6">
                 <div className="flex items-center w-max">
                     <div className="bg-[#6745BA] rounded-full px-2 py-2 mr-2">
                         <img
@@ -42,14 +42,14 @@ const GuaranteeSection = () => {
                     </h2>
                 </div>
 
-                <p className="text-[12.95px] md:text-[22.95px] leading-[15.33px]  md:leading-[26.33px]  lg:text-[14px] xl:text-[15px]  2xl:text-[19px] xl:leading-[20.33px]  2xl:leading-[26.33px] tracking-[0.01em] w-full sm:w-10/12 lg:w-[38%]">
+                <p className="text-[12.95px] md:text-[22.95px] leading-[15.33px]  md:leading-[26.33px]  lg:text-[14px] xl:text-[15px]  2xl:text-[19px] xl:leading-[20.33px]  2xl:leading-[26.33px] tracking-[0.01em] w-10/12 lg:w-[38%]">
                     Si encuentras una copa o disco certificado a un mejor
                     precio,
                     <strong> nosotros te mejoramos la oferta.</strong>
                 </p>
                 {WhatsApp && (
                     <a
-                        className="w-[200.94px] lg:w-[311.94px] text-[14.77px] lg:text-[16.77px] 2xl:text-[18.77px] h-[35px] md:h-[50.11px] xl:w-[268.06px] bg-transparent text-white font-semibold  border border-white rounded-xl shadow xl:h-[45.36px] flex items-center justify-center"
+                        className="w-[180.94px] lg:w-[311.94px]  text-[12px] md:text-[14.77px] lg:text-[16.77px] 2xl:text-[18.77px] h-[30px] md:h-[50.11px] xl:w-[268.06px] bg-transparent text-white font-semibold  border border-white rounded-md lg:rounded-xl shadow xl:h-[45.36px] flex items-center justify-center"
                         target="_blank"
                         id="whatsapp-toggle"
                         href={WhatsApp.link}

@@ -83,8 +83,8 @@ const Footer = ({ terms, footerLinks = [] }) => {
     return (
         <>
             <footer className="bg-[#5F48B7] text-white">
-                <div className="px-[5%] max-w-xl lg:max-w-6xl xl:max-w-5xl 2xl:max-w-7xl md:px-0 mx-auto py-16">
-                    <div className=" flex md:flex-row flex-wrap xl:flex-nowrap gap-8">
+                <div className="pl-[5%] max-w-[20rem] lg:max-w-6xl xl:max-w-5xl 2xl:max-w-7xl md:px-0 mx-auto py-11 lg:py-16">
+                    <div className=" flex md:flex-row flex-wrap xl:flex-nowrap gap-4 lg:gap-8">
                         <div className="hidden w-3/12 lg:flex justify-center">
                             <img
                                 src="https://i.ibb.co/pvgT612S/image.png"
@@ -93,8 +93,8 @@ const Footer = ({ terms, footerLinks = [] }) => {
                             />
                         </div>
 
-                        <div className="w-7/12  text-[15.77px] lg:w-3/12 xl:w-4/12  border-r-[#FFFFFF]  border-r-2 pr-4 md:text-[18.77px] 2xl:text-[23.77px] leading-[23.77px] tracking-[-0.07px] font-light">
-                            <nav className="space-y-4">
+                        <div className="w-8/12  text-[12.77px] lg:w-3/12 xl:w-4/12  border-r-[#FFFFFF]  border-r-2 lg:pr-4 md:text-[18.77px] 2xl:text-[23.77px] leading-[23.77px] tracking-[-0.07px] font-light">
+                            <nav className="space-y-2 lg:space-y-4">
                                 {WhatsApp && (
                                     <a
                                         href={WhatsApp.link}
@@ -130,8 +130,8 @@ const Footer = ({ terms, footerLinks = [] }) => {
                             </nav>
                         </div>
 
-                        <div className="md:w-[35%] text-[15.77px] lg:w-2/12 lg:border-r-[#FFFFFF]  lg:border-r-2  md:text-[18.77px] 2xl:text-[23.77px] leading-[23.77px] tracking-[-0.07px] font-normal">
-                            <nav className="space-y-4">
+                        <div className="w-2/12 md:w-[35%] text-[15.77px] lg:w-2/12 lg:border-r-[#FFFFFF]  lg:border-r-2  md:text-[18.77px] 2xl:text-[23.77px] leading-[23.77px] tracking-[-0.07px] font-normal">
+                            <nav className="space-y-2 lg:space-y-4">
                                 {telefono && (
                                     <a
                                         href={`tel:${telefono}`}
@@ -160,16 +160,16 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                 )}
                             </nav>
                         </div>
-                        <div className=" w-7/12  lg:hidden  flex items-center justify-center md:block">
+                        <div className=" w-6/12 mt-4 lg:mt-0  lg:hidden  flex items-center justify-start md:block">
                             <img
                                 src="https://i.ibb.co/pvgT612S/image.png"
                                 alt="weFem Logo"
-                                className="h-[110.27px]  md:w-[170.52px] md:h-[120.27px] 2xl:w-[197.52px] 2xl:h-[136.27px] object-cover"
+                                className="h-[70.27px]  md:w-[170.52px] md:h-[120.27px] 2xl:w-[197.52px] 2xl:h-[136.27px] object-cover"
                             />
                         </div>
 
-                        <div className="md:w-[35%] lg:w-3/12 flex items-end lg:items-start lg:pt-4">
-                            <div className="flex flex-col md:flex-row gap-4 ">
+                        <div className="w-5/12 mt-4 lg:mt-0  md:w-[35%] lg:w-3/12 flex items-end lg:items-start lg:pt-4">
+                            <div className="flex flex-row gap-1 lg:gap-4 ">
                                 {Instagram && (
                                     <a
                                         href={Instagram.link}
@@ -179,7 +179,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/instagram.png"
                                             alt="facebook"
-                                            className=" h-[39.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto"
+                                            className=" h-[35.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto"
                                         />
                                     </a>
                                 )}
@@ -193,7 +193,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/facebook.png"
                                             alt="Facebook"
-                                            className="h-[39.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto "
+                                            className="h-[35.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto "
                                         />
                                     </a>
                                 )}
@@ -207,7 +207,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/whatsapp.png"
                                             alt="WhatsApp"
-                                            className="h-[39.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto "
+                                            className="h-[35.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto "
                                         />
                                     </a>
                                 )}
@@ -222,8 +222,8 @@ const Footer = ({ terms, footerLinks = [] }) => {
                             Copyright © 2025 weFem® | Todos los derechos
                             reservados | Juntxs sin límites
                         </p>
-                        <p className="md:hidden flex w-full items-center justify-center text-center text-[12.72px] py-4 leading-[22.26px] text-[#EFEDF8]">
-                            Copyright © 2025 weFem® <br /> Todos los derechos
+                        <p className="md:hidden flex w-full items-center justify-center text-center text-[8.72px] py-4 leading-[22.26px] text-[#EFEDF8]">
+                            Copyright © 2025 weFem® Todos los derechos
                             reservados | Juntxs sin límites
                         </p>
                     </div>

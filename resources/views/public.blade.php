@@ -106,6 +106,19 @@
             src="https://www.facebook.com/tr?id=1098274404490481&ev=PageView&noscript=1" />
     </noscript>
     <!-- End Meta Pixel Code -->
+
+    <style>
+        body {
+            background-image: url('/home-mobile.png');
+            width: 100%;
+            height: auto;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            /* Asegura que la imagen no se repita */
+            background-position: top center;
+            /* Centra la imagen en la parte superior */
+        }
+    </style>
 </head>
 
 <body class="font-poppins">

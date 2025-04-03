@@ -368,10 +368,10 @@ const Header = ({
                 {mostrarCarrito && (
                     <>
                         <div className="fixed inset-0 bg-black/50 flex items-start justify-end px-[5%] lg:px-0 pt-12 pb-12 overflow-y-auto z-50 scrollbar-hide">
-                            <div className="bg-[#EFE5FF] shadow-lg w-full sm:max-w-[380px] lg:max-w-[700px] 2xl:max-w-[800px] h-max    p-8 lg:p-14 rounded-[30px]  lg:rounded-[50px] ">
+                            <div className="bg-[#EFE5FF] shadow-lg w-full sm:max-w-[380px] lg:max-w-[500px]  h-max    p-8 lg:p-14 rounded-[30px]  lg:rounded-[50px] ">
                                 {/* Encabezado */}
                                 <div className="flex justify-between items-center  ">
-                                    <h2 className="text-[24.67px] lg:text-[44.67px] font-bold">
+                                    <h2 className="text-[24.67px] lg:text-[34.67px] font-bold">
                                         Tu Carrito
                                     </h2>
                                     <button
@@ -381,8 +381,8 @@ const Header = ({
                                         ✖
                                     </button>
                                 </div>
-                                <div className="bg-[#9C79D4] py-2 text-[13.95px]  md:text-[16.95px]  lg:text-[26.95px] mt-4 mb-8 text-center rounded-[14px]  lg:rounded-[20px]  text-white">
-                                    ¡Tienes envío gratis en lima!{" "}
+                                <div className="bg-[#9C79D4] py-2 text-[13.95px]  md:text-[16.95px]  lg:text-[20.95px] mt-4 mb-8 text-center rounded-[14px]  lg:rounded-[20px]  text-white">
+                                    ¡Tienes envío gratis en LIMA!{" "}
                                     <img
                                         src="/assets/img/emojis/motor-scooter.png"
                                         className="h-[16.88px] lg:h-[26.88px] inline-flex ml-2"
@@ -419,16 +419,16 @@ const Header = ({
                                                         (e.target.src =
                                                             "/api/cover/thumbnail/null")
                                                     }
-                                                    className="w-20 h-20 md:w-28 md:h-28 lg:w-52 lg:h-52 object-cover"
+                                                    className="w-20 h-20 md:w-28 md:h-28  object-cover"
                                                 />
-                                                <div className=" flex flex-col w-[calc(100%-5rem)] md:w-[calc(100%-7rem)] lg:w-[calc(100%-10rem)]">
+                                                <div className=" flex flex-col w-[calc(100%-5rem)] md:w-[calc(100%-7rem)] ">
                                                     <div className="w-full flex">
                                                         <div className="w-5/6 lg:w-8/12">
-                                                            <h3 className="text-[17.95px] md:text-[20.95px] lg:text-[24.95px] 2xl:text-[34.95px] font-normal leading-3 md:leading-[20.78px] lg:leading-[30.78px]">
+                                                            <h3 className="text-[17.95px] md:text-[25.95px]  font-normal leading-3 md:leading-[20.78px] ">
                                                                 {item.name}
                                                             </h3>
                                                             {item.summary && (
-                                                                <p className="text-[10px] md:text-xs  lg:text-[16.81px] 2xl:text-[25px]  font-light inline-flex ">
+                                                                <p className="text-[10px] md:text-xs    font-light inline-flex ">
                                                                     (
                                                                     {
                                                                         item.summary
@@ -438,8 +438,8 @@ const Header = ({
                                                             )}
 
                                                             {item.discount && (
-                                                                <p className="w-11/12 md:w-full h-[18.55px]   md:h-[25.55px]   lg:h-[35.55px]  bg-[#212529]  text-white rounded-[5.44px] mb-2 md:my-2 lg:my-4 flex items-center justify-center text-[8.65px] md:text-[9.65px] 2xl:text-[16.65px] font-semibold   leading-[21.75px]">
-                                                                    <span className="font-medium md:font-bold text-[7.65px] md:text-[9.65px] 2xl:text-[16.65px] mr-2 ">
+                                                                <p className="w-11/12 md:w-full h-[18.55px]   md:h-[25.55px]    bg-[#212529]  text-white rounded-[5.44px] my-1 flex items-center justify-center text-[8.65px] md:text-[9.65px]  font-semibold   leading-[21.75px]">
+                                                                    <span className="font-medium md:font-bold text-[7.65px] md:text-[9.65px]  mr-2 ">
                                                                         ESTAS
                                                                         AHORRANDO
                                                                     </span>{" "}
@@ -452,7 +452,7 @@ const Header = ({
                                                                     )}{" "}
                                                                     <img
                                                                         src="/assets/img/emojis/fire.png"
-                                                                        className="h-[9.88px] 2xl:h-[16px] inline-flex ml-2"
+                                                                        className="h-[9.88px]  inline-flex ml-2"
                                                                     />
                                                                 </p>
                                                             )}
@@ -491,18 +491,18 @@ const Header = ({
                                                         </div>
                                                     </div>
                                                     <div className="w-full flex">
-                                                        <div className="w-1/2  md:w-4/6 lg:w-1/2 h-full flex  ">
-                                                            <p className="text-[18.42px] md:text-[24.42px] h-full items-center  lg:text-[35.33px] 2xl:text-[45.33px] font-bold text-[#5F48B7] ">
+                                                        <div className="w-1/2  md:w-4/6 lg:w-1/2  flex  ">
+                                                            <p className="text-[18.42px] md:text-[24.42px]  items-center   font-bold text-[#5F48B7] ">
                                                                 S/{" "}
                                                                 {Number(
                                                                     item.final_price
                                                                 ).toFixed(2)}
                                                             </p>
                                                         </div>
-                                                        <div className="w-1/2  md:w-2/6 lg:w-1/2 h-full lg:h-14 ">
+                                                        <div className="w-1/2  md:w-2/6 lg:w-1/2 h-8 ">
                                                             <div className=" flex h-full text-[#000000]  bg-transparent border border-black items-center justify-around  rounded-[8px]  md:rounded-[10px] ">
                                                                 <button
-                                                                    className="h-full md:w-8 md:h-8 text-xs md:text-base 2xl:text-2xl "
+                                                                    className="w-6 h-6 text-xs md:text-base  "
                                                                     onClick={() =>
                                                                         decrementarCantidad(
                                                                             item.id
@@ -511,7 +511,7 @@ const Header = ({
                                                                 >
                                                                     -
                                                                 </button>
-                                                                <span className="h-full flex items-center text-xs md:text-base 2xl:text-2xl font-medium">
+                                                                <span className="h-full flex items-center text-xs md:text-base  font-medium">
                                                                     {item.variations &&
                                                                     item
                                                                         .variations
@@ -529,7 +529,7 @@ const Header = ({
                                                                         : item.quantity}
                                                                 </span>
                                                                 <button
-                                                                    className="h-6 md:w-8 md:h-8 text-xs md:text-base 2xl:text-2xl  "
+                                                                    className="w-6 h-6 text-xs md:text-base   "
                                                                     onClick={() =>
                                                                         incrementarCantidad(
                                                                             item.id
@@ -550,17 +550,17 @@ const Header = ({
                                 {totalPrecio > 0 && (
                                     <div className="  w-full mt-8">
                                         <div className="w-full flex items-center justify-between my-6">
-                                            <p className="text-[25.42px] md:text-[50.42px] lg:text-[45.33px] 2xl:text-[51.33px] font-bold text-black ">
+                                            <p className="text-[25.42px] md:text-[30.42px]  font-bold text-black ">
                                                 Subtotal
                                             </p>
-                                            <p className="text-[25.42px] md:text-[50.42px] lg:text-[45.33px] 2xl:text-[51.33px] font-bold text-black ">
+                                            <p className="text-[25.42px] md:text-[30.42px]  font-bold text-black ">
                                                 S/ {totalPrecio.toFixed(2)}
                                             </p>
                                         </div>
 
                                         <a
                                             href="/checkout"
-                                            className=" block text-center text-[20.76px] md:text-[25.76px]  lg:text-[34.76px] 2xl:text-[36.76px] w-full  font-semibold rounded-[12.11px] lg:rounded-[15.11px] bg-[#FF9900] text-white py-3 2xl:py-4 hover:bg-opacity-90 hover:scale-105 transition-all duration-300"
+                                            className=" block text-center text-[20.76px] md:text-[25.76px]   w-full  font-semibold rounded-[12.11px] lg:rounded-[15.11px] bg-[#FF9900] text-white py-3 hover:bg-opacity-90 hover:scale-105 transition-all duration-300"
                                         >
                                             IR A COMPRAR
                                         </a>

@@ -16,7 +16,13 @@ const ProductCard = ({ product, visible = true }) => {
                         <div className="relative overflow-hidden">
                             <div className="relative group aspect-square overflow-hidden flex items-center rounded-xl justify-center">
                                 {product.discount && (
-                                    <div className="absolute top-2 right-2 bg-[#212529] z-50 text-white text-base font-medium px-3 pt-[1px] pb-1 rounded-2xl">
+                                    <div
+                                        className={`absolute bg-[#212529] z-50 text-white text-base font-medium px-3 pt-[1px] pb-1 rounded-2xl ${
+                                            visible
+                                                ? "scale-[.7] top-0 right-0"
+                                                : "top-2 right-2 "
+                                        }`}
+                                    >
                                         <span className="text-[12.09px] leading-[14.72px]">
                                             Ahorras
                                         </span>
@@ -66,7 +72,7 @@ const ProductCard = ({ product, visible = true }) => {
 
                         {/* Información del producto */}
                         <div
-                            className={`px-4 pb-4 pt-2 lg:pt-8 block  lg:block ${
+                            className={`px-0 pb-4 pt-2 lg:px-4 lg:pt-8 block  lg:block ${
                                 visible ? "block" : "hidden"
                             }`}
                         >
