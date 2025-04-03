@@ -109,7 +109,7 @@
 
     <style>
         body {
-            background-image: url('/home-mobile.png');
+            /*background-image: url('/home-mobile.png');*/
             width: 100%;
             height: auto;
             background-size: 100% auto;

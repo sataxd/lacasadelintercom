@@ -43,7 +43,7 @@ const Home = ({
     const tipoSlider = "vua";
     console.log(products_featured);
     return (
-        <div className="opacity-60 ">
+        <div className=" ">
             <Header
                 showSlogan={showSlogan}
                 backgroundType="video"
