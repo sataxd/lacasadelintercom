@@ -17,7 +17,7 @@ const TopSaleSection = ({ producto }) => {
     };
 
     const { agregarAlCarrito } = useContext(CarritoContext);
-
+    const [mainImage, setMainImage] = useState(producto.colors[0].image);
     console.log(producto);
     return (
         <section className="py-2 md:py-10 px-[5%] mx-auto font-poppins bg-white">
@@ -30,7 +30,7 @@ const TopSaleSection = ({ producto }) => {
                 {/* Image */}
                 <div className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] overflow-hidden">
                     <img
-                        src={`/api/items/media/${producto.image}`}
+                        src={`/api/items/media/${mainImage}`}
                         alt={producto.name}
                         className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover rounded-lg"
                         loading="lazy"
@@ -113,16 +113,17 @@ const TopSaleSection = ({ producto }) => {
                     <div className="relative flex justify-between sm:justify-start gap-4 lg:gap-0 lg:justify-between items-center  my-2">
                         {producto.colors.length > 0 && (
                             <div className="flex items-start gap-2">
-                                <p className="md:text-[10.05px] 2xl:text-[13.05px] font-bold">
+                                <p className="md:text-[10.05px] lg:text-[11px] 2xl:text-[14.05px] font-bold">
                                     Color:
                                 </p>
                                 <div className="flex items-center gap-2">
                                     {producto.colors.map((color, index) => (
                                         <button
                                             key={index}
-                                            onClick={() =>
-                                                setSelectedColor(color.name)
-                                            }
+                                            onClick={() => {
+                                                setSelectedColor(color.name);
+                                                setMainImage(color.image);
+                                            }}
                                             className={`rounded-full p-1 border ${
                                                 selectedColor === color.name
                                                     ? "border-[#222222]"
@@ -170,11 +171,11 @@ const TopSaleSection = ({ producto }) => {
                         <div className=" block md:flex gap-4 lg:block items-end">
                             {/* Size Selector */}
                             <div className=" w-full md:w-1/2 lg:w-full mb-4 2xl:mb-6">
-                                <label className="md:text-[10.05px] 2xl:text-[13.05px] font-bold">
+                                <label className="md:text-[10.05px] lg:text-[11px] 2xl:text-[14.05px] font-bold">
                                     Selecciona tu talla:
                                 </label>
                                 <select
-                                    className="w-full h-[40.94px] 2xl:h-[48.94px] md:text-[12.05px] 2xl:text-[14.05px] px-4 bg-[#EFEDF8] rounded-[5.44px] appearance-none  outline-none ring-0 border-0 cursor-pointer focus:outline-none"
+                                    className="w-full h-[40.94px] 2xl:h-[48.94px]  md:text-base 2xl:text-xl font-medium px-4 bg-[#EFEDF8] rounded-[5.44px] appearance-none  outline-none ring-0 border-0 cursor-pointer focus:outline-none"
                                     value={selectedSize}
                                     onChange={(e) =>
                                         setSelectedSize(e.target.value)

@@ -8,13 +8,14 @@ const FeaturesSection = () => {
             }`}
         >
             <div className="px-[5%] mx-auto relative">
-                <div className="grid pl-[5%] lg:px-0 mt-6 lg:my-6  grid-cols-2 gap-4 sm:gap-8 sm:max-w-[608px] lg:flex w-full lg:max-w-[72rem] 2xl:max-w-[84rem] mx-auto md:gap-4 lg:gap-14 whitespace-nowrap transition-none">
-                    <div className="flex items-center gap-2 md:gap-3 justify-start w-auto">
-                        <div className="relative z-10 w-[16%] md:w-3/12">
+                <div className="grid items-center content-center pl-[5%]  lg:px-0 2xl:px-14 mt-6 lg:my-6  grid-cols-2 gap-4 sm:gap-8 sm:max-w-[608px] lg:flex w-full lg:max-w-[72rem] 2xl:max-w-[84rem] mx-auto md:gap-4 lg:gap-14 whitespace-nowrap transition-none">
+                    <div className="flex items-center gap-2 md:gap-3 justify-center w-auto">
+                        <div className="relative z-10 ">
                             <img
                                 src="/assets/img/highlights/truck.png"
                                 alt="Envíos a todo el Perú"
-                                className="w-auto h-full object-cover"
+                                className="w-7 h-7 lg:w-11 lg:h-11
+                                 object-cover"
                             />
                         </div>
                         <div className="w-9/12">
@@ -27,12 +28,12 @@ const FeaturesSection = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 md:gap-3 justify-start w-auto">
-                        <div className="relative z-10  w-[16%]  md:w-3/12">
+                    <div className="flex items-center justify-center  gap-2 md:gap-3 w-auto">
+                        <div className="relative z-10  ">
                             <img
                                 src="/assets/img/highlights/clock.png"
                                 alt="Protege hasta 12 horas"
-                                className="w-auto h-full object-cover"
+                                className="w-7 h-7 lg:w-11 lg:h-11 object-cover"
                             />
                         </div>
                         <div className="w-9/12">
@@ -45,12 +46,12 @@ const FeaturesSection = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 md:gap-3 justify-start w-auto">
-                        <div className="relative z-10 w-[16%]  md:w-3/12 lg:w-[20%] ">
+                    <div className="flex items-center gap-2 md:gap-3 justify-center  w-auto">
+                        <div className="relative z-10  ">
                             <img
                                 src="/assets/img/highlights/gota.png"
                                 alt="Hipoalergénica"
-                                className="w-auto h-full object-cover"
+                                className="w-7 h-7 lg:w-11 lg:h-11 object-cover"
                             />
                         </div>
                         <div className="w-[84%] md:w-9/12 lg:w-[80%]">
@@ -64,12 +65,12 @@ const FeaturesSection = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 md:gap-3 justify-start w-auto">
-                        <div className="relative z-10 w-[16%]  md:w-3/12">
+                    <div className="flex items-center gap-2 md:gap-3 justify-center  w-auto">
+                        <div className="relative z-10  ">
                             <img
                                 src="/assets/img/highlights/heart.png"
                                 alt="Libre de BPA"
-                                className="w-auto h-full object-cover"
+                                className="w-7 h-7 lg:w-11 lg:h-11 object-cover"
                             />
                         </div>
                         <div className="w-9/12">
