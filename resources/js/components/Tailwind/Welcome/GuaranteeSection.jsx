@@ -42,7 +42,7 @@ const GuaranteeSection = () => {
                     </h2>
                 </div>
 
-                <p className="text-[12.95px] md:text-[22.95px] leading-[15.33px]  md:leading-[26.33px]  lg:text-[14px] xl:text-[15px]  2xl:text-[19px] xl:leading-[20.33px]  2xl:leading-[26.33px] tracking-[0.01em] w-10/12 lg:w-[38%]">
+                <p className="text-[10.95px] sm:text-[12.95px] md:text-[22.95px] leading-[15.33px]  md:leading-[26.33px]  lg:text-[14px] xl:text-[15px]  2xl:text-[19px] xl:leading-[20.33px]  2xl:leading-[26.33px] tracking-[0.01em] w-10/12 lg:w-[38%]">
                     Si encuentras una copa o disco certificado a un mejor
                     precio,
                     <strong> nosotros te mejoramos la oferta.</strong>

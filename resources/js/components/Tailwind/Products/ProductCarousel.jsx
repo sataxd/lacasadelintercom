@@ -76,7 +76,7 @@ export default function ProductCarousel({ products, children }) {
                     </div>
                 </div>
 
-                <div className="flex justify-center -mt-5 lg:mt-6">
+                <div className="flex justify-center -mt-3 lg:mt-6">
                     <a
                         href="/catalog"
                         className="group bg-white h-[35.59px] lg:h-[55.59px] 2xl:h-[60.59px] w-[200px] lg:w-[300px] 2xl:w-[331px] text-[#FF9900] border-[0.9px] border-[#FF9900] text-[12.37px] md:text-[16.37px] 2xl:text-[19.37px] rounded-[7.57px] lg:rounded-[13.57px] font-semibold flex items-center justify-center gap-3 leading-[29.05px] hover:bg-[#FF9900] hover:text-white transition-colors duration-300"
