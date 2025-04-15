@@ -55,6 +55,7 @@ const InstagramSection = ({ posts }) => {
                         type: "fraction",
                     }}
                     loop={true}
+                    centeredSlides={true}
                     breakpoints={{
                         0: {
                             slidesPerView: 2.5,

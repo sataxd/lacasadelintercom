@@ -24,7 +24,7 @@ const NotSureSection = ({ producto }) => {
                     <img
                         src={`/api/items/media/${producto?.image}`}
                         alt={producto?.name}
-                        className="w-9/12 mx-auto md:w-[562px] md:h-[562px] lg:w-[500.81px] lg:h-[500.81px]  2xl:w-[620.81px] 2xl:h-[620.81px] object-cover rounded-lg"
+                        className="w-9/12 aspect-square bg-gray-300 mx-auto md:w-[562px] md:h-[562px] lg:w-[500.81px] lg:h-[500.81px]  2xl:w-[620.81px] 2xl:h-[620.81px] object-cover rounded-lg"
                         loading="lazy"
                     />
                 </div>
@@ -36,19 +36,19 @@ const NotSureSection = ({ producto }) => {
                     <p className="hidden lg:block md:text-[20px] 2xl:text-[29px] md:leading-[30px] 2xl:leading-[36px] mt-2 2xl:mt-4 ">
                         Prueba con el {producto?.name}
                     </p>
-                    <p className="w-9/12 lg:w-full mx-auto text-[12.49px] xl:text-[11px] 2xl:text-[14.05px] lg:my-3 leading-4 lg:leading-relaxed ">
+                    <p className="w-9/12 lg:w-full mx-auto text-[12.49px] xl:text-[11px] 2xl:text-[14.05px] lg:my-3 leading-4 lg:leading-relaxed whitespace-pre-line">
                         <img
                             src="/assets/img/emojis/blossom.png"
-                            className="h-[15.05px] inline-flex"
-                        />{" "}
-                        {producto?.description}
+                            className="h-[15.05px] inline-flex me-1"
+                        />
+                        <span>{producto?.description}</span>
                         <img
                             src="/assets/img/emojis/crescent-moon.png"
-                            className="h-[15.05px] inline-flex"
+                            className="h-[15.05px] inline-flex ms-1"
                         />
                         <img
                             src="/assets/img/emojis/sparkling-heart.png"
-                            className="h-[15.05px] inline-flex"
+                            className="h-[15.05px] inline-flex ms-1"
                         />
                     </p>
                     <div className="hidden lg:flex md:w-[158.43px] 2xl:w-[155px] md:h-[20px] 2xl:h-[25px] bg-[#212529] text-white rounded-[5.44px] my-4  items-center justify-center">
@@ -95,7 +95,7 @@ const NotSureSection = ({ producto }) => {
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 576 512"
-                                className="fill-white h-4 lg:h-3 absolute  top-1/2 -translate-y-1/2  right-16 "
+                                className="fill-white h-4 lg:h-3 absolute top-1/2 -translate-y-1/2 right-16 "
                             >
                                 <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                             </svg>
@@ -131,11 +131,11 @@ const NotSureSection = ({ producto }) => {
                                 }
                                 className="lg:mt-4 relative w-[200px] lg:w-full h-[38px] lg:h-[35.88px] 2xl:h-[39.88px] text-[12.02px] lg:text-[12.59px]  2xl:text-[13.59px] leading-[13.59px] bg-[#FC58BE] text-white rounded-[6px]  lg:rounded-[2.72px] border-[1.81px] border-[#FC58BE]  flex items-center justify-center"
                             >
-                                <span className="">Añadir al carrito</span>
+                                <span className="me-2">Añadir al carrito</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 576 512"
-                                    className="fill-white h-3 lg:h-3 absolute  top-1/2 -translate-y-1/2  right-16 "
+                                    className="fill-white h-3 lg:h-3 relative "
                                 >
                                     <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                                 </svg>
