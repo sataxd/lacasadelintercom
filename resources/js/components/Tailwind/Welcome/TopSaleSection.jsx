@@ -46,19 +46,19 @@ const TopSaleSection = ({ producto }) => {
                             ({producto.summary})
                         </p>
                     </div>
-                    <div className="hidden lg:block  text-[12.36px] md:text-[14.36px] lg:text-[11px] 2xl:text-[14.05px] mt-2 leading-relaxed ">
+                    <div className="block w-9/12 lg:w-full mx-auto text-[12.36px] md:text-[14.36px] lg:text-[11px] 2xl:text-[14.05px] mt-2 leading-relaxed ">
                         <img
                             src="/assets/img/emojis/blossom.png"
-                            className="h-[15.05px] inline-flex"
+                            className="h-[15.05px] inline-flex me-1"
                         />{" "}
                         {producto.description}
                         <img
                             src="/assets/img/emojis/crescent-moon.png"
-                            className="h-[15.05px] inline-flex"
+                            className="h-[15.05px] inline-flex ms-1"
                         />
                         <img
                             src="/assets/img/emojis/sparkling-heart.png"
-                            className="h-[15.05px] inline-flex"
+                            className="h-[15.05px] inline-flex ms-1"
                         />
                     </div>
                     <div className="w-9/12 lg:w-full mx-auto">

@@ -25,7 +25,7 @@ const GuaranteeSection = () => {
 
     return (
         <section className="bg-[#FF9900] text-white mt-6 lg:mt-0 h-[168px] md:h-[308px] lg:h-[110.178px] 2xl:h-[164.178px] flex items-center">
-            <div className="px-[5%] w-full xl:max-w-[66rem] 2xl:max-w-7xl xl:px-0 mx-auto flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-[2%]">
+            <div className="px-[5%] w-full xl:max-w-[66rem] 2xl:max-w-7xl xl:px-0 mx-auto flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-3 lg:gap-[2%]">
                 <div className="flex items-center w-max">
                     <div className="bg-[#6745BA] rounded-full px-2 py-2 mr-2">
                         <img
