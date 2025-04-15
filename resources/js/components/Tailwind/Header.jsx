@@ -152,7 +152,7 @@ const Header = ({
                         disablePictureInPicture
                         disableRemotePlayback
                         webkit-playsinline="true" // <- Fallback para versiones antiguas
-                        controls={false}
+                        nocontrols
                     >
                         <source src={backgroundSrc} type="video/mp4" />
                     </video>

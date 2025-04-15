@@ -142,7 +142,7 @@ const WeLoversSection = ({ we_lovers }) => {
                 <div className="block lg:hidden !w-full mx-auto mt-2">
                     <div className="flex  justify-between gap-2 ">
                         {/* Thumbnails */}
-                        <div className="w-[20%] flex flex-col gap-1">
+                        <div className="w-[25%] flex flex-col gap-1">
                             {we_lovers.map((video, index) => (
                                 <div
                                     key={index}
@@ -159,7 +159,7 @@ const WeLoversSection = ({ we_lovers }) => {
                                     <img
                                         src={`https://img.youtube.com/vi/${video.description}/mqdefault.jpg`}
                                         alt={`Miniatura ${index}`}
-                                        className={`aspect-[3/4] object-cover !w-full rounded-lg `}
+                                        className={`aspect-square object-cover !w-full rounded-lg `}
                                     />
                                 </div>
                             ))}
