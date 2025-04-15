@@ -17,7 +17,7 @@ const TopSaleSection = ({ producto }) => {
     };
 
     const { agregarAlCarrito } = useContext(CarritoContext);
-    const [mainImage, setMainImage] = useState(producto.colors[0].image);
+    const [mainImage, setMainImage] = useState(producto.colors[0]?.image);
     console.log(producto);
     return (
         <section className="py-2 md:py-10 px-[5%] mx-auto font-poppins bg-white">
@@ -179,7 +179,7 @@ const TopSaleSection = ({ producto }) => {
                                         Selecciona tu talla:
                                     </label>
                                     <select
-                                        className="w-full h-[40.94px] 2xl:h-[48.94px]  md:text-base 2xl:text-xl font-medium px-4 bg-[#EFEDF8] rounded-[5.44px] appearance-none  outline-none ring-0 border-0 cursor-pointer focus:outline-none"
+                                        className="w-full h-[40.94px] 2xl:h-[48.94px]  text-base font-medium px-6 bg-[#EFEDF8] rounded-[5.44px] appearance-none  outline-none ring-0 border-0 cursor-pointer focus:outline-none"
                                         value={selectedSize}
                                         onChange={(e) =>
                                             setSelectedSize(e.target.value)

@@ -14,8 +14,8 @@ const FeaturesSection = () => {
                             <img
                                 src="/assets/img/highlights/truck.png"
                                 alt="Envíos a todo el Perú"
-                                className="w-7 h-7 lg:w-11 lg:h-11
-                                 object-cover"
+                                className="w-7 h-7 lg:w-16 lg:h-16
+                                 object-contain"
                             />
                         </div>
                         <div className="w-9/12">

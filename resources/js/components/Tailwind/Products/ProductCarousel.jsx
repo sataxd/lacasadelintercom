@@ -35,9 +35,9 @@ export default function ProductCarousel({ products, children }) {
                         modules={[Navigation]}
                         loop={true}
                         breakpoints={{
-                            0: { slidesPerView: 1.9, spaceBetween: 0 },
-                            640: { slidesPerView: 2.5, spaceBetween: 10 },
-                            1024: { slidesPerView: 3, spaceBetween: 0 },
+                            0: { slidesPerView: 1.9, spaceBetween: 10 },
+                            640: { slidesPerView: 2.5, spaceBetween: 20 },
+                            1024: { slidesPerView: 3, spaceBetween: 30 },
                         }}
                         onSlideChange={(swiper) =>
                             setActiveIndex(swiper.realIndex)
@@ -46,7 +46,7 @@ export default function ProductCarousel({ products, children }) {
                         {products.map((product, index) => (
                             <SwiperSlide key={index}>
                                 <div
-                                    className={` ${
+                                    className={`!w-full ${
                                         index === activeIndex
                                             ? "scale-[.9] opacity-100 lg:opacity-100 lg:scale-100 "
                                             : "scale-[1] opacity-50 lg:opacity-100 lg:scale-100 "

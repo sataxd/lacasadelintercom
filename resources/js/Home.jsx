@@ -56,11 +56,11 @@ const Home = ({
             >
                 <div className="absolute inset-0 flex items-center justify-center text-center pt-12 lg:pt-24">
                     <div className="text-white p-6">
-                        <h1 className="text-[29.66px] pt-0 md:pt-0  leading-[100%] tracking-[1.5%] md:text-[58.54px] xl:text-[58.54px]  2xl:text-[81.54px] md:leading-[60.81px] xl:leading-[60.81px] 2xl:leading-[90.81px] font-bold max-w-4xl ">
+                        <h1 className="text-[29.66px] pt-0 md:pt-0 -mt-16  leading-[100%] tracking-[1.5%] md:text-[58.54px] xl:text-[58.54px]  2xl:text-[81.54px] md:leading-[60.81px] xl:leading-[60.81px] 2xl:leading-[90.81px] font-bold max-w-4xl ">
                             ¡Tener sexo con
                             <br /> tu disco es posible!
                         </h1>
-                        <p className="text-[11.13px] mt-0 md:mt-4 lg:mt-0 leading-[100%]  md:text-[20.61px] 2xl:text-[26.61px] md:leading-[36.92px]  my-1 tracking-[1%]">
+                        <p className="text-[11.13px] leading-[100%]  md:text-[20.61px] 2xl:text-[26.61px] md:leading-[36.92px]  mt-4 mb-6 tracking-[1%]">
                             Copas y Discos menstruales weFem
                         </p>
                         <button className="mt-0 w-[150.19px] h-[30.67px] md:w-[258.19px] md:h-[55.67px] xl:w-[300px]  2xl:w-[371px] xl:h-[70px] 2xl:h-[80px] bg-[#DDEC4C] text-[11.15px]  md:text-[17.15px] xl:text-[20.64px] 2xl:text-[24.64px] hover:brightness-90 transition duration-300  font-semibold rounded-[5.91px]  md:rounded-[13.91px] text-[#5F48B7] tracking-[1%]">

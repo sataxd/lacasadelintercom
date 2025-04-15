@@ -25,7 +25,7 @@ const GuaranteeSection = () => {
 
     return (
         <section className="bg-[#FF9900] text-white mt-6 lg:mt-0 h-[168px] md:h-[308px] lg:h-[110.178px] 2xl:h-[164.178px] flex items-center">
-            <div className="px-[5%] w-full xl:max-w-[66rem] 2xl:max-w-7xl xl:px-0 mx-auto flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-2 lg:gap-6 xl:gap-6">
+            <div className="px-[5%] w-full xl:max-w-[66rem] 2xl:max-w-7xl xl:px-0 mx-auto flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-[2%]">
                 <div className="flex items-center w-max">
                     <div className="bg-[#6745BA] rounded-full px-2 py-2 mr-2">
                         <img
@@ -42,7 +42,7 @@ const GuaranteeSection = () => {
                     </h2>
                 </div>
 
-                <p className="text-[10.95px] sm:text-[12.95px] md:text-[22.95px] leading-[15.33px]  md:leading-[26.33px]  lg:text-[14px] xl:text-[15px]  2xl:text-[19px] xl:leading-[20.33px]  2xl:leading-[26.33px] tracking-[0.01em] w-10/12 lg:w-[38%]">
+                <p className={`${WhatsApp ? 'text-center' : 'text-end'} text-[10.95px] sm:text-[12.95px] md:text-[22.95px] leading-[15.33px]  md:leading-[26.33px]  lg:text-[14px] xl:text-[15px]  2xl:text-[19px] xl:leading-[20.33px]  2xl:leading-[26.33px] tracking-[0.01em] w-10/12 lg:w-[38%]`}>
                     Si encuentras una copa o disco certificado a un mejor
                     precio,
                     <strong> nosotros te mejoramos la oferta.</strong>

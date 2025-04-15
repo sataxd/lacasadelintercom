@@ -16,14 +16,14 @@ const NotSureSection = ({ producto }) => {
                 ¿Aún no estás segura?
             </h2>
             <p className="lg:hidden md:text-[28.01px] mt-2 md:mt-4 text-center md:leading-[34.77px] text-[#333333]  ">
-                {producto.name}
+                {producto?.name}
             </p>
             <div className="mx-auto flex flex-col lg:flex-row justify-center items-center mt-2 lg:my-4 gap-3 lg:gap-8">
                 {/* Image */}
                 <div className="w-screen md:w-[562px] md:h-[562px] lg:w-[500.81px] lg:h-[500.81px]  2xl:w-[620.81px] 2xl:h-[620.81px] overflow-hidden md:order-none lg:order-1">
                     <img
-                        src={`/api/items/media/${producto.image}`}
-                        alt={producto.name}
+                        src={`/api/items/media/${producto?.image}`}
+                        alt={producto?.name}
                         className="w-9/12 mx-auto md:w-[562px] md:h-[562px] lg:w-[500.81px] lg:h-[500.81px]  2xl:w-[620.81px] 2xl:h-[620.81px] object-cover rounded-lg"
                         loading="lazy"
                     />
@@ -34,14 +34,14 @@ const NotSureSection = ({ producto }) => {
                         ¿Aún no estás segura?
                     </h3>
                     <p className="hidden lg:block md:text-[20px] 2xl:text-[29px] md:leading-[30px] 2xl:leading-[36px] mt-2 2xl:mt-4 ">
-                        Prueba con el {producto.name}
+                        Prueba con el {producto?.name}
                     </p>
                     <p className="w-9/12 lg:w-full mx-auto text-[12.49px] xl:text-[11px] 2xl:text-[14.05px] lg:my-3 leading-4 lg:leading-relaxed ">
                         <img
                             src="/assets/img/emojis/blossom.png"
                             className="h-[15.05px] inline-flex"
                         />{" "}
-                        {producto.description}
+                        {producto?.description}
                         <img
                             src="/assets/img/emojis/crescent-moon.png"
                             className="h-[15.05px] inline-flex"
@@ -52,7 +52,7 @@ const NotSureSection = ({ producto }) => {
                         />
                     </p>
                     <div className="hidden lg:flex md:w-[158.43px] 2xl:w-[155px] md:h-[20px] 2xl:h-[25px] bg-[#212529] text-white rounded-[5.44px] my-4  items-center justify-center">
-                        {producto.discount && (
+                        {producto?.discount && (
                             <p className="w-[158.43px]   h-[25.55px]  bg-[#212529]  text-white rounded-[5.44px] my-4 flex items-center justify-center text-[10.88px]  leading-[21.75px]">
                                 <img
                                     src="/assets/img/emojis/fire.png"
@@ -63,7 +63,7 @@ const NotSureSection = ({ producto }) => {
                                 </span>{" "}
                                 S/{" "}
                                 {Number(
-                                    producto.price - producto.discount
+                                    producto?.price - producto?.discount
                                 ).toFixed(2)}{" "}
                                 <img
                                     src="/assets/img/emojis/fire.png"
@@ -73,10 +73,10 @@ const NotSureSection = ({ producto }) => {
                         )}
                     </div>
                     <p className="hidden  lg:block md:text-[39.33px] 2xl:text-[49.33px] md:leading-[52.31px] 2xl:leading-[62.31px] tracking-[-0.01em] font-bold text-[#FC58BE]">
-                        S/ {Number(producto.final_price).toFixed(2)}
+                        S/ {Number(producto?.final_price).toFixed(2)}
                     </p>
                     <p className="hidden lg:block md:text-[20.84px] 2xl:text-[24.84px] leading-[31.37px] text-[#B4B4B4]">
-                        <del>Antes S/ {producto.price}</del>
+                        <del>Antes S/ {producto?.price}</del>
                     </p>
 
                     {/* Add to Cart Button */}
@@ -105,11 +105,11 @@ const NotSureSection = ({ producto }) => {
                     <div className="lg:hidden   text-[#333333]">
                         <div className="w-9/12 my-2 lg:w-full mx-auto flex gap-3 lg:gap-4 lg:block items-center">
                             <p className="text-[29.42px] md:text-[50.42px] lg:text-[35.33px] 2xl:text-[49.33px] font-bold text-[#FC58BE]">
-                                S/ {Number(producto.final_price).toFixed(2)}
+                                S/ {Number(producto?.final_price).toFixed(2)}
                             </p>
-                            {producto.discount && (
+                            {producto?.discount && (
                                 <p className="text-[15.39px] md:text-[25.39px] lg:text-[18.84px] 2xl:text-[24.84px] text-[#B4B4B4]">
-                                    <del>Antes S/ {producto.price}</del>
+                                    <del>Antes S/ {producto?.price}</del>
                                 </p>
                             )}
                         </div>

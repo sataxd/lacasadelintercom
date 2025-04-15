@@ -29,7 +29,7 @@ const WeLoversSection = ({ we_lovers }) => {
     return (
         <div className="pt-8 pb-16  lg:py-8 px-4 bg-gradient-to-b from-[#6745BA] to-[#522EAA]">
             <div className="max-w-[18rem]  md:max-w-4xl 2xl:max-w-6xl mx-auto text-center text-white">
-                <h2 className="hidden text-white text-center md:text-[45.41px] 2xl:text-[55.41px]    2xl:leading-[83.11px] tracking-[0.01em] font-bold md:mb-8 2xl:mb-12 lg:flex items-center justify-center gap-2">
+                <h2 className="hidden text-white text-center md:text-[45.41px] 2xl:text-[55.41px]    2xl:leading-[83.11px] tracking-[0.01em] font-bold md:mb-8 2xl:mb-12 lg:flex items-center justify-center gap-2 mt-6">
                     Nuestras weLovers{" "}
                     <img
                         src="/assets/img/emojis/stars.png"
@@ -61,7 +61,7 @@ const WeLoversSection = ({ we_lovers }) => {
                 </h2>
 
                 {/* Swiper for Desktop */}
-                <div className="hidden lg:block max-w-[60rem] mx-auto relative mt-10">
+                <div className="hidden lg:block max-w-[65rem] mx-auto relative mt-10">
                     <Swiper
                         navigation={{
                             prevEl: ".custom-prev",
@@ -85,7 +85,7 @@ const WeLoversSection = ({ we_lovers }) => {
                             <SwiperSlide key={index}>
                                 <div className="pb-10">
                                     <div
-                                        className={`relative rounded-[29.44px] overflow-hidden w-[300px] h-[500px] transition-all duration-300 ${
+                                        className={`relative rounded-[29.44px] overflow-hidden w-full h-[600px] transition-all duration-300 ${
                                             index === activeIndex
                                                 ? "scale-100 opacity-100"
                                                 : "scale-90 opacity-50"

@@ -8,10 +8,10 @@ const ProductCard = ({ product, visible = true }) => {
         }).format(price);
     console.log(product);
     return (
-        <a href={`/product/${product.slug}`}>
-            <div className="w-full flex items-center justify-center sm:w-max">
-                <div className="group w-max  cursor-pointer transition-all duration-300">
-                    <div className="bg-white rounded-xl">
+        <a href={`/product/${product.slug}`} className="block w-full">
+            <div className="w-full flex items-center justify-center">
+                <div className="group cursor-pointer transition-all duration-300 !w-full">
+                    <div className="bg-white rounded-xl w-full">
                         {/* Imagen del producto y etiqueta de descuento */}
                         <div className="relative overflow-hidden">
                             <div className="relative group aspect-square overflow-hidden flex items-center rounded-xl justify-center">
@@ -19,7 +19,7 @@ const ProductCard = ({ product, visible = true }) => {
                                     <div
                                         className={`absolute bg-[#212529] z-50 text-white text-base font-medium px-3 pt-[1px] pb-1 rounded-2xl ${
                                             visible
-                                                ? "scale-[.7] top-0 right-0"
+                                                ? "top-2 right-2"
                                                 : "top-2 right-2 "
                                         }`}
                                     >
@@ -44,7 +44,7 @@ const ProductCard = ({ product, visible = true }) => {
                                 )}
                                 {product.colors ? (
                                     <img
-                                        src={`/api/items/media/${product.colors[0].image}`}
+                                        src={`/api/items/media/${product.colors[0]?.image}`}
                                         alt={product.name}
                                         className="w-[300.38px] md:w-[300.38px] md:h-[300.38px] 2xl:w-[346.38px] 2xl:h-[346.38px] object-cover group-hover:brightness-100 transition-all duration-300"
                                         loading="lazy"
@@ -55,7 +55,7 @@ const ProductCard = ({ product, visible = true }) => {
                                     />
                                 ) : (
                                     <img
-                                        src={`/api/items/media/${product.image}`}
+                                        src={`/api/items/media/${product?.image}`}
                                         alt={product.name}
                                         className="w-[300.38px] md:w-[300.38px] md:h-[300.38px] 2xl:w-[346.38px] 2xl:h-[346.38px] object-cover group-hover:brightness-100 transition-all duration-300"
                                         loading="lazy"
@@ -72,7 +72,7 @@ const ProductCard = ({ product, visible = true }) => {
 
                         {/* Información del producto */}
                         <div
-                            className={`px-0 pb-4 pt-2 lg:px-4 lg:pt-8 block  lg:block ${
+                            className={`px-0 pb-4 pt-2 lg:px-4 lg:pt-8 block  lg:block w-full ${
                                 visible ? "block" : "hidden"
                             }`}
                         >
@@ -86,12 +86,12 @@ const ProductCard = ({ product, visible = true }) => {
                             </div>
 
                             {/* Precio */}
-                            <div className="flex justify-between items-baseline gap-2">
-                                <h4 className="text-[12.28px] md:text-[14.28px] 2xl:text-[16.28px] text-[#212529] line-clamp-2 lg:leading-[29.18px]">
+                            <div className="flex justify-between items-baseline gap-2 !w-full">
+                                <h4 className="block w-full text-start text-[12px] md:text-[14px] 2xl:text-[16px] text-[#212529] truncate leading-tight text-wrap">
                                     ({product.summary})
                                 </h4>
                                 {product.discount && (
-                                    <span className="text-[12.28px] lg:text-[14.28px] 2xl:text-[16.8px] text-[#9F9F9F] line-through">
+                                    <span className="text-[12.28px] lg:text-[14.28px] 2xl:text-[16.8px] text-[#9F9F9F] line-through text-nowrap">
                                         S/ {Number(product.price).toFixed(2)}
                                     </span>
                                 )}

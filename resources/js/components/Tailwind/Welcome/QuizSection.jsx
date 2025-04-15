@@ -26,6 +26,9 @@ const QuizSection = () => {
                         src="/assets/img/quizz/quiz_0.png"
                         alt="Quiz Image"
                         className="w-auto h-[340px] md:h-[606px] 2xl:h-[636px] object-cover object-center relative z-10"
+                        style={{
+                            filter: "drop-shadow(-50px 50px 50px rgba(0, 0, 0, .75))",
+                        }}
                         loading="lazy"
                     />
                     <div

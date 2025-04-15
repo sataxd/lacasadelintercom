@@ -119,7 +119,7 @@ const Header = ({
         <>
             {showSlogan && (
                 <div
-                    className={`text-center px-[5%] py-3 font-light bg-[#6048B7] text-white text-[10.21px] md:text-[16.21px] leading-6 uppercase tracking-[0.2em] font-poppins w-full  ${
+                    className={`text-center px-[5%] py-4 font-light bg-[#6048B7] text-white text-[10.21px] md:text-[16.21px] leading-6 uppercase tracking-[0.2em] font-poppins w-full  ${
                         backgroundType === "none" && "mb-10 lg:mb-[78px] "
                     }`}
                 >
@@ -149,6 +149,7 @@ const Header = ({
                         muted
                         playsInline // <- Atributo crucial para iOS
                         preload="auto"
+                        controls="false"
                         disablePictureInPicture
                         disableRemotePlayback
                         webkit-playsinline="true" // <- Fallback para versiones antiguas
