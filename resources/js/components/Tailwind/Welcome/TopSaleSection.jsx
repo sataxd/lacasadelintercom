@@ -38,8 +38,8 @@ const TopSaleSection = ({ producto }) => {
                 </div>
                 {/* Product Details */}
                 <div className="w-screen  md:w-[644px] lg:w-[350px] 2xl:w-[475px] text-[#333333]">
-                    <div className=" w-9/12 lg:w-full mx-auto flex gap-1 lg:block items-end">
-                        <h3 className="text-[30.58px] leading-[30.78px] md:text-[55.58px] lg:text-[40.38px] 2xl:text-[54.38px] font-bold lg:leading-[40.78px]">
+                    <div className=" w-9/12 lg:w-full mx-auto flex lg:block items-center justify-between gap-4">
+                        <h3 className="text-[30.58px] leading-[30.78px] lg:mb-2 md:text-[55.58px] lg:text-[40.38px] 2xl:text-[54.38px] font-bold lg:leading-[40.78px]">
                             {producto.name}
                         </h3>
                         <p className="text-[16.5px] md:text-[31.5px] lg:text-[16.81px] 2xl:text-[30.81px]  font-normal inline-flex ">

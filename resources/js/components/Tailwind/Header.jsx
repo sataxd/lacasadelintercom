@@ -149,10 +149,10 @@ const Header = ({
                         muted
                         playsInline // <- Atributo crucial para iOS
                         preload="auto"
-                        controls="false"
                         disablePictureInPicture
                         disableRemotePlayback
                         webkit-playsinline="true" // <- Fallback para versiones antiguas
+                        controls={false}
                     >
                         <source src={backgroundSrc} type="video/mp4" />
                     </video>
