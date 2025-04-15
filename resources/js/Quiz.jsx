@@ -134,16 +134,16 @@ const FirstQuiz = ({ setCurrentStep, handleAnswer }) => {
                         />{" "}
                     </p>
 
-                    <div className="gap-4 w-full flex flex-col lg:flex-row items-center justify-center mt-3">
+                    <div className="gap-4 w-full flex  items-center justify-center mt-3">
                         <button
                             onClick={() => handleAnswer(1, 1)}
-                            className="w-full lg:w-1/2 text-base font-semibold xl:text-lg 2xl:text-2xl bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white py-3 2xl:py-4 px-6 rounded-[20px]  transition-colors  border-2 border-[#FF9900] duration-300"
+                            className="w-1/2 text-xs font-semibold xl:text-lg 2xl:text-2xl bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white py-3 2xl:py-4 px-6 rounded-[20px]  transition-colors  border-2 border-[#FF9900] duration-300"
                         >
                             ¡Sí! Quiero probar <br /> algo nuevo
                         </button>
                         <button
                             onClick={() => handleAnswer(1, 2)}
-                            className="w-full lg:w-1/2 text-base xl:text-lg 2xl:text-2xl bg-white text-[#FF9900] hover:bg-[#FF9900]  hover:text-white font-semibold  py-3 2xl:py-4 px-6 rounded-[20px]  transition-colors  border-2 border-[#FF9900] duration-300"
+                            className="w-1/2 text-xs xl:text-lg 2xl:text-2xl bg-white text-[#FF9900] hover:bg-[#FF9900]  hover:text-white font-semibold  py-3 2xl:py-4 px-6 rounded-[20px]  transition-colors  border-2 border-[#FF9900] duration-300"
                         >
                             No, ya he usado
                             <br /> uno antes
@@ -202,22 +202,22 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
                         />
                     </h2>
 
-                    <div className="w-full flex flex-col gap-4 lg:flex-row  items-center justify-center mt-6">
+                    <div className="w-full flex gap-2 items-center justify-center mt-6">
                         <button
                             onClick={() => handleAnswer(2, 1)}
-                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-base lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full  md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full  md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                         >
                             Leve
                         </button>
                         <button
                             onClick={() => handleAnswer(2, 2)}
-                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold px-6 rounded-[20px] text-base lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full  md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full  md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                         >
                             Moderado
                         </button>
                         <button
                             onClick={() => handleAnswer(2, 3)}
-                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-base lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                         >
                             Abundante
                         </button>
@@ -249,9 +249,9 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
 
             <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
-                    src="assets/img/quizz/quiz_3.png"
+                    src="assets/img/quizz/quiz_4.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-bottom lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -276,26 +276,26 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
                         />
                     </h2>
 
-                    <div className="w-full flex flex-col gap-4 lg:flex-row  items-center justify-center mt-6">
+                    <div className="w-full flex gap-4 items-center justify-center mt-6">
                         <button
                             onClick={() => handleAnswer(3, 1)}
-                            className="bg-white w-full lg:w-1/2 hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold py-3 px-6 rounded-[20px] text-base lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors  h-[60px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold py-3 px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors  h-[60px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                         >
                             ¡Sí! Sería lo max{" "}
                             <img
                                 src="/assets/img/emojis/fire.png"
-                                className="h-[30.05px] inline-flex ml-2"
+                                className="h-5 lg:h-[30.05px] inline-flex ml-2"
                                 loading="lazy"
                             />
                         </button>
                         <button
                             onClick={() => handleAnswer(3, 2)}
-                            className="bg-white w-full lg:w-1/2 hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold py-3 px-6 rounded-[20px] text-base lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors   h-[60px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold py-3 px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors   h-[60px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                         >
                             No, me da igual{" "}
                             <img
                                 src="/assets/img/emojis/woman-shrugging.png"
-                                className="h-[30.05px] inline-flex ml-2"
+                                className="h-5 lg:h-[30.05px] inline-flex ml-2"
                                 loading="lazy"
                             />
                         </button>
@@ -327,9 +327,9 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
 
             <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
-                    src="assets/img/quizz/quiz_4.png"
+                    src="assets/img/quizz/quiz_3.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -366,7 +366,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-0 lg:gap-5 2xl:gap-10">
                     <form onSubmit={onEmailSubmit}>
-                        <h2 className="text-[20.27px] leading-[22.12px] md:text-[31.27px] lg:text-[25px] 2xl:text-[32.21px] lg:leading-[46.12px] tracking-[0.01em] font-semibold mb-4 gap-2">
+                        <h2 className="text-base leading-[22.12px] md:text-[31.27px] lg:text-[25px] 2xl:text-[32.21px] lg:leading-[46.12px] tracking-[0.01em] font-semibold mb-4 gap-2">
                             ¡Genial! Hemos encontrado el producto menstrual
                             perfecto para ti{" "}
                             <img
@@ -375,13 +375,11 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 loading="lazy"
                             />
                         </h2>
-                        <p className="hidden lg:block mb-4 md:mb-8 text-[18.07px] md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-[31.81px] tracking-[0.01em]">
+                        <p className="hidden lg:block mb-4 md:mb-8 text-sm leading-tight md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] lg:leading-[31.81px] tracking-[0.01em]">
                             Ingresa tu email para obtener tus resultados y
-                            recibir un email con un {" "}
-                            <strong>cupón exclusivo de 10% OFF</strong> ¡Solo
-                            para ti!
+                            recibir un email con un <strong>cupón exclusivo de 10% OFF</strong> ¡Solo para ti!
                         </p>
-                        <p className="lg:hidden mb-4 md:mb-8 text-[18.07px] md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-[31.81px] tracking-[0.01em]">
+                        <p className="lg:hidden mb-4 md:mb-8 text-sm md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-tight lg:leading-[31.81px] tracking-[0.01em]">
                             Ingresa tu email para tener tus resultados y un
                             <strong>cupón exclusivo para ti!</strong>
                         </p>
@@ -423,7 +421,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                 <img
                     src="assets/img/quizz/quiz_5.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -450,7 +448,7 @@ const Result1Quiz = ({}) => {
                             loading="lazy"
                         />{" "}
                     </h1>
-                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em]">
+                    <p className="text-sm lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em]">
                         Un disco menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en la base del cuello uterino,
                         permitiéndote así tener sexo con la regla, sin manchas
@@ -474,7 +472,7 @@ const Result1Quiz = ({}) => {
                 <img
                     src="assets/img/quizz/quiz_6.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-top lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
