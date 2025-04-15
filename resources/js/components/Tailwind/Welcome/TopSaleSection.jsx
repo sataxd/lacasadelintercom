@@ -42,7 +42,7 @@ const TopSaleSection = ({ producto }) => {
                         <h3 className="text-[30.58px] leading-[30.78px] lg:mb-2 md:text-[55.58px] lg:text-[40.38px] 2xl:text-[54.38px] font-bold lg:leading-[40.78px]">
                             {producto.name}
                         </h3>
-                        <p className="text-[16.5px] md:text-[31.5px] lg:text-[16.81px] 2xl:text-[30.81px]  font-normal inline-flex ">
+                        <p className="text-[16.5px] md:text-[31.5px] text-center lg:text-start lg:text-[16.81px] 2xl:text-[30.81px]  font-normal inline-flex ">
                             ({producto.summary})
                         </p>
                     </div>
@@ -62,23 +62,25 @@ const TopSaleSection = ({ producto }) => {
                         />
                     </div>
                     <div className="w-9/12 lg:w-full mx-auto">
-                        <div className=" w-[120.43px] 2xl:w-[155px] h-[20px] 2xl:h-[25px] bg-[#212529] text-white rounded-[5.44px] my-2 lg:my-4 flex items-center justify-center">
+                        <div className=" w-max 2xl:w-[155px] h-[20px] 2xl:h-[25px] bg-[#212529] text-white rounded-[5.44px] my-2 lg:my-4 flex items-center justify-center">
                             {producto.discount && (
-                                <p className="w-[120.43px]   h-[20.55px]  bg-[#212529]  text-white rounded-[5.44px] my-4 flex items-center justify-center text-[9.88px]  leading-[21.75px]">
+                                <p className=" px-2   h-[20.55px]  bg-[#212529]  text-white rounded-[5.44px] my-4 flex items-center justify-center text-[9.88px]  leading-[21.75px]">
                                     <img
                                         src="/assets/img/emojis/fire.png"
-                                        className="h-[11.88px] inline-flex mr-1 lg:mr-2"
+                                        className="h-[11.88px] inline-flex me-2 lg:mr-2"
                                     />{" "}
-                                    <span className="font-bold text-[10.88px] mr-1">
+                                    <span className="font-bold mr-1">
                                         AHORRA
                                     </span>{" "}
+                                    <span className="text-nowrap font-bold">
                                     S/{" "}
                                     {Number(
                                         producto.price - producto.discount
                                     ).toFixed(2)}{" "}
+                                    </span>
                                     <img
                                         src="/assets/img/emojis/fire.png"
-                                        className="h-[11.88px] inline-flex ml-1 lg:ml-2"
+                                        className="h-[11.88px] inline-flex ms-2 lg:ml-2"
                                     />
                                 </p>
                             )}
@@ -115,7 +117,7 @@ const TopSaleSection = ({ producto }) => {
                     {/* Color Selector */}
                     <div className="w-9/12 lg:w-full mx-auto relative flex justify-between sm:justify-start gap-4 lg:gap-0 lg:justify-between items-center  lg:my-2">
                         {producto.colors.length > 0 && (
-                            <div className="flex items-start gap-2">
+                            <div className="flex items-center gap-2">
                                 <p className="text-[11.05px] lg:text-[11px] 2xl:text-[14.05px] font-bold">
                                     Color:
                                 </p>
@@ -150,7 +152,7 @@ const TopSaleSection = ({ producto }) => {
                                     onClick={() =>
                                         setIsModalTalla(!isModalTalla)
                                     }
-                                    className="inline-flex md:gap-2 2xl:gap-0 items-center justify-center w-[120.45px] lg:w-[180.45px] 2xl:w-[187.45px] h-[24.02px] lg:h-[34.02px] font-medium text-[10.05px] lg:text-[12.05px] 2xl:text-[15.57px] leading-[15.95px] bg-[#5F48B7] text-white rounded-[8.51px]"
+                                    className="inline-flex md:gap-2 2xl:gap-0 items-center justify-center px-3 h-[24.02px] lg:h-[34.02px] font-medium text-[10.05px] lg:text-[12.05px] 2xl:text-[15.57px] leading-[15.95px] bg-[#5F48B7] text-white rounded-[8.51px]"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -240,11 +242,11 @@ const TopSaleSection = ({ producto }) => {
                             }
                             className="lg:mt-4 relative w-[250px] lg:w-full h-[39px] lg:h-[35.88px] 2xl:h-[39.88px] text-[13.02px] lg:text-[12.59px]  2xl:text-[13.59px] leading-[13.59px] bg-[#FC58BE] text-white rounded-[6px]  lg:rounded-[2.72px] border-[1.81px] border-[#FC58BE]  flex items-center justify-center"
                         >
-                            <span className="">Añadir al carrito</span>
+                            <span className="me-2">Añadir al carrito</span>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 576 512"
-                                className="fill-white h-3 lg:h-3 absolute  top-1/2 -translate-y-1/2  right-16 "
+                                className="fill-white h-3 lg:h-3 relative lg:absolute  lg:top-1/2 lg:-translate-y-1/2  lg:right-16 "
                             >
                                 <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                             </svg>
