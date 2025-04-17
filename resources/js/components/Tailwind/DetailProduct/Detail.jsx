@@ -95,13 +95,13 @@ const Detail = ({ item }) => {
     };
     const [mainImage, setMainImage] = useState(item.image);
     return (
-        <section className=" py-10 bg-[#EFE5FF]">
+        <section className="pt-2 pb-10 bg-[#EFE5FF]">
             <div className="px-[5%] lg:px-0 mx-auto lg:max-w-5xl 2xl:max-w-6xl mt-8">
                 <p className="md:w-[644px] mx-auto lg:mx-0 md:text-[18.31px] 2xl:text-[23.31px] leading-[29.44px]">
                     Home / Tienda weFem / <strong>{item.name}</strong>
                 </p>
 
-                <div className="flex items-start flex-col md:flex-row mt-4 gap-4">
+                <div className="flex items-start flex-col md:flex-row mt-2 gap-4">
                     <div className="mx-auto flex flex-col lg:flex-row justify-start items-start my-4 gap-8">
                         {/* Left Column - Images */}
                         <div className="hidden lg:flex items-start justify-start flex-col gap-4 w-[100px] h-full">
@@ -134,7 +134,7 @@ const Detail = ({ item }) => {
                             <img
                                 src={`/api/items/media/${mainImage}`}
                                 alt={item.name}
-                                className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover rounded-lg"
+                                className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover aspect-square rounded-lg"
                                 loading="lazy"
                             />
                         </div>
@@ -146,8 +146,12 @@ const Detail = ({ item }) => {
                                         key={index}
                                         src={`/api/items/media/${image.url}`}
                                         alt="Thumbnail"
-                                        className="h-[100px] w-[100px] object-cover rounded-xl"
+                                        className="h-[100px] w-[100px] object-cover rounded-xl aspect-square"
                                         onClick={() => setMainImage(image.url)}
+                                        onError={(e) =>
+                                            (e.target.src =
+                                                "/api/cover/thumbnail/null")
+                                        }
                                     />
                                 ))}
                             {item.colors.length > 0 &&
@@ -156,9 +160,13 @@ const Detail = ({ item }) => {
                                         key={index}
                                         src={`/api/items/media/${color.image}`}
                                         alt="Thumbnail"
-                                        className="h-[100px] w-[100px] object-cover rounded-xl"
+                                        className="h-[100px] w-[100px] object-cover rounded-xl aspect-square"
                                         onClick={() =>
                                             setMainImage(color.image)
+                                        }
+                                        onError={(e) =>
+                                            (e.target.src =
+                                                "/api/cover/thumbnail/null")
                                         }
                                     />
                                 ))}

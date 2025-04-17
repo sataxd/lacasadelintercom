@@ -381,7 +381,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                         </p>
                         <p className="lg:hidden mb-4 md:mb-8 text-sm md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-tight lg:leading-[31.81px] tracking-[0.01em]">
                             Ingresa tu email para tener tus resultados y un
-                            <strong>cupón exclusivo para ti!</strong>
+                            <strong className="ms-1">cupón exclusivo para ti!</strong>
                         </p>
 
                         <div className=" w-full flex items-center justify-center ">
@@ -389,7 +389,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 ref={emailRef}
                                 type="email"
                                 placeholder="Déjanos tu email aquí"
-                                className="bg-white w-full md:w-9/12 2xl:w-10/12 hover:bg-gray-100 text-[#FF9900] font-semibold  px-6  rounded-[14px] lg:rounded-[20px] text-lg transition-colors border-2 border-[#FF9900] focus:ring-0 h-[70px] lg:h-[80px] 2xl:h-[94px]  focus:outline-none text-[20.94px] placeholder:text-[20.94px] placeholder:text-[#FF9900] placeholder:text-center"
+                                className="bg-white w-full md:w-9/12 2xl:w-10/12 hover:bg-gray-100 text-[#FF9900] font-semibold  px-6  rounded-[14px] lg:rounded-[20px] lg:text-lg transition-colors border-2 border-[#FF9900] focus:ring-0 h-[70px] lg:h-[80px] 2xl:h-[94px]  focus:outline-none text-md placeholder:text-md placeholder:text-[#FF9900] placeholder:text-center"
                             ></input>
                         </div>
                         {error && (
@@ -398,7 +398,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 ...
                             </p>
                         )}
-                        <p className="mb-8 text-[15.78px] lg:text-[14px] 2xl:text-[16.26px]  leading-[22.84px] tracking-[0.01em] mt-4 md:mt-6 text-[#000000]">
+                        <p className="mb-8 text-sm lg:text-[14px] 2xl:text-[16.26px]  leading-[22.84px] tracking-[0.01em] mt-4 md:mt-6 text-[#000000]">
                             Dejándonos tu e-mail aceptas recibir novedades y
                             promociones de wefem
                         </p>
@@ -406,7 +406,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                             <button
                                 type="submit"
                                 disabled={saving}
-                                className="bg-white hover:!bg-[#FF9900] text-[#FF9900] hover:text-white font-semibold py-4 px-6 rounded-[14px] lg:rounded-[20px] text-[20.13px] 2xl:text-[23.13px] tracking-[0.01em] transition-colors w-[393px] h-[70px] lg:h-[80px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                                className="bg-[#FF9900] text-white  font-semibold py-4 px-6 rounded-[14px] lg:rounded-[20px] text-md 2xl:text-[23.13px] tracking-[0.01em] transition-colors w-[393px] h-[70px] lg:h-[80px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                             >
                                 {saving
                                     ? "Enviando..."
@@ -448,7 +448,7 @@ const Result1Quiz = ({}) => {
                             loading="lazy"
                         />{" "}
                     </h1>
-                    <p className="text-sm lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em]">
+                    <p className="text-sm lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
                         Un disco menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en la base del cuello uterino,
                         permitiéndote así tener sexo con la regla, sin manchas
@@ -460,7 +460,7 @@ const Result1Quiz = ({}) => {
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wedisk"
-                            className="inline-flex items-center justify-center bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-[20.94px] tracking-[0.01em] transition-colors w-[377.32px] h-[80.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="inline-flex items-center justify-center bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-md tracking-[0.01em] transition-colors w-[377.32px] h-[80.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                         >
                             ¡Comprar ahora!
                         </a>
@@ -499,7 +499,7 @@ const Result2Quiz = ({}) => {
                             loading="lazy"
                         />{" "}
                     </h1>
-                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em]">
+                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
                         Una copa menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en el canal vaginal y te
                         permitirá moverte cómodamente, sin irritaciones ni
@@ -511,7 +511,7 @@ const Result2Quiz = ({}) => {
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wecup"
-                            className="inline-flex items-center justify-center bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-[20.94px] tracking-[0.01em] transition-colors w-[377.32px] h-[90.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="inline-flex items-center justify-center bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-md tracking-[0.01em] transition-colors w-[377.32px] h-[90.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                         >
                             ¡Comprar ahora!
                         </a>

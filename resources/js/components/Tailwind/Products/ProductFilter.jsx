@@ -171,7 +171,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                         product.images &&
                                         product.images.length > 0 &&
                                         "group-hover:hidden"
-                                    } bg-[#FAFAFA] w-full h-auto object-cover mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300 `}
+                                    } bg-[#FAFAFA] w-full h-auto object-cover aspect-square mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300 `}
                                     onError={(e) =>
                                         (e.target.src =
                                             "/api/cover/thumbnail/null")
@@ -182,7 +182,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                         <img
                                             src={`/api/items/media/${product.images[0].url}`}
                                             alt={product.name}
-                                            className="hidden group-hover:block  bg-[#FAFAFA] w-full h-auto object-cover mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-1000 "
+                                            className="hidden group-hover:block  bg-[#FAFAFA] w-full h-auto object-cover aspect-square mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-1000 "
                                         />
                                     )}
 
@@ -293,7 +293,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                 <img
                                     src={`/api/items/media/${product.image}`}
                                     alt={product.name}
-                                    className="bg-[#FAFAFA] w-full h-auto object-cover mb-2 md:mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300 rounded-md"
+                                    className="bg-[#FAFAFA] w-full h-auto object-cover aspect-square mb-2 md:mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300 rounded-md"
                                     onError={(e) =>
                                         (e.target.src =
                                             "/api/cover/thumbnail/null")
@@ -314,7 +314,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                     {/* Precio */}
                                     <div className="flex justify-between items-baseline gap-2">
                                         {product.summary ? (
-                                            <h4 className="text-[9.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                            <h4 className="text-[9.28px] leading-tight font-normal mb-2 line-clamp-2 h-6">
                                                 ({product.summary})
                                             </h4>
                                         ) : (
@@ -412,7 +412,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                 <img
                                     src={`/api/items/media/${product.image}`}
                                     alt={product.name}
-                                    className="bg-[#FAFAFA] w-full h-auto object-cover mb-2 md:mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300 rounded-md"
+                                    className="bg-[#FAFAFA] w-full h-auto object-cover aspect-square mb-2 md:mb-4 group-hover:bg-[#FDBB2E] transition-colors duration-300 rounded-md"
                                     onError={(e) =>
                                         (e.target.src =
                                             "/api/cover/thumbnail/null")
@@ -433,7 +433,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                     {/* Precio */}
                                     <div className="flex justify-between items-baseline gap-2">
                                         {product.summary ? (
-                                            <h4 className="text-[9.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                            <h4 className="text-[9.28px] leading-tight font-normal mb-2 line-clamp-2 h-6">
                                                 ({product.summary})
                                             </h4>
                                         ) : (

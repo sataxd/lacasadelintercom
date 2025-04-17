@@ -63,14 +63,14 @@ const WeDiskSection = () => {
         <>
             <div className="px-[5%]  max-w-lg lg:max-w-5xl 2xl:max-w-[75rem] md:px-0 mx-auto py-8  md:mt-20 xl:mt-14">
                 <div className="flex justify-center items-center gap-8 flex-col  lg:flex-row">
-                    <div className="w-full lg:w-1/2 relative flex items-center justify-center  h-[350px] sm:h-[450px]  md:h-[450px]  2xl:h-[520px]  overflow-hidden">
+                    <div className="w-full lg:w-1/2 relative flex items-center justify-center aspect-square overflow-hidden">
                         {/* <div className="text-[#EFEDF8] text-[100.92px]  md:text-[140.92px] lg:text-[100.92px] 2xl:text-[150.92px] md:leading-[100.24px] 2xl:leading-[122.24px] font-bold space-y-1">
                             <p>weDisk</p>
                             <p>weDisk</p>
                             <p>weDisk</p>
                         </div> */}
                         <img
-                            className=" absolute object-contain inset-0 top-1/2 -translate-y-1/2 aspect-square h-full sm:h-[480.57px] lg:h-[470.57px] 2xl:h-[560.57px] w-auto"
+                            className="absolute object-contain inset-0 top-1/2 -translate-y-1/2 aspect-square w-10/12 mx-auto"
                             src="/assets/img/instructions/disco.png"
                             alt="weDisk"
                         />
@@ -142,7 +142,7 @@ const WeDiskSection = () => {
                                 Esteriliza tu disco
                             </span>
                         </div>
-                        <p className="text-[20px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-[33px]">
+                        <p className="text-md md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-tight">
                             Antes de usar tu weDisk por primera vez,
                             desinféctalo en una olla o en tu shakerCup con agua
                             hirviendo durante 2:30 minutos.
