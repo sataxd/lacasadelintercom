@@ -102,11 +102,10 @@ const WeDiskSection = () => {
                         {steps.map((step, index) => (
                             <li
                                 key={index}
-                                className={`px-4 pb-1 cursor-pointer ${
-                                    index === activeStep
+                                className={`px-4 pb-1 cursor-pointer ${index === activeStep
                                         ? "text-[#5F48B7] border-b-4 border-[#5F48B7]"
                                         : "text-[#D5D0EA]"
-                                }`}
+                                    }`}
                                 onClick={() => setActiveStep(index)}
                             >
                                 {step}
@@ -115,9 +114,8 @@ const WeDiskSection = () => {
                     </ul>
                 </nav>
                 <div
-                    className={`${
-                        activeStep === 0 ? "grid" : "hidden"
-                    }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 0 ? "grid" : "hidden"
+                        }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <video
@@ -153,9 +151,8 @@ const WeDiskSection = () => {
                     </div>
                 </div>
                 <div
-                    className={`${
-                        activeStep === 1 ? "grid" : "hidden"
-                    }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 1 ? "grid" : "hidden"
+                        }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <video
@@ -190,9 +187,8 @@ const WeDiskSection = () => {
                     </div>
                 </div>
                 <div
-                    className={`${
-                        activeStep === 2 ? "grid" : "hidden"
-                    }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 2 ? "grid" : "hidden"
+                        }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <video
@@ -228,9 +224,8 @@ const WeDiskSection = () => {
                     </div>
                 </div>
                 <div
-                    className={`${
-                        activeStep === 3 ? "grid" : "hidden"
-                    }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 3 ? "grid" : "hidden"
+                        }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <video
@@ -322,9 +317,9 @@ const WeDiskSection = () => {
             </div>
             <div className="px-[5%] md:px-0 w-full md:pl-16 lg:hidden py-4  ">
                 <Swiper
-                    scrollbar={{
-                        hide: true,
-                    }}
+                    // scrollbar={{
+                    //     hide: true,
+                    // }}
                     modules={[Scrollbar]}
                     slidesPerView={1.5}
                     spaceBetween={0}
