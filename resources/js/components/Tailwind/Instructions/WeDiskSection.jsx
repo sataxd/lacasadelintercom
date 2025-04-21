@@ -317,9 +317,9 @@ const WeDiskSection = () => {
             </div>
             <div className="px-[5%] md:px-0 w-full md:pl-16 lg:hidden py-4  ">
                 <Swiper
-                    // scrollbar={{
-                    //     hide: true,
-                    // }}
+                    scrollbar={{
+                        draggable: true,
+                    }}
                     modules={[Scrollbar]}
                     slidesPerView={1.5}
                     spaceBetween={0}
