@@ -318,7 +318,8 @@ const WeCupSection = () => {
             <div className="px-[5%] md:px-0 w-full md:pl-16 lg:hidden py-4  ">
                 <Swiper
                     scrollbar={{
-                        hide: true,
+                        hide: false,
+                        draggable: true,
                     }}
                     modules={[Scrollbar]}
                     slidesPerView={1.5}
