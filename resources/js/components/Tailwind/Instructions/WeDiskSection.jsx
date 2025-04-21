@@ -4,10 +4,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/scrollbar";
+import "swiper/css/navigation";
 import "../../../../css/Swiper/instructionScrollbar.css";
 
 // import required modules
-import { Scrollbar } from "swiper/modules";
+import { Navigation, Scrollbar } from "swiper/modules";
 
 const features = [
     {
@@ -320,7 +321,7 @@ const WeDiskSection = () => {
                     scrollbar={{
                         draggable: true,
                     }}
-                    modules={[Scrollbar]}
+                    modules={[Scrollbar, Navigation]}
                     slidesPerView={1.5}
                     spaceBetween={0}
                     loop={true}
