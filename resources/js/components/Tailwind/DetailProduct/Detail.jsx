@@ -102,7 +102,7 @@ const Detail = ({ item }) => {
                 </p>
 
                 <div className="flex items-start flex-col md:flex-row mt-2 gap-4">
-                    <div className="mx-auto flex flex-col lg:flex-row justify-start items-start my-4 gap-8">
+                    <div className="mx-auto flex flex-col lg:flex-row justify-start items-start my-4 gap-4">
                         {/* Left Column - Images */}
                         <div className="hidden lg:flex items-start justify-start flex-col gap-4 w-[100px] h-full">
                             {item.images.length > 0 &&
@@ -130,46 +130,56 @@ const Detail = ({ item }) => {
                         </div>
 
                         {/* Image */}
-                        <div className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] overflow-hidden">
-                            <img
-                                src={`/api/items/media/${mainImage}`}
-                                alt={item.name}
-                                className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover aspect-square rounded-lg"
-                                loading="lazy"
-                            />
-                        </div>
+                        <div className="flex flex-col gap-2">
+                            <div className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] overflow-hidden">
+                                <img
+                                    src={`/api/items/media/${mainImage}`}
+                                    alt={item.name}
+                                    className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover aspect-square rounded-lg"
+                                    loading="lazy"
+                                    onError={(e) =>
+                                    (e.target.src =
+                                        "/api/cover/thumbnail/null")
+                                    }
+                                />
+                            </div>
 
-                        <div className="flex items-start lg:hidden justify-start flex-row gap-4 w-full overflow-x-auto h-full">
-                            {item.images.length > 0 &&
-                                item.images.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={`/api/items/media/${image.url}`}
-                                        alt="Thumbnail"
-                                        className="h-[100px] w-[100px] object-cover rounded-xl aspect-square"
-                                        onClick={() => setMainImage(image.url)}
-                                        onError={(e) =>
+                            <div className="flex items-start lg:hidden justify-start flex-row gap-2 w-full overflow-x-auto h-full">
+                                {
+                                    item.images.length > 0 &&
+                                    item.images.map((image, index) => (
+                                        <img
+                                            key={index}
+                                            src={`/api/items/media/${image.url}`}
+                                            alt="Thumbnail"
+                                            className="h-[51.5px] w-[51.5px] object-cover rounded-xl aspect-square"
+                                            onClick={() => setMainImage(image.url)}
+                                            onError={(e) =>
                                             (e.target.src =
                                                 "/api/cover/thumbnail/null")
-                                        }
-                                    />
-                                ))}
-                            {item.colors.length > 0 &&
-                                item.colors.map((color, index) => (
-                                    <img
-                                        key={index}
-                                        src={`/api/items/media/${color.image}`}
-                                        alt="Thumbnail"
-                                        className="h-[100px] w-[100px] object-cover rounded-xl aspect-square"
-                                        onClick={() =>
-                                            setMainImage(color.image)
-                                        }
-                                        onError={(e) =>
+                                            }
+                                        />
+                                    ))
+                                }
+                                {
+                                    item.colors.length > 0 &&
+                                    item.colors.map((color, index) => (
+                                        <img
+                                            key={index}
+                                            src={`/api/items/media/${color.image}`}
+                                            alt="Thumbnail"
+                                            className="h-[51.5px] w-[51.5px] object-cover rounded-xl aspect-square"
+                                            onClick={() =>
+                                                setMainImage(color.image)
+                                            }
+                                            onError={(e) =>
                                             (e.target.src =
                                                 "/api/cover/thumbnail/null")
-                                        }
-                                    />
-                                ))}
+                                            }
+                                        />
+                                    ))
+                                }
+                            </div>
                         </div>
                         {/* Product Details */}
                         <div className="md:w-[644px] lg:w-[350px] 2xl:w-[475px] text-[#333333]">
@@ -258,12 +268,11 @@ const Detail = ({ item }) => {
                                                             color.image
                                                         );
                                                     }}
-                                                    className={`rounded-full p-1 border ${
-                                                        selectedColor ===
+                                                    className={`rounded-full p-1 border ${selectedColor ===
                                                         color.name
-                                                            ? "border-[#222222]"
-                                                            : "border-[#DDDDDD]"
-                                                    }`}
+                                                        ? "border-[#222222]"
+                                                        : "border-[#DDDDDD]"
+                                                        }`}
                                                 >
                                                     <div
                                                         className="w-[22px] h-[22px] rounded-full "
