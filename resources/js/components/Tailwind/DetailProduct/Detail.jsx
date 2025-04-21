@@ -113,6 +113,10 @@ const Detail = ({ item }) => {
                                         alt="Thumbnail"
                                         className="h-[100px] w-[100px] object-cover"
                                         onClick={() => setMainImage(image.url)}
+                                        onError={(e) =>
+                                        (e.target.src =
+                                            "/api/cover/thumbnail/null")
+                                        }
                                     />
                                 ))}
                             {item.colors.length > 0 &&
@@ -125,17 +129,21 @@ const Detail = ({ item }) => {
                                         onClick={() =>
                                             setMainImage(color.image)
                                         }
+                                        onError={(e) =>
+                                        (e.target.src =
+                                            "/api/cover/thumbnail/null")
+                                        }
                                     />
                                 ))}
                         </div>
 
                         {/* Image */}
                         <div className="flex flex-col gap-2">
-                            <div className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] overflow-hidden">
+                            <div className="w-full md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] overflow-hidden">
                                 <img
                                     src={`/api/items/media/${mainImage}`}
                                     alt={item.name}
-                                    className="md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover aspect-square rounded-lg"
+                                    className="w-full md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover aspect-square rounded-lg"
                                     loading="lazy"
                                     onError={(e) =>
                                     (e.target.src =
