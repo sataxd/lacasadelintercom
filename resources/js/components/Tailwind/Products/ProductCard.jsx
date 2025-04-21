@@ -77,10 +77,10 @@ const ProductCard = ({ product, visible = true }) => {
                             }`}
                         >
                             <div className="flex justify-between">
-                                <h3 className="text-[22.44px] md:text-[25.44px] 2xl:text-[29.44px] md:leading-[20.64px] 2xl:leading-[41.64px] text-[#212529] font-semibold line-clamp-2">
+                                <h3 className="text-[20px] md:text-[25.44px] 2xl:text-[29.44px] md:leading-[20.64px] 2xl:leading-[41.64px] text-[#212529] font-semibold line-clamp-2">
                                     {product.name}
                                 </h3>
-                                <span className="text-[22.56px] md:text-[27.56px] 2xl:text-[32.56px] md:leading-[20.64px] 2xl:leading-[39.79px] font-bold text-[#FC58BE]">
+                                <span className="text-[20px] md:text-[27.56px] 2xl:text-[32.56px] md:leading-[20.64px] 2xl:leading-[39.79px] font-bold text-[#FC58BE]">
                                     {formatPrice(product.final_price)}
                                 </span>
                             </div>
