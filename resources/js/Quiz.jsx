@@ -106,11 +106,11 @@ const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
                     </div>
                 </div>
             </div>
-            <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
+            <div className="flex pt-3 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_1.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -174,11 +174,11 @@ const FirstQuiz = ({ setCurrentStep, handleAnswer }) => {
                 </div>
             </div>
 
-            <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
+            <div className="flex pt-3 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_2.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover  lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -247,11 +247,11 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
                 </div>
             </div>
 
-            <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
+            <div className="flex pt-3 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_4.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -325,11 +325,11 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
                 </div>
             </div>
 
-            <div className="flex pt-4 lg:pt-0  justify-end  w-full md:w-1/2">
+            <div className="flex pt-3 lg:pt-0  justify-end  w-full md:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_3.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -417,11 +417,11 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                 </div>
             </div>
 
-            <div className="flex pt-4 lg:pt-0  justify-end    w-full lg:w-1/2">
+            <div className="flex pt-3 lg:pt-0  justify-end    w-full lg:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_5.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -468,11 +468,11 @@ const Result1Quiz = ({}) => {
                 </div>
             </div>
 
-            <div className="flex pt-4 lg:pt-0  justify-end  w-full lg:w-1/2">
+            <div className="flex pt-3 lg:pt-0  justify-end  w-full lg:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_6.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -519,11 +519,11 @@ const Result2Quiz = ({}) => {
                 </div>
             </div>
 
-            <div className="flex pt-4 lg:pt-0  justify-end  w-full lg:w-1/2">
+            <div className="flex pt-3 lg:pt-0  justify-end  w-full lg:w-1/2">
                 <img
                     src="assets/img/quizz/quiz_7.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[22vh] lg:h-[75vh] object-cover object-bottom lg:object-center flex-shrink-0"
+                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
