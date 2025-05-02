@@ -36,10 +36,10 @@ const Instructions = ({
                 showSlogan={showSlogan}
                 backgroundType="video"
                 backgroundSrc="/assets/img/backgrounds/instructions.mp4"
-                backgroundHeight="h-[400px] lg:h-[400px] 2xl:h-[600px]"
+                backgroundHeight="h-[220px] lg:h-[400px] 2xl:h-[600px]"
                 backgroundPosition="object-center"
             >
-                <div className="absolute inset-0 flex items-center lg:items-end justify-center text-center">
+                <div className="absolute inset-0 flex items-center  justify-center text-center">
                     <div className="text-white text-center p-6">
                         <h1 className="text-[45.08px]  md:text-[65.08px]  lg:text-[58.54px] 2xl:text-[78.54px]  md:leading-[90.81px]  2xl:leading-[117.81px] font-bold max-w-4xl text-center tracking-[0.01em]">
                             ¿Cómo usar?

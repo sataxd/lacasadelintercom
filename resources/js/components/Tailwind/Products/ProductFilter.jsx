@@ -124,7 +124,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                         <div className="text-white w-full">
                             <img
                                 src={`/api/ads/media/${anuncio.image}`}
-                                className="w-full h-[300px] xl:h-[320px] 2xl:h-[370px] object-cover"
+                                className="w-full aspect-[5/6] object-cover object-center"
                                 alt={anuncio?.name}
                                 onError={(e) =>
                                     (e.target.src = "/api/cover/thumbnail/null")
@@ -372,7 +372,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                         <div className="text-white w-full col-span-2">
                             <img
                                 src={`/api/ads/media/${anuncio.image}`}
-                                className="w-full h-[200px]   md:h-[305px] object-cover"
+                                className="w-full aspect-[16/6] object-cover object-center"
                                 alt="Promoción"
                                 onError={(e) =>
                                     (e.target.src = "/api/cover/thumbnail/null")
