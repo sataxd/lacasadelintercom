@@ -371,7 +371,7 @@ const Header = ({
                             <div className="bg-[#EFE5FF] shadow-lg w-full sm:max-w-[380px] lg:max-w-[500px]  h-max    p-8 lg:p-14 rounded-[30px]  lg:rounded-[50px] ">
                                 {/* Encabezado */}
                                 <div className="flex justify-between items-center  ">
-                                    <h2 className="text-[24.67px] lg:text-[34.67px] font-bold">
+                                    <h2 className="text-2xl font-bold">
                                         Tu Carrito
                                     </h2>
                                     <button
@@ -381,7 +381,7 @@ const Header = ({
                                         ✖
                                     </button>
                                 </div>
-                                <div className="bg-[#9C79D4] py-2 text-[13.95px]  md:text-[16.95px]  lg:text-[20.95px] mt-4 mb-8 text-center rounded-[14px]  lg:rounded-[20px]  text-white">
+                                <div className="bg-[#9C79D4] py-2 text-lg mt-4 mb-8 text-center rounded-[14px]  lg:rounded-[20px]  text-white">
                                     ¡Tienes envío gratis en LIMA!{" "}
                                     <img
                                         src="/assets/img/emojis/motor-scooter.png"
@@ -424,11 +424,11 @@ const Header = ({
                                                 <div className=" flex flex-col w-[calc(100%-5rem)] md:w-[calc(100%-7rem)] ">
                                                     <div className="w-full flex">
                                                         <div className="w-5/6 lg:w-8/12">
-                                                            <h3 className="text-[17.95px] md:text-[25.95px]  font-normal leading-3 md:leading-[20.78px] ">
+                                                            <h3 className="text-2xl  font-normal leading-3 md:leading-[20.78px] ">
                                                                 {item.name}
                                                             </h3>
                                                             {item.summary && (
-                                                                <p className="text-[10px] md:text-xs    font-light inline-flex ">
+                                                                <p className="text-[10px] md:text-xs    font-light inline-flex truncate">
                                                                     (
                                                                     {
                                                                         item.summary
@@ -492,7 +492,7 @@ const Header = ({
                                                     </div>
                                                     <div className="w-full flex">
                                                         <div className="w-1/2  md:w-4/6 lg:w-1/2  flex  ">
-                                                            <p className="text-[18.42px] md:text-[24.42px]  items-center   font-bold text-[#5F48B7] ">
+                                                            <p className="text-xl  items-center   font-bold text-[#5F48B7] ">
                                                                 S/{" "}
                                                                 {Number(
                                                                     item.final_price
@@ -550,17 +550,17 @@ const Header = ({
                                 {totalPrecio > 0 && (
                                     <div className="  w-full mt-8">
                                         <div className="w-full flex items-center justify-between my-6">
-                                            <p className="text-[25.42px] md:text-[30.42px]  font-bold text-black ">
+                                            <p className="text-2xl font-bold text-black ">
                                                 Subtotal
                                             </p>
-                                            <p className="text-[25.42px] md:text-[30.42px]  font-bold text-black ">
+                                            <p className="text-2xl font-bold text-black ">
                                                 S/ {totalPrecio.toFixed(2)}
                                             </p>
                                         </div>
 
                                         <a
                                             href="/checkout"
-                                            className=" block text-center text-[20.76px] md:text-[25.76px]   w-full  font-semibold rounded-[12.11px] lg:rounded-[15.11px] bg-[#FF9900] text-white py-3 hover:bg-opacity-90 hover:scale-105 transition-all duration-300"
+                                            className=" block text-center text-xl w-full  font-semibold rounded-[12.11px] lg:rounded-[15.11px] bg-[#FF9900] text-white py-3 hover:bg-opacity-90 hover:scale-105 transition-all duration-300"
                                         >
                                             IR A COMPRAR
                                         </a>

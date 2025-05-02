@@ -109,7 +109,7 @@ const Detail = ({ item }) => {
                                 item.images.map((image, index) => (
                                     <img
                                         key={index}
-                                        src={`/api/items/media/${image.url}`}
+                                        src={`/api/items/media/${item.colors?.[0]?.image ?? image.url}`}
                                         alt="Thumbnail"
                                         className="h-[100px] w-[100px] object-cover"
                                         onClick={() => setMainImage(image.url)}

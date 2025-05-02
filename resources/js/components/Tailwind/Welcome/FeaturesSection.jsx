@@ -2,8 +2,8 @@ const FeaturesSection = () => {
     return (
         <section
             className={`bg-[#EFE5FF]  overflow-hidden ${location.pathname == "/"
-                    ? "md:pt-10 md:pb-4 2xl:pt-8 "
-                    : "md:py-8"
+                    ? "md:pt-8 md:pb-4 2xl:pt-6 "
+                    : "md:py-4"
                 }`}
         >
             <div className="px-[5%] mx-auto relative">
