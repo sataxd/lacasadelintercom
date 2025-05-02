@@ -366,7 +366,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-0 lg:gap-5 2xl:gap-10">
                     <form onSubmit={onEmailSubmit}>
-                        <h2 className="text-base leading-[22.12px] md:text-[31.27px] lg:text-[25px] 2xl:text-[32.21px] lg:leading-[46.12px] tracking-[0.01em] font-semibold mb-4 gap-2">
+                        <h2 className="text-base md:text-[31.27px] lg:text-[25px] 2xl:text-[32.21px] leading-tight tracking-[0.01em] font-semibold mb-4 gap-2">
                             ¡Genial! Hemos encontrado el producto menstrual
                             perfecto para ti{" "}
                             <img
@@ -375,11 +375,11 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 loading="lazy"
                             />
                         </h2>
-                        <p className="hidden lg:block mb-4 md:mb-8 text-sm leading-tight md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] lg:leading-[31.81px] tracking-[0.01em]">
+                        <p className="hidden lg:block mb-4 md:mb-8 text-sm leading-tight md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] tracking-[0.01em]">
                             Ingresa tu email para obtener tus resultados y
                             recibir un email con un <strong>cupón exclusivo de 10% OFF</strong> ¡Solo para ti!
                         </p>
-                        <p className="lg:hidden mb-4 md:mb-8 text-sm md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-tight lg:leading-[31.81px] tracking-[0.01em]">
+                        <p className="lg:hidden mb-4 md:mb-8 text-sm md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-tight tracking-[0.01em]">
                             Ingresa tu email para tener tus resultados y un
                             <strong className="ms-1">cupón exclusivo para ti!</strong>
                         </p>
