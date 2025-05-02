@@ -269,7 +269,7 @@ const Checkout = ({ publicKey, session }) => {
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5 relative">
                             <div className="lg:col-span-3">
                                 <h2 className="mb-4 text-xl font-semibold">
-                                    INFORMACIÓN PERSONAL
+                                    Información personal
                                 </h2>
 
                                 <div className="grid gap-4 md:grid-cols-2">

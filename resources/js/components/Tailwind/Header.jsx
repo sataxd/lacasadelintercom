@@ -424,7 +424,7 @@ const Header = ({
                                                 <div className=" flex flex-col w-[calc(100%-5rem)] md:w-[calc(100%-7rem)] ">
                                                     <div className="w-full flex">
                                                         <div className="w-5/6 lg:w-8/12">
-                                                            <h3 className="text-2xl  font-normal leading-3 md:leading-[20.78px] ">
+                                                            <h3 className="text-xl  font-normal leading-3 md:leading-[20.78px] ">
                                                                 {item.name}
                                                             </h3>
                                                             {item.summary && (
