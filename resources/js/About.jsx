@@ -34,12 +34,12 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                 showSlogan={showSlogan}
                 backgroundType="image"
                 backgroundSrc="assets/img/about/bg-about.png"
-                backgroundHeight="h-[40vh] md:h-[70vh]"
+                backgroundHeight="h-[250px] md:h-[70vh]"
                 backgroundPosition="object-center blur-[2px]"
             >
-                <div className="absolute inset-0 flex items-end md:items-center justify-center text-center ">
+                <div className="absolute inset-0 flex items-center justify-center text-center ">
                     <div className="text-white p-6">
-                        <h1 className="text-[30.66px] md:text-[58.21px] 2xl:text-[72.21px] md:leading-[65.32px] 2xl:leading-[90.32px] font-bold max-w-5xl tracking-[0.01em]">
+                        <h1 className="text-[30.66px] md:text-[58.21px] 2xl:text-[72.21px] md:leading-[65.32px] 2xl:leading-[90.32px] font-bold max-w-5xl leading-tight tracking-[0.01em]">
                             ¡Tu mejor aliadx en <br />
                             el cuidado menstrual!
                         </h1>
@@ -114,8 +114,8 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
 
                 {/* Iconos Section */}
                 <div className="bg-[#FC58BE] mb-8">
-                    <div className="bg-[#FC58BE] py-12 flex items-center justify-center p-4">
-                        <div className="flex flex-wrap justify-center gap-8 mx-auto">
+                    <div className="bg-[#FC58BE] py-6 md:py-12 flex items-center justify-center p-4">
+                        <div className="flex flex-wrap justify-center gap-2 md:gap-8 mx-auto">
                             {[
                                 {
                                     icon: "/assets/img/about/educacion.png",
@@ -140,16 +140,16 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                             ].map((item, index) => (
                                 <div
                                     key={index}
-                                    className="w-[120px] h-[120px] lg:w-[170px] lg:h-[170px] 2xl:w-[200px] 2xl:h-[200px] border border-white rounded-full 
+                                    className="w-[60px] h-[60px] lg:w-[170px] lg:h-[170px] 2xl:w-[200px] 2xl:h-[200px] border border-white rounded-full 
                             flex items-center justify-center transition-transform duration-300 ease-in-out 
                             flex-col text-center hover:scale-105 cursor-pointer"
                                 >
-                                    <div className="icon-circle  lg:mb-4 flex flex-col items-center justify-center gap-2 md:gap-1 lg:gap-4">
+                                    <div className="icon-circle  lg:mb-4 flex flex-col items-center justify-center gap-1 md:gap-1 lg:gap-4">
                                         <img
                                             src={item.icon}
                                             className="brightness-0 grayscale invert h-[30px]  md:h-[40px] lg:h-[50px]     2xl:h-[53px] w-auto"
                                         />
-                                        <p className="text-white  text-[11.71px] lg:text-[18.81px] 2xl:text-[21.81px] leading-tight max-w-[150px]">
+                                        <p className="text-white  text-[6px] lg:text-[18.81px] 2xl:text-[21.81px] leading-tight max-w-[150px]">
                                             {item.text
                                                 .split("\n")
                                                 .map((line, i) => (

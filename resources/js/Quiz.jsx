@@ -87,7 +87,7 @@ const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <h2 className="text-base md:text-lg lg:text-xl  2xl:text-[30.75px] tracking-[1%] font-semibold ">
+                    <h2 className="text-lg md:text-xl lg:text-2xl  2xl:text-[30.75px] tracking-[1%] font-semibold ">
                         ¿Qué producto es perfecto para ti?
                     </h2>
                     <p className="text-base lg:text-lg  2xl:text-xl tracking-[1%]">
@@ -398,7 +398,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 ...
                             </p>
                         )}
-                        <p className="mb-8 text-sm lg:text-[14px] 2xl:text-[16.26px]  leading-[22.84px] tracking-[0.01em] mt-4 md:mt-6 text-[#000000]">
+                        <p className="mb-8 text-xs lg:text-sm 2xl:text-base  leading-[22.84px] tracking-[0.01em] mt-4 md:mt-6 text-[#000000]">
                             Dejándonos tu e-mail aceptas recibir novedades y
                             promociones de wefem
                         </p>

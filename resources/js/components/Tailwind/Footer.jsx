@@ -168,7 +168,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                             />
                         </div>
 
-                        <div className="w-5/12 mt-4 lg:mt-0  md:w-[35%] lg:w-3/12 flex items-end lg:items-start lg:pt-4">
+                        <div className="w-5/12 mt-4 lg:mt-0  md:w-[35%] lg:w-3/12 flex items-center lg:items-start lg:pt-4">
                             <div className="flex flex-row gap-1 lg:gap-4 ">
                                 {Instagram && (
                                     <a

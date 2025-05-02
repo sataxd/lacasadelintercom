@@ -53,15 +53,18 @@ const WeCupSection = () => {
                             <p>weCup</p>
                         </div> */}
                         <img
-                            className=" absolute object-contain inset-0 top-1/2 -translate-y-1/2 aspect-square h-full sm:h-[480.57px] lg:h-[470.57px] 2xl:h-[560.57px] w-auto"
+                            className=" absolute object-contain inset-0 top-1/2 -translate-y-1/2 aspect-square h-auto sm:h-[480.57px] lg:h-[470.57px] 2xl:h-[560.57px] w-[80%] mx-auto"
                             src="/assets/img/instructions/copa.png"
                             alt="weCup"
                         />
                     </div>
+                    <a href="" className="block md:hidden">Manual de uso <i className="mdi mdi-download"></i></a>
+
                     <div className="bg-[#DDEC4C] flex flex-col items-center gap-4 w-full md:w-[520px] lg:w-[440px] 2xl:w-[540px] h-full  rounded-[50px]  md:rounded-[70px] lg:rounded-[40px] 2xl:rounded-[70px] font-poppins py-[10%] px-[10%] lg:py-10 lg:px-14">
                         <h2 className="font-bold xl:mb-2 text-5xl xl:text-6xl  2xl:text-7xl text-center">
                             weCup
                         </h2>
+                    <a href="" className="hidden md:block">Manual de uso <i className="mdi mdi-download"></i></a>
                         <ul className="space-y-2 md:space-y-3 xl:space-y-4 ">
                             {[
                                 {

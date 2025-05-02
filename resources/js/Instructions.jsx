@@ -62,9 +62,20 @@ const Instructions = ({
                 <WeDiskSection />
 
                 <ProductCarousel products={products_featured}>
-                    <h2 className="text-3xl 2xl:text-4xl font-bold flex gap-4 items-start justify-center">
-                        ¿Te sientes lista? Compra aquí{" "}
+                    <h2 className="font-poppins text-lg md:text-3xl 2xl:text-4xl font-bold flex gap-2 md:gap-4 items-center justify-center">
+                        <img
+                            src="/assets/img/emojis/growing-heart.png"
+                            className="h-4 md:h-8 lg:h-9"
+                        />{" "}
+                        Preferidos por nosotrxs{" "}
+                        <img
+                            src="/assets/img/emojis/growing-heart.png"
+                            className="h-4 md:h-8 lg:h-9"
+                        />
                     </h2>
+                    <p className="font-poppins text-[13.3px] md:text-[19.3px] leading-[19.77px] lg:mt-4">
+                        ¿Estás listx para el cambio?
+                    </p>
                 </ProductCarousel>
 
                 <div

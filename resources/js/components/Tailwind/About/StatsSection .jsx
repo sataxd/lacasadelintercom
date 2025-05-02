@@ -76,7 +76,7 @@ const StatsSection = ({ indicators }) => {
                     />
 
                     {/* Contenido */}
-                    <div className="px-[5%] mx-auto relative z-10 grid grid-cols-2 gap-4 gap-y-16 pt-10 md:pt-20 pb-0  lg:py-20">
+                    <div className="px-[5%] mx-auto relative z-10 grid grid-cols-2 gap-4 gap-y-8 md:gap-y-16 pt-10 md:pt-20 pb-0  lg:py-20">
                         {updatedStats.map((stat, index) => (
                             <div
                                 key={index}
@@ -96,7 +96,7 @@ const StatsSection = ({ indicators }) => {
                                 >
                                     +0{getSuffix(stat.value)}
                                 </div>
-                                <div className="-rotate-2  md:w-[300.09px] 2xl:w-[369.09px] md:text-[22.61px] 2xl:text-[31.61px] text-white px-5 py-2 font-bold bg-[#F750BD]">
+                                <div className="-rotate-2  md:w-[300.09px] text-[10px] 2xl:w-[369.09px] md:text-[22.61px] 2xl:text-[31.61px] text-white px-5 py-2 font-bold bg-[#F750BD]">
                                     {stat.label}
                                 </div>
                             </div>

@@ -430,7 +430,7 @@ const Detail = ({ item }) => {
                     style={{ backdropFilter: "blur(10px)" }}
                 >
                     <div
-                        className="bg-white rounded-[30.58px] lg:w-[419px] lg:h-[405.40px] 2xl:w-[519px] 2xl:h-[505.40px] z-10  p-8 relative"
+                        className="bg-white rounded-[30.58px] w-[90%] aspect-[419/405.40] lg:w-[419px] lg:h-[405.40px] 2xl:w-[519px] 2xl:h-[505.40px] z-10  p-8 relative"
                         style={{
                             backgroundImage:
                                 "url(/assets/img/multiple/mi-talla.png)",

@@ -729,7 +729,7 @@ const Checkout = ({ publicKey, session }) => {
                                     <h2 className="mb-4 text-xl font-semibold">
                                         Tu pedido
                                     </h2>
-                                    <div className="rounded-lg border border-gray-200 p-4">
+                                    <div className="rounded-lg border bg-[rgb(239,229,255)] border-gray-200 p-4">
                                         <div className="mb-4 flex justify-between border-b pb-2 font-bold">
                                             <span className="">Producto</span>
                                             <span className="">Subtotal</span>
