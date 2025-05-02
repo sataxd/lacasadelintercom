@@ -427,7 +427,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
         </div>
     );
 };
-const Result1Quiz = ({}) => {
+const Result1Quiz = ({ }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
@@ -460,7 +460,7 @@ const Result1Quiz = ({}) => {
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wedisk"
-                            className="inline-flex items-center justify-center bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-md tracking-[0.01em] transition-colors w-[377.32px] h-[80.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-[20px] text-md tracking-[0.01em] transition-colors w-[377.32px] h-[80.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
                         >
                             ¡Comprar ahora!
                         </a>
@@ -478,7 +478,7 @@ const Result1Quiz = ({}) => {
         </div>
     );
 };
-const Result2Quiz = ({}) => {
+const Result2Quiz = ({ }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
@@ -511,7 +511,7 @@ const Result2Quiz = ({}) => {
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wecup"
-                            className="inline-flex items-center justify-center bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-md tracking-[0.01em] transition-colors w-[377.32px] h-[90.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-[20px] text-md tracking-[0.01em] transition-colors w-[377.32px] h-[80.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
                         >
                             ¡Comprar ahora!
                         </a>
