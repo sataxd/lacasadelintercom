@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\FragranceController as AdminFragranceController;
 use App\Http\Controllers\Admin\ItemController as AdminItemController;
 use App\Http\Controllers\Admin\RenewalController as AdminRenewalController;
 use App\Http\Controllers\Admin\SaleController as AdminSaleController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\SaleStatusController as AdminSaleStatusController;
 use App\Http\Controllers\Admin\SupplyController as AdminSupplyController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -131,6 +132,7 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     Route::middleware('can:Admin')->prefix('admin')->group(function () {
+
 
         Route::get('/sales/{id}', [AdminSaleController::class, 'get']);
         Route::post('/sales', [AdminSaleController::class, 'save']);

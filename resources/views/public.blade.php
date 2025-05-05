@@ -41,7 +41,7 @@
 
 
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
         * {
 

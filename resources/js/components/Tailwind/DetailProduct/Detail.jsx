@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CarritoContext } from "../../../context/CarritoContext";
-const CountdownTimer = ({ startDate, endDate }) => {
+const CountdownTimer = () => {
     const [timeLeft, setTimeLeft] = useState({
         hours: "00",
         minutes: "00",
@@ -10,29 +10,12 @@ const CountdownTimer = ({ startDate, endDate }) => {
     useEffect(() => {
         const calculateTimeLeft = () => {
             const now = new Date();
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-
-            // Si la promoción aún no inicia
-            if (now < start) {
-                return {
-                    hours: "00",
-                    minutes: "00",
-                    seconds: "00",
-                };
-            }
-
-            // Si la promoción ya terminó
-            if (now > end) {
-                return {
-                    hours: "00",
-                    minutes: "00",
-                    seconds: "00",
-                };
-            }
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
 
             // Calcular diferencia
-            const difference = end - now;
+            const difference = tomorrow - now;
             const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((difference / 1000 / 60) % 60);
             const seconds = Math.floor((difference / 1000) % 60);
@@ -54,7 +37,7 @@ const CountdownTimer = ({ startDate, endDate }) => {
 
         // Limpiar intervalo al desmontar
         return () => clearInterval(timer);
-    }, [startDate, endDate]);
+    }, []);
 
     return (
         <div className="absolute top-8 mx-auto font-bold flex items-center justify-center bg-[#FF9900] text-white md:text-[17px] 2xl:text-[35.85px] px-10 py-1 w-max rounded-full">
@@ -109,13 +92,15 @@ const Detail = ({ item }) => {
                                 item.images.map((image, index) => (
                                     <img
                                         key={index}
-                                        src={`/api/items/media/${item.colors?.[0]?.image ?? image.url}`}
+                                        src={`/api/items/media/${
+                                            item.colors?.[0]?.image ?? image.url
+                                        }`}
                                         alt="Thumbnail"
                                         className="h-[100px] w-[100px] object-cover"
                                         onClick={() => setMainImage(image.url)}
                                         onError={(e) =>
-                                        (e.target.src =
-                                            "/api/cover/thumbnail/null")
+                                            (e.target.src =
+                                                "/api/cover/thumbnail/null")
                                         }
                                     />
                                 ))}
@@ -130,8 +115,8 @@ const Detail = ({ item }) => {
                                             setMainImage(color.image)
                                         }
                                         onError={(e) =>
-                                        (e.target.src =
-                                            "/api/cover/thumbnail/null")
+                                            (e.target.src =
+                                                "/api/cover/thumbnail/null")
                                         }
                                     />
                                 ))}
@@ -146,31 +131,30 @@ const Detail = ({ item }) => {
                                     className="w-full md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover aspect-square rounded-lg"
                                     loading="lazy"
                                     onError={(e) =>
-                                    (e.target.src =
-                                        "/api/cover/thumbnail/null")
+                                        (e.target.src =
+                                            "/api/cover/thumbnail/null")
                                     }
                                 />
                             </div>
 
                             <div className="flex items-start lg:hidden justify-start flex-row gap-2 w-full overflow-x-auto h-full">
-                                {
-                                    item.images.length > 0 &&
+                                {item.images.length > 0 &&
                                     item.images.map((image, index) => (
                                         <img
                                             key={index}
                                             src={`/api/items/media/${image.url}`}
                                             alt="Thumbnail"
                                             className="h-[51.5px] w-[51.5px] object-cover rounded-xl aspect-square"
-                                            onClick={() => setMainImage(image.url)}
+                                            onClick={() =>
+                                                setMainImage(image.url)
+                                            }
                                             onError={(e) =>
-                                            (e.target.src =
-                                                "/api/cover/thumbnail/null")
+                                                (e.target.src =
+                                                    "/api/cover/thumbnail/null")
                                             }
                                         />
-                                    ))
-                                }
-                                {
-                                    item.colors.length > 0 &&
+                                    ))}
+                                {item.colors.length > 0 &&
                                     item.colors.map((color, index) => (
                                         <img
                                             key={index}
@@ -181,12 +165,11 @@ const Detail = ({ item }) => {
                                                 setMainImage(color.image)
                                             }
                                             onError={(e) =>
-                                            (e.target.src =
-                                                "/api/cover/thumbnail/null")
+                                                (e.target.src =
+                                                    "/api/cover/thumbnail/null")
                                             }
                                         />
-                                    ))
-                                }
+                                    ))}
                             </div>
                         </div>
                         {/* Product Details */}
@@ -276,11 +259,12 @@ const Detail = ({ item }) => {
                                                             color.image
                                                         );
                                                     }}
-                                                    className={`rounded-full p-1 border ${selectedColor ===
+                                                    className={`rounded-full p-1 border ${
+                                                        selectedColor ===
                                                         color.name
-                                                        ? "border-[#222222]"
-                                                        : "border-[#DDDDDD]"
-                                                        }`}
+                                                            ? "border-[#222222]"
+                                                            : "border-[#DDDDDD]"
+                                                    }`}
                                                 >
                                                     <div
                                                         className="w-[22px] h-[22px] rounded-full "
@@ -309,7 +293,6 @@ const Detail = ({ item }) => {
                                                 <path
                                                     d="M0 336c0 26.5 21.5 48 48 48l544 0c26.5 0 48-21.5
                 48-48l0-160c0-26.5-21.5-48-48-48l-64 0 0 80c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-80-64 0 0 80c0
-                8.8-7.2 16-16 16s-16-7.2-16-16l0-80-64 0 0 80c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-80-64 0 0 80c0
                 8.8-7.2 16-16 16s-16-7.2-16-16l0-80-64 0 0 80c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-80-64 0c-26.5
                 0-48 21.5-48 48L0 336z"
                                                 />
@@ -392,38 +375,36 @@ const Detail = ({ item }) => {
             </div>
             {/* Modal */}
 
-            {item?.ad?.image &&
-                isModalOpen &&
-                new Date(item.ad.date_end) >= new Date() && (
-                    <div
-                        className="fixed inset-0 flex items-center justify-center z-50 bg-[#00000080]"
-                        style={{ backdropFilter: "blur(10px)" }}
-                    >
-                        <div className="relative flex items-center justify-center">
-                            <button
-                                className="absolute top-4 right-4 text-3xl text-[#9577B9]"
-                                onClick={() => setIsModalOpen(false)}
-                            >
-                                ×
-                            </button>
-                            <div className="bg-white rounded-[30.58px]  2xl:rounded-[48.58px] md:w-[459px] md:h-[450.40px] 2xl:w-[819px] 2xl:h-[805.40px] flex flex-col items-center justify-center ">
-                                <CountdownTimer
-                                    startDate={item.ad.dete_begin}
-                                    endDate={item.ad.date_end}
-                                />
-                                <div>
-                                    <a href={item.ad.link}>
-                                        <img
-                                            src={`/api/ads/media/${item.ad.image}`}
-                                            alt="Ad"
-                                            className="w-full h-full object-cover rounded-[30.58px] 2xl:rounded-[48.58px]"
-                                        />
-                                    </a>
-                                </div>
+            {item?.ad?.image && isModalOpen && item.ad.invasivo && (
+                <div
+                    className="fixed inset-0 flex items-center justify-center z-50 bg-[#00000080]"
+                    style={{ backdropFilter: "blur(10px)" }}
+                >
+                    <div className="relative flex items-center justify-center">
+                        <button
+                            className="absolute top-4 right-4 text-3xl text-[#9577B9]"
+                            onClick={() => setIsModalOpen(false)}
+                        >
+                            ×
+                        </button>
+                        <div className="bg-white rounded-[30.58px]  2xl:rounded-[48.58px] md:w-[459px] md:h-[450.40px] 2xl:w-[819px] 2xl:h-[805.40px] flex flex-col items-center justify-center ">
+                            <CountdownTimer
+                                startDate={item.ad.dete_begin}
+                                endDate={item.ad.date_end}
+                            />
+                            <div>
+                                <a href={item.ad.link}>
+                                    <img
+                                        src={`/api/ads/media/${item.ad.image}`}
+                                        alt="Ad"
+                                        className="w-full h-full object-cover rounded-[30.58px] 2xl:rounded-[48.58px]"
+                                    />
+                                </a>
                             </div>
                         </div>
                     </div>
-                )}
+                </div>
+            )}
             {isModalTalla && (
                 <div
                     className="fixed inset-0 min-h-screen flex items-center justify-center z-50 bg-[#00000080] transition-all duration-1000"

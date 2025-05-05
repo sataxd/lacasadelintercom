@@ -100,6 +100,7 @@ Route::middleware(['auth', 'can:Customer'])->group(function () {
 });
 // Admin routes
 Route::middleware(['can:Admin', 'auth'])->prefix('admin')->group(function () {
+    Route::get('/home-data', [AdminHomeController::class, 'setReactViewProperties']);
     Route::get('/', fn() => redirect('Admin/Home.jsx'));
     Route::get('/home', [AdminHomeController::class, 'reactView'])->name('Admin/Home.jsx');
     Route::get('/sales', [AdminSaleController::class, 'reactView'])->name('Admin/Sales.jsx');

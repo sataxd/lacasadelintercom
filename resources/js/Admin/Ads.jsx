@@ -80,11 +80,7 @@ const Ads = ({ items }) => {
                 actions: actionsRef.current.checked ? 1 : 0,
                 item_id: itemRef.current.value || null,
                 link: linkRef.current.value,
-                invasivo: actionsRef.current.checked
-                    ? 0
-                    : invasivoRef.current.checked
-                    ? 1
-                    : 0,
+                invasivo: invasivoRef.current.checked ? 1 : 0,
             };
 
             const formData = new FormData();
@@ -267,9 +263,7 @@ const Ads = ({ items }) => {
                                         </p>
                                         <p className="mb-0">
                                             <b>Invasivo:</b>{" "}
-                                            {data.invasivo && data.actions === 0
-                                                ? "Si"
-                                                : "No"}
+                                            {data.invasivo === 1 ? "Si" : "No"}
                                         </p>
                                     </>
                                 )
@@ -362,8 +356,8 @@ const Ads = ({ items }) => {
                     <div className="col-md-8">
                         <SwitchFormGroup
                             eRef={invasivoRef}
-                            label="¿El anuncio es invasivo?"
-                            specification="Solo se mostrará este anuncio y no los demás"
+                            label="¿El anuncio se mostrará siempre?"
+                            specification="Este anuncio se mostrara siempre al relacionarlo al producto"
                         />
                         <TextareaFormGroup
                             eRef={nameRef}

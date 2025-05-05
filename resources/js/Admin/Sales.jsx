@@ -361,34 +361,7 @@ const Sales = ({ statuses }) => {
                                                 return (
                                                     <tr key={index}>
                                                         <td>{detail.name}</td>
-                                                        <td>
-                                                            {detail?.colors?.map(
-                                                                (
-                                                                    color,
-                                                                    index
-                                                                ) => {
-                                                                    return (
-                                                                        <Tippy
-                                                                            key={
-                                                                                index
-                                                                            }
-                                                                            content={
-                                                                                color.name
-                                                                            }
-                                                                        >
-                                                                            <i
-                                                                                className="mdi mdi-circle"
-                                                                                style={{
-                                                                                    color: color.hex,
-                                                                                    WebkitTextStroke:
-                                                                                        "1px #808080",
-                                                                                }}
-                                                                            ></i>
-                                                                        </Tippy>
-                                                                    );
-                                                                }
-                                                            )}
-                                                        </td>
+                                                        <td>{detail.color}</td>
                                                         <td align="right">
                                                             S/{" "}
                                                             {Number2Currency(

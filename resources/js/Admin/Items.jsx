@@ -155,7 +155,7 @@ const Items = ({ categories, brands }) => {
             price: priceRef.current.value,
             discount: discountRef.current.value,
             description: descriptionRef.current.value,
-            sotck: stockRef.current.value,
+            stock: stockRef.current.value,
             score: scoreRef.current.value,
             final_price: final_price,
             discount_percent: discount_percent,
