@@ -56,19 +56,34 @@ export const CarritoProvider = ({ children }) => {
     // Mostrar alerta después de un tiempo
     useEffect(() => {
         if (carrito.length > 0) {
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-            timeoutRef.current = setTimeout(() => {
+            // Configurar un temporizador para mostrar la primera alerta después de 1 minuto
+            const primerAlerta = setTimeout(() => {
                 setAlerta({
                     message: "¡No olvides completar tu compra! 😉",
                     actionLabel: "Ver carrito",
-                    //onAction: () => console.log("Ir al carrito"),
+                    onAction: () => console.log("Ir al carrito"),
                     duration: 5000,
                 });
-            }, 1000);
+
+                // Luego configurar un intervalo para repetir la alerta cada 30 segundos
+                const intervalo = setInterval(() => {
+                    setAlerta({
+                        message: "¡No olvides completar tu compra! 😉",
+                        actionLabel: "Ver carrito",
+                        onAction: () => console.log("Ir al carrito"),
+                        duration: 5000,
+                    });
+                }, 30000);
+
+                // Limpiar el intervalo al desmontar o cuando el carrito se vacía
+                return () => clearInterval(intervalo);
+            }, 60000); // Espera de 1 minuto
+
+            // Limpiar el primer temporizador si se vacía el carrito o se desmonta el componente
+            return () => clearTimeout(primerAlerta);
         } else {
             setAlerta(null);
         }
-        return () => clearTimeout(timeoutRef.current);
     }, [carrito]);
 
     // Función para agregar productos

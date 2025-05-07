@@ -109,39 +109,50 @@ class HomeController extends BasicController
     {
         $statusIds = $this->getCompletedStatusIds();
 
-        return Sale::whereIn('status_id', $statusIds)
+        // Si no hay status completados, devolvemos array vacío
+        if (empty($statusIds)) {
+            return [];
+        }
+
+        // Obtener todas las ventas con ubicación, incluso si district es NULL
+        $sales = Sale::whereIn('status_id', $statusIds)
+            ->whereNotNull('department')
+            ->whereNotNull('province')
             ->select([
                 'department',
                 'province',
-                'district',
+                DB::raw('COALESCE(district, "Sin distrito") as district'),
                 DB::raw('COUNT(*) as total_orders'),
-                DB::raw('SUM(amount) as total_sales')
+                DB::raw('SUM(total_amount) as total_sales')
             ])
-            ->whereNotNull('department')
-            ->whereNotNull('province')
-            ->whereNotNull('district')
             ->groupBy('department', 'province', 'district')
-            ->get()
-            ->groupBy('department')
-            ->map(function ($department) {
-                return [
-                    'total_orders' => $department->sum('total_orders'),
-                    'total_sales' => $department->sum('total_sales'),
-                    'provinces' => $department->groupBy('province')->map(function ($province) {
-                        return [
-                            'total_orders' => $province->sum('total_orders'),
-                            'total_sales' => $province->sum('total_sales'),
-                            'districts' => $province->map(function ($district) {
-                                return [
-                                    'district' => $district->district,
-                                    'total_orders' => $district->total_orders,
-                                    'total_sales' => $district->total_sales
-                                ];
-                            })->values()
-                        ];
-                    })
-                ];
-            });
+            ->get();
+
+        // Si no hay resultados, retornamos array vacío
+        if ($sales->isEmpty()) {
+            return [];
+        }
+
+        // Agrupamos jerárquicamente: department → province → district
+        return $sales->groupBy('department')->map(function ($departments) {
+            return [
+                'total_orders' => $departments->sum('total_orders'),
+                'total_sales' => $departments->sum('total_sales'),
+                'provinces' => $departments->groupBy('province')->map(function ($provinces) {
+                    return [
+                        'total_orders' => $provinces->sum('total_orders'),
+                        'total_sales' => $provinces->sum('total_sales'),
+                        'districts' => $provinces->map(function ($district) {
+                            return [
+                                'district' => $district->district,
+                                'total_orders' => $district->total_orders,
+                                'total_sales' => $district->total_sales
+                            ];
+                        })->values(),
+                    ];
+                }),
+            ];
+        });
     }
 
     protected function getUserStats()
@@ -289,38 +300,25 @@ class HomeController extends BasicController
     {
         return [
             'by_device' => WebsiteStatistic::selectRaw('
-            ws.device,
+            COALESCE(ws.device, "Sin dispositivo") as device,
             COUNT(ws.id) as visits,
             COUNT(ss.sale_id) as conversions,
-            ROUND(COUNT(ss.sale_id) * 100.0 / COUNT(ws.id), 2) as conversion_rate
+            ROUND(
+                CASE WHEN COUNT(ws.id) > 0 THEN COUNT(ss.sale_id) * 100.0 / COUNT(ws.id)
+                ELSE 0 END,
+                2
+            ) as conversion_rate
         ')
                 ->from('website_statistics as ws')
                 ->leftJoin('statistics_sales as ss', 'ws.id', '=', 'ss.website_statistic_id')
-                ->groupBy('ws.device')
-                ->get(),
-
-            'by_source' => WebsiteStatistic::selectRaw('
-            CASE 
-                WHEN ws.referrer LIKE "%facebook%" THEN "Facebook"
-                WHEN ws.referrer LIKE "%instagram%" THEN "Instagram"
-                WHEN ws.referrer LIKE "%google%" THEN "Google"
-                ELSE "Directo/otros"
-            END as source,
-            COUNT(ws.id) as visits,
-            COUNT(ss.sale_id) as conversions,
-            ROUND(COUNT(ss.sale_id) * 100.0 / COUNT(ws.id), 2) as conversion_rate
-        ')
-                ->from('website_statistics as ws')
-                ->leftJoin('statistics_sales as ss', 'ws.id', '=', 'ss.website_statistic_id')
-                ->groupBy(
-                    DB::raw('CASE 
-                WHEN ws.referrer LIKE "%facebook%" THEN "Facebook"
-                WHEN ws.referrer LIKE "%instagram%" THEN "Instagram"
-                WHEN ws.referrer LIKE "%google%" THEN "Google"
-                ELSE "Directo/otros"
-            END')
-                )
-                ->get(),
+                ->groupBy(DB::raw('COALESCE(ws.device, "Sin dispositivo")'))
+                ->get()
+                ->map(function ($item) {
+                    $item->visits = (int)$item->visits;
+                    $item->conversions = (int)$item->conversions;
+                    $item->conversion_rate = (float)$item->conversion_rate;
+                    return $item;
+                }),
         ];
     }
 

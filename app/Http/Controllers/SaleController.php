@@ -22,6 +22,8 @@ class SaleController extends Controller
 {
     static function create(array $sale, array $details): array
     {
+
+
         try {
             // Obtener solo los IDs de los productos para la consulta
             $productIds = array_map(fn($item) => $item['id'], $details);
@@ -142,7 +144,7 @@ class SaleController extends Controller
 
             // Cargar la venta con sus detalles para retornar
             $saleToReturn = Sale::with(['details'])->find($saleJpa->id);
-
+            // dd("Dale sale" . $sale);
             return [true, $saleToReturn];
         } catch (\Throwable $th) {
             return [false, [
