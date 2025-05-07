@@ -76,7 +76,7 @@ const StatsSection = ({ indicators }) => {
                     />
 
                     {/* Contenido */}
-                    <div className="px-[5%] mx-auto relative z-10 grid grid-cols-2 gap-4 gap-y-8 md:gap-y-16 pt-10 md:pt-20 pb-0  lg:py-20">
+                    <div className="px-[5%] mx-auto relative z-10 grid grid-cols-2 gap-4 gap-y-8 md:gap-y-16 pt-0 md:pt-20 pb-0  lg:py-20">
                         {updatedStats.map((stat, index) => (
                             <div
                                 key={index}
