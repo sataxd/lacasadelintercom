@@ -88,7 +88,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                             "linear-gradient(90deg, rgba(128,113,182,1) 0%, rgba(192,175,225,1) 100%)",
                     }}
                 >
-                    <div className="px-[5%] flex justify-between md:justify-center items-center flex-row md:justify-around   mx-auto gap-6">
+                    <div className="px-[5%] flex items-center flex-row justify-around   mx-auto gap-6">
                         <img
                             onClick={() => setShowModal1(true)}
                             src="https://i.ibb.co/931mypkH/image.png"
