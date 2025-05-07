@@ -56,7 +56,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
 
         fetchAboutuses();
     }, []);
-    console.log(aboutuses);
+    //console.log(aboutuses);
     // Extrae los datos necesarios
     const aboutusData = aboutuses?.aboutus || [];
     const generalsData = aboutuses?.generals || [];

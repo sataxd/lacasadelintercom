@@ -33,12 +33,12 @@ class GeneralRest extends BasicRest {
                     method: "GET",
                 }
             );
-            console.log("Respuesta completa:", status, result);
+            //console.log("Respuesta completa:", status, result);
             if (!status)
                 throw new Error(
                     result?.message ?? "Ocurrió un error al consultar"
                 );
-            console.log(result);
+            //console.log(result);
 
             return result?.data ?? [];
         } catch (error) {

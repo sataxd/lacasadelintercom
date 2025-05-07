@@ -7,6 +7,8 @@ use App\Models\Item;
 use App\Models\Sale;
 use App\Models\SaleDetail;
 use App\Models\Status;
+use App\Models\User;
+use App\Models\WebsiteStatistic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +18,6 @@ class HomeController extends BasicController
     public $reactView = 'Admin/Home';
     public $reactRootView = 'admin';
 
-    // Nombres de estados considerados como ventas completadas
     private $completedStatusNames = ['Pagado', 'Enviado', 'Entregado'];
 
     public function setReactViewProperties(Request $request)
@@ -31,12 +32,13 @@ class HomeController extends BasicController
             'top_products' => $this->getTopProducts(),
             'recent_orders' => $this->getRecentSales(),
             'low_stock' => $this->getLowStockItems(),
+            'traffic_stats' => $this->getTrafficStats(),
+            'conversion_stats' => $this->getConversionStats(),
+            'sales_by_location' => $this->getSalesByLocation(),
+            'user_stats' => $this->getUserStats(),
         ];
     }
 
-    /**
-     * Obtiene los IDs de los estados completados
-     */
     private function getCompletedStatusIds()
     {
         return Status::whereIn('name', $this->completedStatusNames)
@@ -60,8 +62,6 @@ class HomeController extends BasicController
             ->whereDate('created_at', $yesterday)
             ->sum('total_amount');
 
-        $dailySalesTrend = $this->calculateTrend($dailySales, $prevDailySales);
-
         // Pedidos mensuales
         $monthlySales = Sale::whereIn('status_id', $statusIds)
             ->whereMonth('created_at', $currentMonth)
@@ -71,8 +71,6 @@ class HomeController extends BasicController
             ->whereMonth('created_at', $currentMonth->copy()->subMonth())
             ->count();
 
-        $monthlySalesTrend = $this->calculateTrend($monthlySales, $prevMonthlySales);
-
         // Ticket promedio
         $averageSaleValue = Sale::whereIn('status_id', $statusIds)
             ->whereMonth('created_at', $currentMonth)
@@ -81,8 +79,6 @@ class HomeController extends BasicController
         $prevASV = Sale::whereIn('status_id', $statusIds)
             ->whereMonth('created_at', $currentMonth->copy()->subMonth())
             ->avg('total_amount');
-
-        $asvTrend = $this->calculateTrend($averageSaleValue, $prevASV);
 
         // Nuevos clientes
         $newCustomers = Sale::whereIn('status_id', $statusIds)
@@ -95,17 +91,71 @@ class HomeController extends BasicController
             ->distinct('user_id')
             ->count('user_id');
 
-        $newCustomersTrend = $this->calculateTrend($newCustomers, $prevNewCustomers);
-
         return [
             'daily_sales' => $dailySales ?? 0,
-            'daily_sales_trend' => $dailySalesTrend,
+            'daily_sales_trend' => $this->calculateTrend($dailySales, $prevDailySales),
             'monthly_orders' => $monthlySales,
-            'monthly_orders_trend' => $monthlySalesTrend,
+            'monthly_orders_trend' => $this->calculateTrend($monthlySales, $prevMonthlySales),
             'average_order_value' => $averageSaleValue ?? 0,
-            'aov_trend' => $asvTrend,
+            'aov_trend' => $this->calculateTrend($averageSaleValue, $prevASV),
             'new_customers' => $newCustomers,
-            'new_customers_trend' => $newCustomersTrend,
+            'new_customers_trend' => $this->calculateTrend($newCustomers, $prevNewCustomers),
+            'total_users' => User::count(),
+            'active_users' => User::where('created_at', '>=', $today->subWeek())->count(), //last_login_at
+        ];
+    }
+
+    protected function getSalesByLocation()
+    {
+        $statusIds = $this->getCompletedStatusIds();
+
+        return Sale::whereIn('status_id', $statusIds)
+            ->select([
+                'department',
+                'province',
+                'district',
+                DB::raw('COUNT(*) as total_orders'),
+                DB::raw('SUM(amount) as total_sales')
+            ])
+            ->whereNotNull('department')
+            ->whereNotNull('province')
+            ->whereNotNull('district')
+            ->groupBy('department', 'province', 'district')
+            ->get()
+            ->groupBy('department')
+            ->map(function ($department) {
+                return [
+                    'total_orders' => $department->sum('total_orders'),
+                    'total_sales' => $department->sum('total_sales'),
+                    'provinces' => $department->groupBy('province')->map(function ($province) {
+                        return [
+                            'total_orders' => $province->sum('total_orders'),
+                            'total_sales' => $province->sum('total_sales'),
+                            'districts' => $province->map(function ($district) {
+                                return [
+                                    'district' => $district->district,
+                                    'total_orders' => $district->total_orders,
+                                    'total_sales' => $district->total_sales
+                                ];
+                            })->values()
+                        ];
+                    })
+                ];
+            });
+    }
+
+    protected function getUserStats()
+    {
+        $today = Carbon::today();
+
+        return [
+            'total_users' => User::count(),
+            'new_users_today' => User::whereDate('created_at', $today)->count(),
+            'active_users' => User::where('created_at', '>=', $today->subWeek())->count(), //last_login_at
+            'users_by_type' => User::select('status', DB::raw('COUNT(*) as count')) //type
+                ->groupBy('status')
+                ->get()
+                ->mapWithKeys(fn($item) => [$item->status => $item->count]),
         ];
     }
 
@@ -114,10 +164,7 @@ class HomeController extends BasicController
         $statusIds = $this->getCompletedStatusIds();
 
         $query = Sale::whereIn('status_id', $statusIds)
-            ->selectRaw('
-                DATE(created_at) as date,
-                SUM(total_amount) as total
-            ')
+            ->selectRaw('DATE(created_at) as date, SUM(total_amount) as total')
             ->groupBy('date');
 
         switch ($range) {
@@ -136,10 +183,8 @@ class HomeController extends BasicController
         }
 
         return $query->get()
-            ->map(fn($item) => [
-                'x' => $item->date,
-                'y' => $item->total
-            ])->toArray();
+            ->map(fn($item) => ['x' => $item->date, 'y' => $item->total])
+            ->toArray();
     }
 
     protected function getTopProducts($limit = 5)
@@ -200,6 +245,83 @@ class HomeController extends BasicController
                 'name' => $item->name,
                 'stock' => $item->stock
             ]);
+    }
+
+    protected function getTrafficStats()
+    {
+        return [
+            'by_device' => WebsiteStatistic::selectRaw('
+                device_type as device,
+                COUNT(*) as visits,
+                ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM website_statistics), 2) as percentage
+            ')
+                ->groupBy('device_type')
+                ->get(),
+
+            'by_source' => WebsiteStatistic::selectRaw('
+                source,
+                COUNT(*) as visits
+            ')
+                ->groupBy('source')
+                ->get(),
+
+            'by_os' => WebsiteStatistic::selectRaw('
+                os,
+                COUNT(*) as visits
+            ')
+                ->groupBy('os')
+                ->orderByDesc('visits')
+                ->limit(5)
+                ->get(),
+
+            'by_browser' => WebsiteStatistic::selectRaw('
+                browser,
+                COUNT(*) as visits
+            ')
+                ->groupBy('browser')
+                ->orderByDesc('visits')
+                ->limit(5)
+                ->get(),
+        ];
+    }
+
+    protected function getConversionStats()
+    {
+        return [
+            'by_device' => WebsiteStatistic::selectRaw('
+            ws.device,
+            COUNT(ws.id) as visits,
+            COUNT(ss.sale_id) as conversions,
+            ROUND(COUNT(ss.sale_id) * 100.0 / COUNT(ws.id), 2) as conversion_rate
+        ')
+                ->from('website_statistics as ws')
+                ->leftJoin('statistics_sales as ss', 'ws.id', '=', 'ss.website_statistic_id')
+                ->groupBy('ws.device')
+                ->get(),
+
+            'by_source' => WebsiteStatistic::selectRaw('
+            CASE 
+                WHEN ws.referrer LIKE "%facebook%" THEN "Facebook"
+                WHEN ws.referrer LIKE "%instagram%" THEN "Instagram"
+                WHEN ws.referrer LIKE "%google%" THEN "Google"
+                ELSE "Directo/otros"
+            END as source,
+            COUNT(ws.id) as visits,
+            COUNT(ss.sale_id) as conversions,
+            ROUND(COUNT(ss.sale_id) * 100.0 / COUNT(ws.id), 2) as conversion_rate
+        ')
+                ->from('website_statistics as ws')
+                ->leftJoin('statistics_sales as ss', 'ws.id', '=', 'ss.website_statistic_id')
+                ->groupBy(
+                    DB::raw('CASE 
+                WHEN ws.referrer LIKE "%facebook%" THEN "Facebook"
+                WHEN ws.referrer LIKE "%instagram%" THEN "Instagram"
+                WHEN ws.referrer LIKE "%google%" THEN "Google"
+                ELSE "Directo/otros"
+            END')
+                )
+                ->get(),
+        ];
     }
 
     private function calculateTrend($current, $previous)

@@ -18,7 +18,7 @@ const TopSaleSection = ({ producto }) => {
 
     const { agregarAlCarrito } = useContext(CarritoContext);
     const [mainImage, setMainImage] = useState(producto.colors[0]?.image);
-    console.log(producto);
+    // console.log(producto);
     return (
         <section className="py-2 md:py-10 px-[5%] mx-auto font-poppins bg-white">
             <h2 className=" text-[20.25px]   md:text-[30.25px] 2xl:text-[36.25px] leading-[29.36px] font-bold text-[#212529] mt-7 mb-3 md:mb-10 text-center flex gap-2 items-center justify-center">
@@ -73,10 +73,10 @@ const TopSaleSection = ({ producto }) => {
                                         AHORRA
                                     </span>{" "}
                                     <span className="text-nowrap font-bold">
-                                    S/{" "}
-                                    {Number(
-                                        producto.price - producto.discount
-                                    ).toFixed(2)}{" "}
+                                        S/{" "}
+                                        {Number(
+                                            producto.price - producto.discount
+                                        ).toFixed(2)}{" "}
                                     </span>
                                     <img
                                         src="/assets/img/emojis/fire.png"

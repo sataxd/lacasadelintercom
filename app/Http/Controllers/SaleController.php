@@ -9,6 +9,7 @@ use App\Models\Bundle;
 use App\Models\Item;
 use App\Models\Renewal;
 use App\Models\SaleDetail;
+use App\Models\StatisticSale;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -113,6 +114,9 @@ class SaleController extends Controller
             $saleJpa->delivery = 0; // Agregar lógica de envío si es necesario
             $saleJpa->save();
 
+
+
+
             // Guardar los detalles de venta
             foreach ($saleDetails as $detail) {
                 $detailJpa = new SaleDetail();
@@ -124,6 +128,16 @@ class SaleController extends Controller
                 $detailJpa->color = $detail['color'];
                 $detailJpa->size = $detail['size'];
                 $detailJpa->save();
+            }
+
+            //TRACKING
+            // Asociar con la estadística si existe
+            $statId = session()->get('website_statistic_id');
+            if ($statId) {
+                StatisticSale::create([
+                    'website_statistic_id' => $statId,
+                    'sale_id' => $saleJpa->id,
+                ]);
             }
 
             // Cargar la venta con sus detalles para retornar

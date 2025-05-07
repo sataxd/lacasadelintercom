@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import CreateReactScript from "./Utils/CreateReactScript";
 import { createRoot } from "react-dom/client";
 import Base from "./Components/Tailwind/Base";
 import { Local } from "sode-extend-react";
-import { CarritoProvider } from "./context/CarritoContext";
+import { CarritoContext, CarritoProvider } from "./context/CarritoContext";
 import Header from "./components/Tailwind/Header";
 import Footer from "./components/Tailwind/Footer";
 const Thanks = ({ session }) => {
@@ -11,9 +11,15 @@ const Thanks = ({ session }) => {
         history.replaceState(null, "", "/thanks");
         //Local.delete('vua_cart');
         //Local.delete('vua_test');
-        localStorage.removeItem("carrito");
+        //localStorage.removeItem("carrito");
+        localStorage.clear();
+        localStorage.setItem("carrito", []);
     }, [null]);
+    localStorage.clear();
+    localStorage.setItem("carrito", []);
 
+    const { vaciarCarrito } = useContext(CarritoContext);
+    vaciarCarrito();
     return (
         <>
             <Header showSlogan={true} backgroundHeight="h-0" />

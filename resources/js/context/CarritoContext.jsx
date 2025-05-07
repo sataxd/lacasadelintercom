@@ -1,7 +1,8 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 import { Local } from "sode-extend-react";
 import ItemsRest from "../actions/ItemRest";
 import { i } from "framer-motion/client";
+import AlertComponent from "./AlertComponent";
 
 export const CarritoContext = createContext();
 const itemsRest = new ItemsRest();
@@ -12,8 +13,9 @@ export const CarritoProvider = ({ children }) => {
 
         return data ? JSON.parse(data) : [];
     });
-    console.log("data", carrito);
-
+    //console.log("data", carrito);
+    const [alerta, setAlerta] = useState(null);
+    const timeoutRef = useRef(null);
     // Función para obtener precios actualizados desde la API
     const actualizarPrecios = async () => {
         try {
@@ -41,7 +43,7 @@ export const CarritoProvider = ({ children }) => {
     // Cargar carrito desde localStorage y actualizar precios al iniciar
     useEffect(() => {
         actualizarPrecios();
-        console.log("estoy actualizando");
+        // console.log("estoy actualizando");
     }, []);
 
     // Guardar cambios en LocalStorage
@@ -49,6 +51,24 @@ export const CarritoProvider = ({ children }) => {
         localStorage.setItem("carrito", JSON.stringify(carrito));
         //localStorage.clear();
         //setCarrito([]);
+    }, [carrito]);
+
+    // Mostrar alerta después de un tiempo
+    useEffect(() => {
+        if (carrito.length > 0) {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+            timeoutRef.current = setTimeout(() => {
+                setAlerta({
+                    message: "¡No olvides completar tu compra! 😉",
+                    actionLabel: "Ver carrito",
+                    //onAction: () => console.log("Ir al carrito"),
+                    duration: 5000,
+                });
+            }, 1000);
+        } else {
+            setAlerta(null);
+        }
+        return () => clearTimeout(timeoutRef.current);
     }, [carrito]);
 
     // Función para agregar productos
@@ -140,16 +160,24 @@ export const CarritoProvider = ({ children }) => {
                 ];
             }
         });
+        setAlerta({
+            message: "Se ha agregado el artículo al carrito",
+            actionLabel: "Ver carrito",
+            // onAction: () => console.log("Ir al carrito"),
+            duration: 5000,
+        });
     };
 
     // Función para eliminar un producto
     const eliminarProducto = (id) => {
         setCarrito((prev) => prev.filter((p) => p.id !== id));
+        setAlerta(null); // Reiniciar alerta cuando se elimina un producto
     };
 
     // Función para vaciar carrito
     const vaciarCarrito = () => {
         setCarrito([]);
+        setAlerta(null); // Reiniciar alerta cuando se elimina un producto
     };
 
     // Función para incrementar cantidad
@@ -309,6 +337,9 @@ export const CarritoProvider = ({ children }) => {
             }}
         >
             {children}
+            {alerta && (
+                <AlertComponent {...alerta} onClose={() => setAlerta(null)} />
+            )}
         </CarritoContext.Provider>
     );
 };

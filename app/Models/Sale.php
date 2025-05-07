@@ -72,4 +72,9 @@ class Sale extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function statistics()
+    {
+        return $this->belongsToMany(WebsiteStatistic::class, 'statistics_sales');
+    }
 }
