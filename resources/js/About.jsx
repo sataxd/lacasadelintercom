@@ -97,7 +97,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                         />
                         <img
                             src="https://i.ibb.co/NgMJf8d8/image.png"
-                            className="brightness-0 grayscale-0 invert w-[150px] lg:w-[300.23px] h-auto 2xl:w-[428.23px] 2xl:h-[136.41px] object-contain"
+                            className="brightness-0 grayscale-0 invert w-[125px] lg:w-[300.23px] h-auto 2xl:w-[428.23px] 2xl:h-[136.41px] object-contain"
                             alt="Certificado 2"
                         />
                         <img

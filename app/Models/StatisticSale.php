@@ -19,6 +19,6 @@ class StatisticSale extends Model
 
     public function purchases()
     {
-        return $this->hasManyThrough(Sale::class, StatisticSale::class, 'website_statistic_id', 'id', 'id', 'purchase_id');
+        return $this->hasManyThrough(Sale::class, StatisticSale::class, 'website_statistic_id', 'id', 'id', 'sale_id');
     }
 }

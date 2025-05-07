@@ -22,6 +22,8 @@ class SaleController extends Controller
 {
     static function create(array $sale, array $details): array
     {
+
+
         try {
             // Obtener solo los IDs de los productos para la consulta
             $productIds = array_map(fn($item) => $item['id'], $details);

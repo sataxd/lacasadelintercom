@@ -92,8 +92,8 @@ const Checkout = ({ publicKey, session }) => {
         },
         installments: true,
         style: {
-            logo: `${location.origin}/assets/img/icon-purple.svg`,
-            bannerColor: "#A191B8",
+            logo: `${location.origin}/assets/img/icon.png`,
+            bannerColor: "#5339B1",
         },
     });
 
@@ -102,7 +102,7 @@ const Checkout = ({ publicKey, session }) => {
     const [sale, setSale] = useState({
         name: session?.name || null,
         lastname: session?.lastname || null,
-        email: "basiliohinostroza2003bradneve@gmail.com",
+        email: session?.email,
         phone: session?.phone || null,
         country: "Perú",
         department:
@@ -184,7 +184,7 @@ const Checkout = ({ publicKey, session }) => {
         }
         isLoading(false);
         Culqi.settings({
-            title: "(Suscripción)",
+            title: "WeFem",
             currency: "PEN",
             amount: Math.ceil(
                 (totalPrice - planDiscount - couponDiscount) * 100
@@ -214,11 +214,13 @@ const Checkout = ({ publicKey, session }) => {
     const redirectOnClose = () => {
         setInterval(() => {
             if (Culqi.isOpen) return;
-            // const order_number = Culqi.order_number.replace(`#${Global.APP_CORRELATIVE}-`, '')
-            // fetch(`/api/sales/notify/${order_number}`)
-            // .then(res => {
-            location.href = `/`;
-            // })
+            const order_number = Culqi.order_number.replace(
+                `#${Global.APP_CORRELATIVE}-`,
+                ""
+            );
+            fetch(`/api/sales/notify/${order_number}`).then((res) => {
+                location.href = `/`;
+            });
         }, 500);
     };
 
@@ -230,7 +232,7 @@ const Checkout = ({ publicKey, session }) => {
             .save({
                 coupon,
                 amount: totalPrice,
-                email: "basiliohinostroza2003bradneve@gmail.com",
+                email: sale?.email,
             })
             .then((result) => {
                 if (result) setCoupon(result.data);
