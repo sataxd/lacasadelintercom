@@ -41,7 +41,7 @@ const Home = ({
     posts,
 }) => {
     const tipoSlider = "vua";
-    console.log(products_featured);
+
     return (
         <div className=" ">
             <Header

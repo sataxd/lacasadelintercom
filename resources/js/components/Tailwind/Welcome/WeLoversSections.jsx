@@ -98,10 +98,10 @@ const WeLoversSection = ({ we_lovers }) => {
                                         <iframe
                                             className="w-full h-full "
                                             src={`https://www.youtube.com/embed/${testimonial.description}`}
-                                            frameborder="0"
+                                            frameBorder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                             referrerpolicy="strict-origin-when-cross-origin"
-                                            allowfullscreen
+                                            allowFullScreen
                                         ></iframe>
                                     </div>
                                 </div>

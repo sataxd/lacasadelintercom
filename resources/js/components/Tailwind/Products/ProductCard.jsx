@@ -6,7 +6,7 @@ const ProductCard = ({ product, visible = true }) => {
             style: "currency",
             currency: "PEN",
         }).format(price);
-    console.log(product);
+
     return (
         <a href={`/product/${product.slug}`} className="block w-full">
             <div className="w-full flex items-center justify-center">
