@@ -293,7 +293,7 @@ const RecentOrders = ({ orders }) => {
     if (!orders?.length)
         return <NoDataMessage message="No hay ventas recientes" />;
     return (
-        <div className="col-lg-6">
+        <div className="col-lg-8">
             <div className="card shadow-sm h-100">
                 <div className="card-header d-flex justify-content-between align-items-center bg-white border-bottom">
                     <h5 className="mb-0">🛍️ Ventas Recientes</h5>
@@ -328,10 +328,7 @@ const RecentOrders = ({ orders }) => {
                                             {order.status.name}
                                         </span>
                                     </td>
-                                    <td>
-                                        S/{" "}
-                                        {Number(order.amount).toLocaleString()}
-                                    </td>
+                                    <td>S/ {order.total}</td>
                                     <td>{order.date}</td>
                                 </tr>
                             ))}
@@ -347,7 +344,7 @@ const RecentOrders = ({ orders }) => {
 const LowStockAlert = ({ low_stock }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="col-lg-6">
+        <div className="col-lg-4">
             <div className="card shadow-sm border border-danger">
                 <div className="card-header bg-danger text-white d-flex justify-content-between align-items-center">
                     <h5 className="mb-0">⚠️ Inventario Bajo</h5>
@@ -618,6 +615,7 @@ const Home = ({ session, ...props }) => {
             </div>
             <div className="row g-4">
                 <RecentOrders orders={dashboardData.recent_orders} />
+
                 <LowStockAlert low_stock={dashboardData.low_stock} />
             </div>
         </div>

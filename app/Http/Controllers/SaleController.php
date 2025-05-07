@@ -144,7 +144,7 @@ class SaleController extends Controller
 
             // Cargar la venta con sus detalles para retornar
             $saleToReturn = Sale::with(['details'])->find($saleJpa->id);
-            // dd("Dale sale" . $sale);
+
             return [true, $saleToReturn];
         } catch (\Throwable $th) {
             return [false, [

@@ -32,7 +32,8 @@ const NavBar = ({ session = {}, title = "Pagina", whatsappStatus }) => {
                             </span>
                         </a>
                     </li>
-
+                </li>
+                <li className="dropdown notification-list topbar-dropdown">
                     <a
                         className="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
                         data-bs-toggle="dropdown"
