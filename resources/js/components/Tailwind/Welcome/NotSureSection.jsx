@@ -11,7 +11,7 @@ const NotSureSection = ({ producto }) => {
     };
     const { agregarAlCarrito } = useContext(CarritoContext);
     return (
-        <section className="py-6 lg:py-10 2xl:py-16 px-[5%] mx-auto font-font-general bg-[#F3E5FF] mb-8 2xl:mb-0">
+        <section className="py-6 lg:py-10 2xl:py-16 px-[5%] mx-auto font-font-general bg-[#F3E5FF] mb-0 2xl:mb-0">
             <h2 className="lg:hidden text-[26.3px] leading-[27.31px]  md:text-[46.3px]  md:leading-[47.31px] font-bold text-[#212529]  text-center flex gap-2 items-center justify-center">
                 ¿Aún no estás segura?
             </h2>

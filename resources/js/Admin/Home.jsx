@@ -520,6 +520,7 @@ const ConversionRateChart = ({ conversion }) => {
     };
 
     return (
+<<<<<<< HEAD
         <div className="col-lg-6">
             <div className="card shadow-sm h-100">
                 <div className="card-body d-flex flex-column">
@@ -531,6 +532,233 @@ const ConversionRateChart = ({ conversion }) => {
                             type="bar"
                             height={300}
                         />
+=======
+        <div className="col-lg-12">
+            <div className="card shadow-sm">
+                <div className="card-header">
+                    <h5 className="mb-0">📊 Ventas por Departamento</h5>
+                </div>
+                <div className="card-body">
+                    <Chart
+                        options={options}
+                        series={[{ name: "Total Ventas", data: salesData }]}
+                        type="bar"
+                        height={300}
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Mapa interactivo con Leaflet
+
+const LocationMap = ({ sales_by_location }) => {
+    const mapRef = React.useRef(null);
+    const mapInstanceRef = React.useRef(null);
+
+    // Generar coordenadas ficticias cercanas a Lima
+    const defaultCenter = [-12.0937, -77.0433]; // Lima, Perú
+    const locations = [];
+
+    for (const dept in sales_by_location) {
+        const provinces = sales_by_location[dept].provinces;
+        for (const prov in provinces) {
+            for (const district of provinces[prov].districts) {
+                locations.push({
+                    name: district.district,
+                    latlng: [
+                        defaultCenter[0] + Math.random() * 0.5,
+                        defaultCenter[1] + Math.random() * 0.5,
+                    ],
+                    sales: district.total_sales,
+                });
+            }
+        }
+    }
+
+    React.useEffect(() => {
+        if (!mapRef.current || mapInstanceRef.current) return;
+
+        // Crear el mapa manualmente
+        const L = window.L;
+        const map = L?.map(mapRef.current).setView(defaultCenter, 6);
+        mapInstanceRef.current = map;
+
+        // Agregar capa de OpenStreetMap
+        L?.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution:
+                '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
+        }).addTo(map);
+
+        // Agregar marcadores
+        locations.forEach((loc, index) => {
+            const marker = L.marker(loc.latlng).addTo(map);
+            marker.bindPopup(
+                `<strong>${loc.name}</strong><br>Ventas: S/ ${loc.sales.toFixed(
+                    2
+                )}`
+            );
+        });
+
+        // Limpiar al desmontar
+        return () => {
+            if (mapInstanceRef.current) {
+                mapInstanceRef.current.remove();
+                mapInstanceRef.current = null;
+            }
+        };
+    }, [sales_by_location]);
+
+    return (
+        <div className="col-lg-12">
+            <div className="card shadow-sm">
+                <div className="card-header d-flex justify-content-between align-items-center">
+                    <h5 className="mb-0">🗺️ Ubicaciones de Ventas</h5>
+                </div>
+                <div
+                    className="card-body"
+                    style={{ height: "400px", position: "relative" }}
+                >
+                    <div
+                        ref={mapRef}
+                        style={{ width: "100%", height: "100%", zIndex: 1 }}
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Gráfico circular por provincia
+const ProvincePieChart = ({ sales_by_location }) => {
+    const provinces = [];
+    const sales = [];
+
+    for (const dept in sales_by_location) {
+        const provs = sales_by_location[dept].provinces;
+        for (const p in provs) {
+            provinces.push(p);
+            sales.push(provs[p].total_sales);
+        }
+    }
+
+    const options = {
+        chart: { type: "donut", height: 300 },
+        labels: provinces.slice(0, 5),
+        legend: { position: "bottom" },
+    };
+
+    return (
+        <div className="col-md-6">
+            <div className="card shadow-sm">
+                <div className="card-header">
+                    <h5 className="mb-0">🥧 Provincias con más ventas</h5>
+                </div>
+                <div className="card-body">
+                    <Chart
+                        options={options}
+                        series={sales.slice(0, 5)}
+                        type="donut"
+                        height={300}
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Gráfico circular por distrito
+const DistrictPieChart = ({ sales_by_location }) => {
+    const districts = [];
+    const sales = [];
+
+    for (const dept in sales_by_location) {
+        const provs = sales_by_location[dept].provinces;
+        for (const p in provs) {
+            for (const d of provs[p].districts) {
+                districts.push(d.district);
+                sales.push(d.total_sales);
+            }
+        }
+    }
+
+    const options = {
+        chart: { type: "pie", height: 300 },
+        labels: districts.slice(0, 5),
+        legend: { position: "bottom" },
+    };
+
+    return (
+        <div className="col-md-6">
+            <div className="card shadow-sm">
+                <div className="card-header">
+                    <h5 className="mb-0">🥧 Distritos con más ventas</h5>
+                </div>
+                <div className="card-body">
+                    <Chart
+                        options={options}
+                        series={sales.slice(0, 5)}
+                        type="pie"
+                        height={300}
+                    />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Diagrama de flujo jerárquico
+const LocationFlowChart = ({ sales_by_location }) => {
+    return (
+        <div className="col-lg-12">
+            <div className="card shadow-sm">
+                <div className="card-header">
+                    <h5 className="mb-0">
+                        🧱 Flujo Jerárquico: Depto → Prov → Distrito
+                    </h5>
+                </div>
+                <div className="card-body">
+                    <div className="flow-diagram overflow-x-auto">
+                        <div className="diagram-row d-flex flex-wrap">
+                            {Object.entries(sales_by_location)
+                                .slice(0, 3)
+                                .map(([dept, data]) => (
+                                    <div
+                                        key={dept}
+                                        className="diagram-node mx-3"
+                                    >
+                                        <div className="node dept">{dept}</div>
+                                        <div className="subnodes">
+                                            {Object.entries(data.provinces)
+                                                .slice(0, 3)
+                                                .map(([prov, p]) => (
+                                                    <div
+                                                        key={prov}
+                                                        className="node province"
+                                                    >
+                                                        {prov}
+                                                        <div className="subnodes">
+                                                            {p.districts
+                                                                .slice(0, 2)
+                                                                .map((d, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        className="node district"
+                                                                    >
+                                                                        {
+                                                                            d.district
+                                                                        }
+                                                                    </div>
+                                                                ))}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+                                ))}
+                        </div>
+>>>>>>> 0093405b67223f9e5b1ac74e1bded158ce7ce565
                     </div>
                 </div>
             </div>

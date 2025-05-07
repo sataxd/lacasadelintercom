@@ -79,13 +79,13 @@ const Instructions = ({
                 </ProductCarousel>
 
                 <div
-                    className="py-16 lg:py-12 text-white lg:h-[300.68px] 2xl:h-[349.68px] flex items-center justify-center font-poppins"
+                    className="py-8 lg:py-12 text-white lg:h-[300.68px] 2xl:h-[349.68px] flex items-center justify-center font-poppins"
                     style={{
                         background:
                             "linear-gradient(90deg, rgba(128,113,182,1) 0%, rgba(192,175,225,1) 100%)",
                     }}
                 >
-                    <p className="px-[5%] lg:max-w-5xl 2xl:max-w-7xl lg:px-0 mx-auto text-[18px] md:text-[25.38px] md:leading-[29.67px] lg:text-[20.45px] 2xl:text-[26.45px] lg:leading-[32.67px]">
+                    <p className="px-8 lg:max-w-5xl 2xl:max-w-7xl lg:px-0 mx-auto text-[14px] md:text-[25.38px] leading-snug md:leading-[29.67px] lg:text-[20.45px] 2xl:text-[26.45px] lg:leading-[32.67px]">
                         weFem es una de las marcas más confiables en la
                         categoría de cuidado menstrual reutilizable en el Perú,
                         innovamos con la misma integridad con la que comenzamos

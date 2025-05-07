@@ -61,21 +61,17 @@ const WeDiskSection = () => {
 
     return (
         <>
-            <div className="px-[5%]  max-w-lg lg:max-w-5xl 2xl:max-w-[75rem] md:px-0 mx-auto py-8  md:mt-20 xl:mt-14">
-                <div className="flex justify-center items-center gap-8 flex-col  lg:flex-row">
-                    <div className="w-full lg:w-1/2 relative flex items-center justify-center aspect-square overflow-hidden">
-                        {/* <div className="text-[#EFEDF8] text-[100.92px]  md:text-[140.92px] lg:text-[100.92px] 2xl:text-[150.92px] md:leading-[100.24px] 2xl:leading-[122.24px] font-bold space-y-1">
-                            <p>weDisk</p>
-                            <p>weDisk</p>
-                            <p>weDisk</p>
-                        </div> */}
+            <div className="px-[5%]  max-w-lg lg:max-w-5xl 2xl:max-w-[75rem] md:px-0 mx-auto py-8  md:mt-20 xl:mt-0 xl:py-0">
+                <div className="flex xl:my-11 justify-center items-center gap-8 flex-col  lg:flex-row">
+                    <div className="w-full lg:w-1/2 relative flex flex-col items-center justify-center h-max sm:h-[450px] md:h-[450px] 2xl:h-[520px] overflow-hidden">
                         <img
-                            className="absolute object-contain inset-0 top-1/2 -translate-y-1/2 aspect-square w-10/12 mx-auto"
+                            className="object-contain aspect-square inset-0 h-auto sm:h-[480.57px] lg:h-[470.57px] 2xl:h-[560.57px] w-[80%] mx-auto"
                             src="/assets/img/instructions/disco.png"
                             alt="weDisk"
                         />
+                        <a href="" className="block">Manual de uso <i className="mdi mdi-download"></i></a>
                     </div>
-                    <div className="bg-[#DDEC4C] flex flex-col items-center gap-4 w-full md:w-[520px] lg:w-[440px] 2xl:w-[540px] h-full  rounded-[50px]  md:rounded-[70px] lg:rounded-[40px] 2xl:rounded-[70px] font-poppins py-[10%] px-[10%] lg:py-10 lg:px-14">
+                    <div className="bg-[#DDEC4C] flex flex-col items-center gap-4 w-full md:w-[520px] lg:w-[440px] 2xl:w-[540px] h-max rounded-[50px] md:rounded-[70px] lg:rounded-[40px] 2xl:rounded-[70px] font-poppins py-[10%] px-[10%] lg:py-10 lg:px-14">
                         <h2 className="font-bold xl:mb-2 text-5xl xl:text-6xl  2xl:text-7xl text-center">
                             weDisk
                         </h2>
@@ -87,7 +83,7 @@ const WeDiskSection = () => {
                                 >
                                     <img
                                         src={item.icon}
-                                        className={`w-[25px] xl:w-[30px] 2xl:w-[40px] h-auto flex items-center justify-center brightness-100 grayscale`}
+                                        className={`w-[25px] xl:w-[32px] 2xl:w-[41px] h-auto flex items-center justify-center brightness-100 grayscale`}
                                         alt={item.text}
                                         loading="lazy"
                                     />
@@ -97,8 +93,8 @@ const WeDiskSection = () => {
                         </ul>
                     </div>
                 </div>
-                <nav className="mb-8 mt-8  font-bebas">
-                    <ul className="grid grid-cols-2 gap-4 lg:gap-0 lg:flex font-semibold tracking-wide justify-between border-b text-[20.48px] md:text-[32.48px]">
+                <nav className="mb-8 mt-8 font-bebas">
+                    <ul className="grid grid-cols-2 gap-6 lg:gap-0 lg:flex font-normal lg:font-semibold tracking-wide justify-between border-b text-[18px] md:text-[32.48px]">
                         {steps.map((step, index) => (
                             <li
                                 key={index}
@@ -114,15 +110,14 @@ const WeDiskSection = () => {
                     </ul>
                 </nav>
                 <div
-                    className={`${activeStep === 0 ? "grid" : "hidden"
-                        }  grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 0 ? "grid" : "hidden"} grid-cols-1 lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <video
                             autoPlay
                             loop
                             muted
-                            className=" lg:pt-0  w-full h-auto lg:w-[405px]  lg:h-[405px] 2xl:w-[495px] 2xl:h-[495px] object-cover"
+                            className="lg:pt-0 w-full h-auto lg:w-[405px] lg:h-[405px] 2xl:w-[495px] 2xl:h-[495px] object-cover"
                         >
                             <source
                                 src="/assets/img/instructions/wedisk/Disco-Paso1.mp4"
@@ -132,15 +127,15 @@ const WeDiskSection = () => {
                         </video>
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-[48.75px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
+                        <h2 className="text-[36px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
                             Paso 1:
                         </h2>
-                        <div className="inline-block bg-[#DDEC4C] px-6 py-2 rounded-full mb-6 w-max">
-                            <span className="text-[22.57px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
+                        <div className="inline-block bg-[#DDEC4C] px-4 py-1 rounded-full mb-6 w-max">
+                            <span className="text-[16px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
                                 Esteriliza tu disco
                             </span>
                         </div>
-                        <p className="text-md md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-tight">
+                        <p className="text-[14px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-snug">
                             Antes de usar tu weDisk por primera vez,
                             desinféctalo en una olla o en tu shakerCup con agua
                             hirviendo durante 2:30 minutos.

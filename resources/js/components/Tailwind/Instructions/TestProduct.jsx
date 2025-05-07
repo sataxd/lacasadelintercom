@@ -13,7 +13,7 @@ const TestProduct = ({ producto }) => {
     return (
         <section className="py-10 2xl:py-16 px-[5%] mx-auto font-font-general bg-[#F3E5FF] mb-0 2xl:mb-0">
             <h2 className="lg:hidden text-[26.3px] leading-[27.31px]  md:text-[46.3px]  md:leading-[47.31px] font-bold text-[#212529]  text-center flex gap-2 items-center justify-center">
-                ¿Te gustaría primero probar el disco?
+                ¿Aún no estás segura?
             </h2>
             <p className="lg:hidden md:text-[28.01px] mt-2 md:mt-4 text-center md:leading-[34.77px] text-[#333333]  ">
                 {producto.name}
@@ -31,7 +31,7 @@ const TestProduct = ({ producto }) => {
                 {/* Product Details */}
                 <div className="md:w-[562px] lg:h-[562px] lg:w-[350px] 2xl:w-[475px] text-[#333333] lg:flex lg:flex-col lg:justify-center">
                     <h3 className="hidden lg:block md:text-[44.38px] md:leading-[45.78px] 2xl:text-[54.38px] 2xl:leading-[58.78px] font-bold">
-                        ¿Te gustaría primero probar el disco?
+                        ¿Aún no estás segura?
                     </h3>
                     <p className="hidden lg:block md:text-[20px] 2xl:text-[29px] md:leading-[30px] 2xl:leading-[36px] mt-2 2xl:mt-4 ">
                         Prueba con el {producto.name}

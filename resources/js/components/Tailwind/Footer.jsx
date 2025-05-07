@@ -130,7 +130,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                             </nav>
                         </div>
 
-                        <div className="w-2/12 md:w-[35%] text-[15.77px] lg:w-2/12 lg:border-r-[#FFFFFF]  lg:border-r-2  md:text-[18.77px] 2xl:text-[23.77px] leading-[23.77px] tracking-[-0.07px] font-normal">
+                        <div className="w-2/12 md:w-[35%] text-[14px] lg:w-2/12 lg:border-r-[#FFFFFF]  lg:border-r-2 md:text-[18.77px] 2xl:text-[23.77px] leading-[23.77px] tracking-[-0.07px] font-normal">
                             <nav className="space-y-2 lg:space-y-4">
                                 {telefono && (
                                     <a
@@ -219,12 +219,11 @@ const Footer = ({ terms, footerLinks = [] }) => {
                 <div className="border-t border-[#FFFFFF]">
                     <div className="px-[5%]  md:max-w-xl lg:max-w-5xl 2xl:max-w-7xl md:px-0 mx-auto md:h-[77.91px] md:py-0 flex items-center justify-start">
                         <p className="hidden md:block text-[14.72px] leading-[22.26px] text-[#EFEDF8]">
-                            Copyright © 2025 weFem® | Todos los derechos
+                            Copyright © {new Date().getFullYear()} weFem® | Todos los derechos
                             reservados | Juntxs sin límites
                         </p>
-                        <p className="md:hidden flex w-full items-center justify-center text-center text-[8.72px] py-4 leading-[22.26px] text-[#EFEDF8]">
-                            Copyright © 2025 weFem® Todos los derechos
-                            reservados | Juntxs sin límites
+                        <p className="md:hidden flex font-extralight w-full items-center justify-center text-center text-[8px] py-4 leading-[22.26px] text-[#EFEDF8]">
+                            Copyright © {new Date().getFullYear()} weFem® | Todos los derechos reservados | Juntxs sin límites
                         </p>
                     </div>
                 </div>

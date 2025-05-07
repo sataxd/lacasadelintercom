@@ -37,12 +37,12 @@ const CatalogProducts = ({
                 backgroundHeight="h-[30vh] 2xl:h-[31vh]"
                 backgroundPosition="object-center"
             >
-                <div className="absolute inset-0 flex items-end justify-center text-center">
+                <div className="absolute inset-0 flex items-center justify-center text-center">
                     <div className="text-white p-6">
                         <h1 className="text-[38.54px] leading-[60.81px]  md:text-[58.54px] 2xl:text-[80.54px] lg:leading-[90.81px] 2xl:leading-[117.81px] font-bold max-w-4xl tracking-[0.01em]">
                             Tienda
                         </h1>
-                        <p className="md:text-[20.61px] 2xl:text-[24.61px]   mb-2 tracking-[0.01em]">
+                        <p className="text-[12px] md:text-[20.61px] 2xl:text-[24.61px]   mb-2 tracking-[0.01em] font-light">
                             Únete a weFem, libera tu ciclo y tu cuerpo.
                         </p>
                     </div>

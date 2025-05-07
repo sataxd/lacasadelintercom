@@ -39,7 +39,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
             >
                 <div className="absolute inset-0 flex items-center justify-center text-center ">
                     <div className="text-white p-6">
-                        <h1 className="text-[30.66px] md:text-[58.21px] 2xl:text-[72.21px] md:leading-[65.32px] 2xl:leading-[90.32px] font-bold max-w-5xl leading-tight tracking-[0.01em]">
+                        <h1 className="text-[26px] md:text-[58.21px] 2xl:text-[72.21px] md:leading-[65.32px] 2xl:leading-[90.32px] font-bold max-w-5xl leading-tight tracking-[0.01em]">
                             ¡Tu mejor aliadx en <br />
                             el cuidado menstrual!
                         </h1>
@@ -51,7 +51,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                 <div className="bg-[#EFE5FF] h-4 lg:hidden"></div>
                 {/* Certificaciones Section */}
                 <div className="flex lg:h-full lg:items-center flex-col lg:flex-row w-full md:max-w-2xl lg:gap-16 px-[5%] lg:max-w-6xl 2xl:max-w-[84rem] lg:px-0 mx-auto py-12 2xl:py-16">
-                    <p className="font-poppins lg:w-6/12 md:text-[22.63px]  lg:text-[18.45px] 2xl:text-[24.45px] xl:leading-[33px] tracking-wider text-justify font-light">
+                    <p className="font-poppins lg:w-6/12 text-[13px] md:text-[22.63px]  lg:text-[18.45px] 2xl:text-[24.45px] xl:leading-[33px] tracking-wider text-justify font-light">
                         weFem se enorgullece de contar con los más altos
                         estándares de calidad y seguridad en la fabricación de
                         todos nuestros productos menstruales. Poseemos el
@@ -75,14 +75,14 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
 
                     <img
                         src="/assets/img/about/image-about.png"
-                        className="w-full h-[600px] mt-4 lg:mt-0  lg:w-6/12 lg:h-[530px]   2xl:w-6/12 2xl:h-[660px] object-cover object-right-top"
+                        className="w-full aspect-[326/379] md:aspect-auto md:h-[600px] mt-6 lg:mt-0  lg:w-6/12 lg:h-[530px]   2xl:w-6/12 2xl:h-[660px] object-cover object-right-top"
                         alt="image"
                     />
                 </div>
 
                 {/* Logos Section */}
                 <div
-                    className="py-12 text-white"
+                    className="py-6 text-white"
                     style={{
                         background:
                             "linear-gradient(90deg, rgba(128,113,182,1) 0%, rgba(192,175,225,1) 100%)",
