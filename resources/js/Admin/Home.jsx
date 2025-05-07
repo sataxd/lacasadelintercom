@@ -488,11 +488,11 @@ const LocationMap = ({ sales_by_location }) => {
 
         // Crear el mapa manualmente
         const L = window.L;
-        const map = L.map(mapRef.current).setView(defaultCenter, 6);
+        const map = L?.map(mapRef.current).setView(defaultCenter, 6);
         mapInstanceRef.current = map;
 
         // Agregar capa de OpenStreetMap
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        L?.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution:
                 '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> Contributors',
         }).addTo(map);

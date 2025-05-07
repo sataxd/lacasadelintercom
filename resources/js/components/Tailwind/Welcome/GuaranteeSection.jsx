@@ -29,7 +29,7 @@ const GuaranteeSection = () => {
                 <div className="flex items-center w-max">
                     <div className="bg-[#6745BA] rounded-full px-2 py-2 mr-2">
                         <img
-                            className="h-[30.16px] sm:h-[35.16px] md:h-[50px] xl:h-[35.16px]  2xl:h-[43.16px]"
+                            className="h-[30px] sm:h-[35.16px] md:h-[50px] xl:h-[35.16px]  2xl:h-[43.16px]"
                             src="https://i.ibb.co/HLXD6gTx/image.png"
                             alt="Garantía WEFEM"
                         />

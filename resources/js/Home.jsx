@@ -54,7 +54,7 @@ const Home = ({
                 }
                 backgroundHeight="h-[320px] lg:h-[85vh] 2xl:h-[90vh]"
             >
-                <div className="absolute inset-0 flex items-center justify-center text-center pt-12 lg:pt-24">
+                <div className="absolute inset-0 flex items-center justify-center text-center pt-20 lg:pt-24">
                     <div className="text-white p-6">
                         <h1 className="text-[29.66px] pt-0 md:pt-0 -mt-16  leading-[100%] tracking-[1.5%] md:text-[58.54px] xl:text-[58.54px]  2xl:text-[81.54px] md:leading-[60.81px] xl:leading-[60.81px] 2xl:leading-[90.81px] font-bold max-w-4xl ">
                             ¡Tener sexo con

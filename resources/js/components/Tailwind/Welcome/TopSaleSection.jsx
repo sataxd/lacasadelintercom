@@ -39,10 +39,10 @@ const TopSaleSection = ({ producto }) => {
                 {/* Product Details */}
                 <div className="w-screen  md:w-[644px] lg:w-[350px] 2xl:w-[475px] text-[#333333]">
                     <div className=" w-9/12 lg:w-full mx-auto flex lg:block items-center justify-between gap-4">
-                        <h3 className="text-[30.58px] leading-[30.78px] lg:mb-2 md:text-[55.58px] lg:text-[40.38px] 2xl:text-[54.38px] font-bold lg:leading-[40.78px]">
+                        <h3 className="text-[28px] leading-[30.78px] lg:mb-2 md:text-[55.58px] lg:text-[40.38px] 2xl:text-[54.38px] font-bold lg:leading-[40.78px]">
                             {producto.name}
                         </h3>
-                        <p className="text-[16.5px] md:text-[31.5px] text-center lg:text-start lg:text-[16.81px] 2xl:text-[30.81px]  font-normal inline-flex ">
+                        <p className="text-[15px] md:text-[31.5px] text-center lg:text-start lg:text-[16.81px] 2xl:text-[30.81px]  font-normal inline-flex ">
                             ({producto.summary})
                         </p>
                     </div>
@@ -91,7 +91,7 @@ const TopSaleSection = ({ producto }) => {
                             S/ {Number(producto.final_price).toFixed(2)}
                         </p>
                         {producto.discount && (
-                            <p className="text-[14.39px] md:text-[25.39px] lg:text-[18.84px] 2xl:text-[24.84px] text-[#B4B4B4]">
+                            <p className="text-[13px] md:text-[25.39px] lg:text-[18.84px] 2xl:text-[24.84px] text-[#B4B4B4]">
                                 <del>Antes S/ {producto.price}</del>
                             </p>
                         )}
@@ -181,7 +181,7 @@ const TopSaleSection = ({ producto }) => {
                                         Selecciona tu talla:
                                     </label>
                                     <select
-                                        className="w-full h-[40.94px] 2xl:h-[48.94px]  text-base font-medium px-6 bg-[#EFEDF8] rounded-[5.44px] appearance-none  outline-none ring-0 border-0 cursor-pointer focus:outline-none"
+                                        className="w-full lg:h-[40.94px] 2xl:h-[48.94px]  text-xs py-2 lg:text-base font-medium px-4 bg-[#EFEDF8] rounded-[5.44px]  outline-none ring-0 border-0 cursor-pointer focus:outline-none"
                                         value={selectedSize}
                                         onChange={(e) =>
                                             setSelectedSize(e.target.value)
@@ -202,19 +202,19 @@ const TopSaleSection = ({ producto }) => {
                                 </div>
                                 {/* Quantity Selector */}
                                 <div className=" w-full md:w-1/2 lg:w-full mb-4 2xl:mb-6">
-                                    <div className=" flex h-[40.94px] text-[#000000]  bg-[#EFEDF8] items-center justify-around  rounded-[5.44px] ">
+                                    <div className="text-xs lg:text-base flex py-2.5 lg:h-[40.94px] text-[#000000]  bg-[#EFEDF8] items-center justify-around  rounded-[5.44px] ">
                                         <button
                                             onClick={() => changeQuantity(-1)}
-                                            className="w-8 h-8 text-[17.84px] text-[#444444]"
+                                            className="w-8 h-full text-[#444444]"
                                         >
                                             -
                                         </button>
-                                        <span className="md:text-base 2xl:text-xl font-medium">
+                                        <span className="text-xs md:text-base 2xl:text-xl font-medium">
                                             {quantity}
                                         </span>
                                         <button
                                             onClick={() => changeQuantity(1)}
-                                            className="w-8 h-8 text-[17.84px] text-[#444444]"
+                                            className="w-8 h-full text-[#444444]"
                                         >
                                             +
                                         </button>

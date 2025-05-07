@@ -100,6 +100,7 @@ class BasicController extends Controller
       'session' => Auth::user(),
       'global' => [
         'PUBLIC_RSA_KEY' => Controller::$PUBLIC_RSA_KEY,
+        'WA_URL' => env('WA_URL'),
         'APP_NAME' => env('APP_NAME', 'Trasciende'),
         'APP_URL' => env('APP_URL'),
         'APP_DOMAIN' => env('APP_DOMAIN'),

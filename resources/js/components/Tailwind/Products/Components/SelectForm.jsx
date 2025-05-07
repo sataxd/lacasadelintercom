@@ -75,7 +75,7 @@ const SelectForm = ({
                 </label>
             )}
             <button
-                className={`w-full relative text-start  px-6 py-2 border border-[#5F48B7] focus:ring-0 focus:outline-0 2xl:text-[19.37px]   transition-all duration-300 font-semibold text-[#5F48B7] ${className}`}
+                className={`w-full relative text-start  px-4 py-1 font-normal border border-[#5F48B7] focus:ring-0 focus:outline-0 text-[12px] 2xl:text-[19.37px]   transition-all duration-300  text-[#5F48B7] ${className}`}
                 onClick={() => setIsOpen(!isOpen)}
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
@@ -103,8 +103,8 @@ const SelectForm = ({
             </button>
 
             {isOpen && (
-                <div className="absolute z-10 w-full mt-1 bg-white rounded-lg shadow-lg max-h-60 overflow-auto">
-                    <ul className="py-1" role="listbox">
+                <div className="absolute z-[100] w-full mt-1 bg-white rounded-lg shadow-lg max-h-60 overflow-auto">
+                    <ul className="py-1 text-[13px]" role="listbox">
                         {filteredOptions.map((option) => (
                             <li
                                 key={option.value}

@@ -29,7 +29,7 @@ const WeLoversSection = ({ we_lovers }) => {
     return (
         <div className="pt-8 pb-16  lg:py-8 px-4 bg-gradient-to-b from-[#6745BA] to-[#522EAA]">
             <div className="max-w-[18rem]  md:max-w-4xl 2xl:max-w-6xl mx-auto text-center text-white">
-                <h2 className="hidden text-white text-center md:text-[45.41px] 2xl:text-[55.41px]    2xl:leading-[83.11px] tracking-[0.01em] font-bold md:mb-8 2xl:mb-12 lg:flex items-center justify-center gap-2 mt-6">
+                <h2 className="hidden mb-6 text-white text-center md:text-[45.41px] 2xl:text-[55.41px]  leading-none tracking-[0.01em] font-bold md:mb-8 2xl:mb-12 lg:flex items-center justify-center gap-2 mt-6">
                     Nuestras weLovers{" "}
                     <img
                         src="/assets/img/emojis/stars.png"
@@ -43,19 +43,19 @@ const WeLoversSection = ({ we_lovers }) => {
                         className="h-12"
                     />
                 </h2>
-                <h2 className="lg:hidden text-white text-center text-[25.41px] md:text-[45.41px] 2xl:text-[55.41px]    2xl:leading-[83.11px] tracking-[0.01em] font-semibold md:font-bold md:mb-8 2xl:mb-12  items-center justify-center gap-2">
+                <h2 className="lg:hidden mb-6 text-white text-center text-[25.41px] md:text-[45.41px] 2xl:text-[55.41px]  leading-none tracking-[0.01em] font-semibold md:font-bold md:mb-8 2xl:mb-12  items-center justify-center gap-2">
                     Nuestras weLovers <br />
                     <span className="flex w-full items-center justify-center gap-2">
                         <img
                             src="/assets/img/emojis/stars.png"
                             alt=""
-                            className="h-8 sm:h-12"
+                            className="h-6 sm:h-12"
                         />
                         <span className="whitespace-nowrap">lo afirman</span>
                         <img
                             src="/assets/img/emojis/stars.png"
                             alt=""
-                            className="h-8 sm:h-12"
+                            className="h-6 sm:h-12"
                         />
                     </span>
                 </h2>

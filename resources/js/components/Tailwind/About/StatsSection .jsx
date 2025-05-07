@@ -106,7 +106,7 @@ const StatsSection = ({ indicators }) => {
                             <img
                                 src="https://i.ibb.co/bj6rNvs7/1bc2a501a327fe55cf37f78fd57747ca.png"
                                 alt="Copa menstrual"
-                                className="absolute -left-[150px] bottom-0 top-[-50px] h-[400px]  md:h-[700px]  z-0 transform scale-x-[-1] w-[450px] object-cover"
+                                className="absolute -left-[125px] bottom-0 top-[-50px] h-[400px]  md:h-[700px]  z-0 transform scale-x-[-1] w-[450px] object-cover"
                             />
                             <img
                                 src="https://i.ibb.co/4nHfPP5q/49f3389e94334976b46ba6a4d0aea0e8.png"

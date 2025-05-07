@@ -78,29 +78,29 @@ const BenefitsSection = () => {
         fetchBenefits();
     }, []);
     return (
-        <div className="relative overflow-hidden pt-10 lg:pt-8 bg-[#EFE5FF]">
+        <div className="relative overflow-hidden pt-8 bg-[#EFE5FF]">
             <div className="bg-[#6745BA]">
                 <div className="relative w-full lg:max-w-5xl 2xl:max-w-7xl mx-auto text-white py-6 lg:py-10 px-6 lg:px-0 flex flex-col items-center text-center">
                     <div className="max-w-[20rem] ml-[8rem] md:ml-60 lg:ml-0 md:max-w-2xl mx-auto md:mx-0 relative z-10">
-                        <h2 className="text-[12.0px] md:text-[21.07px] leading-[25.28px] xl:text-[24.65px] 2xl:text-[27.65px] xl:leading-[33.18px] font-bold">
+                        <h2 className="text-[10.0px] md:text-[21.07px] leading-[25.28px] xl:text-[24.65px] 2xl:text-[27.65px] xl:leading-[33.18px] font-medium">
                             Una copa o disco menstrual en 5 años
                         </h2>
                         <div className="flex justify-center gap-10 md:mt-4">
                             <div className="w-1/2 flex flex-col items-center justify-center">
-                                <span className="text-[14.99px] md:text-[24.99px] md:leading-[40.78px] xl:text-[28.79px] 2xl:text-[32.79px] 2xl:leading-[53.52px] font-medium lg:font-bold text-[#E7FF57]">
+                                <span className="text-[13px] md:text-[24.99px] md:leading-[40.78px] xl:text-[28.79px] 2xl:text-[32.79px] 2xl:leading-[53.52px] font-semibold text-[#E7FF57]">
                                     Reemplaza
                                 </span>
                                 <Counter target={Toallas?.description} />
-                                <p className="text-[8.84px] md:text-[18.84px] md:leading-[47.47px] xl:text-[20.14px] 2xl:text-[24.14px] 2xl:leading-[62.3px]">
+                                <p className="font-light text-nowrap text-[8.84px] md:text-[18.84px] md:leading-[47.47px] xl:text-[20.14px] 2xl:text-[24.14px] 2xl:leading-[62.3px]">
                                     Toallas higiénicas
                                 </p>
                             </div>
                             <div className="w-1/2 flex flex-col items-center justify-center">
-                                <span className="text-[14.99px] md:text-[24.99px] md:leading-[40.78px] xl:text-[28.79px] 2xl:text-[32.79px] 2xl:leading-[53.52px] font-medium lg:font-bold text-[#E7FF57]">
+                                <span className="text-[13px] md:text-[24.99px] md:leading-[40.78px] xl:text-[28.79px] 2xl:text-[32.79px] 2xl:leading-[53.52px] font-semibold text-[#E7FF57]">
                                     Ahorra
                                 </span>
                                 <Counter target={Soles?.description} />
-                                <p className="text-[8.84px] md:text-[18.84px] md:leading-[47.47px] xl:text-[20.14px] 2xl:text-[24.14px] 2xl:leading-[62.3px]">
+                                <p className="font-light text-nowrap text-[8.84px] md:text-[18.84px] md:leading-[47.47px] xl:text-[20.14px] 2xl:text-[24.14px] 2xl:leading-[62.3px]">
                                     Soles Aprox
                                 </p>
                             </div>

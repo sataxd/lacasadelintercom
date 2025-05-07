@@ -38,23 +38,23 @@ const ProductFilter = ({ products, categories, anuncio }) => {
     console.log(anuncio);
     return (
         <div className="px-[5%] mx-auto py-8">
-            <div className="flex flex-col md:flex-row w-full lg:justify-end md:justify-between">
+            <div className="flex w-full items-center lg:justify-end md:justify-between mb-8">
                 {/* Sidebar */}
-                <div className="  lg:hidden md:w-1/2">
+                <div className="  lg:hidden w-1/2">
                     {/* Categorías */}
-                    <nav className="relative mb-8 w-full md:text-[18.67px] 2xl:text-[23.67px] leading-[26.52px] text-[#000000]  ">
+                    <nav className="relativew-full md:text-[18.67px] 2xl:text-[23.67px] leading-[26.52px] text-[#000000]  ">
                         <button
                             onClick={() => setOpenMenu(!openMenu)}
-                            className="font-bold text-[#000000] text-[23.67px] leading-[26.52px] flex justify-center items-center underline "
+                            className="font-bold text-[#000000] text-[13px] leading-[26.52px] flex justify-center items-center underline "
                         >
                             <img
                                 src="https://i.ibb.co/nqyF9D6F/f6d1287b6197d4335884bd52d40a18fa.png"
-                                className="mr-3 h-5"
+                                className="mr-3 h-3"
                             />
                             Todos los productos
                         </button>
                         {openMenu && (
-                            <ul className=" absolute z-50 bg-white rounded-lg p-4 space-y-3">
+                            <ul className=" absolute z-[100] bg-white rounded-lg p-4 space-y-3 text-[13px]">
                                 {categories.map((category) => (
                                     <li
                                         className="cursor-pointer"
@@ -77,8 +77,8 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                 </div>
 
                 {/* Header con ordenamiento */}
-                <div className="flex justify-end items-end mb-6 ">
-                    <div className="w-60">
+                {/* <div className="flex justify-end items-end mb-6 "> */}
+                    <div className="w-1/2">
                         <SelectForm
                             options={sortOptions}
                             placeholder="Ordenar por"
@@ -87,7 +87,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                             valueKey="value"
                         />
                     </div>
-                </div>
+                {/* </div> */}
             </div>
 
             <div className="hidden lg:flex mx-auto gap-6">
@@ -201,7 +201,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                     {/* Precio */}
                                     <div className="flex justify-between items-baseline gap-2">
                                         {product.summary ? (
-                                            <h4 className="text-[14.28px] 2xl:text-[16.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                            <h4 className="text-[14.28px] 2xl:text-[16.28px] leading-tight font-normal mb-2 line-clamp-2">
                                                 ({product.summary})
                                             </h4>
                                         ) : (
@@ -301,7 +301,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                 />
                                 <div className="px-0 md:px-6 text-[#212529]">
                                     <div className="flex justify-between items-center">
-                                        <h3 className="text-[20.44px] leading-[21.64px] md:text-[29.44px] md:leading-[41.64px] font-semibold line-clamp-2">
+                                        <h3 className="text-[16px] leading-[21.64px] md:text-[29.44px] md:leading-[41.64px] font-semibold line-clamp-2">
                                             {product.name.split(" ")[0]}
                                         </h3>
                                         <span className="text-[17.8px] md:text-[25.56px] xl:leading-[39.79px] 2xl:text-[32.56px] tracking-[-0.01em] font-bold text-[#FC58BE]">
@@ -318,7 +318,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                                 ({product.summary})
                                             </h4>
                                         ) : (
-                                            <h4 className="text-[9.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                            <h4 className="text-[9.28px] leading-tight font-normal mb-2 line-clamp-2">
                                                 {product.name
                                                     .split(" ")
                                                     .slice(1)
@@ -420,7 +420,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                 />
                                 <div className="px-0 md:px-6 text-[#212529]">
                                     <div className="flex justify-between items-center">
-                                        <h3 className="text-[20.44px] leading-[21.64px] md:text-[29.44px] md:leading-[41.64px] font-semibold line-clamp-2">
+                                        <h3 className="text-[16px] leading-[21.64px] md:text-[29.44px] md:leading-[41.64px] font-semibold line-clamp-2">
                                             {product.name.split(" ")[0]}
                                         </h3>
                                         <span className="text-[17.8px] md:text-[25.56px] xl:leading-[39.79px] 2xl:text-[32.56px] tracking-[-0.01em] font-bold text-[#FC58BE]">
@@ -437,7 +437,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
                                                 ({product.summary})
                                             </h4>
                                         ) : (
-                                            <h4 className="text-[9.28px] leading-[29.18px] font-normal mb-2 line-clamp-2">
+                                            <h4 className="text-[9.28px] leading-tight font-normal mb-2 line-clamp-2">
                                                 {product.name
                                                     .split(" ")
                                                     .slice(1)
