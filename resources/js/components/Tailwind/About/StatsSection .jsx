@@ -86,7 +86,7 @@ const StatsSection = ({ indicators }) => {
                                     className="text-[60.31px] md:text-[120.31px] 2xl:text-[199.31px] leading-none font-bold text-white mb-2 count"
                                     style={{
                                         textShadow:
-                                            "1.98px 3.96px 18.73px 0px #00000033",
+                                            "1.98px 3.96px 10px #00000033",
                                     }}
                                     ref={(el) =>
                                         (countersRef.current[index] = el)
@@ -102,16 +102,16 @@ const StatsSection = ({ indicators }) => {
                             </div>
                         ))}
 
-                        <div className="col-span-2 relative lg:hidden h-[200px] md:h-[350px]">
+                        <div className="col-span-2 relative lg:hidden h-[100px] md:h-[350px]">
                             <img
                                 src="https://i.ibb.co/bj6rNvs7/1bc2a501a327fe55cf37f78fd57747ca.png"
                                 alt="Copa menstrual"
-                                className="absolute -left-[125px] bottom-0 top-[-50px] h-[400px]  md:h-[700px]  z-0 transform scale-x-[-1] w-[450px] object-cover"
+                                className="absolute -left-[100px] bottom-0 top-[-50px] h-[300px] w-[350px] md:aspect-auto md:h-[700px]  z-0 transform scale-x-[-1] md:w-[450px] object-cover"
                             />
                             <img
                                 src="https://i.ibb.co/4nHfPP5q/49f3389e94334976b46ba6a4d0aea0e8.png"
                                 alt="Disco menstrual"
-                                className="absolute -right-[100px]  bottom-0 top-[-50px] h-[400px]  md:h-[580px]  object-cover  w-auto z-20"
+                                className="absolute -right-[50px]  bottom-0 top-[-50px] h-[250px]  md:h-[580px]  object-cover object-top  w-auto z-20"
                             />
                         </div>
                     </div>

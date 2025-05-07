@@ -46,25 +46,25 @@ const WeCupSection = () => {
         <>
             <div className="px-[5%]  max-w-lg lg:max-w-5xl 2xl:max-w-[75rem] md:px-0 mx-auto py-8  md:mt-20 xl:mt-0 xl:py-0">
                 <div className="flex xl:my-11 justify-center items-center gap-8 flex-col  lg:flex-row">
-                    <div className="w-full lg:w-1/2 relative flex items-center justify-center  h-[350px] sm:h-[450px]  md:h-[450px]  2xl:h-[520px]  overflow-hidden">
+                    <div className="w-full lg:w-1/2 relative flex flex-col items-center justify-center  h-max sm:h-[450px]  md:h-[450px]  2xl:h-[520px]  overflow-hidden">
                         {/* <div className="text-[#EFEDF8] text-[100.92px]  md:text-[140.92px] lg:text-[120.92px] 2xl:text-[150.92px] leading-[100.24px] md:leading-[130.24px] lg:leading-[110.24px] 2xl:leading-[132.24px] font-bold space-y-1">
                             <p>weCup</p>
                             <p>weCup</p>
                             <p>weCup</p>
                         </div> */}
                         <img
-                            className=" absolute object-contain inset-0 top-1/2 -translate-y-1/2 aspect-square h-auto sm:h-[480.57px] lg:h-[470.57px] 2xl:h-[560.57px] w-[80%] mx-auto"
+                            className=" object-contain aspect-square inset-0 h-auto sm:h-[480.57px] lg:h-[470.57px] 2xl:h-[560.57px] w-[80%] mx-auto"
                             src="/assets/img/instructions/copa.png"
                             alt="weCup"
                         />
+                        <a href="" className="block">Manual de uso <i className="mdi mdi-download"></i></a>
                     </div>
-                    <a href="" className="block md:hidden">Manual de uso <i className="mdi mdi-download"></i></a>
 
-                    <div className="bg-[#DDEC4C] flex flex-col items-center gap-4 w-full md:w-[520px] lg:w-[440px] 2xl:w-[540px] h-full  rounded-[50px]  md:rounded-[70px] lg:rounded-[40px] 2xl:rounded-[70px] font-poppins py-[10%] px-[10%] lg:py-10 lg:px-14">
+                    <div className="bg-[#DDEC4C] flex flex-col items-center gap-4 w-full md:w-[520px] lg:w-[440px] 2xl:w-[540px] h-max  rounded-[50px]  md:rounded-[70px] lg:rounded-[40px] 2xl:rounded-[70px] font-poppins py-[10%] px-[10%] lg:py-10 lg:px-14">
                         <h2 className="font-bold xl:mb-2 text-5xl xl:text-6xl  2xl:text-7xl text-center">
                             weCup
                         </h2>
-                    <a href="" className="hidden md:block">Manual de uso <i className="mdi mdi-download"></i></a>
+                        {/* <a href="" className="hidden md:block">Manual de uso <i className="mdi mdi-download"></i></a> */}
                         <ul className="space-y-2 md:space-y-3 xl:space-y-4 ">
                             {[
                                 {
@@ -105,15 +105,14 @@ const WeCupSection = () => {
                     </div>
                 </div>
                 <nav className="mb-8 mt-8  font-bebas">
-                    <ul className="grid grid-cols-2 gap-6 lg:gap-0 lg:flex font-semibold tracking-wide justify-between border-b text-[20.48px] md:text-[32.48px]">
+                    <ul className="grid grid-cols-2 gap-6 lg:gap-0 lg:flex font-normal lg:font-semibold tracking-wide justify-between border-b text-[18px] md:text-[32.48px]">
                         {steps.map((step, index) => (
                             <li
                                 key={index}
-                                className={`px-4 pb-1 cursor-pointer ${
-                                    index === activeStep
+                                className={`px-4 pb-1 cursor-pointer text-nowrap ${index === activeStep
                                         ? "text-[#5F48B7] border-b-4 border-[#5F48B7]"
                                         : "text-[#D5D0EA]"
-                                }`}
+                                    }`}
                                 onClick={() => setActiveStep(index)}
                             >
                                 {step}
@@ -122,9 +121,8 @@ const WeCupSection = () => {
                     </ul>
                 </nav>
                 <div
-                    className={`${
-                        activeStep === 0 ? "grid" : "hidden"
-                    } grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 0 ? "grid" : "hidden"
+                        } grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <video
@@ -141,15 +139,15 @@ const WeCupSection = () => {
                         </video>
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-[48.75px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
+                        <h2 className="text-[36px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
                             Paso 1:
                         </h2>
-                        <div className="inline-block bg-[#DDEC4C] px-6 py-2 rounded-full mb-6 w-max">
-                            <span className="text-[22.57px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
+                        <div className="inline-block bg-[#DDEC4C] px-4 py-1 rounded-full mb-6 w-max">
+                            <span className="text-[16px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
                                 Esteriliza tu copa
                             </span>
                         </div>
-                        <p className="text-[20px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-[33px]">
+                        <p className="text-[14px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-snug">
                             Antes de usar tu weCup por primera vez, desinféctala
                             en una olla o en tu shakerCup con agua hirviendo
                             durante 2:30 minutos.
@@ -159,9 +157,8 @@ const WeCupSection = () => {
                     </div>
                 </div>
                 <div
-                    className={`${
-                        activeStep === 1 ? "grid" : "hidden"
-                    } grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 1 ? "grid" : "hidden"
+                        } grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <video
@@ -178,15 +175,15 @@ const WeCupSection = () => {
                         </video>
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-[48.75px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
+                        <h2 className="text-[36px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
                             Paso 2:
                         </h2>
-                        <div className="inline-block bg-[#DDEC4C] px-6 py-2 rounded-full mb-6 w-max">
-                            <span className="text-[22.57px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
+                        <div className="inline-block bg-[#DDEC4C] px-4 py-1 rounded-full mb-6 w-max">
+                            <span className="text-[16px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
                                 Elije tu doblez
                             </span>
                         </div>
-                        <p className="text-[20px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-[33px]">
+                        <p className="text-[14px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-snug">
                             Hay muchas formas de doblar tu copa menstrual: con
                             pliegue en U y con pliegue hacia abajo. Ambos son
                             fáciles de dominar y adecuados para principiantes,
@@ -196,9 +193,8 @@ const WeCupSection = () => {
                     </div>
                 </div>
                 <div
-                    className={`${
-                        activeStep === 2 ? "grid" : "hidden"
-                    } grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 2 ? "grid" : "hidden"
+                        } grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <img
@@ -207,15 +203,15 @@ const WeCupSection = () => {
                         />
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-[48.75px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
+                        <h2 className="text-[36px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
                             Paso 3:
                         </h2>
-                        <div className="inline-block bg-[#DDEC4C] px-6 py-2 rounded-full mb-6 w-max">
-                            <span className="text-[22.57px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
+                        <div className="inline-block bg-[#DDEC4C] px-4 py-1 rounded-full mb-6 w-max">
+                            <span className="text-[16px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
                                 ¿Cómo insertar?
                             </span>
                         </div>
-                        <p className="text-[20px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-[33px]">
+                        <p className="text-[14px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-snug">
                             Lávate las manos y ponte cómoda. Mientras estás
                             sentada en el inodoro o de pie con una pierna
                             levantada en la bañera, separa suavemente tus labios
@@ -226,9 +222,8 @@ const WeCupSection = () => {
                     </div>
                 </div>
                 <div
-                    className={`${
-                        activeStep === 3 ? "grid" : "hidden"
-                    } grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
+                    className={`${activeStep === 3 ? "grid" : "hidden"
+                        } grid-cols-1  lg:grid-cols-2 gap-8 lg:mb-12 px-8 lg:px-12 py-4 lg:py-8`}
                 >
                     <div className="rounded-lg bg-text-pattern order-1 lg:order-none">
                         <video
@@ -245,15 +240,15 @@ const WeCupSection = () => {
                         </video>
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-[48.75px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
+                        <h2 className="text-[36px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
                             Paso 4:
                         </h2>
-                        <div className="inline-block bg-[#DDEC4C] px-6 py-2 rounded-full mb-6 w-max">
-                            <span className="text-[22.57px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
+                        <div className="inline-block bg-[#DDEC4C] px-4 py-1 rounded-full mb-6 w-max">
+                            <span className="text-[16px] md:text-[27.57px] lg:text-[20.57px] 2xl:text-[27.57px] leading-[30.88px]">
                                 Lava tus manos y tu copa
                             </span>
                         </div>
-                        <p className="text-[20px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-[33px]">
+                        <p className="text-[14px] md:text-[24px] lg:text-[18px] 2xl:text-[24px] leading-snug">
                             Antes de insertarla y después de retirarla, lava tu
                             weCup con un jabón suave, sin fragancias
                             artificiales, de preferencia de PH neutro. y
