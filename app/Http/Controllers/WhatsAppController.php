@@ -15,11 +15,7 @@ class WhatsAppController extends Controller
         try {
 
             $jpa  = Sale::with([
-                'formula',
-                'formula.hasTreatment',
-                'formula.scalpType',
-                'formula.hairType',
-                'formula.fragrance',
+
                 'status',
                 'details',
                 'details.item',

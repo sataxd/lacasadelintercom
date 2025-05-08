@@ -32,7 +32,7 @@ class SendSaleWhatsApp implements ShouldQueue
     try {
       WhatsAppController::sendSale($data, $send2client, $send2group);
     } catch (\Throwable $th) {
-      // dump($th->getMessage());
+      dump($th->getMessage());
     }
   }
 }

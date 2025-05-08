@@ -33,7 +33,9 @@ class Item extends Model
         'status',
         'sku',
         'stock',
-        'score'
+        'score',
+        'min_stock',
+        'manual'
     ];
     /*
      

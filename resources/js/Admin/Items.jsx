@@ -18,6 +18,7 @@ import CreateReactScript from "../Utils/CreateReactScript";
 import Number2Currency from "../Utils/Number2Currency";
 import ReactAppend from "../Utils/ReactAppend";
 import SetSelectValue from "../Utils/SetSelectValue";
+import Global from "../Utils/Global";
 
 const itemsRest = new ItemsRest();
 
@@ -34,13 +35,17 @@ const Items = ({ categories, brands }) => {
     const priceRef = useRef();
     const discountRef = useRef();
     const imageRef = useRef();
+    const manualRef = useRef();
     const descriptionRef = useRef();
     const scoreRef = useRef();
     // Nuevos campos
     const stockRef = useRef();
+    const min_stockRef = useRef();
+
     const [isEditing, setIsEditing] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedScore, setSelectedScore] = useState(null);
+
     /*ADD NEW LINES GALLERY */
     const [gallery, setGallery] = useState([]);
     const galleryRef = useRef();
@@ -93,6 +98,8 @@ const Items = ({ categories, brands }) => {
         }
     }, [itemData]);
 
+    const [manualPreview, setManualPreview] = useState(null);
+
     const onModalOpen = (data) => {
         // console.log(data);
         setItemData(data || null); // Guardamos los datos en el estado
@@ -114,6 +121,12 @@ const Items = ({ categories, brands }) => {
             .trigger("change");
         imageRef.current.value = null;
         imageRef.image.src = `/api/items/media/${data?.image ?? "undefined"}`;
+        manualRef.current.value = null;
+        if (data?.manual) {
+            setManualPreview(`/storage/images/item/${data.manual}`);
+        } else {
+            setManualPreview(null);
+        }
 
         descriptionRef.current.value = data?.description ?? "";
 
@@ -130,6 +143,7 @@ const Items = ({ categories, brands }) => {
         // Nuevos campos
 
         stockRef.current.value = data?.stock;
+        min_stockRef.current.value = data?.min_stock;
 
         $(modalRef.current).modal("show");
     };
@@ -156,6 +170,7 @@ const Items = ({ categories, brands }) => {
             discount: discountRef.current.value,
             description: descriptionRef.current.value,
             stock: stockRef.current.value,
+            min_stock: min_stockRef.current.value,
             score: scoreRef.current.value,
             final_price: final_price,
             discount_percent: discount_percent,
@@ -169,6 +184,12 @@ const Items = ({ categories, brands }) => {
         const image = imageRef.current.files[0];
         if (image) {
             formData.append("image", image);
+        }
+
+        const manual = manualRef.current.files[0];
+
+        if (manual && manualPreview) {
+            formData.append("manual", manual);
         }
 
         gallery.forEach((img, index) => {
@@ -232,6 +253,16 @@ const Items = ({ categories, brands }) => {
         { value: 4, label: "4" },
         { value: 5, label: "5" },
     ];
+    const handleManualChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setManualPreview(URL.createObjectURL(file));
+        }
+    };
+
+    const handleManualDelete = () => {
+        setManualPreview(null);
+    };
     return (
         <>
             <Table
@@ -531,7 +562,11 @@ const Items = ({ categories, brands }) => {
                                 </option>
                             ))}
                         </SelectFormGroup>
-
+                        <InputFormGroup
+                            label="Stock mínimo"
+                            eRef={min_stockRef}
+                            type="number"
+                        />
                         <InputFormGroup
                             label="Stock"
                             eRef={stockRef}
@@ -645,6 +680,65 @@ const Items = ({ categories, brands }) => {
                                         </div>
                                     ))}
                                 </div>
+                            </div>
+                            <div className="form-group">
+                                <label>Manual PDF</label>
+                                <div className="input-group mb-2">
+                                    <input
+                                        type="file"
+                                        className="form-control"
+                                        ref={manualRef}
+                                        accept=".pdf"
+                                        onChange={handleManualChange}
+                                    />
+                                    {manualPreview && (
+                                        <div className="input-group-append">
+                                            <button
+                                                type="button"
+                                                className="btn btn-danger"
+                                                onClick={handleManualDelete}
+                                            >
+                                                <i className="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                                {manualPreview && (
+                                    <div className="mt-2">
+                                        <div className="d-flex align-items-center mb-2">
+                                            <a
+                                                href={manualPreview}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="btn btn-sm btn-soft-primary mr-2"
+                                            >
+                                                <i className="fa fa-file-pdf mr-1"></i>
+                                                Ver PDF
+                                            </a>
+                                        </div>
+                                        <div className="border rounded">
+                                            <iframe
+                                                src={`${manualPreview}#toolbar=0`}
+                                                type="application/pdf"
+                                                width="100%"
+                                                height="400px"
+                                            >
+                                                <p>
+                                                    Tu navegador no puede
+                                                    mostrar el PDF directamente.
+                                                    <a
+                                                        href={manualPreview}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        Haz clic aquí para
+                                                        descargarlo
+                                                    </a>
+                                                </p>
+                                            </iframe>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
