@@ -41,7 +41,7 @@ const Instructions = ({
             >
                 <div className="absolute inset-0 flex items-center  justify-center text-center">
                     <div className="text-white text-center p-6">
-                        <h1 className="text-[45.08px]  md:text-[65.08px]  lg:text-[58.54px] 2xl:text-[78.54px]  md:leading-[90.81px]  2xl:leading-[117.81px] font-bold max-w-4xl text-center tracking-[0.01em]">
+                        <h1 className="text-[40px]  md:text-[65.08px]  lg:text-[58.54px] 2xl:text-[78.54px]  md:leading-[90.81px]  2xl:leading-[117.81px] font-bold max-w-4xl text-center tracking-[0.01em]">
                             ¿Cómo usar?
                         </h1>
                         <p className="text-[9.61px] md:text-[18.61px] lg:text-[20.61px] 2xl:text-[24.61px] md:leading-[36.92px]  my-2 tracking-[0.01em]">

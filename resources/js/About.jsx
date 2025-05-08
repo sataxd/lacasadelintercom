@@ -50,8 +50,8 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                 <FeaturesSection />
                 <div className="bg-[#EFE5FF] h-4 lg:hidden"></div>
                 {/* Certificaciones Section */}
-                <div className="flex lg:h-full lg:items-center flex-col lg:flex-row w-full md:max-w-2xl lg:gap-16 px-[5%] lg:max-w-6xl 2xl:max-w-[84rem] lg:px-0 mx-auto py-12 2xl:py-16">
-                    <p className="font-poppins lg:w-6/12 text-[13px] md:text-[22.63px]  lg:text-[18.45px] 2xl:text-[24.45px] xl:leading-[33px] tracking-wider text-justify font-light">
+                <div className="flex lg:h-full lg:items-center flex-col lg:flex-row w-full md:max-w-2xl lg:gap-16 px-[10%] lg:max-w-6xl 2xl:max-w-[84rem] lg:px-0 mx-auto py-12 2xl:py-16">
+                    <p className="font-poppins lg:w-6/12 text-[12px] md:text-[22.63px]  lg:text-[18.45px] 2xl:text-[24.45px] xl:leading-[33px] tracking-wider leading-[1.5] text-justify font-normal">
                         weFem se enorgullece de contar con los más altos
                         estándares de calidad y seguridad en la fabricación de
                         todos nuestros productos menstruales. Poseemos el
@@ -88,7 +88,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                             "linear-gradient(90deg, rgba(128,113,182,1) 0%, rgba(192,175,225,1) 100%)",
                     }}
                 >
-                    <div className="px-[5%] flex justify-center items-center flex-row md:justify-around   mx-auto gap-6">
+                    <div className="px-[5%] flex items-center flex-row justify-around   mx-auto gap-6">
                         <img
                             onClick={() => setShowModal1(true)}
                             src="https://i.ibb.co/931mypkH/image.png"
@@ -97,7 +97,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                         />
                         <img
                             src="https://i.ibb.co/NgMJf8d8/image.png"
-                            className="brightness-0 grayscale-0 invert w-[150px] lg:w-[300.23px] h-auto 2xl:w-[428.23px] 2xl:h-[136.41px] object-contain"
+                            className="brightness-0 grayscale-0 invert w-[125px] lg:w-[300.23px] h-auto 2xl:w-[428.23px] 2xl:h-[136.41px] object-contain"
                             alt="Certificado 2"
                         />
                         <img

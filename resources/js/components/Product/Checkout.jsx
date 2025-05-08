@@ -334,7 +334,7 @@ const Checkout = ({ formula, publicKey, selectedPlan, bundles, planes, session }
                         ? <>
                           <div className='md:col-span-3'>
                             <label className="mb-1 block text-sm font-medium " htmlFor="district">
-                              Provincia <b className='text-red-500'>*</b>
+                              Distrito <b className='text-red-500'>*</b>
                             </label>
                             <select
                               id="province"
