@@ -147,9 +147,9 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                                     <div className="icon-circle  lg:mb-4 flex flex-col items-center justify-center gap-1 md:gap-1 lg:gap-4">
                                         <img
                                             src={item.icon}
-                                            className="brightness-0 grayscale invert h-[30px]  md:h-[40px] lg:h-[50px]     2xl:h-[53px] w-auto"
+                                            className="brightness-0 grayscale invert h-[20px]  md:h-[40px] lg:h-[50px]     2xl:h-[53px] w-auto"
                                         />
-                                        <p className="text-white  text-[6px] lg:text-[18.81px] 2xl:text-[21.81px] leading-tight max-w-[150px]">
+                                        <p className="text-white  text-[6px] lg:text-[18.81px] 2xl:text-[21.81px] leading-none max-w-[150px]">
                                             {item.text
                                                 .split("\n")
                                                 .map((line, i) => (

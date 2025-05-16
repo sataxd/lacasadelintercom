@@ -78,7 +78,7 @@ const ProductFilter = ({ products, categories, anuncio }) => {
 
                 {/* Header con ordenamiento */}
                 {/* <div className="flex justify-end items-end mb-6 "> */}
-                    <div className="w-1/2">
+                    <div className="w-1/2 max-w-[240px]">
                         <SelectForm
                             options={sortOptions}
                             placeholder="Ordenar por"

@@ -9,6 +9,9 @@ import SubscriptionsRest from "./actions/SubscriptionsRest";
 import { CarritoProvider } from "./context/CarritoContext";
 import Swal from "sweetalert2";
 import Global from "./Utils/Global";
+
+import Quiz1 from './Quiz-1.png'
+
 const subscriptionsRest = new SubscriptionsRest();
 // Componente principal del cuestionario
 const Quiz = ({ showSlogan = true }) => {
@@ -82,15 +85,16 @@ const Quiz = ({ showSlogan = true }) => {
 const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
+            {/* <img src={Quiz1} alt="" className="absolute w-full opacity-75 top-[108px] z-50" /> */}
             <div className="flex py-10 lg:py-0 order-1 md:order-none flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
-                <div className="px-[5%] max-w-[44rem] lg:px-0 lg:max-w-lg 2xl:max-w-2xl text-center flex flex-col gap-5 2xl:gap-10">
+                <div className="px-[5%] max-w-[44rem] lg:px-0 lg:max-w-lg 2xl:max-w-2xl text-center flex flex-col gap-2 2xl:gap-10">
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <h2 className="text-lg md:text-xl lg:text-2xl  2xl:text-[30.75px] tracking-[1%] font-semibold ">
+                    <h2 className="text-base md:text-xl lg:text-2xl  2xl:text-[30.75px] tracking-[1%] font-semibold ">
                         ¿Qué producto es perfecto para ti?
                     </h2>
-                    <p className="text-base lg:text-lg  2xl:text-xl tracking-[1%]">
+                    <p className="text-xs lg:text-lg mt-2  2xl:text-xl tracking-[1%] leading-tight">
                         Cada cuerpo es único. Tu flujo y estilo de vida pueden
                         afectar el ajuste y la sensación de tu copa o disco.
                         Responde nuestro cuestionario de 2 minutos para
@@ -99,7 +103,7 @@ const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
                     <div className="w-full flex justify-center">
                         <button
                             onClick={() => setCurrentStep(2)}
-                            className="bg-[#FF9900] w-[250.23px] h-[60.09px] md:w-[308.23px] md:h-[70.09px] 2xl:w-[348.23px] lg:h-[65.09px] 2xl:h-[75.09px] hover:opacity-90 text-white font-semibold   rounded-xl  text-[18.03px] md:text-[22.03px] lg:text-[18.13px]  2xl:text-[23.13px] leading-[34.69px] tracking-[0.01em] transition-colors  duration-300 ease-in-out"
+                            className="bg-[#FF9900] w-44 h-10 mt-4 md:w-[308.23px] md:h-[70.09px] 2xl:w-[348.23px] lg:h-[65.09px] 2xl:h-[75.09px] hover:opacity-90 text-white font-semibold   rounded-xl  text-sm md:text-[22.03px] lg:text-[18.13px]  2xl:text-[23.13px] leading-[34.69px] tracking-[0.01em] transition-colors  duration-300 ease-in-out"
                         >
                             Continuar
                         </button>
@@ -110,7 +114,7 @@ const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
                 <img
                     src="assets/img/quizz/quiz_1.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[21.5vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
@@ -121,7 +125,7 @@ const FirstQuiz = ({ setCurrentStep, handleAnswer }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1 md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
-                <div className="px-[5%] max-w-[44rem] lg:px-0 lg:max-w-lg 2xl:max-w-[44rem] text-center flex flex-col gap-5 2xl:gap-10">
+                <div className="px-[5%] max-w-[44rem] lg:px-0 lg:max-w-lg 2xl:max-w-[44rem] text-center flex flex-col gap-2 2xl:gap-10">
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
@@ -134,16 +138,16 @@ const FirstQuiz = ({ setCurrentStep, handleAnswer }) => {
                         />{" "}
                     </p>
 
-                    <div className="gap-4 w-full flex  items-center justify-center mt-3">
+                    <div className="gap-4 w-full flex items-center justify-center mt-2">
                         <button
                             onClick={() => handleAnswer(1, 1)}
-                            className="w-1/2 text-xs font-semibold xl:text-lg 2xl:text-2xl bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white py-3 2xl:py-4 px-6 rounded-[20px]  transition-colors  border-2 border-[#FF9900] duration-300"
+                            className="leading-tight w-1/2 text-xs font-semibold xl:text-lg 2xl:text-xl bg-white hover:bg-[#FF9900] text-[#FF9900] hover:text-white py-3 2xl:py-4 px-6 rounded-[20px] transition-colors border-2 border-[#FF9900] duration-300"
                         >
                             ¡Sí! Quiero probar <br /> algo nuevo
                         </button>
                         <button
                             onClick={() => handleAnswer(1, 2)}
-                            className="w-1/2 text-xs xl:text-lg 2xl:text-2xl bg-white text-[#FF9900] hover:bg-[#FF9900]  hover:text-white font-semibold  py-3 2xl:py-4 px-6 rounded-[20px]  transition-colors  border-2 border-[#FF9900] duration-300"
+                            className="leading-tight w-1/2 text-xs xl:text-lg 2xl:text-xl bg-white text-[#FF9900] hover:bg-[#FF9900] hover:text-white font-semibold py-3 2xl:py-4 px-6 rounded-[20px] transition-colors border-2 border-[#FF9900] duration-300"
                         >
                             No, ya he usado
                             <br /> uno antes
@@ -189,7 +193,7 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
-                <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-5 2xl:gap-10">
+                <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-6 2xl:gap-12">
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
@@ -202,7 +206,7 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
                         />
                     </h2>
 
-                    <div className="w-full flex gap-2 items-center justify-center mt-6">
+                    <div className="w-full flex gap-2 items-center justify-center mt-0">
                         <button
                             onClick={() => handleAnswer(2, 1)}
                             className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full  md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
@@ -262,7 +266,7 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
-                <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-5 ">
+                <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-6 2xl:gap-12">
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
@@ -276,7 +280,7 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
                         />
                     </h2>
 
-                    <div className="w-full flex gap-4 items-center justify-center mt-6">
+                    <div className="w-full flex gap-4 items-center justify-center mt-0">
                         <button
                             onClick={() => handleAnswer(3, 1)}
                             className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold py-3 px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors  h-[60px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
@@ -398,7 +402,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 ...
                             </p>
                         )}
-                        <p className="mb-8 text-xs lg:text-sm 2xl:text-base  leading-[22.84px] tracking-[0.01em] mt-4 md:mt-6 text-[#000000]">
+                        <p className="mb-6 text-xs lg:text-sm 2xl:text-base  leading-[22.84px] tracking-[0.01em] mt-4 md:mt-6 text-[#000000]">
                             Dejándonos tu e-mail aceptas recibir novedades y
                             promociones de wefem
                         </p>
@@ -448,7 +452,7 @@ const Result1Quiz = ({ }) => {
                             loading="lazy"
                         />{" "}
                     </h1>
-                    <p className="text-sm lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
+                    <p className="text-sm mt-8 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
                         Un disco menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en la base del cuello uterino,
                         permitiéndote así tener sexo con la regla, sin manchas
@@ -499,7 +503,7 @@ const Result2Quiz = ({ }) => {
                             loading="lazy"
                         />{" "}
                     </h1>
-                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
+                    <p className="text-sm mt-8 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
                         Una copa menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en el canal vaginal y te
                         permitirá moverte cómodamente, sin irritaciones ni

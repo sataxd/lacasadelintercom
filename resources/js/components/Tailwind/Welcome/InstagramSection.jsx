@@ -25,12 +25,12 @@ const InstagramSection = ({ posts }) => {
         <section className="bg-white text-[#212529] 2xl:pt-16">
             {/* Header */}
             <div className="max-w-6xl mx-auto text-center mb-2 lg:mb-12">
-                <h2 className="text-[18.94px] pt-4 lg:mt-0 lg:text-[32.94px] lg:leading-[38.12px] font-bold lg:mb-4">
+                <h2 className="text-[18.94px] lg:mt-0 lg:text-[32.94px] lg:leading-[38.12px] font-bold lg:mb-4">
                     ¡Juntxs, sin límites!
                 </h2>
                 <a
                     href="https://instagram.com/wefem.pe"
-                    className="inline-flex items-center font-semibold text-[#EF62BA] hover:opacity-90 transition-opacity lg:leading-[35.75px] text-[16.89px] lg:text-[30.89px]"
+                    className="inline-flex items-center font-semibold text-[#EF62BA] hover:opacity-90 transition-opacity lg:leading-[35.75px] text-[16.89px] lg:text-[30.89px] mb-4 md:mb-0"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
@@ -75,7 +75,7 @@ const InstagramSection = ({ posts }) => {
                     }}
                 >
                     {posts.map((post, index) => (
-                        <SwiperSlide key={index} className="left-[20%]">
+                        <SwiperSlide key={index} className="left-[20%] md:left-[unset]">
                             <a
                                 href={post.link}
                                 target="_blank"
