@@ -25,7 +25,7 @@ const InstagramSection = ({ posts }) => {
         <section className="bg-white text-[#212529] 2xl:pt-16">
             {/* Header */}
             <div className="max-w-6xl mx-auto text-center mb-2 lg:mb-12">
-                <h2 className="text-[18.94px] lg:mt-0 lg:text-[32.94px] lg:leading-[38.12px] font-bold lg:mb-4">
+                <h2 className="text-[18.94px] pt-6 lg:mt-0 lg:text-[32.94px] lg:leading-[38.12px] font-bold lg:mb-4">
                     ¡Juntxs, sin límites!
                 </h2>
                 <a

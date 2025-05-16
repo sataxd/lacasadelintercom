@@ -122,7 +122,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                 <StatsSection indicators={indicators} />
 
                 {/* Iconos Section */}
-                <div className="bg-[#FC58BE] mb-8">
+                <div className="bg-[#FC58BE]">
                     <div className="bg-[#FC58BE] py-6 md:py-12 flex items-center justify-center p-4">
                         <div className="flex flex-wrap justify-center gap-2 md:gap-8 mx-auto">
                             {[
