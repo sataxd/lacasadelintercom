@@ -131,6 +131,7 @@ const Home = ({ session, ...props }) => {
               <tbody>
                 {products?.map((product) => (
                   <tr key={product.id}>
+              
                     <td>
                       <div className="d-flex align-items-center">
                         <div className="flex-shrink-0">

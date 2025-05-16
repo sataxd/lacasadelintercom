@@ -277,7 +277,7 @@ class HomeController extends BasicController
     {
         $statusIds = $this->getCompletedStatusIds();
 
-        return SaleDetail::with(['item' => fn($q) => $q->select('id', 'name', 'sku')])
+        return SaleDetail::with(['item' => fn($q) => $q->select('id', 'name', 'sku','image')])
             ->select([
                 'item_id',
                 DB::raw('SUM(quantity) as total_sold'),
