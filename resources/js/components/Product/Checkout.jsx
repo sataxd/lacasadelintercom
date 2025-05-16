@@ -623,7 +623,7 @@ const Checkout = ({ formula, publicKey, selectedPlan, bundles, planes, session }
                   }
                   <button type='submit' className="mt-6 w-full rounded-md bg-[#C5B8D4] py-3 text-white disabled:cursor-not-allowed" disabled={loading}>
                     <i className='mdi mdi-lock me-1'></i>
-                    Pagar Ahora
+                    PAGAR AHORA
                     <small className='ms-1'>(S/ {Number2Currency(totalPrice - bundleDiscount - planDiscount - couponDiscount)})</small>
                   </button>
                 </div>

@@ -89,7 +89,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                     }}
                 >
                     <div className="px-[5%] flex items-center flex-row justify-around   mx-auto gap-6">
-                        <div className="relative">
+                        <div className="relative w-max h-full">
                             <img
                                 // onClick={() => setShowModal1(true)}
                                 src="https://i.ibb.co/931mypkH/image.png"
@@ -98,7 +98,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                             />
                             <button className="absolute mdi mdi-eye text-2xl bottom-0 right-0 cursor-pointer" onClick={() => setShowModal1(true)}></button>
                         </div>
-                        <div className="relative">
+                        <div className="relative w-max h-full">
                             <img
                                 src="https://i.ibb.co/NgMJf8d8/image.png"
                                 className="brightness-0 grayscale-0 invert w-[125px] lg:w-[300.23px] h-auto 2xl:w-[428.23px] 2xl:h-[136.41px] object-contain"
@@ -106,7 +106,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                             />
                             <button className="absolute mdi mdi-eye text-2xl bottom-0 right-0 cursor-pointer" onClick={() => {/*setShowModal1(true)*/}}></button>
                         </div>
-                        <div className="relative">
+                        <div className="relative w-max h-full">
                             <img
                                 // onClick={() => setShowModal2(true)}
                                 src="https://i.ibb.co/sdGcCP7B/image.png"
