@@ -344,6 +344,7 @@ const Home = ({ session, ...props }) => {
     };
 
     const series = data?.map(item => item.visits) || [];
+    console.log(data)
 
     return (
       <div className="col-xl-6">
