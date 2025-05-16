@@ -1054,7 +1054,7 @@ const Checkout = ({ publicKey, session }) => {
                                         disabled={loading}
                                     >
                                        
-                                        Pagar Ahora
+                                        PAGAR AHORA
                                 {/*  <i className="mdi mdi-lock me-1"></i>       <small className="ms-1">
                                             (S/{" "}
                                             {Number2Currency(
