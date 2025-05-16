@@ -35,6 +35,7 @@ const Quiz = ({ showSlogan = true }) => {
         }
         setAnswers({});
     };
+    const [emailRef, setEmailRef] = useState(null);
 
     return (
         <>
@@ -63,13 +64,15 @@ const Quiz = ({ showSlogan = true }) => {
                 <FourQuiz
                     setCurrentStep={setCurrentStep}
                     handleResult={handleResult}
+               emailRef={emailRef}
+               setEmailRef={setEmailRef}
                 />
             )}
             {currentStep === 6 && (
-                <Result1Quiz setCurrentStep={setCurrentStep} />
+                <Result1Quiz setCurrentStep={setCurrentStep} emailRef={emailRef} />
             )}
             {currentStep === 7 && (
-                <Result2Quiz setCurrentStep={setCurrentStep} />
+                <Result2Quiz setCurrentStep={setCurrentStep} emailRef={emailRef}/>
             )}
             {/* Agrega los demás pasos siguiendo el mismo patrón */}
 
@@ -335,29 +338,29 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
         </div>
     );
 };
-const FourQuiz = ({ setCurrentStep, handleResult }) => {
+const FourQuiz = ({ setCurrentStep, handleResult, emailRef,setEmailRef }) => {
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(false);
-    const emailRef = useRef(null);
+    
 
     const onEmailSubmit = async (e) => {
         e.preventDefault();
         setSaving(true);
-        if (!emailRef.current.value) {
+        if (!emailRef) {
             // setError(true);
             // setSaving(false);
             // return;
             handleResult();
         } else {
             const request = {
-                email: emailRef.current.value,
+                email: emailRef,
             };
             const result = await subscriptionsRest.save(request);
             setSaving(false);
 
             if (!result) return;
 
-            emailRef.current.value = null;
+            
             handleResult();
         }
     };
@@ -386,7 +389,8 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
 
                         <div className=" w-full flex items-center justify-center ">
                             <input
-                                ref={emailRef}
+                                value={emailRef}
+                                onChange={(e) => setEmailRef(e.target.value)}
                                 type="email"
                                 placeholder="Déjanos tu email aquí"
                                 className="bg-white w-full md:w-9/12 2xl:w-10/12 hover:bg-gray-100 text-[#FF9900] font-semibold  px-6  rounded-[14px] lg:rounded-[20px] lg:text-lg transition-colors border-2 border-[#FF9900] focus:ring-0 h-[70px] lg:h-[80px] 2xl:h-[94px]  focus:outline-none text-md placeholder:text-md placeholder:text-[#FF9900] placeholder:text-center"
@@ -427,7 +431,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
         </div>
     );
 };
-const Result1Quiz = ({ }) => {
+const Result1Quiz = ({emailRef }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
@@ -454,9 +458,9 @@ const Result1Quiz = ({ }) => {
                         permitiéndote así tener sexo con la regla, sin manchas
                         ni fugas.
                     </p>
-                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
+                  {emailRef &&   <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
                         ¡Revisa tu e-mail para obtener tu descuento exclusivo!
-                    </p>
+                    </p>}
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wedisk"
@@ -478,7 +482,7 @@ const Result1Quiz = ({ }) => {
         </div>
     );
 };
-const Result2Quiz = ({ }) => {
+const Result2Quiz = ({ emailRef}) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
@@ -505,9 +509,9 @@ const Result2Quiz = ({ }) => {
                         permitirá moverte cómodamente, sin irritaciones ni
                         fugas.
                     </p>
-                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
+                    {emailRef &&   <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
                         ¡Revisa tu e-mail para obtener tu descuento exclusivo!
-                    </p>
+                    </p>}
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wecup"

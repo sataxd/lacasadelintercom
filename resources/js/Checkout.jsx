@@ -1,4 +1,4 @@
-import { CreditCard, HeadphonesIcon, ShieldCheck } from "lucide-react";
+import { ChevronDown, CreditCard, HeadphonesIcon, ShieldCheck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Local } from "sode-extend-react";
 import CulqiRest from "./Actions/CulqiRest";
@@ -76,8 +76,147 @@ const places = {
 };
 
 const couponRest = new CouponsRest();
+const PhoneInput = ({ onPhoneChange }) => {
+    const [countries, setCountries] = useState([]);
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [showDropdown, setShowDropdown] = useState(false);
+    const dropdownRef = useRef(null);
+
+    // Cargar países y establecer Perú como predeterminado
+    useEffect(() => {
+        const loadCountries = async () => {
+            try {
+                // Si está en public/data
+                const response = await fetch(
+                    "/assets/data/countries_phone.json"
+                );
+                // Si está en src/data (importar directamente)
+                // import countriesData from '../data/countries_phone.json';
+
+                const data = await response.json();
+                setCountries(data);
+
+                // Establecer Perú como predeterminado (código PE)
+                const peru = data.find((c) => c.iso2 === "PE");
+                setSelectedCountry(peru || data[0]);
+            } catch (error) {
+                console.error("Error loading countries:", error);
+            }
+        };
+
+        loadCountries();
+    }, []);
+
+    // Cerrar dropdown al hacer clic fuera
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setShowDropdown(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const handlePhoneChange = (e) => {
+        const value = e.target.value.replace(/\D/g, ""); // Solo números
+        setPhoneNumber(value);
+
+        // Enviar el número completo con prefijo al formulario padre
+        if (selectedCountry) {
+            const fullNumber = `+${selectedCountry.phoneCode.replace(
+                /\D/g,
+                ""
+            )}${value}`;
+            onPhoneChange(fullNumber);
+        }
+    };
+
+    const handleCountrySelect = (country) => {
+        setSelectedCountry(country);
+        setShowDropdown(false);
+    };
+
+    return (
+        <div className="relative w-full">
+            <label className="block text-sm font-medium mb-1">Teléfono/Celular <b className="text-red-500">*</b></label>
+
+            <div className="flex border border-gray-300 rounded-md focus-within:ring-0 ">
+                {/* Selector de país */}
+                <div className="relative" ref={dropdownRef}>
+                    <button
+                        type="button"
+                        className="flex items-center justify-between px-3 py-1
+                         h-full border-r border-gray-300 bg-gray-50 rounded-l-md w-20"
+                        onClick={() => setShowDropdown(!showDropdown)}
+                    >
+                        <div className="flex items-center">
+                            <span
+                                className={`fi fi-${selectedCountry?.iso2.toLowerCase()} mr-2`}
+                            ></span>
+                            <span>{selectedCountry?.iso2}</span>
+                        </div>
+                        <ChevronDown
+                            className={`h-4 w-4 transition-transform ${showDropdown ? "rotate-180" : ""
+                                }`}
+                        />
+                    </button>
+
+                    {showDropdown && (
+                        <div className="absolute z-10 mt-1 w-64 bg-white shadow-lg rounded-md py-1 max-h-60 overflow-auto border border-gray-200">
+                            {countries.map((country) => (
+                                <div
+                                    key={country.iso2}
+                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center"
+                                    onClick={() => handleCountrySelect(country)}
+                                >
+                                    <span
+                                        className={`fi fi-${country.iso2.toLowerCase()} mr-3`}
+                                    ></span>
+                                    <span className="flex-1">
+                                        {country.nameES}
+                                    </span>
+                                    <span className="text-gray-500">
+                                        +{country.phoneCode}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+               
+                {/* Input de teléfono */}
+                <input
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={handlePhoneChange}
+                    placeholder="Ej: 987654321"
+                    className="flex-1 px-4 py-2 focus:outline-none rounded-r-md"
+                    pattern="[0-9]*"
+                />
+            </div>
+
+            {/* Mostrar número completo */}
+            {phoneNumber && selectedCountry && (
+                <p className="mt-1 text-sm text-gray-500">
+                    Número completo: +{selectedCountry.phoneCode} {phoneNumber}
+                </p>
+            )}
+        </div>
+    );
+};
 
 const Checkout = ({ publicKey, session }) => {
+
+
+
     const couponRef = useRef(null);
 
     Culqi.publicKey = publicKey;
@@ -636,7 +775,17 @@ const Checkout = ({ publicKey, session }) => {
                                         disabled
                                     />
                                 </div>
-                                <div className="mt-4">
+                                <div>
+                                    <PhoneInput
+                                        onChange={(fullNumber) =>
+                                            setSale((old) => ({
+                                                ...old,
+                                                phone: fullNumber,
+                                            }))
+                                        }
+                                    />
+                                </div>
+                              {/*  <div className="mt-4">
                                     <label
                                         className="mb-1 block text-sm font-medium "
                                         htmlFor="phone"
@@ -664,7 +813,7 @@ const Checkout = ({ publicKey, session }) => {
                                         />
                                     </div>
                                 </div>
-
+*/}
                                 <div className="mt-6">
                                     <h3 className="mb-4 text-xl font-semibold">
                                         Pago
@@ -754,8 +903,8 @@ const Checkout = ({ publicKey, session }) => {
                                                                     onError={(
                                                                         e
                                                                     ) =>
-                                                                        (e.target.src =
-                                                                            "/api/cover/thumbnail/null")
+                                                                    (e.target.src =
+                                                                        "/api/cover/thumbnail/null")
                                                                     }
                                                                 />
                                                             </div>
@@ -767,19 +916,19 @@ const Checkout = ({ publicKey, session }) => {
                                                                     <span className="w-6 inline-block text-nowrap">
                                                                         ×{" "}
                                                                         {item.variations &&
-                                                                        item
-                                                                            .variations
-                                                                            .length >
+                                                                            item
+                                                                                .variations
+                                                                                .length >
                                                                             0
                                                                             ? item.variations.reduce(
-                                                                                  (
-                                                                                      sum,
-                                                                                      v
-                                                                                  ) =>
-                                                                                      sum +
-                                                                                      v.quantity,
-                                                                                  0
-                                                                              )
+                                                                                (
+                                                                                    sum,
+                                                                                    v
+                                                                                ) =>
+                                                                                    sum +
+                                                                                    v.quantity,
+                                                                                0
+                                                                            )
                                                                             : item.quantity}
                                                                     </span>
                                                                 </small>
@@ -792,19 +941,19 @@ const Checkout = ({ publicKey, session }) => {
                                                                     item
                                                                         .variations
                                                                         .length >
-                                                                        0
+                                                                    0
                                                                     ? item.variations.reduce(
-                                                                          (
-                                                                              sum,
-                                                                              v
-                                                                          ) =>
-                                                                              sum +
-                                                                              item.final_price *
-                                                                                  v.quantity,
-                                                                          0
-                                                                      )
+                                                                        (
+                                                                            sum,
+                                                                            v
+                                                                        ) =>
+                                                                            sum +
+                                                                            item.final_price *
+                                                                            v.quantity,
+                                                                        0
+                                                                    )
                                                                     : item.final_price *
-                                                                          item.quantity
+                                                                    item.quantity
                                                             )}
                                                         </span>
                                                     </div>
@@ -874,8 +1023,8 @@ const Checkout = ({ publicKey, session }) => {
                                                 S/{" "}
                                                 {Number2Currency(
                                                     totalPrice -
-                                                        planDiscount -
-                                                        couponDiscount
+                                                    planDiscount -
+                                                    couponDiscount
                                                 )}
                                             </span>
                                         </div>
@@ -906,17 +1055,17 @@ const Checkout = ({ publicKey, session }) => {
                                         className="mt-6 w-full rounded-md bg-[#FF9900] py-3 text-white disabled:cursor-not-allowed"
                                         disabled={loading}
                                     >
-                                        <i className="mdi mdi-lock me-1"></i>
+                                       
                                         Pagar Ahora
-                                        <small className="ms-1">
+                                {/*  <i className="mdi mdi-lock me-1"></i>       <small className="ms-1">
                                             (S/{" "}
                                             {Number2Currency(
                                                 totalPrice -
-                                                    planDiscount -
-                                                    couponDiscount
+                                                planDiscount -
+                                                couponDiscount
                                             )}
                                             )
-                                        </small>
+                                        </small>*/}
                                     </button>
                                 </div>
                             </div>
