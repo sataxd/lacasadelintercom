@@ -6,6 +6,7 @@ use App\Http\Controllers\BasicController;
 use App\Models\Item;
 use App\Models\Sale;
 use App\Models\SaleDetail;
+use App\Models\SaleStatus;
 use App\Models\Status;
 use App\Models\User;
 use App\Models\WebsiteStatistic;
@@ -22,6 +23,19 @@ class HomeController extends BasicController
 
     public function setReactViewProperties(Request $request)
     {
+
+             // Pedidos por estado
+             $statuses = Status::all();
+             $ordersByStatus = [];
+             foreach ($statuses as $status) {
+                 $count = Sale::where('status_id', $status->id)->count();
+                 $ordersByStatus[] = [
+                     'name' => $status->name,
+                     'color' => $status->color,
+                     'count' => $count
+                 ];
+             }
+     
         return [
             'metrics' => $this->getMetrics(),
             'sales_data' => [
@@ -29,6 +43,7 @@ class HomeController extends BasicController
                 'week' => $this->getSalesData('week'),
                 'month' => $this->getSalesData('month'),
             ],
+            'ordersByStatus' =>  $ordersByStatus,
             'top_products' => $this->getTopProducts(),
             'recent_orders' => $this->getRecentSales(),
             'low_stock' => $this->getLowStockItems(),
@@ -36,8 +51,68 @@ class HomeController extends BasicController
             'conversion_stats' => $this->getConversionStats(),
             'sales_by_location' => $this->getSalesByLocation(),
             'user_stats' => $this->getUserStats(),
+
+            'top_provinces' => $this->getTopProvinces(),
+            'traffic_sources' => $this->getTrafficSources(),
+            'social_media_traffic' => $this->getSocialMediaTraffic(),
         ];
     }
+
+    protected function getTopProvinces($limit = 5)
+    {
+        $statusIds = $this->getCompletedStatusIds();
+
+        return Sale::whereIn('status_id', $statusIds)
+            ->whereNotNull('province')
+            ->select(
+                'province',
+                DB::raw('COUNT(*) as total_orders'),
+                DB::raw('SUM(total_amount) as total_sales')
+            )
+            ->groupBy('province')
+            ->orderByDesc('total_sales')
+            ->take($limit)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'province' => $item->province,
+                    'total_sales' => $item->total_sales,
+                    'total_orders' => $item->total_orders
+                ];
+            });
+    }
+
+    protected function getTrafficSources()
+    {
+        return WebsiteStatistic::selectRaw('
+            CASE 
+                WHEN source LIKE "%instagram%" THEN "Instagram"
+                WHEN source LIKE "%facebook%" THEN "Facebook"
+                WHEN source LIKE "%tiktok%" THEN "TikTok"
+                WHEN source LIKE "%google%" THEN "Google"
+                WHEN source = "direct" THEN "Directo"
+                ELSE "Otros"
+            END as source_group,
+            COUNT(*) as visits
+        ')
+        ->groupBy('source_group')
+        ->get();
+    }
+
+    protected function getSocialMediaTraffic()
+    {
+        return WebsiteStatistic::selectRaw('
+            source,
+            COUNT(*) as visits,
+            SUM(CASE WHEN device_type = "mobile" THEN 1 ELSE 0 END) as mobile_visits,
+            SUM(CASE WHEN device_type = "desktop" THEN 1 ELSE 0 END) as desktop_visits
+        ')
+        ->whereIn('source', ['instagram', 'facebook', 'tiktok'])
+        ->groupBy('source')
+        ->orderByDesc('visits')
+        ->get();
+    }
+
 
     private function getCompletedStatusIds()
     {
