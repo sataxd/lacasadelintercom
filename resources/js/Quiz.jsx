@@ -460,7 +460,7 @@ const Result1Quiz = ({emailRef }) => {
                             loading="lazy"
                         />{" "}
                     </h1>
-                    <p className="text-[11px] mt-4 md:mt-8 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
+                    <p className="text-[11px] mt-4 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
                         Un disco menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en la base del cuello uterino,
                         permitiéndote así tener sexo con la regla, sin manchas
@@ -511,7 +511,7 @@ const Result2Quiz = ({ emailRef}) => {
                             loading="lazy"
                         />
                     </h1>
-                    <p className="text-[11px] mt-4 md:mt-8 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
+                    <p className="text-[11px] mt-4 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
                         Una copa menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en el canal vaginal y te
                         permitirá moverte cómodamente, sin irritaciones ni
