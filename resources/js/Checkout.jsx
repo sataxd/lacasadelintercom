@@ -770,7 +770,7 @@ const Checkout = ({ publicKey, session }) => {
                                             }))
                                         }
                                         required
-                                        disabled
+                                        // disabled={Boolean(session?.email)}
                                     />
                                 </div>
                                 <div>
