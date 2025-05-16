@@ -131,7 +131,7 @@ const Home = ({ session, ...props }) => {
               <tbody>
                 {products?.map((product) => (
                   <tr key={product.id}>
-              
+           
                     <td>
                       <div className="d-flex align-items-center">
                         <div className="flex-shrink-0">
@@ -139,10 +139,11 @@ const Home = ({ session, ...props }) => {
                                     src={`/api/items/media/${product.image}`}
                                     style={{
                                         width: "60px",
-                                        height: "38px",
+                                    
                                         objectFit: "cover",
                                         objectPosition: "center",
                                         borderRadius: "4px",
+                                        aspectRatio: "1",
                                     }}
                                     onError={(e) =>
                                         (e.target.src =

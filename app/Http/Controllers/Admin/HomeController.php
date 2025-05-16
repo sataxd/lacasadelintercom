@@ -293,6 +293,7 @@ class HomeController extends BasicController
                     'id' => $detail->item_id,
                     'name' => $detail->item->name ?? 'Producto eliminado',
                     'sku' => $detail->item->sku ?? 'N/A',
+                    'image' => $detail->item->image?? null,
                     'total_sold' => $detail->total_sold,
                     'total_revenue' => $detail->total_revenue
                 ];
