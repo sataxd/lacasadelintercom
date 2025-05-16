@@ -526,7 +526,7 @@ const Checkout = ({ publicKey, session }) => {
                                                         className="mb-1 block text-sm font-medium "
                                                         htmlFor="district"
                                                     >
-                                                        Provincia{" "}
+                                                        Distrito{" "}
                                                         <b className="text-red-500">
                                                             *
                                                         </b>
