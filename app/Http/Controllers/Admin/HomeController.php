@@ -250,8 +250,14 @@ class HomeController extends BasicController
         $statusIds = $this->getCompletedStatusIds();
 
         $query = Sale::whereIn('status_id', $statusIds)
-            ->selectRaw('DATE(created_at) as date, SUM(total_amount) as total')
-            ->groupBy('date');
+        ->selectRaw('
+            DATE(created_at) as date, 
+            SUM(total_amount) as total_sales,
+            COUNT(*) as order_count,
+            AVG(total_amount) as average_order_value
+        ')
+        ->groupBy('date');
+      
 
         switch ($range) {
             case 'day':
@@ -269,8 +275,13 @@ class HomeController extends BasicController
         }
 
         return $query->get()
-            ->map(fn($item) => ['x' => $item->date, 'y' => $item->total])
-            ->toArray();
+        ->map(fn($item) => [
+            'x' => $item->date,
+            'sales' => $item->total_sales,
+            'orders' => $item->order_count,
+            'average' => $item->average_order_value
+        ])
+        ->toArray();
     }
 
     protected function getTopProducts($limit = 5)

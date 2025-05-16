@@ -17,7 +17,7 @@ import Result1 from './Result-1.png'
 const subscriptionsRest = new SubscriptionsRest();
 // Componente principal del cuestionario
 const Quiz = ({ showSlogan = true }) => {
-    const [currentStep, setCurrentStep] = useState(7);
+    const [currentStep, setCurrentStep] = useState(6);
     const [answers, setAnswers] = useState({});
     const [result, setResult] = useState(null);
     const handleAnswer = (questionId, answer) => {
@@ -472,7 +472,7 @@ const Result1Quiz = ({emailRef }) => {
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wedisk"
-                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-2xl text-xs tracking-[0.01em] transition-colors w-[200px] h-[50px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
+                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-2xl text-xs md:text-base tracking-[0.01em] transition-colors w-[200px] h-[50px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
                         >
                             ¡Comprar ahora!
                         </a>
@@ -523,7 +523,7 @@ const Result2Quiz = ({ emailRef}) => {
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wecup"
-                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-2xl text-xs tracking-[0.01em] transition-colors w-[200px] h-[50px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
+                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-2xl text-xs md:text-base tracking-[0.01em] transition-colors w-[200px] h-[50px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
                         >
                             ¡Comprar ahora!
                         </a>
