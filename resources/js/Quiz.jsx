@@ -91,7 +91,7 @@ const InitQuiz = ({ setCurrentStep, showSlogan = true }) => {
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <h2 className="text-base md:text-xl lg:text-2xl  2xl:text-[30.75px] tracking-[1%] font-semibold ">
+                    <h2 className="text-base md:text-xl lg:text-2xl 2xl:text-[30.75px] tracking-[1%] font-semibold ">
                         ¿Qué producto es perfecto para ti?
                     </h2>
                     <p className="text-xs lg:text-lg mt-2  2xl:text-xl tracking-[1%] leading-tight">
@@ -201,35 +201,35 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
                         ¿Cual es tu tipo de flujo?{" "}
                         <img
                             src="/assets/img/emojis/drop-of-blood.png"
-                            className="h-[30.05px] inline-flex ml-2"
+                            className="h-5 lg:h-[30.05px] inline-flex ml-2"
                             loading="lazy"
                         />
                     </h2>
 
-                    <div className="w-full flex gap-2 items-center justify-center mt-0">
+                    <div className="w-full flex gap-4 items-center justify-center mt-2">
                         <button
                             onClick={() => handleAnswer(2, 1)}
-                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full  md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="bg-white hover:bg-[#FF9900] text-[#FF9900] hover:text-white font-semibold py-3 px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-44 h-10 md:w-[308.23px] md:h-[70.09px] 2xl:w-[348.23px] lg:h-[65.09px] 2xl:h-[75.09px] border-2 border-[#FF9900] duration-300"
                         >
                             Leve
                         </button>
                         <button
                             onClick={() => handleAnswer(2, 2)}
-                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full  md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="bg-white hover:bg-[#FF9900] text-[#FF9900] hover:text-white font-semibold py-3 px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-44 h-10 md:w-[308.23px] md:h-[70.09px] 2xl:w-[348.23px] lg:h-[65.09px] 2xl:h-[75.09px] border-2 border-[#FF9900] duration-300"
                         >
                             Moderado
                         </button>
                         <button
                             onClick={() => handleAnswer(2, 3)}
-                            className="bg-white hover:bg-[#FF9900]  text-[#FF9900] hover:text-white font-semibold  px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-full md:w-[203px] h-[50px] lg:h-[74px]  2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                            className="bg-white hover:bg-[#FF9900] text-[#FF9900] hover:text-white font-semibold py-3 px-6 rounded-[20px] text-xs lg:text-lg 2xl:text-xl tracking-[0.01em] transition-colors w-44 h-10 md:w-[308.23px] md:h-[70.09px] 2xl:w-[348.23px] lg:h-[65.09px] 2xl:h-[75.09px] border-2 border-[#FF9900] duration-300"
                         >
                             Abundante
                         </button>
                     </div>
-                    <div className="flex flex-row justify-between mt-6 mx-auto max-w-xl w-full">
+                    <div className="flex flex-row justify-between mt-4 mx-auto max-w-xl w-full">
                         <button
                             onClick={() => setCurrentStep(2)}
-                            className=" hover:opacity-90 font-semibold flex items-center gap-2 text-[#5F48B7] text-base lg:text-[18.13px]  2xl:text-[23.13px] leading-[34.69px] tracking-[0.01em]"
+                            className="hover:opacity-90 font-semibold flex items-center gap-2 text-[#5F48B7] text-sm md:text-[22.03px] lg:text-[18.13px] 2xl:text-[23.13px] leading-[34.69px] tracking-[0.01em]"
                         >
                             <span className="rotate-180">
                                 <svg
@@ -255,7 +255,7 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
                 <img
                     src="assets/img/quizz/quiz_4.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[21.5vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
