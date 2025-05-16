@@ -89,23 +89,32 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                     }}
                 >
                     <div className="px-[5%] flex items-center flex-row justify-around   mx-auto gap-6">
-                        <img
-                            onClick={() => setShowModal1(true)}
-                            src="https://i.ibb.co/931mypkH/image.png"
-                            className="brightness-0 grayscale-0 invert w-[50px]  lg:w-[150.97px] h-auto 2xl:w-[226.97px] 2xl:h-[169.95px] object-contain cursor-pointer"
-                            alt="Certificado 1"
-                        />
-                        <img
-                            src="https://i.ibb.co/NgMJf8d8/image.png"
-                            className="brightness-0 grayscale-0 invert w-[125px] lg:w-[300.23px] h-auto 2xl:w-[428.23px] 2xl:h-[136.41px] object-contain"
-                            alt="Certificado 2"
-                        />
-                        <img
-                            onClick={() => setShowModal2(true)}
-                            src="https://i.ibb.co/sdGcCP7B/image.png"
-                            className="brightness-0 grayscale-0 invert w-[50px] lg:w-[100.07px] h-auto 2xl:w-[171.07px] 2xl:h-[171.07px] object-contain cursor-pointer"
-                            alt="Certificado 3"
-                        />
+                        <div className="relative">
+                            <img
+                                // onClick={() => setShowModal1(true)}
+                                src="https://i.ibb.co/931mypkH/image.png"
+                                className="brightness-0 grayscale-0 invert w-[50px]  lg:w-[150.97px] h-auto 2xl:w-[226.97px] 2xl:h-[169.95px] object-contain cursor-pointer"
+                                alt="Certificado 1"
+                            />
+                            <button className="absolute mdi mdi-eye text-2xl bottom-0 right-0 cursor-pointer" onClick={() => setShowModal1(true)}></button>
+                        </div>
+                        <div className="relative">
+                            <img
+                                src="https://i.ibb.co/NgMJf8d8/image.png"
+                                className="brightness-0 grayscale-0 invert w-[125px] lg:w-[300.23px] h-auto 2xl:w-[428.23px] 2xl:h-[136.41px] object-contain"
+                                alt="Certificado 2"
+                            />
+                            <button className="absolute mdi mdi-eye text-2xl bottom-0 right-0 cursor-pointer" onClick={() => {/*setShowModal1(true)*/}}></button>
+                        </div>
+                        <div className="relative">
+                            <img
+                                // onClick={() => setShowModal2(true)}
+                                src="https://i.ibb.co/sdGcCP7B/image.png"
+                                className="brightness-0 grayscale-0 invert w-[50px] lg:w-[100.07px] h-auto 2xl:w-[171.07px] 2xl:h-[171.07px] object-contain cursor-pointer"
+                                alt="Certificado 3"
+                            />
+                            <button className="absolute mdi mdi-eye text-2xl bottom-0 right-0 cursor-pointer" onClick={() => setShowModal2(true)}></button>
+                        </div>
                     </div>
                 </div>
 

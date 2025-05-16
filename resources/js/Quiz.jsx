@@ -134,7 +134,7 @@ const FirstQuiz = ({ setCurrentStep, handleAnswer }) => {
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <p className="text-base lg:text-2xl 2xl:text-3xl font-semibold gap-2">
+                    <p className="text-base md:text-xl lg:text-2xl 2xl:text-[30.75px] tracking-[1%] font-semibold">
                         ¿Esta es la primera vez que utilizarías un <br /> método
                         alternativo a toallas y tampones?
                         <img
@@ -202,7 +202,7 @@ const SecondQuiz = ({ setCurrentStep, handleAnswer }) => {
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <h2 className="text-base lg:text-2xl 2xl:text-3xl font-semibold gap-2">
+                    <h2 className="text-base md:text-xl lg:text-2xl 2xl:text-[30.75px] tracking-[1%] font-semibold">
                         ¿Cual es tu tipo de flujo?{" "}
                         <img
                             src="/assets/img/emojis/drop-of-blood.png"
@@ -275,7 +275,7 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
                     <h1 className="text-4xl lg:text-[48.92px] 2xl:text-[68.92px]  font-bold  text-[#212529] tracking-[0.01em]">
                         weFem Quiz!
                     </h1>
-                    <h2 className="text-base lg:text-2xl 2xl:text-3xl font-semibold gap-2">
+                    <h2 className="text-base md:text-xl lg:text-2xl 2xl:text-[30.75px] tracking-[1%] font-semibold">
                         ¿Te interesaría tener relaciones con <br /> la regla sin
                         que manche?{" "}
                         <img
