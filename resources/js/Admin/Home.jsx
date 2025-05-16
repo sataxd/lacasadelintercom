@@ -46,7 +46,7 @@ const Home = ({ session, ...props }) => {
               {trend && (
                 <div className="text-muted font-13">
                   <i className={`fas fa-arrow-${trend >= 0 ? 'up text-success' : 'down text-danger'} me-1`}></i>
-                  <span>{Math.abs(trend)}% vs período anterior</span>
+                  <span>{Math.abs(trend)}% </span>
                 </div>
               )}
               {secondaryText && <small className="text-muted">{secondaryText}</small>}

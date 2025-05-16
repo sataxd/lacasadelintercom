@@ -11,11 +11,13 @@ import Swal from "sweetalert2";
 import Global from "./Utils/Global";
 
 import Quiz1 from './Quiz-1.png'
+import Quiz4 from './Quiz-4.png'
+import Result1 from './Result-1.png'
 
 const subscriptionsRest = new SubscriptionsRest();
 // Componente principal del cuestionario
 const Quiz = ({ showSlogan = true }) => {
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(7);
     const [answers, setAnswers] = useState({});
     const [result, setResult] = useState(null);
     const handleAnswer = (questionId, answer) => {
@@ -38,6 +40,7 @@ const Quiz = ({ showSlogan = true }) => {
         }
         setAnswers({});
     };
+    const [emailRef, setEmailRef] = useState(null);
 
     return (
         <>
@@ -66,13 +69,15 @@ const Quiz = ({ showSlogan = true }) => {
                 <FourQuiz
                     setCurrentStep={setCurrentStep}
                     handleResult={handleResult}
+               emailRef={emailRef}
+               setEmailRef={setEmailRef}
                 />
             )}
             {currentStep === 6 && (
-                <Result1Quiz setCurrentStep={setCurrentStep} />
+                <Result1Quiz setCurrentStep={setCurrentStep} emailRef={emailRef} />
             )}
             {currentStep === 7 && (
-                <Result2Quiz setCurrentStep={setCurrentStep} />
+                <Result2Quiz setCurrentStep={setCurrentStep} emailRef={emailRef}/>
             )}
             {/* Agrega los demás pasos siguiendo el mismo patrón */}
 
@@ -339,38 +344,39 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
         </div>
     );
 };
-const FourQuiz = ({ setCurrentStep, handleResult }) => {
+const FourQuiz = ({ setCurrentStep, handleResult, emailRef,setEmailRef }) => {
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(false);
-    const emailRef = useRef(null);
+    
 
     const onEmailSubmit = async (e) => {
         e.preventDefault();
         setSaving(true);
-        if (!emailRef.current.value) {
+        if (!emailRef) {
             // setError(true);
             // setSaving(false);
             // return;
             handleResult();
         } else {
             const request = {
-                email: emailRef.current.value,
+                email: emailRef,
             };
             const result = await subscriptionsRest.save(request);
             setSaving(false);
 
             if (!result) return;
 
-            emailRef.current.value = null;
+            
             handleResult();
         }
     };
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
+            {/* <img src={Quiz4} alt="" className="absolute w-full opacity-75 top-[108px] z-50" /> */}
             <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-0 lg:gap-5 2xl:gap-10">
                     <form onSubmit={onEmailSubmit}>
-                        <h2 className="text-base md:text-[31.27px] lg:text-[25px] 2xl:text-[32.21px] leading-tight tracking-[0.01em] font-semibold mb-4 gap-2">
+                        <h2 className="text-base md:text-[31.27px] lg:text-[25px] 2xl:text-[32.21px] leading-tight tracking-[0.01em] font-semibold mb-2 gap-2">
                             ¡Genial! Hemos encontrado el producto menstrual
                             perfecto para ti{" "}
                             <img
@@ -383,17 +389,18 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                             Ingresa tu email para obtener tus resultados y
                             recibir un email con un <strong>cupón exclusivo de 10% OFF</strong> ¡Solo para ti!
                         </p>
-                        <p className="lg:hidden mb-4 md:mb-8 text-sm md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-tight tracking-[0.01em]">
+                        <p className="lg:hidden mb-1 md:mb-8 text-sm md:text-[23.07px] lg:text-[17.77px] 2xl:text-[23px] leading-tight tracking-[0.01em]">
                             Ingresa tu email para tener tus resultados y un
                             <strong className="ms-1">cupón exclusivo para ti!</strong>
                         </p>
 
                         <div className=" w-full flex items-center justify-center ">
                             <input
-                                ref={emailRef}
+                                value={emailRef}
+                                onChange={(e) => setEmailRef(e.target.value)}
                                 type="email"
                                 placeholder="Déjanos tu email aquí"
-                                className="bg-white w-full md:w-9/12 2xl:w-10/12 hover:bg-gray-100 text-[#FF9900] font-semibold  px-6  rounded-[14px] lg:rounded-[20px] lg:text-lg transition-colors border-2 border-[#FF9900] focus:ring-0 h-[70px] lg:h-[80px] 2xl:h-[94px]  focus:outline-none text-md placeholder:text-md placeholder:text-[#FF9900] placeholder:text-center"
+                                className="bg-white w-3/4 md:w-9/12 2xl:w-10/12 text-center hover:bg-gray-100 text-[#FF9900] font-semibold  px-6  rounded-[14px] lg:rounded-[20px] lg:text-lg transition-colors border-2 border-[#FF9900] focus:ring-0 h-[50px] lg:h-[80px] 2xl:h-[94px]  focus:outline-none text-xs placeholder:text-md placeholder:text-[#FF9900] placeholder:text-center"
                             ></input>
                         </div>
                         {error && (
@@ -402,7 +409,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                                 ...
                             </p>
                         )}
-                        <p className="mb-6 text-xs lg:text-sm 2xl:text-base  leading-[22.84px] tracking-[0.01em] mt-4 md:mt-6 text-[#000000]">
+                        <p className="mb-2 md:mb-6 text-[8px] leading-tight lg:text-sm 2xl:text-base tracking-[0.01em] mt-2 md:mt-6 text-[#000000]">
                             Dejándonos tu e-mail aceptas recibir novedades y
                             promociones de wefem
                         </p>
@@ -410,7 +417,7 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                             <button
                                 type="submit"
                                 disabled={saving}
-                                className="bg-[#FF9900] text-white  font-semibold py-4 px-6 rounded-[14px] lg:rounded-[20px] text-md 2xl:text-[23.13px] tracking-[0.01em] transition-colors w-[393px] h-[70px] lg:h-[80px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
+                                className="bg-[#FF9900] text-[10px] md:text-base text-white  font-semibold py-4 px-6 rounded-[14px] lg:rounded-[20px] text-md 2xl:text-[23.13px] tracking-[0.01em] transition-colors w-48 md:w-[400px] h-[50px] lg:h-[80px] 2xl:h-[94px] border-2 border-[#FF9900] duration-300"
                             >
                                 {saving
                                     ? "Enviando..."
@@ -425,46 +432,47 @@ const FourQuiz = ({ setCurrentStep, handleResult }) => {
                 <img
                     src="assets/img/quizz/quiz_5.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[21.5vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
     );
 };
-const Result1Quiz = ({ }) => {
+const Result1Quiz = ({emailRef }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
-            <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
+            {/* <img src={Result1} alt="" className="absolute w-full opacity-75 top-[108px] z-50" /> */}
+            <div className="flex py-8 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
                 <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-0 ">
                     <h2 className=" md:text-[25.55px] lg:text-[25px] 2xl:text-[30.75px] 2xl:leading-[20.12px] tracking-[0.01em] font-semibold 2xl:mb-4 gap-2">
                         Tu mejor aliada sería
                     </h2>
-                    <h1 className="text-[50.82px] md:text-[82.82px] lg:text-[58.92px] leading-[36.26px]  2xl:text-[86.26px] 2xl:leading-[86.26px] font-bold mb-4 text-[#212529] tracking-[0.01em]">
+                    <h1 className="text-[44px] -mt-1 md:text-[82.82px] lg:text-[58.92px] leading-[36.26px]  2xl:text-[86.26px] 2xl:leading-[86.26px] font-bold  mb-0 md:mb-4 text-[#212529] tracking-[0.01em]">
                         <img
                             src="/assets/img/emojis/fire.png"
-                            className="h-[50.05px] md:h-[80.05px] lg:h-[50.05px]  2xl:2xl:h-[80.05px] inline-flex ml-2 mb-4"
+                            className="h-[40px] md:h-[80.05px] lg:h-[50.05px]  2xl:2xl:h-[80.05px] inline-flex ml-2 mb-4"
                             loading="lazy"
                         />{" "}
                         weDisk{" "}
                         <img
                             src="/assets/img/emojis/fire.png"
-                            className="h-[50.05px] md:h-[80.05px] lg:h-[50.05px]  2xl:h-[80.05px] inline-flex ml-2 mb-4"
+                            className="h-[40px] md:h-[80.05px] lg:h-[50.05px]  2xl:h-[80.05px] inline-flex ml-2 mb-4"
                             loading="lazy"
                         />{" "}
                     </h1>
-                    <p className="text-sm mt-8 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
+                    <p className="text-[11px] mt-4 md:mt-8 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
                         Un disco menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en la base del cuello uterino,
                         permitiéndote así tener sexo con la regla, sin manchas
                         ni fugas.
                     </p>
-                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
+                  {emailRef &&   <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
                         ¡Revisa tu e-mail para obtener tu descuento exclusivo!
-                    </p>
+                    </p>}
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wedisk"
-                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-[20px] text-md tracking-[0.01em] transition-colors w-[377.32px] h-[80.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
+                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-2xl text-xs tracking-[0.01em] transition-colors w-[200px] h-[50px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
                         >
                             ¡Comprar ahora!
                         </a>
@@ -476,46 +484,46 @@ const Result1Quiz = ({ }) => {
                 <img
                     src="assets/img/quizz/quiz_6.png"
                     alt="weFem productos"
-                    className="w-full aspect-square h-[24vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
+                    className="w-full aspect-square h-[21.5vh] lg:h-[75vh] object-cover object-center flex-shrink-0"
                 />
             </div>
         </div>
     );
 };
-const Result2Quiz = ({ }) => {
+const Result2Quiz = ({ emailRef}) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
-            <div className="flex py-10 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
-                <div className="px-[5%] w-full lg:px-0  lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-0 ">
+            <div className="flex py-8 lg:py-0 order-1  md:order-none  flex-col w-full md:w-1/2 justify-center items-center lg:items-center text-[#212529]">
+                <div className="px-[5%] w-full lg:px-0 lg:max-w-lg 2xl:max-w-[46rem] text-center flex flex-col gap-0">
                     <h2 className=" md:text-[25.55px] lg:text-[25px] 2xl:text-[30.75px] 2xl:leading-[20.12px] tracking-[0.01em] font-semibold 2xl:mb-4 gap-2">
                         Tu mejor aliada sería
                     </h2>
-                    <h1 className="text-[50.82px] md:text-[82.82px] lg:text-[58.92px] leading-[36.26px]  2xl:text-[86.26px] 2xl:leading-[86.26px] font-bold mb-4 text-[#212529] tracking-[0.01em]">
+                    <h1 className="text-[44px] -mt-1 md:text-[82.82px] lg:text-[58.92px] leading-[36.26px]  2xl:text-[86.26px] 2xl:leading-[86.26px] font-bold  mb-0 md:mb-4 text-[#212529] tracking-[0.01em]">
                         <img
                             src="/assets/img/emojis/wine-glass.png"
-                            className="h-[50.05px] md:h-[80.05px] lg:h-[50.05px]  2xl:h-[80.05px] inline-flex ml-2 mb-4"
+                            className="h-[40px] md:h-[80.05px] lg:h-[50.05px] 2xl:h-[80.05px] inline-flex ml-2 mb-4"
                             loading="lazy"
                         />{" "}
-                        weCup
+                        weCup{" "}
                         <img
                             src="/assets/img/emojis/wine-glass.png"
-                            className="h-[50.05px] md:h-[80.05px] lg:h-[50.05px]  2xl:h-[80.05px] inline-flex ml-2 mb-4"
+                            className="h-[40px] md:h-[80.05px] lg:h-[50.05px] 2xl:h-[80.05px] inline-flex ml-2 mb-4"
                             loading="lazy"
-                        />{" "}
+                        />
                     </h1>
-                    <p className="text-sm mt-8 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
+                    <p className="text-[11px] mt-4 md:mt-8 lg:mb-2 md:text-[21.47px] lg:text-[16px] 2xl:text-[22.37px] leading-tight tracking-[0.01em]">
                         Una copa menstrual de silicona que recoge tu flujo de
                         forma segura. Se coloca en el canal vaginal y te
                         permitirá moverte cómodamente, sin irritaciones ni
                         fugas.
                     </p>
-                    <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
+                    {emailRef && <p className="text-[16.47px] lg:mb-8 md:text-[21.47px] lg:text-[17.77px] 2xl:text-[22.37px] leading-[29.93px] tracking-[0.01em] font-bold mt-6 text-[#212529]">
                         ¡Revisa tu e-mail para obtener tu descuento exclusivo!
-                    </p>
+                    </p>}
                     <div className="space-x-4 w-full flex justify-center mt-6">
                         <a
                             href="/product/wecup"
-                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-[20px] text-md tracking-[0.01em] transition-colors w-[377.32px] h-[80.25px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
+                            className="inline-flex items-center justify-center bg-[#FF9900]  text-white font-semibold  px-6 rounded-2xl text-xs tracking-[0.01em] transition-colors w-[200px] h-[50px] lg:w-[300px] 2xl:w-[393px] lg:h-[86px] 2xl:h-[94px] border-2 duration-300"
                         >
                             ¡Comprar ahora!
                         </a>
