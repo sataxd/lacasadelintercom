@@ -77,8 +77,7 @@ const Detail = ({ item }) => {
         }
        
     };
-    console.log(item);
-    const [mainImage, setMainImage] = useState(item.image);
+    const [mainImage, setMainImage] = useState(item.colors[0]?.image ??item.image);
     return (
         <section className="pt-2 pb-10 bg-[#EFE5FF]">
             <div className="px-[5%] lg:px-0 mx-auto lg:max-w-5xl 2xl:max-w-6xl mt-8">
@@ -94,9 +93,7 @@ const Detail = ({ item }) => {
                                 item.images.map((image, index) => (
                                     <img
                                         key={index}
-                                        src={`/api/items/media/${
-                                            item.colors?.[0]?.image ?? image.url
-                                        }`}
+                                        src={`/api/items/media/${image.url}`}
                                         alt="Thumbnail"
                                         className="h-[100px] w-[100px] object-cover"
                                         onClick={() => setMainImage(image.url)}

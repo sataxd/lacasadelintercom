@@ -104,7 +104,6 @@ const Generals = ({ generals }) => {
     $('#cbo-keywords option').prop('selected', true).trigger('change')
   }, [null])
 
-  console.log(formData)
 
   return (
     <div className="card">

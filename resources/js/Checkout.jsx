@@ -237,7 +237,6 @@ const Checkout = ({ publicKey, session }) => {
     });
 
     const cart = JSON.parse(localStorage.getItem("carrito")) || [];
-    console.log(cart);
     const [sale, setSale] = useState({
         name: session?.name || null,
         lastname: session?.lastname || null,
@@ -302,7 +301,6 @@ const Checkout = ({ publicKey, session }) => {
 
     const onCulqiOpen = async (e) => {
         e.preventDefault();
-        console.log(cart);
         if (loading) return;
         isLoading(true);
         let order_number = null;
@@ -526,7 +524,7 @@ const Checkout = ({ publicKey, session }) => {
                                                         className="mb-1 block text-sm font-medium "
                                                         htmlFor="district"
                                                     >
-                                                        Provincia{" "}
+                                                        Distrito{" "}
                                                         <b className="text-red-500">
                                                             *
                                                         </b>

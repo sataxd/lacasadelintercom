@@ -52,7 +52,6 @@ const Sales = ({ statuses }) => {
     const onModalOpen = async (saleId) => {
         setSaleStatuses([]);
         const newSale = await salesRest.get(saleId);
-        console.log(newSale);
         setSaleLoaded(newSale.data);
         $(modalRef.current).modal("show");
     };

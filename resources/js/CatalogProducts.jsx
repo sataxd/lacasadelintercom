@@ -34,11 +34,11 @@ const CatalogProducts = ({
                 showSlogan={showSlogan}
                 backgroundType="video"
                 backgroundSrc="/assets/img/backgrounds/store.mp4"
-                backgroundHeight="h-[30vh] 2xl:h-[31vh]"
+                backgroundHeight="h-[30vh] 2xl:h-[40vh]"
                 backgroundPosition="object-center"
             >
                 <div className="absolute inset-0 flex items-center justify-center text-center">
-                    <div className="text-white p-6">
+                    <div className="text-white p-6 md:mt-10">
                         <h1 className="text-[38.54px] leading-[60.81px]  md:text-[58.54px] 2xl:text-[80.54px] lg:leading-[90.81px] 2xl:leading-[117.81px] font-bold max-w-4xl tracking-[0.01em]">
                             Tienda
                         </h1>

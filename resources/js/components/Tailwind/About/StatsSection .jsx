@@ -96,7 +96,7 @@ const StatsSection = ({ indicators }) => {
                                 >
                                     +0{getSuffix(stat.value)}
                                 </div>
-                                <div className="-rotate-2  md:w-[300.09px] text-[10px] 2xl:w-[369.09px] md:text-[22.61px] 2xl:text-[31.61px] text-white px-5 py-2 font-bold bg-[#F750BD]">
+                                <div className="-rotate-2 w-full  md:w-[300.09px] text-[10px] 2xl:w-[369.09px] md:text-[22.61px] 2xl:text-[31.61px] text-white px-5 py-1 font-bold bg-[#F750BD]">
                                     {stat.label}
                                 </div>
                             </div>
