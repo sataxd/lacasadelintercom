@@ -34,8 +34,6 @@ const ProductFilter = ({ products, categories, anuncio }) => {
         });
     const [openMenu, setOpenMenu] = useState(false);
 
-    console.log(filteredProducts);
-    console.log(anuncio);
     return (
         <div className="px-[5%] mx-auto py-8">
             <div className="flex w-full items-center lg:justify-end md:justify-between mb-8">

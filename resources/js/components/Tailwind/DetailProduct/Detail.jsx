@@ -76,7 +76,6 @@ const Detail = ({ item }) => {
             setIsModalOpen(true);
         }
     };
-    console.log(item)
     const [mainImage, setMainImage] = useState(item.colors[0]?.image ??item.image);
     return (
         <section className="pt-2 pb-10 bg-[#EFE5FF]">

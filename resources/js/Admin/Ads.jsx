@@ -93,7 +93,6 @@ const Ads = ({ items }) => {
             }
 
             const result = await adsRest.save(formData);
-            console.log(result);
             if (!result) return;
 
             console.log("Refrescando tabla...");
@@ -251,7 +250,6 @@ const Ads = ({ items }) => {
                                         )}
                                         <p className="mb-0">
                                             <b>Se muestra:</b>{" "}
-                                            {console.log(data)}
                                             {data.seconds > 0 &&
                                             data.actions === 0 ? (
                                                 <>Después de {data.seconds}s</>
