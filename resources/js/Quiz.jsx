@@ -17,7 +17,7 @@ import Result1 from './Result-1.png'
 const subscriptionsRest = new SubscriptionsRest();
 // Componente principal del cuestionario
 const Quiz = ({ showSlogan = true }) => {
-    const [currentStep, setCurrentStep] = useState(6);
+    const [currentStep, setCurrentStep] = useState(1);
     const [answers, setAnswers] = useState({});
     const [result, setResult] = useState(null);
     const handleAnswer = (questionId, answer) => {
