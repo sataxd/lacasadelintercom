@@ -61,50 +61,162 @@ const Home = ({ session, ...props }) => {
   const SalesChart = ({ data }) => {
     const [timeRange, setTimeRange] = useState("week");
     
+    // Configuración mejorada del gráfico
     const options = {
       chart: {
-        type: "area",
-        height: 350,
+        type: "line",
+        height: 400,
         zoom: { enabled: false },
-        toolbar: { show: false }
+        toolbar: { show: true }
       },
-      colors: ['#727cf5'],
+      colors: ['#727cf5', '#0acf97', '#fa5c7c'],
+      stroke: { 
+        width: 3,
+        curve: "smooth",
+        dashArray: [0, 5, 0] // Para diferenciar líneas
+      },
       dataLabels: { enabled: false },
-      stroke: { curve: "smooth", width: 2 },
-      xaxis: { type: "datetime", labels: { format: "dd MMM" } },
-      yaxis: { labels: { formatter: (val) => `S/ ${val.toLocaleString()}` } },
-      tooltip: { x: { format: "dd MMM yyyy" } },
-      grid: { borderColor: '#f1f3f5' }
+      xaxis: { 
+        type: "datetime",
+        labels: { 
+          format: "dd MMM",
+          datetimeUTC: false 
+        }
+      },
+      yaxis: [
+        {
+          title: { text: "Ventas y Ticket Promedio (S/)" },
+          labels: { 
+            formatter: (val) => `S/ ${Math.round(val).toLocaleString()}`,
+          },
+          min: 0
+        },
+        {
+          opposite: true,
+          title: { text: "Número de Pedidos" },
+          labels: { formatter: (val) => val.toLocaleString() },
+          forceNiceScale: true
+        }
+      ],
+      tooltip: {
+        shared: true,
+        intersect: false,
+        x: { format: "dd MMM yyyy" },
+        y: [
+          { 
+            formatter: (val) => `S/ ${val.toLocaleString(undefined, { maximumFractionDigits: 2 })}`,
+            title: { formatter: () => 'Ventas' }
+          },
+          {
+            formatter: (val) => `${val} pedidos`,
+            title: { formatter: () => 'Pedidos' }
+          },
+          {
+            formatter: (val) => `S/ ${val.toFixed(2)}`,
+            title: { formatter: () => 'Ticket Promedio' }
+          }
+        ]
+      },
+      annotations: {
+        points: [
+          {
+            x: new Date().getTime(),
+            y: 0,
+            marker: {
+              size: 6,
+              fillColor: "#fff",
+              strokeColor: "#fa5c7c",
+              radius: 2
+            },
+            label: {
+              text: "Ahora",
+              offsetY: 0,
+              style: { color: "#fff", background: "#fa5c7c" }
+            }
+          }
+        ]
+      }
     };
-
+  
+    // Procesamiento de datos
+    const currentData = data?.[timeRange] || [];
+    
+    const series = [
+      {
+        name: "Ventas Totales",
+        type: "area",
+        data: currentData.map(d => ({
+          x: new Date(d.x),
+          y: d.sales
+        })),
+        yAxisIndex: 0
+      },
+      {
+        name: "Número de Pedidos",
+        type: "column",
+        data: currentData.map(d => ({
+          x: new Date(d.x),
+          y: d.orders
+        })),
+        yAxisIndex: 1
+      },
+      {
+        name: "Ticket Promedio",
+        type: "line",
+        data: currentData.map(d => ({
+          x: new Date(d.x),
+          y: d.average
+        })),
+        yAxisIndex: 0
+      }
+    ];
+  
     return (
       <div className="col-xl-7">
         <div className="card">
-          <div className="card-header d-flex justify-content-between align-items-center">
-            <h5 className="card-title mb-0">Tendencias de Ventas</h5>
+          <div className="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+            <h5 className="card-title mb-0 text-white">
+              <i className="fas fa-chart-line me-2"></i>
+              Análisis Multidimensional de Ventas
+            </h5>
             <select 
-              className="form-select w-auto" 
+              className="form-select form-select-sm w-auto"
               value={timeRange}
               onChange={(e) => setTimeRange(e.target.value)}
             >
-              <option value="day">24H</option>
-              <option value="week">Semana</option>
-              <option value="month">Mes</option>
+              <option value="day">24 Horas</option>
+              <option value="week">Semanal</option>
+              <option value="month">Mensual</option>
             </select>
           </div>
-          <div className="card-body">
+          <div className="card-body position-relative">
             <Chart
               options={options}
-              series={[{ 
-                name: "Ventas",
-                data: (data?.[timeRange] || []).map(item => ({
-                  x: new Date(item.x),
-                  y: item.y
-                }))
-              }]}
-              type="area"
-              height={350}
+              series={series}
+              type="line"
+              height={400}
             />
+            
+            {/* Leyenda interactiva */}
+            <div className="chart-legend mt-3">
+              <div className="row g-2 text-center">
+                {series.map((serie, idx) => (
+                  <div key={idx} className="col-auto">
+                    <span 
+                      className="legend-marker me-2" 
+                      style={{ 
+                        backgroundColor: options.colors[idx],
+                        width: '12px',
+                        height: '12px',
+                        display: 'inline-block',
+                        borderRadius: '2px'
+                      }}
+                    ></span>
+                    <small className="text-muted">{serie.name}</small>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
