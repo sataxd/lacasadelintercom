@@ -153,14 +153,14 @@ const PhoneInput = ({ onPhoneChange }) => {
                     <button
                         type="button"
                         className="flex items-center justify-between px-3 py-1
-                         h-full border-r border-gray-300 bg-gray-50 rounded-l-md w-20"
+                         h-full border-r border-gray-300 bg-gray-50 rounded-l-md min-w-20"
                         onClick={() => setShowDropdown(!showDropdown)}
                     >
                         <div className="flex items-center">
                             <span
                                 className={`fi fi-${selectedCountry?.iso2.toLowerCase()} mr-2`}
                             ></span>
-                            <span>{selectedCountry?.iso2}</span>
+                            <span>+ {selectedCountry?.phoneCode}</span>
                         </div>
                         <ChevronDown
                             className={`h-4 w-4 transition-transform ${showDropdown ? "rotate-180" : ""
@@ -1054,7 +1054,7 @@ const Checkout = ({ publicKey, session }) => {
                                         disabled={loading}
                                     >
                                        
-                                        PAGAR AHORA
+                                       PAGAR AHORA
                                 {/*  <i className="mdi mdi-lock me-1"></i>       <small className="ms-1">
                                             (S/{" "}
                                             {Number2Currency(

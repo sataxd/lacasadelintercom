@@ -96,7 +96,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                                 className="brightness-0 grayscale-0 invert w-[50px]  lg:w-[150.97px] h-auto 2xl:w-[226.97px] 2xl:h-[169.95px] object-contain cursor-pointer"
                                 alt="Certificado 1"
                             />
-                            <button className="absolute mdi mdi-eye text-2xl bottom-0 right-0 cursor-pointer" onClick={() => setShowModal1(true)}></button>
+                            <button className="absolute mdi mdi-eye text-2xl -bottom-2 right-2 cursor-pointer" onClick={() => setShowModal1(true)}></button>
                         </div>
                         <div className="relative w-max h-full">
                             <img
@@ -104,7 +104,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                                 className="brightness-0 grayscale-0 invert w-[125px] lg:w-[300.23px] h-auto 2xl:w-[428.23px] 2xl:h-[136.41px] object-contain"
                                 alt="Certificado 2"
                             />
-                            <button className="absolute mdi mdi-eye text-2xl bottom-0 right-0 cursor-pointer" onClick={() => {/*setShowModal1(true)*/}}></button>
+                            <button className="absolute mdi mdi-eye text-2xl -bottom-2 right-2 cursor-pointer" onClick={() => {/*setShowModal1(true)*/}}></button>
                         </div>
                         <div className="relative w-max h-full">
                             <img
@@ -113,7 +113,7 @@ const About = ({ about, showSlogan = true, posts, indicators }) => {
                                 className="brightness-0 grayscale-0 invert w-[50px] lg:w-[100.07px] h-auto 2xl:w-[171.07px] 2xl:h-[171.07px] object-contain cursor-pointer"
                                 alt="Certificado 3"
                             />
-                            <button className="absolute mdi mdi-eye text-2xl bottom-0 right-0 cursor-pointer" onClick={() => setShowModal2(true)}></button>
+                            <button className="absolute mdi mdi-eye text-2xl -bottom-2 right-2 cursor-pointer" onClick={() => setShowModal2(true)}></button>
                         </div>
                     </div>
                 </div>
