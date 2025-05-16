@@ -40,7 +40,7 @@ const CountdownTimer = () => {
     }, []);
 
     return (
-        <div className="absolute top-8 mx-auto font-bold flex items-center justify-center bg-[#FF9900] text-white md:text-[17px] 2xl:text-[35.85px] px-10 py-1 w-max rounded-full">
+        <div className="absolute top-8 mx-auto font-bold flex items-center justify-center bg-[#FF9900] text-white md:text-[17px] 2xl:text-[20.85px] px-20 py-1 w-max rounded-full">
             Solo por {timeLeft.hours} : {timeLeft.minutes} : {timeLeft.seconds}
         </div>
     );
@@ -64,7 +64,7 @@ const Detail = ({ item }) => {
 
     const { agregarAlCarrito } = useContext(CarritoContext);
 
-    const addProduct = () => {
+    const addProduct = (item) => {
         agregarAlCarrito({
             ...item,
             quantity,
@@ -72,9 +72,10 @@ const Detail = ({ item }) => {
             selectedSize: item.sizes?.length > 0 ? selectedSize : null,
         });
         // 2. Luego verificar si tiene ad y mostrar el modal
-        if (item.ad && item.ad.image) {
+        if (item.ad) {
             setIsModalOpen(true);
         }
+       
     };
     const [mainImage, setMainImage] = useState(item.colors[0]?.image ??item.image);
     return (
@@ -354,7 +355,7 @@ const Detail = ({ item }) => {
                             {/* Add to Cart Button */}
                             <div className="flex justify-center">
                                 <button
-                                    onClick={() => addProduct()}
+                                    onClick={() => addProduct(item)}
                                     className="mt-4 relative w-full sm:w-[332px] lg:w-full h-[59px] lg:h-[35.88px] 2xl:h-[39.88px] text-[17.02px] lg:text-[12.59px]  2xl:text-[13.59px] leading-[13.59px] bg-[#FC58BE] text-white rounded-[6px]  lg:rounded-[2.72px] border-[1.81px] border-[#FC58BE]  flex items-center justify-center"
                                 >
                                     <span className="">Añadir al carrito</span>
@@ -373,19 +374,19 @@ const Detail = ({ item }) => {
             </div>
             {/* Modal */}
 
-            {item?.ad?.image && isModalOpen && item.ad.invasivo && (
+            {item?.ad && isModalOpen  && (
                 <div
                     className="fixed inset-0 flex items-center justify-center z-50 bg-[#00000080]"
                     style={{ backdropFilter: "blur(10px)" }}
                 >
                     <div className="relative flex items-center justify-center">
                         <button
-                            className="absolute top-4 right-4 text-3xl text-[#9577B9]"
+                            className="absolute top-5 right-8 text-3xl text-[#9577B9]"
                             onClick={() => setIsModalOpen(false)}
                         >
                             ×
                         </button>
-                        <div className="bg-white rounded-[30.58px]  2xl:rounded-[48.58px] md:w-[459px] md:h-[450.40px] 2xl:w-[819px] 2xl:h-[805.40px] flex flex-col items-center justify-center ">
+                        <div className="bg-white rounded-[30.58px]  2xl:rounded-[48.58px] md:w-[459px] md:h-[450.40px] 2xl:w-[519px] 2xl:h-[505.40px] flex flex-col items-center justify-center ">
                             <CountdownTimer
                                 startDate={item.ad.dete_begin}
                                 endDate={item.ad.date_end}

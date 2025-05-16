@@ -73,6 +73,7 @@ const DetailProduct = ({
             image: "https://i.ibb.co/yFYSFPtJ/35b45868b7de6ab7b4b48f5bf5e380cd.png ",
         },
     ];
+ 
     return (
         <>
             <Header showSlogan={showSlogan}></Header>
