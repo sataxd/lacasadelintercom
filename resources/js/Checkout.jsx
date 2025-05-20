@@ -147,20 +147,21 @@ const PhoneInput = ({ onPhoneChange }) => {
         <div className="relative w-full">
             <label className="block text-sm font-medium mb-1">Teléfono/Celular <b className="text-red-500">*</b></label>
 
-            <div className="flex border border-gray-300 rounded-md focus-within:ring-0 ">
-                {/* Selector de país */}
-                <div className="relative w-max" ref={dropdownRef}>
+            <div className="flex border border-gray-300 rounded-md focus-within:ring-0 focus-within:border-[#C5B8D4]">
+                {/* Selector de país - Modificado */}
+                <div className="relative flex-shrink-0" ref={dropdownRef}>
                     <button
                         type="button"
-                        className="flex items-center justify-between px-3 py-1
-                         h-full border-r border-gray-300 bg-gray-50 rounded-l-md w-max lg:min-w-20"
+                        className="flex items-center justify-between px-3 py-2
+                         h-full border-r border-gray-300 bg-gray-50 rounded-l-md 
+                         focus:outline-none focus:ring-0"
                         onClick={() => setShowDropdown(!showDropdown)}
                     >
-                        <div className="flex items-center">
+                        <div className="flex items-center gap-1">
                             <span
-                                className={`fi fi-${selectedCountry?.iso2.toLowerCase()} mr-2`}
+                                className={`fi fi-${selectedCountry?.iso2.toLowerCase()} mr-1`}
                             ></span>
-                            <span>+ {selectedCountry?.phoneCode}</span>
+                            <span className="text-sm">+{selectedCountry?.phoneCode}</span>
                         </div>
                         <ChevronDown
                             className={`h-4 w-4 transition-transform ${showDropdown ? "rotate-180" : ""
@@ -169,20 +170,20 @@ const PhoneInput = ({ onPhoneChange }) => {
                     </button>
 
                     {showDropdown && (
-                        <div className="absolute z-10 mt-1 w-64 bg-white shadow-lg rounded-md py-1 max-h-60 overflow-auto border border-gray-200">
+                        <div className="absolute z-10 mt-1 w-full min-w-[280px] bg-white shadow-lg rounded-md py-1 max-h-60 overflow-auto border border-gray-200">
                             {countries.map((country) => (
                                 <div
                                     key={country.iso2}
-                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center"
+                                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer flex items-center text-sm"
                                     onClick={() => handleCountrySelect(country)}
                                 >
                                     <span
-                                        className={`fi fi-${country.iso2.toLowerCase()} mr-3`}
+                                        className={`fi fi-${country.iso2.toLowerCase()} mr-2`}
                                     ></span>
-                                    <span className="flex-1">
+                                    <span className="flex-1 truncate">
                                         {country.nameES}
                                     </span>
-                                    <span className="text-gray-500">
+                                    <span className="text-gray-500 ml-2">
                                         +{country.phoneCode}
                                     </span>
                                 </div>
@@ -191,15 +192,16 @@ const PhoneInput = ({ onPhoneChange }) => {
                     )}
                 </div>
 
-               
-                {/* Input de teléfono */}
+                {/* Input de teléfono - Modificado */}
                 <input
                     type="tel"
                     value={phoneNumber}
                     onChange={handlePhoneChange}
                     placeholder="Ej: 987654321"
-                    className="flex-1 px-4 py-2 focus:outline-none rounded-r-md"
+                    className="flex-1 w-full min-w-0 px-3 py-2 text-sm 
+                    border-0 focus:ring-0 rounded-r-md bg-transparent"
                     pattern="[0-9]*"
+                    style={{ WebkitAppearance: 'none' }}
                 />
             </div>
 
@@ -770,7 +772,7 @@ const Checkout = ({ publicKey, session }) => {
                                             }))
                                         }
                                         required
-                                        // disabled={Boolean(session?.email)}
+                                    // disabled={Boolean(session?.email)}
                                     />
                                 </div>
                                 <div>
@@ -783,7 +785,7 @@ const Checkout = ({ publicKey, session }) => {
                                         }
                                     />
                                 </div>
-                              {/*  <div className="mt-4">
+                                {/*  <div className="mt-4">
                                     <label
                                         className="mb-1 block text-sm font-medium "
                                         htmlFor="phone"
@@ -1053,9 +1055,9 @@ const Checkout = ({ publicKey, session }) => {
                                         className="mt-6 w-full rounded-md bg-[#FF9900] py-3 text-white disabled:cursor-not-allowed"
                                         disabled={loading}
                                     >
-                                       
-                                       PAGAR AHORA
-                                {/*  <i className="mdi mdi-lock me-1"></i>       <small className="ms-1">
+
+                                        PAGAR AHORA
+                                        {/*  <i className="mdi mdi-lock me-1"></i>       <small className="ms-1">
                                             (S/{" "}
                                             {Number2Currency(
                                                 totalPrice -
