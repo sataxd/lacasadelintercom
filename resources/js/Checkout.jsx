@@ -149,7 +149,7 @@ const PhoneInput = ({ onPhoneChange }) => {
 
             <div className="flex border border-gray-300 rounded-md focus-within:ring-0 ">
                 {/* Selector de país */}
-                <div className="relative" ref={dropdownRef}>
+                <div className="relative w-max" ref={dropdownRef}>
                     <button
                         type="button"
                         className="flex items-center justify-between px-3 py-1
