@@ -334,7 +334,7 @@ const WeCupSection = () => {
                                 {/*8cm * 4cm */}
                                 <div class=" flex items-center justify-center">
                                     <div className="relative h-[300px]">
-                                        <div className="h-[300px]  overflow-hidden">
+                                        <div className="h-[200px] lg::h-[300px]  overflow-hidden">
                                             <img
                                                 src="/assets/img/instructions/cup-item-size.png"
                                                 alt={`Talla ${zise.zise}`}
