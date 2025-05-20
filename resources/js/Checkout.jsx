@@ -153,7 +153,7 @@ const PhoneInput = ({ onPhoneChange }) => {
                     <button
                         type="button"
                         className="flex items-center justify-between px-3 py-1
-                         h-full border-r border-gray-300 bg-gray-50 rounded-l-md min-w-20"
+                         h-full border-r border-gray-300 bg-gray-50 rounded-l-md w-max lg:min-w-20"
                         onClick={() => setShowDropdown(!showDropdown)}
                     >
                         <div className="flex items-center">
