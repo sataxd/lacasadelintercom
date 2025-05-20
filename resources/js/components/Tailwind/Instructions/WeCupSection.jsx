@@ -333,8 +333,8 @@ const WeCupSection = () => {
                             <div className="text-center py-14 mb-4  h-[500px]  transition-all duration-300">
                                 {/*8cm * 4cm */}
                                 <div class=" flex items-center justify-center">
-                                    <div className="relative h-[300px]">
-                                        <div className="h-[200px] lg::h-[300px]  overflow-hidden">
+                                    <div className="relative h-[250px] lg:h-[300px]">
+                                        <div className="h-[250px] lg:h-[300px]  overflow-hidden">
                                             <img
                                                 src="/assets/img/instructions/cup-item-size.png"
                                                 alt={`Talla ${zise.zise}`}
