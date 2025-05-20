@@ -35,23 +35,37 @@ const AlertComponent = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
                     transition={{ duration: 0.3 }}
-                    className="fixed bottom-10 left-10 bg-[#5339B1] text-white px-6 py-5 rounded-xl shadow-xl flex items-center space-x-4 z-[9999]"
+                    className="fixed md:bottom-10 md:left-10 bottom-4 left-4 right-4 
+                bg-[#5339B1] text-white px-4 py-3 md:px-6 md:py-5 rounded-lg 
+                md:rounded-xl shadow-xl flex items-center justify-between 
+                space-x-2 md:space-x-4 z-[9999] max-w-[90vw] lg:w-max mx-auto"
                 >
-                    <span className="flex-grow">{message}</span>
-                    {actionLabel && (
-                        <a
-                            href="/checkout"
-                            className="bg-[#FF9900] text-white p-3 rounded-xl shadow"
+                    <span className="flex-grow text-sm md:text-base max-w-[200px] md:max-w-none truncate">
+                        {message}
+                    </span>
+
+                    <div className="flex items-center space-x-2 md:space-x-4 flex-shrink-0">
+                        {actionLabel && (
+                            <a
+                                href="/checkout"
+                                className="bg-[#FF9900] text-white px-3 py-2 
+                            md:px-4 md:py-3 text-sm md:text-base rounded-lg
+                            md:rounded-xl shadow hover:bg-[#FFAA33] 
+                            transition-colors whitespace-nowrap"
+                            >
+                                {actionLabel}
+                            </a>
+                        )}
+
+                        <button
+                            onClick={handleClose}
+                            className="bg-red-600 hover:bg-red-700 p-2 
+                        md:p-3 text-white rounded-lg md:rounded-xl 
+                        transition-colors"
                         >
-                            {actionLabel}
-                        </a>
-                    )}
-                    <button
-                        onClick={handleClose}
-                        className="bg-red-600 p-3 text-white ml-2 rounded-xl"
-                    >
-                        <X size={20} />
-                    </button>
+                            <X size={18} className="md:w-5 md:h-5 w-4 h-4" />
+                        </button>
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>
