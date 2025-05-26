@@ -22,34 +22,22 @@ class StatusSeeder extends Seeder
             ],
             [
                 'id' => '312f9a91-d3f2-4672-a6bf-678967616cac',
-                'name' => 'Pagado',
-                'color' => '#71b6f9',
+                'name' => 'Procesando',
+                'color' => '#2BA824',
                 'editable' => false
             ],
-            [
-                'id' => 'd3a77651-15df-4fdc-a3db-91d6a8f4247c',
-                'name' => 'Rechazado',
-                'color' => '#ff5b5b',
-                'editable' => false
-            ],
+            
             [
                 'id' => 'c063efb2-1e9b-4a43-8991-b444c14d30dd',
-                'name' => 'Anulado',
+                'name' => 'Cancelado',
                 'color' => '#323a46',
                 'reversible' => false
             ],
-            [
-                'id' => 'a8903cd5-e91d-47d2-93ee-e0fca3845ecc',
-                'name' => 'En producción',
-            ],
-            [
-                'id' => 'ad509181-6701-4fa1-a990-6bcb103254af',
-                'name' => 'Enviado'
-            ],
+         
             [
                 'id' => 'bc012ef5-96e8-4bbb-867b-061c4090d9d2',
-                'name' => 'Entregado',
-                'color' => '#10c469',
+                'name' => 'Concluido',
+                'color' => '#108CC4',
                 'reversible' => false
             ],
         ];
