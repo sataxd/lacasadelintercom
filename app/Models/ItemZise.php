@@ -20,4 +20,9 @@ class ItemZise extends Model
     {
         return $this->belongsTo(Item::class);
     }
+    // Relación con variantes
+    public function variants()
+    {
+        return $this->hasMany(ItemVariant::class, 'zise_id');
+    }
 }

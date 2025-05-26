@@ -4,6 +4,7 @@ use App\Http\Controllers\AdController;
 use Illuminate\Support\Facades\Route;
 
 // Admin
+use App\Http\Controllers\ItemVariantController;
 use App\Http\Controllers\Admin\AboutusController as AdminAboutusController;
 use App\Http\Controllers\Admin\IndicatorController as AdminIndicatorController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
@@ -130,8 +131,20 @@ Route::get('/sales/notify/{code}', [SaleController::class, 'notify']);
 Route::middleware('auth')->group(function () {
     Route::delete('logout', [AuthController::class, 'destroy'])
         ->name('logout');
+    // Variantes de producto (pivot)
+    Route::post('/item-variants/save', [ItemVariantController::class, 'save']);
+    Route::delete('/item-variants/{id}', [ItemVariantController::class, 'delete']);
+    Route::get('/item-variants/by-item/{itemId}', [ItemVariantController::class, 'byItem']);
+
 
     Route::middleware('can:Admin')->prefix('admin')->group(function () {
+
+        // Listar colores y tallas por item
+        Route::post('/colors/list', [AdminItemColorController::class, 'list']);
+        Route::post('/sizes/list', [AdminItemSizeController::class, 'list']);
+
+
+
 
 
         Route::get('/sales/{id}', [AdminSaleController::class, 'get']);

@@ -46,21 +46,31 @@ class Item extends Model
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
 
+    // Un producto tiene muchos colores
     public function colors()
     {
         return $this->hasMany(ItemColor::class);
     }
-    public function images()
-    {
-        return $this->hasMany(ItemImage::class);
-    }
+    // Un producto tiene muchas tallas
     public function sizes()
     {
         return $this->hasMany(ItemZise::class);
     }
+
+    // Un producto tiene muchas variantes (pivot)
+    public function variants()
+    {
+        return $this->hasMany(ItemVariant::class);
+    }
     public function ad()
     {
         return $this->hasOne(Ad::class);
+    }
+
+    // Un producto tiene muchas imágenes
+    public function images()
+    {
+        return $this->hasMany(ItemImage::class);
     }
 
     protected static function booted()

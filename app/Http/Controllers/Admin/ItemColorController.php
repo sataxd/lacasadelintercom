@@ -28,4 +28,18 @@ class ItemColorController extends BasicController
     {
         return $model::with(['item']);
     }
+
+    
+    // Devuelve los colores de un item específico
+    public function list(Request $request)
+    {
+      
+        $itemId = $request->input('item_id');
+        if (!$itemId) {
+            return response()->json(['status' => 400, 'message' => 'item_id requerido'], 400);
+        }
+        $colors = ItemColor::where('item_id', $itemId)->get();
+        dump($colors);
+        return response()->json(['status' => 200, 'data' => $colors]);
+    }
 }

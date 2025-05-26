@@ -18,12 +18,20 @@ import CreateReactScript from "../Utils/CreateReactScript";
 import Number2Currency from "../Utils/Number2Currency";
 import ReactAppend from "../Utils/ReactAppend";
 import SetSelectValue from "../Utils/SetSelectValue";
-import Global from "../Utils/Global";
+
+import ItemVariants from "./ItemVariants";
+import ItemVariantsModal from "./ItemVariantsModal";
+import ColorsRest from "../Actions/Admin/ColorsRest";
+import SizesRest from "../Actions/Admin/SizesRest";
 
 const itemsRest = new ItemsRest();
 
 const Items = ({ categories, brands }) => {
+    // Estados para colores y tallas del producto actual
+    const [colors, setColors] = useState([]);
+    const [sizes, setSizes] = useState([]);
     const [itemData, setItemData] = useState([]);
+    const [showVariantsModal, setShowVariantsModal] = useState(false);
     const gridRef = useRef();
     const modalRef = useRef();
     // Form elements ref
@@ -144,7 +152,6 @@ const Items = ({ categories, brands }) => {
 
         stockRef.current.value = data?.stock;
         min_stockRef.current.value = data?.min_stock;
-
         $(modalRef.current).modal("show");
     };
 
@@ -263,12 +270,59 @@ const Items = ({ categories, brands }) => {
     const handleManualDelete = () => {
         setManualPreview(null);
     };
+    const handleOpenVariantsModal = () => {
+        setShowVariantsModal(true);
+    };
+    const handleCloseVariantsModal = () => {
+        setShowVariantsModal(false);
+    };
+
+    // Abre el modal de variantes desde la tabla
+    const onVariantsClicked = async (itemId) => {
+        // Cargar colores y tallas del producto
+
+        const colorsRest = new ColorsRest();
+        const sizesRest = new SizesRest();
+        colorsRest.list({ item_id: itemId }).then((res) => {
+            setColors(res.data || []);
+        });
+        sizesRest.list({ item_id: itemId }).then((res) => {
+            setSizes(res.data || []);
+            console.log(res.data);
+        });
+
+        let item = null;
+        if (gridRef.current && typeof gridRef.current.current?.instance?.getDataSource === 'function') {
+            const items = gridRef.current.current.instance.getDataSource().items;
+            if (Array.isArray(items)) {
+                item = items.find(i => i.id === itemId);
+            }
+        } else if (gridRef.current && typeof gridRef.current.instance?.getDataSource === 'function') {
+            // fallback por si gridRef es ref directo
+            const items = gridRef.current.instance.getDataSource().items;
+            if (Array.isArray(items)) {
+                item = items.find(i => i.id === itemId);
+            }
+        }
+        if (!item) item = { id: itemId };
+        const [colorsRes, sizesRes] = await Promise.all([
+            colorsRest.list({ item_id: itemId }),
+            sizesRest.list({ item_id: itemId })
+        ]);
+        setColors(colorsRes.data || []);
+        setSizes(sizesRes.data || []);
+        setItemData(item);
+        setIsEditing(false);
+        setShowVariantsModal(true);
+    };
+
     return (
         <>
             <Table
                 gridRef={gridRef}
                 title="Items"
                 rest={itemsRest}
+              
                 toolBar={(container) => {
                     container.unshift({
                         widget: "dxButton",
@@ -394,8 +448,8 @@ const Items = ({ categories, brands }) => {
                                         borderRadius: "4px",
                                     }}
                                     onError={(e) =>
-                                        (e.target.src =
-                                            "/api/cover/thumbnail/null")
+                                    (e.target.src =
+                                        "/api/cover/thumbnail/null")
                                     }
                                 />
                             );
@@ -520,12 +574,21 @@ const Items = ({ categories, brands }) => {
                             );
                             container.append(
                                 DxButton({
+                                    className: "btn btn-xs btn-soft-secondary",
+                                    title: "Variantes",
+                                    icon: "fa fa-layer-group",
+                                    onClick: () => onVariantsClicked(data.id),
+                                })
+                            );
+                            container.append(
+                                DxButton({
                                     className: "btn btn-xs btn-soft-danger",
                                     title: "Eliminar",
                                     icon: "fa fa-trash",
                                     onClick: () => onDeleteClicked(data.id),
                                 })
                             );
+
                         },
                         allowFiltering: false,
                         allowExporting: false,
@@ -750,6 +813,16 @@ const Items = ({ categories, brands }) => {
                     className="form-control"
                     placeholder="Descripción"
                 ></textarea>
+                {/* Modal de variantes solo visible si showVariantsModal está activo */}
+                {showVariantsModal && (
+                    <ItemVariantsModal
+                        show={showVariantsModal}
+                        onClose={handleCloseVariantsModal}
+                        itemId={itemData?.id}
+                        colors={colors}
+                        sizes={sizes}
+                    />
+                )}
             </Modal>
         </>
     );
