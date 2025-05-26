@@ -19,23 +19,24 @@ class WhatsAppController extends Controller
                 'status',
                 'details',
                 'details.item',
-                'renewal',
-                'bundle',
+               
                 'coupon'
             ])->find($sale->id);
-            $hairGoals = Formula::whereIn('id', $jpa->formula->hair_goals)->get();
-            $jpa->formula->hair_goals_list = $hairGoals;
+           
 
             $data =  [
                 'sale' => $jpa
             ];
 
-            $content = View::make('mailing.sale-done', $data)->render();
+            $content = View::make('mailing.sale-done-wefem', $data)->render();
 
             $onlyName = \explode(' ', $sale->name)[0];
             $address = ($sale->province ?? $sale->district) . ", {$sale->department}, {$sale->country}" . ($sale->zip_code ? ' - ' . $sale->zip_code : '');
             try {
                 if ($send2client) {
+                    // Permitir cualquier código de país, asumiendo que el número ya viene con +[código][número]
+                    $phone = $sale->phone;
+                    $phone = ltrim($phone, '+'); // Quitar el + si existe
                     new Fetch(env('WA_URL') . '/api/send', [
                         'method' => 'POST',
                         'headers' => [
@@ -43,7 +44,7 @@ class WhatsAppController extends Controller
                         ],
                         'body' => [
                             'from' => env('APP_CORRELATIVE'),
-                            'to' => ['51' . Text::keep($sale->phone, '0123456789')],
+                            'to' => [$phone],
                             'content' => "Hola *{$onlyName}*! nos llegó tu pedido por la web 🥰\n\n*Nombre*: {$sale->name} {$sale->lastname}\n*Dirección*: {$sale->address} {$sale->number}, {$address}\n*Correo electrónico*: {$sale->email}\n*Teléfono*: {$sale->phone}",
                             'html' => $content
                         ]

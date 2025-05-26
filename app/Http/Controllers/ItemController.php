@@ -48,13 +48,13 @@ class ItemController extends BasicController
 
     public function verifyStock(Request $request)
     {
-        dump("son datos de entrada", $request->all());
+       // dump("son datos de entrada", $request->all());
         $response = Response::simpleTryCatch(function () use ($request) {
             return Item::select(['id', 'price', 'discount', 'name', 'final_price'])
                 ->whereIn('id', $request->all())
                 ->get();
         });
-        dump("estamos en response del verify: ", $response);
+       // dump("estamos en response del verify: ", $response);
         return response($response->toArray(), $response->status);
     }
     public function getDestacados(Request $request): HttpResponse|ResponseFactory
@@ -62,12 +62,12 @@ class ItemController extends BasicController
         $response = new Response();
         try {
             $data = Item::where('featured', true)->where('status', true)->take(10)->get();
-            dump($data);
+            // dump($data);
             $response->data = $data;
             $response->status = 200;
             $response->message = 'Operacion correcta';
         } catch (\Throwable $th) {
-            dump($th->getMessage());
+            // dump($th->getMessage());
             $response->status = 400;
             $response->message = $th->getMessage();
         } finally {

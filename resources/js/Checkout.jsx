@@ -333,22 +333,24 @@ const Checkout = ({ publicKey, session }) => {
         Culqi.open();
     };
 
-    window.culqi = async () => {
-        if (Culqi.token) {
-            const resCQ = await CulqiRest.token({
-                order: Culqi.order_number,
-                token: Culqi.token,
-            });
-            if (resCQ) location.href = "/thanks";
-        } else if (Culqi.order) {
-            redirectOnClose();
+window.culqi = async () => {
+    if (Culqi.token) {
+        const resCQ = await CulqiRest.token({
+            order: Culqi.order_number,
+            token: Culqi.token,
+        });
+        if (resCQ) {
             const order_number = Culqi.order_number.replace(
                 `#${Global.APP_CORRELATIVE}-`,
                 ""
             );
-            fetch(`/api/sales/notify/${order_number}`);
+            await fetch(`/api/sales/notify/${order_number}`);
+            location.href = "/thanks";
         }
-    };
+    } else if (Culqi.order) {
+        redirectOnClose();
+    }
+};
 
     const redirectOnClose = () => {
         setInterval(() => {
@@ -777,13 +779,17 @@ const Checkout = ({ publicKey, session }) => {
                                 </div>
                                 <div>
                                     <PhoneInput
-                                        onChange={(fullNumber) =>
+                                        onPhoneChange={(fullNumber) => {
                                             setSale((old) => ({
                                                 ...old,
                                                 phone: fullNumber,
-                                            }))
-                                        }
+                                            }));
+                                            console.log('Phone actualizado:', fullNumber);
+                                        }}
                                     />
+                                    <div className="text-xs text-gray-500 mt-1">
+                                        Teléfono actual en sale: {sale.phone}
+                                    </div>
                                 </div>
                                 {/*  <div className="mt-4">
                                     <label

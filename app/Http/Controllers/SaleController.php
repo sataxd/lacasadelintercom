@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendSaleEmail;
+use Illuminate\Support\Facades\Log;
 use App\Jobs\SendSaleWhatsApp;
 use App\Models\Sale;
 use App\Models\Bundle;
@@ -65,6 +66,7 @@ class SaleController extends Controller
             $saleJpa->name = $sale['name'];
             $saleJpa->lastname = $sale['lastname'];
             $saleJpa->email = $sale['email'];
+            // Guardar el teléfono tal como viene (con código de país)
             $saleJpa->phone = $sale['phone'];
             $saleJpa->status_id = 'f13fa605-72dd-4729-beaa-ee14c9bbc47b';
 
@@ -82,6 +84,7 @@ class SaleController extends Controller
             // Actualizar información del usuario si está autenticado
             if (Auth::check()) {
                 $userJpa = User::find(Auth::user()->id);
+                // Guardar el teléfono tal como viene (con código de país)
                 $userJpa->phone = $sale['phone'];
                 $userJpa->country = $sale['country'];
                 $userJpa->department = $sale['department'];
@@ -156,14 +159,16 @@ class SaleController extends Controller
     }
 
 
-    public function notify(Request $request)
+    public function notify(Request $request, $code)
     {
-        $response = Response::simpleTryCatch(function () use ($request) {
-            $sale = Sale::where('code', $request->code)->first();
-            if (!$request->code) throw new Exception('No existe la venta');
+        $response = Response::simpleTryCatch(function () use ($code) {
+            $sale = Sale::where('code', $code)->first();
+            if (!$sale) throw new Exception('No existe la venta con el código: ' . $code);
+            Log::info('Notificando por WhatsApp. Sale ID: ' . $sale->id . ', Código: ' . $code);
             SendSaleWhatsApp::dispatchAfterResponse($sale, true, false);
-            SendSaleEmail::dispatchAfterResponse($sale, true, false);
+            SendSaleEmail::dispatchAfterResponse($sale);
         });
+        Log::info('Respuesta de notify:', $response->toArray());
         return response($response->toArray(), $response->status);
     }
 }

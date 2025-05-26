@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <img src="https://vua.pe/api/mailing/media/{{ $image }}" style="width: 100%; max-width: 600px;">
+  <img src="https://wefem.atalaya.pe/api/mailing/media/{{ $image }}" style="width: 100%; max-width: 600px;">
 </body>
 
 </html>

@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use SoDe\Extend\Crypto;
 use SoDe\Extend\Fetch;
@@ -37,26 +38,19 @@ class SendSaleEmail implements ShouldQueue
     try {
 
       $jpa  = Sale::with([
-        'formula',
-        'formula.hasTreatment',
-        'formula.scalpType',
-        'formula.hairType',
-        'formula.fragrance',
-        'status',
-        'details',
-        'details.item',
-        'renewal',
-        'bundle',
-        'coupon'
+       'status',
+                'details',
+                'details.item',
+               
+                'coupon'
       ])->find($data->id);
-      $hairGoals = Formula::whereIn('id', $jpa->formula->hair_goals)->get();
-      $jpa->formula->hair_goals_list = $hairGoals;
+    
 
       $data =  [
         'sale' => $jpa
       ];
 
-      $content = View::make('mailing.sale-done', $data)->render();
+      $content = View::make('mailing.sale-done-wefem', $data)->render();
 
       $res = new Fetch(\env('WA_URL') . '/api/utils/html2image', [
         'method' => 'POST',
@@ -74,24 +68,25 @@ class SendSaleEmail implements ShouldQueue
         mkdir(dirname($path), 0755, true);
       }
       file_put_contents($path, $binary);
-
+//basiliohinostroza2003bradneve@gmail.com reemplzar por tu correo electrónico de la empresa
       if ($send2client) {
         MailingController::simpleNotify('mailing.sale-done-mail', $jpa->email, [
           'title' => 'Resumen de tu pedido ' . $jpa->code,
           'image' => $imageName
         ], $send2group ? [
-          'pedidos@vua.pe'
+          'basiliohinostroza2003bradneve@gmail.com'
         ] : []);
         $send2group = false;
       }
       if ($send2group) {
-        MailingController::simpleNotify('mailing.sale-done', 'pedidos@vua.pe', [
+        MailingController::simpleNotify('mailing.sale-done-wefem', 'basiliohinostroza2003bradneve@gmail.com', [
           'title' => 'Resumen de tu pedido ' . $jpa->code,
           'image' => $imageName
         ]);
       }
     } catch (\Throwable $th) {
       // dump($th->getMessage());
+      Log::error('Error al enviar correo de venta: ' . $th->getMessage());
     }
   }
 }
