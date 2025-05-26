@@ -242,8 +242,8 @@ class CulqiController extends Controller
       $sale->update(['status_id' => '312f9a91-d3f2-4672-a6bf-678967616cac']);
       $culqiSubscription->update(['already_paid' => true]);
 
-      SendSaleWhatsApp::dispatchAfterResponse($sale);
-      SendSaleEmail::dispatchAfterResponse($sale);
+     // SendSaleWhatsApp::dispatchAfterResponse($sale);
+      //SendSaleEmail::dispatchAfterResponse($sale);
     } else {
       $cChrData = $cChrRes->json();
 
