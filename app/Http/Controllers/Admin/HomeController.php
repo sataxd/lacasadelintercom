@@ -36,28 +36,52 @@ class HomeController extends BasicController
             ];
         }
 
-        // Productos con inventario bajo (incluye variantes)
-        $lowStockItems = Item::where('stock', '<=', 'min_stock')
+        // Productos con inventario bajo (incluye variantes, color y talla)
+        $lowStock = collect();
+
+        // 1. Variantes con bajo stock (stock <= min_stock)
+        $variantLowStock = \App\Models\ItemVariant::with(['item', 'color', 'zise'])
+            ->whereColumn('stock', '<=', 'min_stock')
             ->orderBy('stock')
-            ->get(['id', 'name', 'sku', 'stock','image','final_price']);
-        // Agregar variantes con bajo stock
-        $variantLowStock = DB::table('item_variants')
-            ->join('items', 'item_variants.item_id', '=', 'items.id')
-            ->select('item_variants.id', 'items.name', 'items.sku', 'item_variants.stock', 'item_variants.color_id', 'item_variants.zise_id')
-            ->where('item_variants.stock', '<=', 'item_variants.min_stock')
-            ->orderBy('item_variants.stock')
             ->get();
-        $lowStock = collect($lowStockItems)->merge($variantLowStock)->map(function($item) {
-            return [
+
+        foreach ($variantLowStock as $variant) {
+            $lowStock->push([
+                'id' => $variant->item->id,
+                'name' => $variant->item->name,
+                'sku' => $variant->item->sku ?? '',
+                'stock' => $variant->stock,
+                'image' => $variant->color && $variant->color->image ? $variant->color->image : $variant->item->image,
+                'price' => $variant->final_price ?? 0,
+                'color_name' => $variant->color ? $variant->color->name : null,
+                'color_summary' => $variant->color ? $variant->color->summary : null,
+                'zise_name' => $variant->zise ? $variant->zise->name : null,
+                'zise_summary' => $variant->zise ? $variant->zise->summary : null,
+            ]);
+        }
+
+        // 2. Productos simples (sin variantes) con bajo stock
+        $simpleLowStock = Item::whereColumn('stock', '<=', 'min_stock')
+            ->doesntHave('variants')
+            ->orderBy('stock')
+            ->get();
+
+        foreach ($simpleLowStock as $item) {
+            $lowStock->push([
                 'id' => $item->id,
                 'name' => $item->name,
                 'sku' => $item->sku ?? '',
                 'stock' => $item->stock,
-                'image' => $item->image?? null,
-                'price' => $item->final_price ?? 0
+                'image' => $item->image,
+                'price' => $item->final_price ?? 0,
+                'color_name' => null,
+                'color_summary' => null,
+                'zise_name' => null,
+                'zise_summary' => null,
+            ]);
+        }
 
-            ];
-        })->values();
+        $lowStock = $lowStock->values();
 
         // Top productos por cantidad y por ingresos
         $topProducts = $this->getTopProducts();
@@ -401,27 +425,57 @@ class HomeController extends BasicController
     {
         $statusIds = $this->getCompletedStatusIds();
 
-        return SaleDetail::with(['item' => fn($q) => $q->select('id', 'name', 'sku','image')])
-            ->select([
-                'item_id',
-                DB::raw('SUM(quantity) as total_sold'),
-                DB::raw('SUM(quantity * price) as total_revenue')
-            ])
-            ->whereHas('sale', fn($q) => $q->whereIn('status_id', $statusIds))
-            ->groupBy('item_id')
-            ->orderByDesc('total_sold')
-            ->take($limit)
-            ->get()
-            ->map(function ($detail) {
-                return [
-                    'id' => $detail->item_id,
-                    'name' => $detail->item->name ?? 'Producto eliminado',
-                    'sku' => $detail->item->sku ?? 'N/A',
-                    'image' => $detail->item->image?? null,
-                    'total_sold' => $detail->total_sold,
-                    'total_revenue' => $detail->total_revenue
-                ];
-            });
+        // Traer los detalles de venta con color y talla
+        $details = SaleDetail::whereHas('sale', fn($q) => $q->whereIn('status_id', $statusIds))
+            ->get();
+
+        // Agrupar por item_id, color, size
+        $grouped = $details->groupBy(function($d) {
+            return $d->item_id . '||' . ($d->color ?? '') . '||' . ($d->size ?? '');
+        });
+
+        $top = $grouped->map(function($group) {
+            $first = $group->first();
+            $item = Item::find($first->item_id);
+            // Buscar la variante exacta si existe
+            $variant = null;
+            if ($first->color || $first->size) {
+                $variant = \App\Models\ItemVariant::where('item_id', $first->item_id)
+                    ->when($first->color, function($q) use ($first) {
+                        $q->whereHas('color', function($qc) use ($first) {
+                            $qc->where('name', $first->color);
+                        });
+                    })
+                    ->when($first->size, function($q) use ($first) {
+                        $q->whereHas('zise', function($qz) use ($first) {
+                            $qz->where('name', $first->size);
+                        });
+                    })
+                    ->first();
+            }
+            // Sumar cantidad y total generado
+            $total_sold = $group->sum('quantity');
+            $total_revenue = $group->sum(function($d) { return $d->quantity * $d->price; });
+            // Imagen y precio
+            $colorModel = null;
+            if ($variant && $variant->color_id) {
+                $colorModel = \App\Models\ItemColor::find($variant->color_id);
+            }
+            return [
+                'id' => $item ? $item->id : null,
+                'name' => $item ? $item->name : 'Producto eliminado',
+                'sku' => $item ? $item->sku : 'N/A',
+                'image' => $colorModel && $colorModel->image ? $colorModel->image : ($item ? $item->image : null),
+                'stock' => $variant ? $variant->stock : ($item ? $item->stock : null),
+                'price' => $variant ? $variant->final_price : ($item ? $item->final_price : 0),
+                'total_sold' => $total_sold,
+                'total_revenue' => $total_revenue,
+                'color_name' => $first->color ?? null,
+                'zise_name' => $first->size ?? null,
+            ];
+        })->sortByDesc('total_sold')->take($limit)->values();
+
+        return $top;
     }
 
     protected function getRecentSales($limit = 5)

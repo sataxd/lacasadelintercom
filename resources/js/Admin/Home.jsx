@@ -575,142 +575,151 @@ const Home = ({ session, ...props }) => {
 
   // TopProducts mejorado manteniendo funcionalidad
   const TopProducts = ({ products }) => (
-    <div className="col-xl-4">
-      <div className="card border-0 shadow-sm h-100" style={{ borderRadius: "20px" }}>
-        <div className="card-header bg-transparent d-flex justify-content-between align-items-center border-0 pb-0 pt-4">
-          <div>
-            <h5 className="fw-bold mb-2" style={{ fontSize: "1.4rem", color: "#1f2937" }}>
-              Top Productos
-            </h5>
-            <p className="text-muted mb-0" style={{ fontSize: "0.9rem" }}>
-              Los productos más vendidos
-            </p>
-          </div>
-
-        </div>
-        <div className="card-body pt-3">
-          <div className="products-list">
-            {products?.slice(0, 5).map((product, index) => (
-              <div
-                key={product.id}
-                className="product-item d-flex align-items-center p-3 mb-3 position-relative"
-                style={{
-                  background: "linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%)",
-                  borderRadius: "16px",
-                  border: "1px solid #e2e8f0",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-2px)"
-                  e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)"
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)"
-                  e.currentTarget.style.boxShadow = "none"
-                }}
-              >
-                {/* Ranking Badge */}
-                <div
-                  className="ranking-badge position-absolute d-flex align-items-center justify-content-center text-white fw-bold"
-                  style={{
-                    width: "28px",
-                    height: "28px",
-                    borderRadius: "50%",
-                    background:
-                      index === 0
-                        ? "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)"
-                        : index === 1
-                          ? "linear-gradient(135deg, #10b981 0%, #059669 100%)"
-                          : "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-                    fontSize: "12px",
-                    top: "-8px",
-                    left: "-8px",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                    zIndex: 10,
-                  }}
-                >
-                  {index + 1}
-                </div>
-
-                <div className="flex-shrink-0 me-3">
-                  <div
-                    className="product-image-wrapper"
-                    style={{
-                      width: "56px",
-                      height: "56px",
-                      borderRadius: "12px",
-                      overflow: "hidden",
-                      boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-                      border: "2px solid #ffffff",
-                    }}
-                  >
-                    <img
-                      src={`/api/items/media/${product.image}`}
-                      alt={product.name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        objectPosition: "center",
-                        backgroundColor: "#f5f5f5",
-                        transition: "transform 0.3s ease",
-                      }}
-                      onError={(e) => (e.target.src = "/api/cover/thumbnail/null")}
-                      onMouseEnter={(e) => (e.target.style.transform = "scale(1.05)")}
-                      onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex-grow-1 min-w-0">
-                  <h6
-                    className="mb-1 fw-bold text-truncate"
-                    style={{ maxWidth: "140px", color: "#1f2937", fontSize: "0.95rem" }}
-                  >
-                    {product.name}
-                  </h6>
-                  <span className="text-muted fw-medium" style={{ fontSize: "0.8rem" }}>
-                    {product.sku}
-                  </span>
-                </div>
-
-                <div className="text-end">
-                  <span
-                    className="sales-badge badge mb-2 px-3 py-1"
-                    style={{
-                      background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)",
-                      color: "#1e40af",
-                      fontSize: "0.75rem",
-                      fontWeight: "600",
-                      borderRadius: "12px",
-                      border: "1px solid #93c5fd",
-                    }}
-                  >
-                    {product.total_sold}
-                  </span>
-                  <div className="fw-bold" style={{ color: "#059669", fontSize: "0.9rem" }}>
-                    S/ {Number(product.total_revenue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          {products?.length > 5 && (
-            <div className="text-center mt-4">
-              <a
-                href="/admin/items"
-                className="btn btn-link text-decoration-none fw-semibold d-flex align-items-center justify-content-center mx-auto"
-                style={{ color: "#4f46e5", fontSize: "0.9rem" }}
-              >
-                Ver todos los productos
-                <i className="fas fa-chevron-right ms-2" style={{ fontSize: "12px" }}></i>
-              </a>
-            </div>
-          )}
+  <div className="col-xl-4">
+    <div className="card border-0 shadow-sm h-100" style={{ borderRadius: "20px" }}>
+      <div className="card-header bg-transparent d-flex justify-content-between align-items-center border-0 pb-0 pt-4">
+        <div>
+          <h5 className="fw-bold mb-2" style={{ fontSize: "1.4rem", color: "#1f2937" }}>
+            Top Productos
+          </h5>
+          <p className="text-muted mb-0" style={{ fontSize: "0.9rem" }}>
+            Los productos más vendidos
+          </p>
         </div>
       </div>
+      <div className="card-body pt-3">
+        <div className="products-list">
+          {products?.slice(0, 5).map((product, index) => (
+            <div
+              key={product.id + '-' + (product.color_name || '') + '-' + (product.zise_name || '')}
+              className="product-item d-flex align-items-center p-3 mb-3 position-relative"
+              style={{
+                background: "linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%)",
+                borderRadius: "16px",
+                border: "1px solid #e2e8f0",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-2px)"
+                e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)"
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)"
+                e.currentTarget.style.boxShadow = "none"
+              }}
+            >
+              {/* Ranking Badge */}
+              <div
+                className="ranking-badge position-absolute d-flex align-items-center justify-content-center text-white fw-bold"
+                style={{
+                  width: "28px",
+                  height: "28px",
+                  borderRadius: "50%",
+                  background:
+                    index === 0
+                      ? "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)"
+                      : index === 1
+                        ? "linear-gradient(135deg, #10b981 0%, #059669 100%)"
+                        : "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+                  fontSize: "12px",
+                  top: "-8px",
+                  left: "-8px",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                  zIndex: 10,
+                }}
+              >
+                {index + 1}
+              </div>
+
+              <div className="flex-shrink-0 me-3">
+                <div
+                  className="product-image-wrapper"
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "12px",
+                    overflow: "hidden",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+                    border: "2px solid #ffffff",
+                  }}
+                >
+                  <img
+                    src={`/api/items/media/${product.image}`}
+                    alt={product.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center",
+                      backgroundColor: "#f5f5f5",
+                      transition: "transform 0.3s ease",
+                    }}
+                    onError={(e) => (e.target.src = "/api/cover/thumbnail/null")}
+                    onMouseEnter={(e) => (e.target.style.transform = "scale(1.05)")}
+                    onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
+                  />
+                </div>
+              </div>
+
+              <div className="flex-grow-1 min-w-0">
+                <h6
+                  className="mb-1 fw-bold text-truncate"
+                  style={{ maxWidth: "140px", color: "#1f2937", fontSize: "0.95rem" }}
+                >
+                  {product.name}
+                </h6>
+                <span className="text-muted fw-medium" style={{ fontSize: "0.8rem" }}>
+                  {product.sku}
+                </span>
+                {(product.color_name || product.zise_name) && (
+                  <div className="text-muted fw-medium mt-1" style={{ fontSize: "0.8rem" }}>
+                    {product.color_name && (
+                      <span>Color: {product.color_name} </span>
+                    )}
+                    {product.zise_name && (
+                      <span>Talla: {product.zise_name}</span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="text-end">
+                <span
+                  className="sales-badge badge mb-2 px-3 py-1"
+                  style={{
+                    background: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)",
+                    color: "#1e40af",
+                    fontSize: "0.75rem",
+                    fontWeight: "600",
+                    borderRadius: "12px",
+                    border: "1px solid #93c5fd",
+                  }}
+                >
+                  {product.total_sold}
+                </span>
+                <div className="fw-bold" style={{ color: "#059669", fontSize: "0.9rem" }}>
+                  S/ {Number(product.total_revenue).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {products?.length > 5 && (
+          <div className="text-center mt-4">
+            <a
+              href="/admin/items"
+              className="btn btn-link text-decoration-none fw-semibold d-flex align-items-center justify-content-center mx-auto"
+              style={{ color: "#4f46e5", fontSize: "0.9rem" }}
+            >
+              Ver todos los productos
+              <i className="fas fa-chevron-right ms-2" style={{ fontSize: "12px" }}></i>
+            </a>
+          </div>
+        )}
+      </div>
     </div>
+  </div>
   )
 
   // TopProvincesChart mejorado
@@ -1505,6 +1514,19 @@ const Home = ({ session, ...props }) => {
                         <span className="text-muted fw-medium" style={{ fontSize: "0.8rem" }}>
                           SKU: {product.sku}
                         </span>
+                        {(product.color_name || product.zise_name) && (
+                          <div className="text-muted fw-medium mt-1" style={{ fontSize: "0.8rem" }}>
+                            {product.color_name && (
+                              <span style={{ display: 'inline-block', marginRight: 6 }}>
+                                <span style={{ display: 'inline-block', width: 14, height: 14, borderRadius: '50%', background: '#eee', border: '1px solid #ccc', marginRight: 4, verticalAlign: 'middle', backgroundColor: product.color_summary || '#eee' }}></span>
+                                Color: {product.color_name}
+                              </span>
+                            )}
+                            {product.zise_name && (
+                              <span style={{ marginLeft: 6 }}>Talla: {product.zise_name}</span>
+                            )}
+                          </div>
+                        )}
                       </div>
 
                       <div className="text-end">
