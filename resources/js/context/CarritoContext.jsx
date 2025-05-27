@@ -216,6 +216,8 @@ export const CarritoProvider = ({ children }) => {
     const eliminarProducto = (id) => {
         setCarrito((prev) => prev.filter((p) => p.id !== id));
         setAlerta(null); // Reiniciar alerta cuando se elimina un producto
+        // Eliminar flag de ad_shown si corresponde (para volver a mostrar el modal de Ads)
+        localStorage.removeItem(`ad_shown_${id}`);
     };
 
     // Función para vaciar carrito

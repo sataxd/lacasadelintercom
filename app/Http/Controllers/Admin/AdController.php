@@ -12,7 +12,7 @@ class AdController extends BasicController
 {
     public $model = Ad::class;
     public $reactView = 'Admin/Ads';
-    public $imageFields = ['image'];
+    public $imageFields = ['image','banner_image'];
 
     public function setReactViewProperties(Request $request)
     {

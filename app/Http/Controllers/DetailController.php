@@ -31,6 +31,20 @@ class DetailController extends BasicController
             }
         ])->first();
 
+        // Si el item tiene un ad y ese ad tiene offer_item_id, traemos el producto de oferta
+        if ($item && $item->ad && $item->ad->offer_item_id) {
+            $offerItem = Item::with([
+                'colors',
+                'sizes',
+                'images',
+                'variants' => function ($q) {
+                    $q->where('stock', '>', 0)->with(['color', 'zise']);
+                }
+            ])->find($item->ad->offer_item_id);
+            // Adjuntamos el producto de oferta al ad
+            $item->ad->offer_item = $offerItem;
+        }
+
         $products_featured = Item::where('status', true)->where('visible', true)->where('featured', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->limit(12)->get();
         if (count($products_featured) < 4) {
             $original_count = count($products_featured);
@@ -42,10 +56,8 @@ class DetailController extends BasicController
             }
         }
         return [
-
             'item' => $item,
             'products_featured' => $products_featured,
-
         ];
     }
 }

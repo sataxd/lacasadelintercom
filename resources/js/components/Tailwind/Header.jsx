@@ -59,7 +59,23 @@ const Header = ({
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const { carrito, eliminarProducto } = useContext(CarritoContext);
+    const { carrito, eliminarProducto, agregarAlCarrito } = useContext(CarritoContext);
+
+    // --- Múltiples banners de Ads en el modal del carrito ---
+    // Buscar todos los Ads activos con banner_image y producto de oferta no presente en el carrito ni aceptado
+    let bannerAds = [];
+    for (const prod of carrito) {
+        if (prod.ad && prod.ad.banner_image && prod.ad.offer_item) {
+            // Solo mostrar si la oferta no está en el carrito
+            const offerItemId = prod.ad.offer_item.id;
+            const ofertaEnCarrito = carrito.some(
+                (item) => item.id === offerItemId
+            );
+            if (!ofertaEnCarrito) {
+                bannerAds.push(prod.ad);
+            }
+        }
+    }
     const [animar, setAnimar] = useState(false);
     const totalProductos = carrito.reduce((acc, item) => {
         if (item.variations && item.variations.length > 0) {
@@ -119,9 +135,8 @@ const Header = ({
         <>
             {showSlogan && (
                 <div
-                    className={`text-center px-[5%] py-4 font-light bg-[#6048B7] text-white text-[10.21px] md:text-[16.21px] leading-6 uppercase tracking-[0.2em] font-poppins w-full  ${
-                        backgroundType === "none" && "mb-10 lg:mb-[78px] "
-                    }`}
+                    className={`text-center px-[5%] py-4 font-light bg-[#6048B7] text-white text-[10.21px] md:text-[16.21px] leading-6 uppercase tracking-[0.2em] font-poppins w-full  ${backgroundType === "none" && "mb-10 lg:mb-[78px] "
+                        }`}
                 >
                     <span className="text-[#DDEC4C] font-semibold">
                         ¡ENVÍO GRATIS
@@ -168,16 +183,14 @@ const Header = ({
                     ></div>
                 )}
                 <header
-                    className={`font-poppins fixed lg:w-full top-0 overflow-hidden z-40 transition-colors duration-300 ${
-                        backgroundType === "none"
+                    className={`font-poppins fixed lg:w-full top-0 overflow-hidden z-40 transition-colors duration-300 ${backgroundType === "none"
                             ? "bg-[#5339B1] mt-12 "
                             : isScrolled
-                            ? "bg-[#5339B1]  pt-0 !mt-0 "
-                            : "bg-transparent top-4 pt-8 md:pt-14 lg:pt-10"
-                    } ${
-                        isScrolled &&
+                                ? "bg-[#5339B1]  pt-0 !mt-0 "
+                                : "bg-transparent top-4 pt-8 md:pt-14 lg:pt-10"
+                        } ${isScrolled &&
                         "bg-[#5339B1]  pt-0 !mt-0 transition-all duration-150 "
-                    }`}
+                        }`}
                 >
                     <div
                         className={`px-[5%] w-screen py-4 lg:py-0 lg:max-w-7xl 2xl:max-w-[92rem] mx-auto flex  justify-between items-center text-white shadow-lg lg:shadow-none `}
@@ -190,9 +203,8 @@ const Header = ({
                                 aria-label="Toggle menu"
                             >
                                 <i
-                                    className={`fas ${
-                                        isOpen ? "fa-times" : "fa-bars"
-                                    } text-lg md:text-2xl`}
+                                    className={`fas ${isOpen ? "fa-times" : "fa-bars"
+                                        } text-lg md:text-2xl`}
                                 ></i>
                             </button>
                             <a href="/">
@@ -265,9 +277,8 @@ const Header = ({
                                 >
                                     <i className="fas fa-shopping-cart"></i>
                                     <span
-                                        className={`absolute -top-1 -right-1 bg-[#FF9900] text-white rounded-full w-3 h-3 flex items-center justify-center text-[10px] font-medium transition-transform ${
-                                            animar ? "scale-150" : "scale-100"
-                                        }`}
+                                        className={`absolute -top-1 -right-1 bg-[#FF9900] text-white rounded-full w-3 h-3 flex items-center justify-center text-[10px] font-medium transition-transform ${animar ? "scale-150" : "scale-100"
+                                            }`}
                                         style={{
                                             transition:
                                                 "transform 0.3s ease-in-out",
@@ -299,9 +310,8 @@ const Header = ({
                                 >
                                     <i className="fas fa-shopping-cart"></i>
                                     <span
-                                        className={`absolute -top-1 -right-1 bg-[#FF9900] text-white rounded-full w-3 h-3 flex items-center justify-center text-[7px] font-medium transition-transform ${
-                                            animar ? "scale-150" : "scale-100"
-                                        }`}
+                                        className={`absolute -top-1 -right-1 bg-[#FF9900] text-white rounded-full w-3 h-3 flex items-center justify-center text-[7px] font-medium transition-transform ${animar ? "scale-150" : "scale-100"
+                                            }`}
                                         style={{
                                             transition:
                                                 "transform 0.3s ease-in-out",
@@ -334,13 +344,11 @@ const Header = ({
                 </header>
                 <div
                     ref={menuRef}
-                    className={`fixed   md:top-20 inset-0 text-white z-[999] transform ${
-                        isOpen ? "opacity-1 block " : "hidden opacity-0 "
-                    } ${
-                        isScrolled
+                    className={`fixed   md:top-20 inset-0 text-white z-[999] transform ${isOpen ? "opacity-1 block " : "hidden opacity-0 "
+                        } ${isScrolled
                             ? "top-[3.75rem] bg-[#5339B1]"
                             : "top-24 bg-[#5339B1]"
-                    } transition-transform duration-300 ease-in-out p-[5%] h-max overflow-y-auto `}
+                        } transition-transform duration-300 ease-in-out p-[5%] h-max overflow-y-auto `}
                 >
                     <ul className="flex flex-col gap-4 items-center justify-center">
                         <li>
@@ -416,8 +424,8 @@ const Header = ({
                                                     src={`/api/items/media/${item.image}`}
                                                     alt={item.name}
                                                     onError={(e) =>
-                                                        (e.target.src =
-                                                            "/api/cover/thumbnail/null")
+                                                    (e.target.src =
+                                                        "/api/cover/thumbnail/null")
                                                     }
                                                     className="w-20 h-20 md:w-28 md:h-28  object-cover"
                                                 />
@@ -446,7 +454,7 @@ const Header = ({
                                                                     S/{" "}
                                                                     {Number(
                                                                         item.price -
-                                                                            item.discount
+                                                                        item.discount
                                                                     ).toFixed(
                                                                         0
                                                                     )}{" "}
@@ -513,19 +521,19 @@ const Header = ({
                                                                 </button>
                                                                 <span className="h-full flex items-center text-xs md:text-base  font-medium">
                                                                     {item.variations &&
-                                                                    item
-                                                                        .variations
-                                                                        .length >
+                                                                        item
+                                                                            .variations
+                                                                            .length >
                                                                         0
                                                                         ? item.variations.reduce(
-                                                                              (
-                                                                                  sum,
-                                                                                  v
-                                                                              ) =>
-                                                                                  sum +
-                                                                                  v.quantity,
-                                                                              0
-                                                                          )
+                                                                            (
+                                                                                sum,
+                                                                                v
+                                                                            ) =>
+                                                                                sum +
+                                                                                v.quantity,
+                                                                            0
+                                                                        )
                                                                         : item.quantity}
                                                                 </span>
                                                                 <button
@@ -546,6 +554,33 @@ const Header = ({
                                         ))
                                     )}
                                 </div>
+                                  
+                                {/* Múltiples banners de Ads activos */}
+                                {bannerAds.length > 0 && (
+                                    <div className="my-4 flex flex-col items-center gap-6">
+                                        {bannerAds.map((bannerAd, idx) => (
+                                            <div key={bannerAd.id || idx} className="w-full flex flex-col items-center">
+                                                <div className="text-start mt-2 text-black font-bold my-2">
+                                                    ¡Aprovecha esta oferta exclusiva!
+                                                </div>
+                                                <img
+                                                    src={`/api/ads/media/${bannerAd.banner_image}`}
+                                                    alt="Promo especial"
+                                                    className="w-full max-w-md rounded-xl shadow-lg cursor-pointer"
+                                                    onClick={async () => {
+                                                        if (!bannerAd.offer_item) return;
+                                                        await agregarAlCarrito({
+                                                            ...bannerAd.offer_item,
+                                                            id: bannerAd.offer_item.id,
+                                                            quantity: 1,
+                                                            price: bannerAd.offer_price ?? bannerAd.offer_item.final_price ?? bannerAd.offer_item.price,
+                                                        });
+                                                    }}
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                                 {/* Total y botón de Checkout */}
                                 {totalPrecio > 0 && (
                                     <div className="  w-full mt-8">

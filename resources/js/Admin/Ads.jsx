@@ -33,8 +33,13 @@ const Ads = ({ items }) => {
     const invasivoRef = useRef();
     const actionsRef = useRef();
     const itemRef = useRef();
+    const offer_itemRef = useRef();
+    const offer_priceRef = useRef();
+    const banner_imageRef = useRef();
+
     const [isEditing, setIsEditing] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedOfferItem, setSelectedOfferItem] = useState(null);
     const [selectedAction, setSelectedAction] = useState(false);
     const onModalOpen = (data) => {
         if (data?.id) setIsEditing(true);
@@ -45,10 +50,14 @@ const Ads = ({ items }) => {
         descriptionRef.current.value = data?.description ?? "";
         imageRef.image.src = `/api/ads/media/${data?.image}`;
         imageRef.current.value = null;
+        banner_imageRef.image.src = `/api/ads/media/${data?.banner_image}`;
+        banner_imageRef.current.value = null;
         dateBeginRef.current.value = data?.date_begin ?? "";
         dateEndRef.current.value = data?.date_end ?? "";
         secondsRef.current.value = data?.seconds ?? 0;
         itemRef.current.value = data?.item_id ?? null;
+        offer_itemRef.current.value = data?.offer_item_id ?? null;
+        offer_priceRef.current.value = data?.offer_price ?? null;
         linkRef.current.value = data?.link ?? "";
         if (data?.actions) {
             $(actionsRef.current).prop("checked", false).trigger("click");
@@ -79,6 +88,8 @@ const Ads = ({ items }) => {
                 seconds: secondsRef.current.value || 0,
                 actions: actionsRef.current.checked ? 1 : 0,
                 item_id: itemRef.current.value || null,
+                offer_item_id: offer_itemRef.current.value || null,
+                offer_price: offer_priceRef.current.value || null,
                 link: linkRef.current.value,
                 invasivo: invasivoRef.current.checked ? 1 : 0,
             };
@@ -90,6 +101,11 @@ const Ads = ({ items }) => {
             const file = imageRef.current.files[0];
             if (file) {
                 formData.append("image", file);
+            }
+
+            const fileBanner = banner_imageRef.current.files[0];
+            if (fileBanner) {
+                formData.append("banner_image", fileBanner);
             }
 
             const result = await adsRest.save(formData);
@@ -251,7 +267,7 @@ const Ads = ({ items }) => {
                                         <p className="mb-0">
                                             <b>Se muestra:</b>{" "}
                                             {data.seconds > 0 &&
-                                            data.actions === 0 ? (
+                                                data.actions === 0 ? (
                                                 <>Después de {data.seconds}s</>
                                             ) : data.actions === 1 ? (
                                                 <>Al agregar carrito</>
@@ -351,6 +367,7 @@ const Ads = ({ items }) => {
                         fit="contain"
                         required
                     />
+                    
                     <div className="col-md-8">
                         <SwitchFormGroup
                             eRef={invasivoRef}
@@ -368,6 +385,14 @@ const Ads = ({ items }) => {
                             rows={2}
                         />
                     </div>
+                     <ImageFormGroup
+                        eRef={banner_imageRef}
+                        label="Banner Imagen"
+                        col="col-md-12"
+                        aspect={16/9}
+                        fit="contain"
+                        
+                    />
                     <label>Mostrar</label>
                     <InputFormGroup
                         eRef={dateBeginRef}
@@ -407,6 +432,27 @@ const Ads = ({ items }) => {
                             </option>
                         ))}
                     </SelectFormGroup>
+
+                    <SelectFormGroup
+                        eRef={offer_itemRef}
+                        label="Producto Ads"
+                        dropdownParent="#principal-container"
+                        onChange={(e) => setSelectedOfferItem(e.target.value)}
+                        disabled={!selectedAction}
+                    >
+                        {items.map((item, index) => (
+                            <option key={index} value={item.id}>
+                                {item.name}
+                            </option>
+                        ))}
+                    </SelectFormGroup>
+
+                    <InputFormGroup
+                        eRef={offer_priceRef}
+                        label="Precio oferta del producto"
+                        type="number"
+                        disabled={!selectedAction}
+                    />
 
                     <InputFormGroup
                         eRef={secondsRef}

@@ -92,7 +92,8 @@ const Detail = ({ item }) => {
             alert(result.message || 'No se pudo agregar al carrito por falta de stock.');
             return;
         }
-        if (item.ad) {
+        // Solo mostrar el modal si no se ha mostrado antes para este producto
+        if (item.ad && !localStorage.getItem(`ad_shown_${item.id}`)) {
             setIsModalOpen(true);
         }
     };
@@ -395,7 +396,7 @@ const Detail = ({ item }) => {
             </div>
             {/* Modal */}
 
-            {item?.ad && isModalOpen  && (
+            {item?.ad && isModalOpen && (
                 <div
                     className="fixed inset-0 flex items-center justify-center z-50 bg-[#00000080]"
                     style={{ backdropFilter: "blur(10px)" }}
@@ -412,14 +413,26 @@ const Detail = ({ item }) => {
                                 startDate={item.ad.dete_begin}
                                 endDate={item.ad.date_end}
                             />
-                            <div>
-                                <a href={item.ad.link}>
-                                    <img
-                                        src={`/api/ads/media/${item.ad.image}`}
-                                        alt="Ad"
-                                        className="w-full h-full object-cover rounded-[30.58px] 2xl:rounded-[48.58px]"
-                                    />
-                                </a>
+                            <div className="flex flex-col items-center">
+                                <img
+                                    src={`/api/ads/media/${item.ad.image}`}
+                                    alt="Ad"
+                                    className="w-full h-full object-cover rounded-[30.58px] 2xl:rounded-[48.58px] cursor-pointer"
+                                    onClick={async () => {
+                                        // Agregar producto de oferta al carrito usando los datos completos
+                                        if (!item.ad.offer_item) return;
+                                        await agregarAlCarrito({
+                                            ...item.ad.offer_item,
+                                            id: item.ad.offer_item.id,
+                                            quantity: 1,
+                                            price: item.ad.offer_price ?? item.ad.offer_item.final_price ?? item.ad.offer_item.price,
+                                            // Puedes agregar lógica para variantes si es necesario
+                                        });
+                                        // Ya no se guarda flag, siempre debe aparecer el modal de oferta
+                                        setIsModalOpen(false);
+                                    }}
+                                />
+                               
                             </div>
                         </div>
                     </div>

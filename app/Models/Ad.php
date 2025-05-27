@@ -27,6 +27,9 @@ class Ad extends Model
         'visible',
         'invasivo',
         'status',
+        'offer_item_id',
+        'offer_price',
+        'banner_image',
     ];
 
     public static function today()
