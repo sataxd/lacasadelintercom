@@ -19,43 +19,155 @@ class HomeController extends BasicController
     public $reactView = 'Admin/Home';
     public $reactRootView = 'admin';
 
-    private $completedStatusNames = ['Pagado', 'Enviado', 'Entregado'];
+    // Ajusta los nombres de status a los que realmente representan ventas efectivas en tu sistema
+    private $completedStatusNames = ['Concluido', 'Procesando'];
 
     public function setReactViewProperties(Request $request)
     {
+        // Pedidos por estado
+        $statuses = Status::all();
+        $ordersByStatus = [];
+        foreach ($statuses as $status) {
+            $count = Sale::where('status_id', $status->id)->count();
+            $ordersByStatus[] = [
+                'name' => $status->name,
+                'color' => $status->color,
+                'count' => $count
+            ];
+        }
 
-             // Pedidos por estado
-             $statuses = Status::all();
-             $ordersByStatus = [];
-             foreach ($statuses as $status) {
-                 $count = Sale::where('status_id', $status->id)->count();
-                 $ordersByStatus[] = [
-                     'name' => $status->name,
-                     'color' => $status->color,
-                     'count' => $count
-                 ];
-             }
-     
+        // Productos con inventario bajo (incluye variantes)
+        $lowStockItems = Item::where('stock', '<=', 'min_stock')
+            ->orderBy('stock')
+            ->get(['id', 'name', 'sku', 'stock','image','final_price']);
+        // Agregar variantes con bajo stock
+        $variantLowStock = DB::table('item_variants')
+            ->join('items', 'item_variants.item_id', '=', 'items.id')
+            ->select('item_variants.id', 'items.name', 'items.sku', 'item_variants.stock', 'item_variants.color_id', 'item_variants.zise_id')
+            ->where('item_variants.stock', '<=', 'item_variants.min_stock')
+            ->orderBy('item_variants.stock')
+            ->get();
+        $lowStock = collect($lowStockItems)->merge($variantLowStock)->map(function($item) {
+            return [
+                'id' => $item->id,
+                'name' => $item->name,
+                'sku' => $item->sku ?? '',
+                'stock' => $item->stock,
+                'image' => $item->image?? null,
+                'price' => $item->final_price ?? 0
+
+            ];
+        })->values();
+
+        // Top productos por cantidad y por ingresos
+        $topProducts = $this->getTopProducts();
+
+        // Ventas por ubicación (departamento, provincia, distrito)
+        $salesByLocation = $this->getSalesByLocation();
+
+        // Tráfico y conversión
+        $trafficStats = $this->getTrafficStats();
+        $conversionStats = $this->getConversionStats();
+
+        // Tráfico por fuente y redes sociales
+        $trafficSources = $this->getTrafficSources();
+        $socialMediaTraffic = $this->getSocialMediaTraffic();
+
+        // Provincias top
+        $topProvinces = $this->getTopProvinces();
+
+        // Pedidos recientes
+        $recentOrders = $this->getRecentSales();
+
+
+        // KPIs requeridos: ventas hoy, ventas mes, pedidos hoy, pedidos mes
+        $kpis = $this->getKpis();
+        // También incluir los KPIs en el array 'metrics' para compatibilidad si algún frontend lo espera
+        $metrics = $kpis;
+        // Datos de ventas para gráfica de barras (últimos 30 días)
+        $salesBarData = $this->getSalesBarData();
+
+        // Usuarios
+        $userStats = $this->getUserStats();
+
         return [
-            'metrics' => $this->getMetrics(),
-            'sales_data' => [
-                'day' => $this->getSalesData('day'),
-                'week' => $this->getSalesData('week'),
-                'month' => $this->getSalesData('month'),
-            ],
-            'ordersByStatus' =>  $ordersByStatus,
-            'top_products' => $this->getTopProducts(),
-            'recent_orders' => $this->getRecentSales(),
-            'low_stock' => $this->getLowStockItems(),
-            'traffic_stats' => $this->getTrafficStats(),
-            'conversion_stats' => $this->getConversionStats(),
-            'sales_by_location' => $this->getSalesByLocation(),
-            'user_stats' => $this->getUserStats(),
-
-            'top_provinces' => $this->getTopProvinces(),
-            'traffic_sources' => $this->getTrafficSources(),
-            'social_media_traffic' => $this->getSocialMediaTraffic(),
+            'kpis' => $kpis,
+            'metrics' => $metrics, // para compatibilidad, pero el frontend usará kpis
+            'sales_bar_data' => $salesBarData,
+            'ordersByStatus' => $ordersByStatus,
+            'top_products' => $topProducts,
+            'recent_orders' => $recentOrders,
+            'low_stock' => $lowStock,
+            'traffic_stats' => $trafficStats,
+            'conversion_stats' => $conversionStats,
+            'sales_by_location' => $salesByLocation,
+            'user_stats' => $userStats,
+            'top_provinces' => $topProvinces,
+            'traffic_sources' => $trafficSources,
+            'social_media_traffic' => $socialMediaTraffic,
         ];
+
+    }
+
+    // KPIs requeridos para el dashboard
+    protected function getKpis()
+    {
+        $statusIds = $this->getCompletedStatusIds();
+        $today = Carbon::now('America/Lima')->startOfDay();
+        $monthStart = Carbon::now('America/Lima')->startOfMonth();
+
+        // Ventas hoy
+        $salesToday = Sale::whereIn('status_id', $statusIds)
+            ->whereBetween('created_at', [$today, $today->copy()->endOfDay()])
+            ->sum('total_amount');
+        // Ventas mes
+        $salesMonth = Sale::whereIn('status_id', $statusIds)
+            ->whereBetween('created_at', [$monthStart, $monthStart->copy()->endOfMonth()])
+            ->sum('total_amount');
+        // Pedidos hoy
+        $ordersToday = Sale::whereIn('status_id', $statusIds)
+            ->whereBetween('created_at', [$today, $today->copy()->endOfDay()])
+            ->count();
+        // Pedidos mes
+        $ordersMonth = Sale::whereIn('status_id', $statusIds)
+            ->whereBetween('created_at', [$monthStart, $monthStart->copy()->endOfMonth()])
+            ->count();
+
+        return [
+            'sales_today' => $salesToday,
+            'sales_month' => $salesMonth,
+            'orders_today' => $ordersToday,
+            'orders_month' => $ordersMonth,
+        ];
+    }
+
+    // Gráfica de barras: pedidos y montos por fecha (últimos 30 días)
+    protected function getSalesBarData()
+    {
+        $statusIds = $this->getCompletedStatusIds();
+        $start = Carbon::now('America/Lima')->subDays(29)->startOfDay();
+        $end = Carbon::now('America/Lima')->endOfDay();
+        $sales = Sale::whereIn('status_id', $statusIds)
+            ->whereBetween('created_at', [$start, $end])
+            ->selectRaw('DATE(created_at) as date, SUM(total_amount) as total_sales, COUNT(*) as order_count')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+        // Rellenar días faltantes
+        $dates = collect();
+        for ($d = $start->copy(); $d->lte($end); $d->addDay()) {
+            $dates->push($d->format('Y-m-d'));
+        }
+        $salesByDate = $sales->keyBy('date');
+        $result = $dates->map(function($date) use ($salesByDate) {
+            $row = $salesByDate->get($date);
+            return [
+                'date' => $date,
+                'total_sales' => $row ? (float)$row->total_sales : 0,
+                'order_count' => $row ? (int)$row->order_count : 0,
+            ];
+        })->values();
+        return $result;
     }
 
     protected function getTopProvinces($limit = 5)
@@ -124,45 +236,46 @@ class HomeController extends BasicController
     protected function getMetrics()
     {
         $statusIds = $this->getCompletedStatusIds();
-        $today = Carbon::today();
-        $yesterday = Carbon::yesterday();
-        $currentMonth = Carbon::now()->startOfMonth();
+        // Usar la zona horaria local (America/Lima)
+        $today = Carbon::now('America/Lima')->startOfDay();
+        $yesterday = Carbon::now('America/Lima')->subDay()->startOfDay();
+        $currentMonth = Carbon::now('America/Lima')->startOfMonth();
 
         // Ventas diarias
         $dailySales = Sale::whereIn('status_id', $statusIds)
-            ->whereDate('created_at', $today)
+            ->whereBetween('created_at', [$today, $today->copy()->endOfDay()])
             ->sum('total_amount');
 
         $prevDailySales = Sale::whereIn('status_id', $statusIds)
-            ->whereDate('created_at', $yesterday)
+            ->whereBetween('created_at', [$yesterday, $yesterday->copy()->endOfDay()])
             ->sum('total_amount');
 
         // Pedidos mensuales
         $monthlySales = Sale::whereIn('status_id', $statusIds)
-            ->whereMonth('created_at', $currentMonth)
+            ->whereBetween('created_at', [$currentMonth, $currentMonth->copy()->endOfMonth()])
             ->count();
 
         $prevMonthlySales = Sale::whereIn('status_id', $statusIds)
-            ->whereMonth('created_at', $currentMonth->copy()->subMonth())
+            ->whereBetween('created_at', [$currentMonth->copy()->subMonth(), $currentMonth->copy()->subMonth()->endOfMonth()])
             ->count();
 
         // Ticket promedio
         $averageSaleValue = Sale::whereIn('status_id', $statusIds)
-            ->whereMonth('created_at', $currentMonth)
+            ->whereBetween('created_at', [$currentMonth, $currentMonth->copy()->endOfMonth()])
             ->avg('total_amount');
 
         $prevASV = Sale::whereIn('status_id', $statusIds)
-            ->whereMonth('created_at', $currentMonth->copy()->subMonth())
+            ->whereBetween('created_at', [$currentMonth->copy()->subMonth(), $currentMonth->copy()->subMonth()->endOfMonth()])
             ->avg('total_amount');
 
         // Nuevos clientes
         $newCustomers = Sale::whereIn('status_id', $statusIds)
-            ->whereDate('created_at', $today)
+            ->whereBetween('created_at', [$today, $today->copy()->endOfDay()])
             ->distinct('user_id')
             ->count('user_id');
 
         $prevNewCustomers = Sale::whereIn('status_id', $statusIds)
-            ->whereDate('created_at', $yesterday)
+            ->whereBetween('created_at', [$yesterday, $yesterday->copy()->endOfDay()])
             ->distinct('user_id')
             ->count('user_id');
 
@@ -176,7 +289,7 @@ class HomeController extends BasicController
             'new_customers' => $newCustomers,
             'new_customers_trend' => $this->calculateTrend($newCustomers, $prevNewCustomers),
             'total_users' => User::count(),
-            'active_users' => User::where('created_at', '>=', $today->subWeek())->count(), //last_login_at
+            'active_users' => User::where('created_at', '>=', Carbon::now('America/Lima')->subWeek())->count(), //last_login_at
         ];
     }
 
@@ -413,5 +526,39 @@ class HomeController extends BasicController
     {
         if ($previous == 0) return $current > 0 ? 100 : 0;
         return round(($current - $previous) / $previous * 100, 2);
+    }
+
+        // Nuevo endpoint: ventas diarias por rango de fechas
+    public function salesByDateRange(Request $request)
+    {
+        $statusIds = $this->getCompletedStatusIds();
+        $start = $request->input('start_date');
+        $end = $request->input('end_date');
+        if (!$start || !$end) {
+            return response()->json(['error' => 'Debe enviar start_date y end_date'], 400);
+        }
+        $startDate = Carbon::parse($start, 'America/Lima')->startOfDay();
+        $endDate = Carbon::parse($end, 'America/Lima')->endOfDay();
+
+        $sales = Sale::whereIn('status_id', $statusIds)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->selectRaw('DATE(created_at) as date, SUM(total_amount) as total_sales, COUNT(*) as order_count')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+        // Calcular monto acumulado diario
+        $accum = 0;
+        $result = $sales->map(function($item) use (&$accum) {
+            $accum += $item->total_sales;
+            return [
+                'date' => $item->date,
+                'total_sales' => (float)$item->total_sales,
+                'order_count' => (int)$item->order_count,
+                'accum_sales' => (float)$accum
+            ];
+        });
+
+        return response()->json($result);
     }
 }

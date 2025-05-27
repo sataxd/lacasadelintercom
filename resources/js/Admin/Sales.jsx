@@ -343,6 +343,7 @@ const Sales = ({ statuses }) => {
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Colores</th>
+                                              <th>Tallas</th>
                                             <th>Precio</th>
                                             <th>Cantidad</th>
                                             <th>Subtotal</th>
@@ -361,6 +362,7 @@ const Sales = ({ statuses }) => {
                                                     <tr key={index}>
                                                         <td>{detail.name}</td>
                                                         <td>{detail.color}</td>
+                                                            <td>{detail.size}</td>
                                                         <td align="right">
                                                             S/{" "}
                                                             {Number2Currency(
