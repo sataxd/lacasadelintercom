@@ -461,6 +461,7 @@ class HomeController extends BasicController
     protected function getTrafficStats()
     {
         return [
+            // Usar device_type para nombres amigables
             'by_device' => WebsiteStatistic::selectRaw('
                 device_type as device,
                 COUNT(*) as visits,
@@ -499,19 +500,20 @@ class HomeController extends BasicController
     protected function getConversionStats()
     {
         return [
+            // Usar device_type para nombres amigables
             'by_device' => WebsiteStatistic::selectRaw('
-            COALESCE(ws.device, "Sin dispositivo") as device,
-            COUNT(ws.id) as visits,
-            COUNT(ss.sale_id) as conversions,
-            ROUND(
-                CASE WHEN COUNT(ws.id) > 0 THEN COUNT(ss.sale_id) * 100.0 / COUNT(ws.id)
-                ELSE 0 END,
-                2
-            ) as conversion_rate
-        ')
+                COALESCE(ws.device_type, "Sin dispositivo") as device,
+                COUNT(ws.id) as visits,
+                COUNT(ss.sale_id) as conversions,
+                ROUND(
+                    CASE WHEN COUNT(ws.id) > 0 THEN COUNT(ss.sale_id) * 100.0 / COUNT(ws.id)
+                    ELSE 0 END,
+                    2
+                ) as conversion_rate
+            ')
                 ->from('website_statistics as ws')
                 ->leftJoin('statistics_sales as ss', 'ws.id', '=', 'ss.website_statistic_id')
-                ->groupBy(DB::raw('COALESCE(ws.device, "Sin dispositivo")'))
+                ->groupBy(DB::raw('COALESCE(ws.device_type, "Sin dispositivo")'))
                 ->get()
                 ->map(function ($item) {
                     $item->visits = (int)$item->visits;

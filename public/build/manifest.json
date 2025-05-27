@@ -2373,7 +2373,7 @@
     ]
   },
   "resources/js/components/Adminto/Modal.jsx": {
-    "file": "assets/Modal-ClxeGkIS.js",
+    "file": "assets/Modal-uOWZuDyS.js",
     "name": "Modal",
     "src": "resources/js/components/Adminto/Modal.jsx",
     "isEntry": true,
@@ -2459,7 +2459,7 @@
     ]
   },
   "resources/js/components/Adminto/form/PasswordFormGroup.jsx": {
-    "file": "assets/PasswordFormGroup-ClxeGkIS.js",
+    "file": "assets/PasswordFormGroup-uOWZuDyS.js",
     "name": "PasswordFormGroup",
     "src": "resources/js/components/Adminto/form/PasswordFormGroup.jsx",
     "isEntry": true,
@@ -2558,7 +2558,7 @@
     ]
   },
   "resources/js/components/Blog/Filter.jsx": {
-    "file": "assets/Filter-uOWZuDyS.js",
+    "file": "assets/Filter-ClxeGkIS.js",
     "name": "Filter",
     "src": "resources/js/components/Blog/Filter.jsx",
     "isEntry": true,
@@ -2638,7 +2638,7 @@
     ]
   },
   "resources/js/components/Courses/Filter.jsx": {
-    "file": "assets/Filter-ClxeGkIS.js",
+    "file": "assets/Filter-uOWZuDyS.js",
     "name": "Filter",
     "src": "resources/js/components/Courses/Filter.jsx",
     "isEntry": true,
@@ -2728,7 +2728,7 @@
     ]
   },
   "resources/js/components/DataGrid.jsx": {
-    "file": "assets/DataGrid-uOWZuDyS.js",
+    "file": "assets/DataGrid-ClxeGkIS.js",
     "name": "DataGrid",
     "src": "resources/js/components/DataGrid.jsx",
     "isEntry": true,
@@ -2916,7 +2916,7 @@
     ]
   },
   "resources/js/components/Modal.jsx": {
-    "file": "assets/Modal-uOWZuDyS.js",
+    "file": "assets/Modal-ClxeGkIS.js",
     "name": "Modal",
     "src": "resources/js/components/Modal.jsx",
     "isEntry": true,
@@ -3037,7 +3037,7 @@
     ]
   },
   "resources/js/components/Tailwind/DataGrid.jsx": {
-    "file": "assets/DataGrid-ClxeGkIS.js",
+    "file": "assets/DataGrid-uOWZuDyS.js",
     "name": "DataGrid",
     "src": "resources/js/components/Tailwind/DataGrid.jsx",
     "isEntry": true,
@@ -3331,20 +3331,20 @@
     ]
   },
   "resources/js/components/Test/HairGoals.jsx": {
-    "file": "assets/HairGoals-uOWZuDyS.js",
+    "file": "assets/HairGoals-Pqu0qlsw.js",
     "name": "HairGoals",
     "src": "resources/js/components/Test/HairGoals.jsx",
-    "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "resources/js/components/About/AboutHeader.jsx",
       "_index-B80Lgev0.js"
     ]
   },
   "resources/js/components/Test/HairType.jsx": {
-    "file": "assets/HairType-CpPx52vs.js",
+    "file": "assets/HairType-D4XKIVGc.js",
     "name": "HairType",
     "src": "resources/js/components/Test/HairType.jsx",
-    "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "resources/js/components/About/AboutHeader.jsx",
       "_index-B80Lgev0.js",
@@ -3495,7 +3495,7 @@
     ]
   },
   "resources/js/components/form/PasswordFormGroup.jsx": {
-    "file": "assets/PasswordFormGroup-uOWZuDyS.js",
+    "file": "assets/PasswordFormGroup-ClxeGkIS.js",
     "name": "PasswordFormGroup",
     "src": "resources/js/components/form/PasswordFormGroup.jsx",
     "isEntry": true,
