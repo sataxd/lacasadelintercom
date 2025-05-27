@@ -112,6 +112,7 @@ export const CarritoProvider = ({ children }) => {
         const stockInfo = stockResult[0];
         if (!stockInfo || !stockInfo.available) {
             setAlerta({
+                id: Date.now(),
                 message: `No hay stock suficiente para "${producto.name}"${stockInfo && stockInfo.color ? ` (${stockInfo.color}${stockInfo.size ? ' - ' + stockInfo.size : ''})` : ''}.`,
                 actionLabel: "Ver productos",
                 duration: 5000,
@@ -206,6 +207,7 @@ export const CarritoProvider = ({ children }) => {
             }
         });
         setAlerta({
+            id: Date.now(),
             message: "Se ha agregado el artículo al carrito",
             actionLabel: "Ver carrito",
             duration: 5000,
