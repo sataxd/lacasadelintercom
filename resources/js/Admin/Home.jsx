@@ -1045,7 +1045,7 @@ const Home = ({ session, ...props }) => {
                     >
                       <div className="d-flex align-items-center justify-content-center mb-3">
                         <i
-                          className={`fab fa-${item.source} me-3`}
+                          className={`fa-brands fab fa-${item.source} me-3`}
                           style={{
                             fontSize: "2rem",
                             color: index === 0 ? "#4f46e5" : index === 1 ? "#10b981" : "#f59e0b",
@@ -1286,7 +1286,7 @@ const Home = ({ session, ...props }) => {
 
         {/* Estado de pedidos y redes sociales */}
         <div className="row g-4 mb-5">
-          <div className="col-xl-6">
+          <div className="col-xl-5">
             <div className="card border-0 shadow-sm h-100" style={{ borderRadius: "20px" }}>
               <div className="card-header bg-transparent border-0 pb-0 pt-4">
                 <h5 className="fw-bold mb-2" style={{ fontSize: "1.4rem", color: "#1f2937" }}>
@@ -1333,7 +1333,7 @@ const Home = ({ session, ...props }) => {
               </div>
             </div>
           </div>
-          <div className="col-xl-6">
+          <div className="col-xl-7">
             <SocialMediaTrafficChart data={dashboardData.social_media_traffic} />
           </div>
         </div>
