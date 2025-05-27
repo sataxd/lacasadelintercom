@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body style="background: #7B4EDB; font-family: 'Poppins', Arial, sans-serif; margin: 0; padding: 0;">
-    <div style="max-width: 750px; margin: 40px auto; background: #7B4EDB; border-radius: 24px; padding: 20px 32px 40px; color: #fff;">
+    <div style="max-width: 750px; margin: 40px auto; background: #7B4EDB; border-radius: 24px; padding: -20px 32px 40px; color: #fff;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
             <div style="font-size: 22px; font-weight: 700; background: #fff; color: #7B4EDB; border-radius: 16px; padding: 8px 24px;">Pedido: <span style="font-weight: 400;">{{ $sale->code }}</span></div>
             <img src="https://wefem.atalaya.pe/assets/img/logo.png" alt="wefem" style="height: 40px;">
