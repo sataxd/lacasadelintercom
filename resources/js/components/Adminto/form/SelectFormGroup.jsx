@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from "react"
 const SelectFormGroup = ({ id, col, className, label, specification, eRef, required = false, children, dropdownParent, noMargin = false, multiple = false, disabled = false, onChange = () => { },
   templateResult,
   templateSelection,
+  value,
+  name,
   tags
 }) => {
 
@@ -18,7 +20,19 @@ const SelectFormGroup = ({ id, col, className, label, specification, eRef, requi
       tags
     })
     $(eRef.current).on('change', onChange)
+
+    return () => {
+      // Limpiar event listeners cuando se desmonte el componente
+      $(eRef.current).off('change')
+    }
   }, [dropdownParent])
+
+  // Efecto adicional para actualizar el valor de Select2 cuando cambia externamente
+  useEffect(() => {
+    if (value !== undefined && eRef.current) {
+      $(eRef.current).val(value).trigger('change.select2')
+    }
+  }, [value])
 
   return <div className={`form-group ${col} ${!noMargin && 'mb-2'}`}>
     <label htmlFor={id} className="form-label mb-1">
@@ -33,7 +47,7 @@ const SelectFormGroup = ({ id, col, className, label, specification, eRef, requi
         </>
       }
     </label>
-    <select ref={eRef} id={id} required={required} className={`form-control ${className}`} style={{ width: '100%' }} disabled={disabled} multiple={multiple}>
+    <select ref={eRef} name={name} id={id} required={required} className={`form-control ${className}`} style={{ width: '100%' }} disabled={disabled} multiple={multiple}>
       {children}
     </select>
   </div>

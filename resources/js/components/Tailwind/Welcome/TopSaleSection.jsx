@@ -226,8 +226,8 @@ const TopSaleSection = ({ producto }) => {
                     {/* Add to Cart Button */}
                     <div className="w-9/12 lg:w-full mx-auto flex justify-center">
                         <button
-                            onClick={() =>
-                                agregarAlCarrito({
+                            onClick={async () => {
+                                const result = await agregarAlCarrito({
                                     ...producto,
                                     quantity,
                                     selectedColor:
@@ -238,8 +238,11 @@ const TopSaleSection = ({ producto }) => {
                                         producto.sizes?.length > 0
                                             ? selectedSize
                                             : null,
-                                })
-                            }
+                                });
+                                if (result && result.success === false) {
+                                    alert(result.message || 'No se pudo agregar al carrito por falta de stock.');
+                                }
+                            }}
                             className="lg:mt-4 relative w-[250px] lg:w-full h-[39px] lg:h-[35.88px] 2xl:h-[39.88px] text-[13.02px] lg:text-[12.59px]  2xl:text-[13.59px] leading-[13.59px] bg-[#FC58BE] text-white rounded-[6px]  lg:rounded-[2.72px] border-[1.81px] border-[#FC58BE]  flex items-center justify-center"
                         >
                             <span className="me-2">Añadir al carrito</span>

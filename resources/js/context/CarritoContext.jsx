@@ -86,10 +86,40 @@ export const CarritoProvider = ({ children }) => {
         }
     }, [carrito]);
 
-    // Función para agregar productos
-    const agregarAlCarrito = (producto) => {
+    // Función para agregar productos con validación de stock
+    const agregarAlCarrito = async (producto) => {
+        // Preparar payload para verificar stock
+        const payload = [];
+        if ((producto.sizes && producto.sizes.length > 0) || (producto.colors && producto.colors.length > 0)) {
+            // Producto con variaciones
+            payload.push({
+                id: producto.id,
+                quantity: producto.quantity,
+                color: producto.selectedColor || null,
+                size: producto.selectedSize || null,
+            });
+        } else {
+            // Producto sin variaciones
+            payload.push({
+                id: producto.id,
+                quantity: producto.quantity,
+                color: null,
+                size: null,
+            });
+        }
+
+        const stockResult = await itemsRest.verifyStock(payload);
+        const stockInfo = stockResult[0];
+        if (!stockInfo || !stockInfo.available) {
+            setAlerta({
+                message: `No hay stock suficiente para "${producto.name}"${stockInfo && stockInfo.color ? ` (${stockInfo.color}${stockInfo.size ? ' - ' + stockInfo.size : ''})` : ''}.`,
+                actionLabel: "Ver productos",
+                duration: 5000,
+            });
+            return;
+        }
+
         setCarrito((prev) => {
-            // Verificar si el producto tiene tallas o colores
             const tieneVariaciones =
                 (producto.sizes && producto.sizes.length > 0) ||
                 (producto.colors && producto.colors.length > 0);
@@ -110,7 +140,7 @@ export const CarritoProvider = ({ children }) => {
                     ...prev,
                     {
                         ...producto,
-                        variations: [], // Mantener la estructura uniforme
+                        variations: [],
                         quantity: producto.quantity,
                     },
                 ];
@@ -170,7 +200,7 @@ export const CarritoProvider = ({ children }) => {
                     {
                         ...producto,
                         variations: [newVariation],
-                        quantity: producto.quantity, // Evitar que se fije en 1
+                        quantity: producto.quantity,
                     },
                 ];
             }
@@ -178,7 +208,6 @@ export const CarritoProvider = ({ children }) => {
         setAlerta({
             message: "Se ha agregado el artículo al carrito",
             actionLabel: "Ver carrito",
-            // onAction: () => console.log("Ir al carrito"),
             duration: 5000,
         });
     };

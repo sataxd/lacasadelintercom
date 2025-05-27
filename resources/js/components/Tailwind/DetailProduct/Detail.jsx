@@ -64,20 +64,40 @@ const Detail = ({ item }) => {
 
     const { agregarAlCarrito } = useContext(CarritoContext);
 
-    const addProduct = (item) => {
-        agregarAlCarrito({
+    // Calcular stock disponible según selección
+    let stockDisponible = 0;
+    if (item.variants && item.variants.length > 0) {
+        const variante = item.variants.find(
+            v =>
+                (!item.colors.length || v.color?.name === selectedColor) &&
+                (!item.sizes.length || v.zise?.name === selectedSize)
+        );
+        stockDisponible = variante ? variante.stock : 0;
+    } else {
+        stockDisponible = item.stock ?? 0;
+    }
+
+    const addProduct = async (item) => {
+        if (stockDisponible <= 0) {
+            alert('Sin stock disponible para este producto.');
+            return;
+        }
+        const result = await agregarAlCarrito({
             ...item,
             quantity,
             selectedColor: item.colors?.length > 0 ? selectedColor : null,
             selectedSize: item.sizes?.length > 0 ? selectedSize : null,
         });
-        // 2. Luego verificar si tiene ad y mostrar el modal
+        if (result && result.success === false) {
+            alert(result.message || 'No se pudo agregar al carrito por falta de stock.');
+            return;
+        }
         if (item.ad) {
             setIsModalOpen(true);
         }
-       
     };
-    const [mainImage, setMainImage] = useState(item.colors[0]?.image ??item.image);
+
+    const [mainImage, setMainImage] = useState(item.colors[0]?.image ?? item.image);
     return (
         <section className="pt-2 pb-10 bg-[#EFE5FF]">
             <div className="px-[5%] lg:px-0 mx-auto lg:max-w-5xl 2xl:max-w-6xl mt-8">
@@ -355,10 +375,11 @@ const Detail = ({ item }) => {
                             {/* Add to Cart Button */}
                             <div className="flex justify-center">
                                 <button
-                                    onClick={() => addProduct(item)}
+                                    onClick={async () => await addProduct(item)}
                                     className="mt-4 relative w-full sm:w-[332px] lg:w-full h-[59px] lg:h-[35.88px] 2xl:h-[39.88px] text-[17.02px] lg:text-[12.59px]  2xl:text-[13.59px] leading-[13.59px] bg-[#FC58BE] text-white rounded-[6px]  lg:rounded-[2.72px] border-[1.81px] border-[#FC58BE]  flex items-center justify-center"
+                                    disabled={stockDisponible <= 0}
                                 >
-                                    <span className="">Añadir al carrito</span>
+                                    <span className="">{stockDisponible <= 0 ? "Sin stock" : "Añadir al carrito"}</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 576 512"

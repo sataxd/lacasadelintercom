@@ -122,7 +122,7 @@ class SaleController extends Controller
 
 
 
-            // Guardar los detalles de venta
+            // Guardar los detalles de venta y descontar stock
             foreach ($saleDetails as $detail) {
                 $detailJpa = new SaleDetail();
                 $detailJpa->sale_id = $saleJpa->id;
@@ -133,6 +133,28 @@ class SaleController extends Controller
                 $detailJpa->color = $detail['color'];
                 $detailJpa->size = $detail['size'];
                 $detailJpa->save();
+
+                // Descontar stock
+                if ($detailJpa['color'] || $detailJpa['size']) {
+                    // Buscar la variante exacta por item_id, color y size
+                    $variant = \App\Models\ItemVariant::where('item_id', $detailJpa['item_id'])
+                        ->whereHas('color', function($q) use ($detailJpa) {
+                            if ($detailJpa['color']) $q->where('name', $detailJpa['color']);
+                        })
+                        ->whereHas('zise', function($q) use ($detailJpa) {
+                            if ($detailJpa['size']) $q->where('name', $detailJpa['size']);
+                        })
+                        ->first();
+                    if ($variant) {
+                        $variant->decrement('stock', $detailJpa['quantity']);
+                    }
+                } else {
+                    // Producto sin variantes
+                    $item = \App\Models\Item::find($detailJpa['item_id']);
+                    if ($item) {
+                        $item->decrement('stock', $detailJpa['quantity']);
+                    }
+                }
             }
 
             //TRACKING

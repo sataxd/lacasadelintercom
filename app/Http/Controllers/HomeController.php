@@ -25,7 +25,20 @@ class HomeController extends BasicController
         $items = Item::where('featured', true)->where('visible', true)->where('status', true)->get();
         $supplies = Supply::where('status', true)->where('visible', true)->where('featured', true)->get();
         $popups = Ad::today();
-        $top_sale = Item::where('status', true)->where('visible', true)->where('featured', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->first();
+        // $top_sale = Item::where('status', true)->where('visible', true)->where('featured', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->first();
+
+        $top_sale = Item::where('status', true)
+            ->where('visible', true)
+            ->where('featured', true)
+            ->with([
+                'colors',
+                'sizes',
+                'variants' => function ($q) {
+                    $q->where('stock', '>', 0)->with(['color', 'zise']);
+                }
+            ])
+            ->orderBy('updated_at', 'DESC')
+            ->first();
         $new_product = Item::where('status', true)->where('visible', true)->where('is_new', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->first();
         $we_lovers = Testimony::all();
         $products_featured = Item::where('status', true)->where('visible', true)->where('featured', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->limit(12)->get();

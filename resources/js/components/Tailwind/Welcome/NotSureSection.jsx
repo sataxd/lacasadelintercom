@@ -83,12 +83,23 @@ const NotSureSection = ({ producto }) => {
                     {/* Add to Cart Button */}
                     <div className="hidden lg:flex justify-center">
                         <button
-                            onClick={() =>
-                                agregarAlCarrito({
+                            onClick={async () => {
+                                const result = await agregarAlCarrito({
                                     ...producto,
                                     quantity,
-                                })
-                            }
+                                    selectedColor:
+                                        producto.colors?.length > 0
+                                            ? selectedColor
+                                            : null,
+                                    selectedSize:
+                                        producto.sizes?.length > 0
+                                            ? selectedSize
+                                            : null,
+                                });
+                                if (result && result.success === false) {
+                                    alert(result.message || 'No se pudo agregar al carrito por falta de stock.');
+                                }
+                            }}
                             className="mt-4 relative w-full sm:w-[332px] lg:w-full h-[59px] lg:h-[35.88px] 2xl:h-[39.88px] text-[17.02px] lg:text-[12.59px]  2xl:text-[13.59px] leading-[13.59px] bg-[#FC58BE] text-white rounded-[6px]  lg:rounded-[2.72px] border-[1.81px] border-[#FC58BE]  flex items-center justify-center"
                         >
                             <span className="">Añadir al carrito</span>
@@ -115,8 +126,8 @@ const NotSureSection = ({ producto }) => {
                         </div>
                         <div className="w-9/12  mx-auto flex justify-center">
                             <button
-                                onClick={() =>
-                                    agregarAlCarrito({
+                                onClick={async () => {
+                                    const result = await agregarAlCarrito({
                                         ...producto,
                                         quantity,
                                         selectedColor:
@@ -127,8 +138,11 @@ const NotSureSection = ({ producto }) => {
                                             producto.sizes?.length > 0
                                                 ? selectedSize
                                                 : null,
-                                    })
-                                }
+                                    });
+                                    if (result && result.success === false) {
+                                        alert(result.message || 'No se pudo agregar al carrito por falta de stock.');
+                                    }
+                                }}
                                 className="lg:mt-4 relative w-[200px] lg:w-full h-[38px] lg:h-[35.88px] 2xl:h-[39.88px] text-[12.02px] lg:text-[12.59px]  2xl:text-[13.59px] leading-[13.59px] bg-[#FC58BE] text-white rounded-[6px]  lg:rounded-[2.72px] border-[1.81px] border-[#FC58BE]  flex items-center justify-center"
                             >
                                 <span className="me-2">Añadir al carrito</span>

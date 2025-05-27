@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SelectFormGroup from "../Components/Adminto/form/SelectFormGroup";
 import InputFormGroup from "../Components/Adminto/form/InputFormGroup";
 // Elimina DxButton, usa botones nativos para evitar error de React
@@ -9,21 +9,17 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
     const [variants, setVariants] = useState([]);
     const [loading, setLoading] = useState(false);
     const [editingIndex, setEditingIndex] = useState(null);
-    const colorRef = useRef();
-    const ziseRef = useRef();
+
+     const colorRef = useRef();
+      const sizeRef = useRef();
+    // Eliminados los refs, todo será controlado por estado
+    const color_idRef = useRef();
+    const zise_idRef = useRef();
     const stockRef = useRef();
-    const minStockRef = useRef();
+    const min_stockRef = useRef();
     const priceRef = useRef();
     const discountRef = useRef();
-    const [form, setForm] = useState({
-        color_id: "",
-        zise_id: "",
-        stock: "",
-        min_stock: "",
-        price: "",
-        discount: "",
-        final_price: ""
-    });
+    const final_priceRef = useRef();
 
     useEffect(() => {
         if (!itemId) return;
@@ -36,35 +32,44 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
             });
     }, [itemId]);
 
-    const handleChange = (e) => {
-        // Para Select2, e.target puede ser undefined, usar e.currentTarget
-        if (e && e.target && e.target.name) {
-            setForm({ ...form, [e.target.name]: e.target.value });
-        }
-    };
+    // No se necesita handleChange, los valores se leen directamente de los refs
 
-    // Sincronizar selects con estado React cuando cambian (Select2)
-    useEffect(() => {
-        if (colorRef.current) {
-            $(colorRef.current).on('change', function () {
-                setForm((prev) => ({ ...prev, color_id: colorRef.current.value }));
-            });
-        }
-        if (ziseRef.current) {
-            $(ziseRef.current).on('change', function () {
-                setForm((prev) => ({ ...prev, zise_id: ziseRef.current.value }));
-            });
-        }
-        // Cleanup
-        return () => {
-            if (colorRef.current) $(colorRef.current).off('change');
-            if (ziseRef.current) $(ziseRef.current).off('change');
-        };
-    }, []);
+    // Eliminado el useEffect de sincronización con refs y jQuery
 
     const handleEdit = (index) => {
         setEditingIndex(index);
-        setForm({ ...variants[index] });
+        // Actualizar los refs con los valores de la variante a editar
+        const v = variants[index];
+        if (color_idRef.current) {
+            color_idRef.current.value = v.color_id || "";
+            // Forzar actualización visual de select2
+            window.$ && window.$(color_idRef.current).val(v.color_id || "").trigger('change.select2');
+        }
+        if (zise_idRef.current) {
+            zise_idRef.current.value = v.zise_id || "";
+            window.$ && window.$(zise_idRef.current).val(v.zise_id || "").trigger('change.select2');
+        }
+        if (stockRef.current) stockRef.current.value = v.stock || "";
+        if (min_stockRef.current) min_stockRef.current.value = v.min_stock || "";
+        if (priceRef.current) priceRef.current.value = v.price || "";
+        if (discountRef.current) discountRef.current.value = v.discount || "";
+        if (final_priceRef.current) final_priceRef.current.value = v.final_price || "";
+    };
+
+    const cancelEdit = () => {
+        setEditingIndex(null);
+        resetForm();
+    };
+
+    // Función para resetear el formulario
+    const resetForm = () => {
+        if (color_idRef.current) color_idRef.current.value = "";
+        if (zise_idRef.current) zise_idRef.current.value = "";
+        if (stockRef.current) stockRef.current.value = "";
+        if (min_stockRef.current) min_stockRef.current.value = "";
+        if (priceRef.current) priceRef.current.value = "";
+        if (discountRef.current) discountRef.current.value = "";
+        if (final_priceRef.current) final_priceRef.current.value = "";
     };
 
     const handleDelete = async (id) => {
@@ -83,13 +88,13 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
 
     const handleSave = async (e) => {
         e.preventDefault && e.preventDefault();
-        // Leer valores actuales de los refs para asegurar que el estado está sincronizado
-        const color_id = colorRef.current ? colorRef.current.value : form.color_id;
-        const zise_id = ziseRef.current ? ziseRef.current.value : form.zise_id;
-        const stock = stockRef.current ? stockRef.current.value : form.stock;
-        const min_stock = minStockRef.current ? minStockRef.current.value : form.min_stock;
-        const price = priceRef.current ? priceRef.current.value : form.price;
-        const discount = discountRef.current ? discountRef.current.value : form.discount;
+        // Leer valores de los refs
+        const color_id = color_idRef.current ? color_idRef.current.value : "";
+        const zise_id = zise_idRef.current ? zise_idRef.current.value : "";
+        const stock = stockRef.current ? stockRef.current.value : "";
+        const min_stock = min_stockRef.current ? min_stockRef.current.value : "";
+        const price = priceRef.current ? priceRef.current.value : "";
+        const discount = discountRef.current ? discountRef.current.value : "";
         // Validación robusta: no vacío, no null, no string vacío, no solo espacios
         const isEmpty = (val) => val === undefined || val === null || String(val).trim() === '';
         if (isEmpty(color_id) || isEmpty(zise_id) || isEmpty(stock) || isEmpty(price)) {
@@ -110,6 +115,10 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
             final_price,
             item_id: itemId
         };
+        // Si estamos editando, incluir el ID de la variante
+        if (editingIndex !== null) {
+            payload.id = variants[editingIndex].id;
+        }
         const res = await fetch(`/api/item-variants/save`, {
             method: "POST",
             headers: {
@@ -125,7 +134,7 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
             } else {
                 setVariants((prev) => [...prev, data.data]);
             }
-            setForm({ color_id: "", zise_id: "", stock: "", min_stock: "", price: "", discount: "", final_price: "" });
+            resetForm();
             setEditingIndex(null);
         }
     };
@@ -135,15 +144,13 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
             <h5>Variantes (Color + Talla)</h5>
             <div className="row g-2 align-items-center" id="item-variants-form" style={{ alignItems: "center" }}>
                 <div className="col-md-2">
-            <SelectFormGroup
-                label="Color"
-                name="color_id"
-                value={form.color_id}
-                onChange={handleChange}
-                required
-                dropdownParent="#item-variants-form"
-                eRef={colorRef}
-            >
+                    <SelectFormGroup
+                        label="Color"
+                        name="color_id"
+                        eRef={color_idRef}
+                        required
+                        dropdownParent="#item-variants-form"
+                    >
                         <option value="">Seleccionar</option>
                         {colors.map((c) => (
                             <option key={c.id} value={c.id}>{c.name}</option>
@@ -151,14 +158,12 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
                     </SelectFormGroup>
                 </div>
                 <div className="col-md-2">
-            <SelectFormGroup
-                label="Talla"
-                name="zise_id"
-                value={form.zise_id}
-                onChange={handleChange}
-                dropdownParent="#item-variants-form"
-                eRef={ziseRef}
-            >
+                    <SelectFormGroup
+                        label="Talla"
+                        name="zise_id"
+                        eRef={zise_idRef}
+                        dropdownParent="#item-variants-form"
+                    >
                         <option value="">Seleccionar</option>
                         {sizes.map((s) => (
                             <option key={s.id} value={s.id}>{s.name}</option>
@@ -166,21 +171,26 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
                     </SelectFormGroup>
                 </div>
                 <div className="col-md-2">
-                    <InputFormGroup label="Stock" name="stock" value={form.stock} onChange={handleChange} type="number" min={0} required eRef={stockRef} />
+                    <InputFormGroup label="Stock" name="stock" eRef={stockRef} type="number" min={0} required />
                 </div>
                 <div className="col-md-1">
-                    <InputFormGroup label="Min. Stock" name="min_stock" value={form.min_stock} onChange={handleChange} type="number" min={0} eRef={minStockRef} />
+                    <InputFormGroup label="Min. Stock" name="min_stock" eRef={min_stockRef} type="number" min={0} />
                 </div>
                 <div className="col-md-2">
-                    <InputFormGroup label="Precio" name="price" value={form.price} onChange={handleChange} type="number" step="0.01" eRef={priceRef} />
+                    <InputFormGroup label="Precio" name="price" eRef={priceRef} type="number" step="0.01" />
                 </div>
                 <div className="col-md-1">
-                    <InputFormGroup label="Descuento" name="discount" value={form.discount} onChange={handleChange} type="number" step="0.01" eRef={discountRef} />
+                    <InputFormGroup label="Descuento" name="discount" eRef={discountRef} type="number" step="0.01" />
                 </div>
                 <div className="col-md-2 d-flex align-items-center">
-                    <button className="btn btn-primary w-100" type="button" onClick={handleSave}>
+                    <button className="btn btn-primary me-1" type="button" onClick={handleSave}>
                         {editingIndex !== null ? "Actualizar" : "Agregar"}
                     </button>
+                    {editingIndex !== null && (
+                        <button className="btn btn-light" type="button" onClick={cancelEdit}>
+                            Cancelar
+                        </button>
+                    )}
                 </div>
             </div>
             <hr />

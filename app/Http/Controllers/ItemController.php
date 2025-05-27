@@ -48,13 +48,62 @@ class ItemController extends BasicController
 
     public function verifyStock(Request $request)
     {
-       // dump("son datos de entrada", $request->all());
+        // Espera un array de objetos: [{id, quantity, color, size}]
         $response = Response::simpleTryCatch(function () use ($request) {
-            return Item::select(['id', 'price', 'discount', 'name', 'final_price'])
-                ->whereIn('id', $request->all())
-                ->get();
+            $items = $request->all();
+            $result = [];
+            foreach ($items as $item) {
+                $itemJpa = Item::find($item['id']);
+                if (!$itemJpa) continue;
+                $hasVariants = $itemJpa->variants()->count() > 0;
+                if ($hasVariants) {
+                    // Buscar variante exacta
+                    $variant = $itemJpa->variants()
+                        ->whereHas('color', function($q) use ($item) {
+                            if (!empty($item['color'])) $q->where('name', $item['color']);
+                        })
+                        ->whereHas('zise', function($q) use ($item) {
+                            if (!empty($item['size'])) $q->where('name', $item['size']);
+                        })
+                        ->first();
+                    if ($variant) {
+                        $result[] = [
+                            'id' => $itemJpa->id,
+                            'variant_id' => $variant->id,
+                            'stock' => $variant->stock,
+                            'requested' => $item['quantity'],
+                            'available' => $variant->stock >= $item['quantity'],
+                            'name' => $itemJpa->name,
+                            'color' => $item['color'] ?? null,
+                            'size' => $item['size'] ?? null,
+                        ];
+                    } else {
+                        $result[] = [
+                            'id' => $itemJpa->id,
+                            'variant_id' => null,
+                            'stock' => 0,
+                            'requested' => $item['quantity'],
+                            'available' => false,
+                            'name' => $itemJpa->name,
+                            'color' => $item['color'] ?? null,
+                            'size' => $item['size'] ?? null,
+                        ];
+                    }
+                } else {
+                    // Producto sin variantes
+                    $result[] = [
+                        'id' => $itemJpa->id,
+                        'stock' => $itemJpa->stock,
+                        'requested' => $item['quantity'],
+                        'available' => $itemJpa->stock >= $item['quantity'],
+                        'name' => $itemJpa->name,
+                        'color' => null,
+                        'size' => null,
+                    ];
+                }
+            }
+            return $result;
         });
-       // dump("estamos en response del verify: ", $response);
         return response($response->toArray(), $response->status);
     }
     public function getDestacados(Request $request): HttpResponse|ResponseFactory

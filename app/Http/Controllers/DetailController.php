@@ -20,7 +20,17 @@ class DetailController extends BasicController
     public function setReactViewProperties(Request $request)
     {
         //get detail item with $request->spl_autoload_unregister
-        $item = Item::where('slug', $request->slug)->with('colors', 'sizes', 'images', 'category', 'ad')->first();
+        $item = Item::where('slug', $request->slug)->with([
+            'colors',
+            'sizes',
+            'images',
+            'category',
+            'ad',
+            'variants' => function ($q) {
+                $q->where('stock', '>', 0)->with(['color', 'zise']);
+            }
+        ])->first();
+
         $products_featured = Item::where('status', true)->where('visible', true)->where('featured', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->limit(12)->get();
         if (count($products_featured) < 4) {
             $original_count = count($products_featured);

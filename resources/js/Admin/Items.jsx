@@ -358,7 +358,7 @@ const Items = ({ categories, brands }) => {
                     {
                         dataField: "category.name",
                         caption: "Categoría",
-                        width: "120px",
+                        width: "180px",
                         cellTemplate: (container, { data }) => {
                             container.html(
                                 renderToString(
@@ -561,7 +561,7 @@ const Items = ({ categories, brands }) => {
                     },
                     {
                         caption: "Acciones",
-                        width: "100px",
+                        width: "150px",
                         cellTemplate: (container, { data }) => {
                             container.css("text-overflow", "unset");
                             container.append(
