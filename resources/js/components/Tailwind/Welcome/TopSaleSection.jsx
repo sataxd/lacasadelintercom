@@ -1,5 +1,50 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CarritoContext } from "../../../context/CarritoContext";
+const CountdownTimer = () => {
+    const [timeLeft, setTimeLeft] = useState({
+        hours: "00",
+        minutes: "00",
+        seconds: "00",
+    });
+
+    useEffect(() => {
+        const calculateTimeLeft = () => {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+
+            // Calcular diferencia
+            const difference = tomorrow - now;
+            const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((difference / 1000 / 60) % 60);
+            const seconds = Math.floor((difference / 1000) % 60);
+
+            return {
+                hours: hours.toString().padStart(2, "0"),
+                minutes: minutes.toString().padStart(2, "0"),
+                seconds: seconds.toString().padStart(2, "0"),
+            };
+        };
+
+        // Actualizar inmediatamente
+        setTimeLeft(calculateTimeLeft());
+
+        // Configurar intervalo para actualizar cada segundo
+        const timer = setInterval(() => {
+            setTimeLeft(calculateTimeLeft());
+        }, 1000);
+
+        // Limpiar intervalo al desmontar
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
+        <div className="absolute top-8 mx-auto font-bold flex items-center justify-center bg-[#FF9900] text-white md:text-[17px] 2xl:text-[20.85px] px-20 py-1 w-max rounded-full">
+            Solo por {timeLeft.hours} : {timeLeft.minutes} : {timeLeft.seconds}
+        </div>
+    );
+};
 
 const TopSaleSection = ({ producto }) => {
     const [isModalTalla, setIsModalTalla] = useState(false);
@@ -17,6 +62,7 @@ const TopSaleSection = ({ producto }) => {
     };
 
     const { agregarAlCarrito } = useContext(CarritoContext);
+    const [isModalAd, setIsModalAd] = useState(false);
     const [mainImage, setMainImage] = useState(producto.colors[0]?.image);
 
     return (
@@ -129,11 +175,10 @@ const TopSaleSection = ({ producto }) => {
                                                 setSelectedColor(color.name);
                                                 setMainImage(color.image);
                                             }}
-                                            className={`rounded-full p-[2px] lg:p-1 border ${
-                                                selectedColor === color.name
+                                            className={`rounded-full p-[2px] lg:p-1 border ${selectedColor === color.name
                                                     ? "border-[#222222]"
                                                     : "border-[#DDDDDD]"
-                                            }`}
+                                                }`}
                                         >
                                             <div
                                                 className="w-[12px] h-[12px]   lg:w-[22px] lg:h-[22px] rounded-full "
@@ -241,6 +286,11 @@ const TopSaleSection = ({ producto }) => {
                                 });
                                 if (result && result.success === false) {
                                     alert(result.message || 'No se pudo agregar al carrito por falta de stock.');
+                                    return;
+                                }
+                                // Si tiene ad y offer_item, mostrar modal de oferta
+                                if (producto.ad && producto.ad.offer_item) {
+                                    setIsModalAd(true);
                                 }
                             }}
                             className="lg:mt-4 relative w-[250px] lg:w-full h-[39px] lg:h-[35.88px] 2xl:h-[39.88px] text-[13.02px] lg:text-[12.59px]  2xl:text-[13.59px] leading-[13.59px] bg-[#FC58BE] text-white rounded-[6px]  lg:rounded-[2.72px] border-[1.81px] border-[#FC58BE]  flex items-center justify-center"
@@ -254,6 +304,49 @@ const TopSaleSection = ({ producto }) => {
                                 <path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                             </svg>
                         </button>
+                        {/* Modal de oferta especial (Ad) */}
+                        {isModalAd && producto.ad && producto.ad.offer_item && (
+                            <div
+                                className="fixed inset-0 flex items-center justify-center z-50 bg-[#00000080]"
+                                style={{ backdropFilter: "blur(10px)" }}
+                            >
+                                <div className="relative flex items-center justify-center">
+                                    <button
+                                        className="absolute top-5 right-8 text-3xl text-[#9577B9]"
+                                        onClick={() => setIsModalAd(false)}
+                                    >
+                                        ×
+                                    </button>
+                                    <div className="bg-white rounded-[30.58px]  2xl:rounded-[48.58px] md:w-[459px] md:h-[450.40px] 2xl:w-[519px] 2xl:h-[505.40px] flex flex-col items-center justify-center ">
+                                        <CountdownTimer
+                                            startDate={producto.ad.dete_begin}
+                                            endDate={producto.ad.date_end}
+                                        />
+                                        <div className="flex flex-col items-center">
+                                            <img
+                                                src={`/api/ads/media/${producto.ad.image}`}
+                                                alt="Ad"
+                                                className="w-full h-full object-cover rounded-[30.58px] 2xl:rounded-[48.58px] cursor-pointer"
+                                                onClick={async () => {
+                                                    // Agregar producto de oferta al carrito usando los datos completos
+                                                    if (!producto.ad.offer_item) return;
+                                                    await agregarAlCarrito({
+                                                        ...producto.ad.offer_item,
+                                                        id: producto.ad.offer_item.id,
+                                                        quantity: 1,
+                                                        price: producto.ad.offer_price ?? producto.ad.offer_item.final_price ?? producto.ad.offer_item.price,
+                                                        // Puedes agregar lógica para variantes si es necesario
+                                                    });
+                                                    // Ya no se guarda flag, siempre debe aparecer el modal de oferta
+                                                    setIsModalAd(false);
+                                                }}
+                                            />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

@@ -39,6 +39,20 @@ class HomeController extends BasicController
             ])
             ->orderBy('updated_at', 'DESC')
             ->first();
+
+                // Si el item tiene un ad y ese ad tiene offer_item_id, traemos el producto de oferta
+        if ($top_sale && $top_sale->ad && $top_sale->ad->offer_item_id) {
+            $offerItem = Item::with([
+                'colors',
+                'sizes',
+                'images',
+                'variants' => function ($q) {
+                    $q->where('stock', '>', 0)->with(['color', 'zise']);
+                }
+            ])->find($top_sale->ad->offer_item_id);
+            // Adjuntamos el producto de oferta al ad
+            $top_sale->ad->offer_item = $offerItem;
+        }
         $new_product = Item::where('status', true)->where('visible', true)->where('is_new', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->first();
         $we_lovers = Testimony::all();
         $products_featured = Item::where('status', true)->where('visible', true)->where('featured', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->limit(12)->get();
