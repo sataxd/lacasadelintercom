@@ -92,6 +92,7 @@ const Home = ({ session, ...props }) => {
 
   // Componente MetricCard mejorado con diseño moderno
   const MetricCard = ({ title, value, trend, icon, isCurrency = false, secondaryText, color }) => {
+    // Permitir recibir un prop progress, si no, usar 0
     const colorStyles = {
       blue: {
         ring: "#4f46e5",
@@ -124,7 +125,25 @@ const Home = ({ session, ...props }) => {
     }
 
     const colorSet = colorStyles[color || "blue"]
-    const progress = 65 // Valor fijo como en tu código original
+    // Determinar el progreso según el tipo de métrica
+    let progress = 0;
+    if (title === "Ventas Hoy") {
+      // Ejemplo: meta diaria 1000 soles
+      const goal = 1000;
+      progress = value && goal ? Math.min(100, Math.round((value / goal) * 100)) : 0;
+    } else if (title === "Ventas del Mes") {
+      // Ejemplo: meta mensual 20000 soles
+      const goal = 20000;
+      progress = value && goal ? Math.min(100, Math.round((value / goal) * 100)) : 0;
+    } else if (title === "Pedidos Hoy") {
+      // Ejemplo: meta diaria 20 pedidos
+      const goal = 20;
+      progress = value && goal ? Math.min(100, Math.round((value / goal) * 100)) : 0;
+    } else if (title === "Pedidos del Mes") {
+      // Ejemplo: meta mensual 400 pedidos
+      const goal = 400;
+      progress = value && goal ? Math.min(100, Math.round((value / goal) * 100)) : 0;
+    }
 
     return (
       <div className="col-xl-3 col-md-6">
