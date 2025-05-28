@@ -11,8 +11,10 @@ class StatusSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+   
     public function run(): void
     {
+         Status::truncate();
         $statuses = [
             [
                 'id' => 'f13fa605-72dd-4729-beaa-ee14c9bbc47b',
