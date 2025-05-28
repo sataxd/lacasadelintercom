@@ -344,7 +344,7 @@ window.culqi = async () => {
                 `#${Global.APP_CORRELATIVE}-`,
                 ""
             );
-            await fetch(`/api/sales/notify/${order_number}`);
+            //await fetch(`/api/sales/notify/${order_number}`);
             location.href = "/thanks";
         }
     } else if (Culqi.order) {
