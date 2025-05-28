@@ -23,7 +23,8 @@ class SaleController extends Controller
 {
     static function create(array $sale, array $details): array
     {
-
+        // Log para depuración: ver qué productos llegan al backend
+        Log::info('Detalles recibidos en create:', ['sale' => $sale, 'details' => $details]);
 
         try {
             // Obtener solo los IDs de los productos para la consulta
@@ -38,6 +39,21 @@ class SaleController extends Controller
             foreach ($details as $detail) {
                 $itemJpa = $itemsJpa->firstWhere('id', $detail['id']);
                 if (!$itemJpa) continue;
+
+                // Si no hay variaciones o el array está vacío, agregar como producto simple
+                if (!isset($detail['variations']) || !is_array($detail['variations']) || empty($detail['variations'])) {
+                    $saleDetails[] = [
+                        'item_id' => $itemJpa->id,
+                        'name' => $itemJpa->name,
+                        'price' => $itemJpa->discount != 0 ? $itemJpa->discount : $itemJpa->price,
+                        'quantity' => $detail['quantity'] ?? 1,
+                        'color' => null,
+                        'size' => null
+                    ];
+                    $totalPrice += ($itemJpa->discount != 0 ? $itemJpa->discount : $itemJpa->price) * ($detail['quantity'] ?? 1);
+                    $totalItems += ($detail['quantity'] ?? 1);
+                    continue;
+                }
 
                 // Calcular cantidad total de este producto (sumando todas sus variaciones)
                 $itemQuantity = array_sum(array_column($detail['variations'] ?? [], 'quantity'));
@@ -138,10 +154,10 @@ class SaleController extends Controller
                 if ($detailJpa['color'] || $detailJpa['size']) {
                     // Buscar la variante exacta por item_id, color y size
                     $variant = \App\Models\ItemVariant::where('item_id', $detailJpa['item_id'])
-                        ->whereHas('color', function($q) use ($detailJpa) {
+                        ->whereHas('color', function ($q) use ($detailJpa) {
                             if ($detailJpa['color']) $q->where('name', $detailJpa['color']);
                         })
-                        ->whereHas('zise', function($q) use ($detailJpa) {
+                        ->whereHas('zise', function ($q) use ($detailJpa) {
                             if ($detailJpa['size']) $q->where('name', $detailJpa['size']);
                         })
                         ->first();
@@ -172,6 +188,7 @@ class SaleController extends Controller
 
             return [true, $saleToReturn];
         } catch (\Throwable $th) {
+            dump($th);
             return [false, [
                 'error' => $th->getMessage(),
                 'file' => $th->getFile(),

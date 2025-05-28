@@ -119,8 +119,8 @@ const Detail = ({ item }) => {
                                         className="h-[100px] w-[100px] object-cover"
                                         onClick={() => setMainImage(image.url)}
                                         onError={(e) =>
-                                            (e.target.src =
-                                                "/api/cover/thumbnail/null")
+                                        (e.target.src =
+                                            "/api/cover/thumbnail/null")
                                         }
                                     />
                                 ))}
@@ -135,8 +135,8 @@ const Detail = ({ item }) => {
                                             setMainImage(color.image)
                                         }
                                         onError={(e) =>
-                                            (e.target.src =
-                                                "/api/cover/thumbnail/null")
+                                        (e.target.src =
+                                            "/api/cover/thumbnail/null")
                                         }
                                     />
                                 ))}
@@ -151,8 +151,8 @@ const Detail = ({ item }) => {
                                     className="w-full md:w-[644px] md:h-[644px] lg:w-[500.81px] lg:h-[500.81px] 2xl:w-[620.81px] 2xl:h-[620.81px] object-cover aspect-square rounded-lg"
                                     loading="lazy"
                                     onError={(e) =>
-                                        (e.target.src =
-                                            "/api/cover/thumbnail/null")
+                                    (e.target.src =
+                                        "/api/cover/thumbnail/null")
                                     }
                                 />
                             </div>
@@ -169,8 +169,8 @@ const Detail = ({ item }) => {
                                                 setMainImage(image.url)
                                             }
                                             onError={(e) =>
-                                                (e.target.src =
-                                                    "/api/cover/thumbnail/null")
+                                            (e.target.src =
+                                                "/api/cover/thumbnail/null")
                                             }
                                         />
                                     ))}
@@ -185,8 +185,8 @@ const Detail = ({ item }) => {
                                                 setMainImage(color.image)
                                             }
                                             onError={(e) =>
-                                                (e.target.src =
-                                                    "/api/cover/thumbnail/null")
+                                            (e.target.src =
+                                                "/api/cover/thumbnail/null")
                                             }
                                         />
                                     ))}
@@ -279,12 +279,11 @@ const Detail = ({ item }) => {
                                                             color.image
                                                         );
                                                     }}
-                                                    className={`rounded-full p-1 border ${
-                                                        selectedColor ===
+                                                    className={`rounded-full p-1 border ${selectedColor ===
                                                         color.name
-                                                            ? "border-[#222222]"
-                                                            : "border-[#DDDDDD]"
-                                                    }`}
+                                                        ? "border-[#222222]"
+                                                        : "border-[#DDDDDD]"
+                                                        }`}
                                                 >
                                                     <div
                                                         className="w-[22px] h-[22px] rounded-full "
@@ -419,20 +418,29 @@ const Detail = ({ item }) => {
                                     alt="Ad"
                                     className="w-full h-full object-cover rounded-[30.58px] 2xl:rounded-[48.58px] cursor-pointer"
                                     onClick={async () => {
-                                        // Agregar producto de oferta al carrito usando los datos completos
+                                          // Agregar producto de oferta al carrito usando los datos completos
                                         if (!item.ad.offer_item) return;
+                                        console.log(item)
                                         await agregarAlCarrito({
                                             ...item.ad.offer_item,
-                                            id: item.ad.offer_item.id,
+
                                             quantity: 1,
                                             price: item.ad.offer_price ?? item.ad.offer_item.final_price ?? item.ad.offer_item.price,
+                                            selectedColor:
+                                                item?.ad?.colors?.length > 0
+                                                    ? selectedColor
+                                                    : null,
+                                            selectedSize:
+                                                item?.ad?.sizes?.length > 0
+                                                    ? selectedSize
+                                                    : null,
                                             // Puedes agregar lógica para variantes si es necesario
                                         });
                                         // Ya no se guarda flag, siempre debe aparecer el modal de oferta
                                         setIsModalOpen(false);
                                     }}
                                 />
-                               
+
                             </div>
                         </div>
                     </div>
