@@ -14,7 +14,7 @@ class StatusSeeder extends Seeder
    
     public function run(): void
     {
-         Status::truncate();
+        Status::query()->delete();
         $statuses = [
             [
                 'id' => 'f13fa605-72dd-4729-beaa-ee14c9bbc47b',
