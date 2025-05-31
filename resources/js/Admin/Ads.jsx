@@ -55,8 +55,13 @@ const Ads = ({ items }) => {
         dateBeginRef.current.value = data?.date_begin ?? "";
         dateEndRef.current.value = data?.date_end ?? "";
         secondsRef.current.value = data?.seconds ?? 0;
-        itemRef.current.value = data?.item_id ?? null;
-        offer_itemRef.current.value = data?.offer_item_id ?? null;
+ 
+        $(itemRef.current)
+            .val(data?.item_id || null)
+            .trigger("change");
+         $(offer_itemRef.current)
+            .val(data?.offer_item_id || null)
+            .trigger("change");
         offer_priceRef.current.value = data?.offer_price ?? null;
         linkRef.current.value = data?.link ?? "";
         if (data?.actions) {
