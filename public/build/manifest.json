@@ -65,8 +65,8 @@
     "file": "assets/DxButton-CsjWvhyj.js",
     "name": "DxButton"
   },
-  "_FeaturesSection-CbBRVJ5G.js": {
-    "file": "assets/FeaturesSection-CbBRVJ5G.js",
+  "_FeaturesSection-BfyGgKHd.js": {
+    "file": "assets/FeaturesSection-BfyGgKHd.js",
     "name": "FeaturesSection",
     "imports": [
       "resources/js/components/About/AboutHeader.jsx"
@@ -405,7 +405,7 @@
     "isEntry": true
   },
   "resources/js/About.jsx": {
-    "file": "assets/About-CmXVsmDL.js",
+    "file": "assets/About-q5gchses.js",
     "name": "About",
     "src": "resources/js/About.jsx",
     "isEntry": true,
@@ -416,7 +416,7 @@
       "_Base-EMiPcBfW.js",
       "_CreateReactScript-CyT_ENnh.js",
       "_Header-Rsix90I_.js",
-      "_FeaturesSection-CbBRVJ5G.js",
+      "_FeaturesSection-BfyGgKHd.js",
       "_main-Br9xqDfn.js",
       "resources/js/components/Blog/Results.jsx",
       "_swiper-react-DKHvTq9_.js",
@@ -1562,7 +1562,7 @@
     ]
   },
   "resources/js/CatalogProducts.jsx": {
-    "file": "assets/CatalogProducts-l5gRK6-W.js",
+    "file": "assets/CatalogProducts-DdmX7ZxW.js",
     "name": "CatalogProducts",
     "src": "resources/js/CatalogProducts.jsx",
     "isEntry": true,
@@ -1573,7 +1573,7 @@
       "_Base-EMiPcBfW.js",
       "_CreateReactScript-CyT_ENnh.js",
       "_Header-Rsix90I_.js",
-      "_FeaturesSection-CbBRVJ5G.js",
+      "_FeaturesSection-BfyGgKHd.js",
       "_main-Br9xqDfn.js",
       "resources/js/components/Blog/Results.jsx",
       "_swiper-react-DKHvTq9_.js",
@@ -1779,7 +1779,7 @@
     ]
   },
   "resources/js/Home.jsx": {
-    "file": "assets/Home-CS8cj-Ih.js",
+    "file": "assets/Home-Chh9gds3.js",
     "name": "Home",
     "src": "resources/js/Home.jsx",
     "isEntry": true,
@@ -1796,7 +1796,7 @@
       "resources/js/components/Home/Supplies.jsx",
       "_index-B1nVdsa0.js",
       "_Header-Rsix90I_.js",
-      "_FeaturesSection-CbBRVJ5G.js",
+      "_FeaturesSection-BfyGgKHd.js",
       "_ProductCarousel-BzKzupIb.js",
       "resources/js/components/Tailwind/DetailProduct/Detail.jsx",
       "_GuaranteeSection-CIkfrKXJ.js",
@@ -2341,7 +2341,7 @@
     ]
   },
   "resources/js/components/Adminto/Dx/DxButton.jsx": {
-    "file": "assets/DxButton-l0sNRNKZ.js",
+    "file": "assets/DxButton-DP2rzg_V.js",
     "name": "DxButton",
     "src": "resources/js/components/Adminto/Dx/DxButton.jsx",
     "isEntry": true
@@ -2491,7 +2491,7 @@
     ]
   },
   "resources/js/components/Adminto/form/SelectFormGroup.jsx": {
-    "file": "assets/SelectFormGroup-uOWZuDyS.js",
+    "file": "assets/SelectFormGroup-ClxeGkIS.js",
     "name": "SelectFormGroup",
     "src": "resources/js/components/Adminto/form/SelectFormGroup.jsx",
     "isEntry": true,
@@ -2558,7 +2558,7 @@
     ]
   },
   "resources/js/components/Blog/Filter.jsx": {
-    "file": "assets/Filter-uOWZuDyS.js",
+    "file": "assets/Filter-ClxeGkIS.js",
     "name": "Filter",
     "src": "resources/js/components/Blog/Filter.jsx",
     "isEntry": true,
@@ -2638,7 +2638,7 @@
     ]
   },
   "resources/js/components/Courses/Filter.jsx": {
-    "file": "assets/Filter-ClxeGkIS.js",
+    "file": "assets/Filter-uOWZuDyS.js",
     "name": "Filter",
     "src": "resources/js/components/Courses/Filter.jsx",
     "isEntry": true,
@@ -3307,10 +3307,10 @@
     ]
   },
   "resources/js/components/Test/Email.jsx": {
-    "file": "assets/Email-BgabRZUJ.js",
+    "file": "assets/Email-8Hke3edI.js",
     "name": "Email",
     "src": "resources/js/components/Test/Email.jsx",
-    "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "resources/js/components/About/AboutHeader.jsx",
       "_index-B80Lgev0.js",
@@ -3469,7 +3469,7 @@
     ]
   },
   "resources/js/components/dx/DxButton.jsx": {
-    "file": "assets/DxButton-DP2rzg_V.js",
+    "file": "assets/DxButton-l0sNRNKZ.js",
     "name": "DxButton",
     "src": "resources/js/components/dx/DxButton.jsx",
     "isEntry": true
@@ -3527,7 +3527,7 @@
     ]
   },
   "resources/js/components/form/SelectFormGroup.jsx": {
-    "file": "assets/SelectFormGroup-ClxeGkIS.js",
+    "file": "assets/SelectFormGroup-uOWZuDyS.js",
     "name": "SelectFormGroup",
     "src": "resources/js/components/form/SelectFormGroup.jsx",
     "isEntry": true,

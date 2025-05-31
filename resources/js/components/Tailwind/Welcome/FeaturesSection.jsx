@@ -2,12 +2,12 @@ const FeaturesSection = () => {
     return (
         <section
             className={`bg-[#EFE5FF]  overflow-hidden ${location.pathname == "/"
-                    ? "md:pt-8 md:pb-4 2xl:pt-6 "
+                    ? "md:pt-8 md:pb-0 2xl:pt-6 "
                     : "md:py-4"
                 }`}
         >
             <div className="px-[5%] mx-auto relative">
-                <div className="grid items-center content-center px-[5%] lg:px-0 2xl:px-14 mt-6 lg:my-6  grid-cols-2 gap-x-[5%] gap-y-[2.5%] sm:max-w-[608px] lg:flex w-full lg:max-w-[72rem] 2xl:max-w-[84rem] mx-auto whitespace-nowrap transition-none">
+                <div className="grid items-center content-center px-[5%] lg:px-0 2xl:px-14 mt-6 lg:mt-4  grid-cols-2 gap-x-[5%] gap-y-[2.5%] sm:max-w-[608px] lg:flex w-full lg:max-w-[72rem] 2xl:max-w-[84rem] mx-auto whitespace-nowrap transition-none">
                     <div className="flex items-center gap-2 md:gap-3 justify-center w-full">
                         <div className="relative z-10 h-max ">
                             <img
