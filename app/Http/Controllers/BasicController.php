@@ -337,11 +337,9 @@ class BasicController extends Controller
   {
     $response = new Response();
     try {
-      $deleted = $this->softDeletion
-        ? $this->model::where('id', $id)
-        ->update(['status' => false])
-        : $this->model::where('id', $id)
+      $deleted =  $this->model::where('id', $id)
         ->delete();
+      
 
       if (!$deleted) throw new Exception('No se ha eliminado ningun registro');
 
