@@ -753,7 +753,7 @@ window.culqi = async () => {
                                         }
                                     />
                                 </div>
-                                <div className="mb-4">
+                                <div className="mb-4 mt-4">
                                     <label
                                         className="mb-1 block text-sm font-medium "
                                         htmlFor="email"
