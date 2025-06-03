@@ -788,7 +788,7 @@ window.culqi = async () => {
                                         }}
                                     />
                                     <div className="text-xs text-gray-500 mt-1">
-                                        Teléfono actual en sale: {sale.phone}
+                                        Teléfono actual: {sale.phone}
                                     </div>
                                 </div>
                                 {/*  <div className="mt-4">
