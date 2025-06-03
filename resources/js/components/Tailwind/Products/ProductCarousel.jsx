@@ -13,9 +13,9 @@ import ProductCard from "./ProductCard";
 export default function ProductCarousel({ products, children }) {
     const [activeIndex, setActiveIndex] = useState(0);
     return (
-        <section className="pb-10 lg:pb-16 lg:py-24 bg-white text-[#212529] font-poppins">
+        <section className="pb-10 lg:py-24 lg:pt-20 bg-white text-[#212529] font-poppins">
             <div className="mx-auto xl:px-[5%] text-center">
-                <div className="flex flex-col items-center pb-2 lg:pb-4">
+                <div className="flex flex-col items-center pb-2 lg:pb-8">
                     {children}
                 </div>
 

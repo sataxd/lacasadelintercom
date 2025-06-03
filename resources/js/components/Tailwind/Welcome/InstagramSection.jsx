@@ -11,18 +11,10 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 
 const InstagramSection = ({ posts }) => {
-    const postes = [
-        { image: "https://i.ibb.co/qYWkFHcr/image.png" },
-        { image: "https://i.ibb.co/SjDMLFx/image.png" },
-        { image: "https://i.ibb.co/d068vJ8C/image.png" },
-        { image: "https://i.ibb.co/Y45sRBx9/image.png" },
-
-        { image: "https://i.ibb.co/Y45sRBx9/image.png" },
-        { image: "https://i.ibb.co/Y45sRBx9/image.png" },
-    ];
+  
 
     return (
-        <section className="bg-white text-[#212529] 2xl:pt-16">
+        <section className="bg-white text-[#212529] lg:pt-10 2xl:pt-16">
             {/* Header */}
             <div className="max-w-6xl mx-auto text-center mb-2 lg:mb-12">
                 <h2 className="text-[18.94px] pt-6 lg:mt-0 lg:text-[32.94px] lg:leading-[38.12px] font-bold lg:mb-4">
