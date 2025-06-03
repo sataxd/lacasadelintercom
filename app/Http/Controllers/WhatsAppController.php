@@ -13,30 +13,49 @@ class WhatsAppController extends Controller
     static function sendSale(Sale $sale, bool $send2client = true, bool $send2group = true)
     {
         try {
-
             $jpa  = Sale::with([
-
                 'status',
                 'details',
                 'details.item',
-               
                 'coupon'
             ])->find($sale->id);
-           
 
             $data =  [
                 'sale' => $jpa
             ];
-
             $content = View::make('mailing.sale-done-wefem', $data)->render();
-
             $onlyName = \explode(' ', $sale->name)[0];
-            $address = ($sale->province ?? $sale->district) . ", {$sale->department}, {$sale->country}" . ($sale->zip_code ? ' - ' . $sale->zip_code : '');
+
+            // Construir lista de productos
+            $productos = '';
+            foreach ($jpa->details as $detail) {
+                $linea = '+ ' . $detail->name;
+                if ($detail->size || $detail->color) {
+                    $linea .= ' ';
+                    if ($detail->size) $linea .= strtoupper($detail->size);
+                    if ($detail->color) $linea .= ' ' . strtoupper($detail->color);
+                }
+                $productos .= $linea . "\n";
+            }
+
+            // Monto y método de pago
+            $monto = 'S/' . number_format($jpa->amount, 2) . ' CULQI';
+
+            // Dirección y datos
+            $isLima = ($jpa->department == 'Lima Metropolitana');
+            $direccion = $jpa->address . ($jpa->number ? ' ' . $jpa->number : '');
+            $referencia = $jpa->reference ? "\nReferencia: {$jpa->reference}" : '';
+            $provincia = $isLima ? 'LIMA METROPOLITANA' : ($jpa->province ? strtoupper($jpa->province) : '') . ($jpa->department ? ' - ' . strtoupper($jpa->department) : '') . ' - SHALOM';
+
+            $mensaje = "PEDIDO #{$jpa->code}. {$jpa->name} {$jpa->lastname}\n";
+            $mensaje .= $productos . "\n";
+            $mensaje .= $isLima
+                ? ("LIMA METROPOLITANA  $referencia\nDNI: {$jpa->dni}\nDirección: $direccion\nCorreo: {$jpa->email}\nCelular: {$jpa->phone}\n$monto")
+                : ("PROVINCIA $provincia\nDNI: {$jpa->dni}\nDirección: $direccion\n" . ($jpa->district ? $jpa->district . "\n" : '') . ($jpa->department ? strtoupper($jpa->department) . "\n" : '') . "Correo: {$jpa->email}\nCelular: {$jpa->phone}\n$monto");
+
             try {
                 if ($send2client) {
-                    // Permitir cualquier código de país, asumiendo que el número ya viene con +[código][número]
-                    $phone = $sale->phone;
-                    $phone = ltrim($phone, '+'); // Quitar el + si existe
+                    $phone = ltrim($sale->phone, '+');
                     new Fetch(env('WA_URL') . '/api/send', [
                         'method' => 'POST',
                         'headers' => [
@@ -45,7 +64,7 @@ class WhatsAppController extends Controller
                         'body' => [
                             'from' => env('APP_CORRELATIVE'),
                             'to' => [$phone],
-                            'content' => "Hola *{$onlyName}*! nos llegó tu pedido por la web 🥰\n\n*Nombre*: {$sale->name} {$sale->lastname}\n*Dirección*: {$sale->address} {$sale->number}, {$address}\n*Correo electrónico*: {$sale->email}\n*Teléfono*: {$sale->phone}",
+                            'content' => $mensaje,
                             'html' => $content
                         ]
                     ]);
@@ -63,8 +82,7 @@ class WhatsAppController extends Controller
                         ]);
                     }
                 }
-            } catch (\Throwable $th) {
-            }
+            } catch (\Throwable $th) {}
             try {
                 if ($send2group)
                     new Fetch(env('WA_URL') . '/api/send', [
@@ -75,12 +93,11 @@ class WhatsAppController extends Controller
                         'body' => [
                             'from' => env('APP_CORRELATIVE'),
                             'to' => [env('WAGROUP_VENTAS_ID')],
-                            'content' => "Pedido `{$sale->code}`\n\n*Nombre*: {$sale->name} {$sale->lastname}\n*Dirección*: {$sale->address} {$sale->number}, {$address}\n*Correo electrónico*: {$sale->email}\n*Teléfono*: {$sale->phone}\n\n> " . $sale->created_at->format('Y-m-d H:i:s'),
+                            'content' => $mensaje,
                             'html' => $content
                         ]
                     ]);
-            } catch (\Throwable $th) {
-            }
+            } catch (\Throwable $th) {}
         } catch (\Throwable $th) {
             dump($th->getMessage());
         }
