@@ -31,37 +31,36 @@ class WhatsAppController extends Controller
             foreach ($jpa->details as $detail) {
                 // Verificar si el producto es un pack
                 if ($detail->item && $detail->item->isPack()) {
-                    // Es un pack, mostrar los productos que lo componen
-                    $productos .= "+ *PACK: {$detail->name}*\n";
-                    
-                    // Variable para controlar si ya se asignó la talla/color
-                    $sizeColorAssigned = false;
+                    // Es un pack, mostrar solo los productos que lo componen sin mencionar "PACK"
                     
                     // Usar pack_items directamente del JSON para evitar consultas adicionales
                     $packItemsData = $detail->item->pack_items;
                     if ($packItemsData && is_array($packItemsData)) {
                         foreach ($packItemsData as $packItem) {
                             if (is_array($packItem) && isset($packItem['name'])) {
-                                $itemLine = "  - *{$packItem['name']}*";
+                                $itemLine = "+ *{$packItem['name']}*";
                                 
                                 // Buscar el producto individual para verificar si acepta tallas/colores
                                 $individualItem = \App\Models\Item::where('name', $packItem['name'])->first();
                                 
-                                // Si este producto individual tiene tallas/colores, el detalle tiene talla/color,
-                                // y aún no se ha asignado a ningún producto, asignarlo a este
-                                if ($individualItem && 
-                                    ($individualItem->sizes || $individualItem->colors) && 
-                                    ($detail->size || $detail->color) &&
-                                    !$sizeColorAssigned) {
-                                    
+                                // Verificar si el producto individual acepta tallas o colores
+                                $acceptsSizes = $individualItem && $individualItem->sizes->count() > 0;
+                                $acceptsColors = $individualItem && $individualItem->colors->count() > 0;
+                                
+                                // Verificar si el detalle tiene talla o color para asignar
+                                $hasSize = $detail->size;
+                                $hasColor = $detail->color;
+                                
+                                // Cada producto que acepta el atributo lo recibe
+                                $shouldReceiveSize = $acceptsSizes && $hasSize;
+                                $shouldReceiveColor = $acceptsColors && $hasColor;
+                                
+                                if ($shouldReceiveSize || $shouldReceiveColor) {
                                     $itemLine .= ' (';
-                                    if ($detail->size) $itemLine .= 'Talla ' . strtoupper($detail->size);
-                                    if ($detail->size && $detail->color) $itemLine .= ' - ';
-                                    if ($detail->color) $itemLine .= 'Color ' . strtoupper($detail->color);
+                                    if ($shouldReceiveSize) $itemLine .= ' ' . strtoupper($detail->size);
+                                    if ($shouldReceiveSize && $shouldReceiveColor) $itemLine .= ' - ';
+                                    if ($shouldReceiveColor) $itemLine .= ' ' . strtoupper($detail->color);
                                     $itemLine .= ')';
-                                    
-                                    // Marcar que ya se asignó la talla/color
-                                    $sizeColorAssigned = true;
                                 }
                                 
                                 $productos .= $itemLine . "\n";
@@ -73,9 +72,9 @@ class WhatsAppController extends Controller
                     $linea = '+ *' . $detail->name . '*';
                     if ($detail->size || $detail->color) {
                         $linea .= ' (';
-                        if ($detail->size) $linea .= 'Talla ' . strtoupper($detail->size);
+                        if ($detail->size) $linea .= ' ' . strtoupper($detail->size);
                         if ($detail->size && $detail->color) $linea .= ' - ';
-                        if ($detail->color) $linea .= 'Color ' . strtoupper($detail->color);
+                        if ($detail->color) $linea .= ' ' . strtoupper($detail->color);
                         $linea .= ')';
                     }
                     $productos .= $linea . "\n";

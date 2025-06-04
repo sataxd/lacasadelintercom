@@ -27,6 +27,7 @@ const Colors = ({ items }) => {
     const itemRef = useRef();
     const summaryRef = useRef();
     const imageRef = useRef();
+    const bannerRef = useRef();
     const [selectedItem, setSelectedItem] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -41,6 +42,8 @@ const Colors = ({ items }) => {
         nameRef.current.value = data?.name ?? "";
         summaryRef.current.value = data?.summary ?? "#fff";
         imageRef.image.src = `/api/items/media/${data?.image ?? "undefined"}`;
+
+        bannerRef.image.src = `/api/items/media/${data?.banner ?? "undefined"}`;
 
         $(modalRef.current).modal("show");
     };
@@ -61,6 +64,11 @@ const Colors = ({ items }) => {
         const image = imageRef.current.files[0];
         if (image) {
             formData.append("image", image);
+        }
+
+        const banner = bannerRef.current.files[0];
+        if (banner) {
+            formData.append("banner", banner);
         }
 
         const result = await colorsRest.save(formData);
@@ -249,7 +257,7 @@ const Colors = ({ items }) => {
                 modalRef={modalRef}
                 title={isEditing ? "Editar color" : "Agregar color"}
                 onSubmit={onModalSubmit}
-                size="sm"
+                size="md"
             >
                 <div className="row" id="principal-container">
                     <input ref={idRef} type="hidden" />
@@ -277,7 +285,13 @@ const Colors = ({ items }) => {
                         eRef={imageRef}
                         label="Imagen"
                         aspect={1}
-                        col="col-lg-12 col-md-12 col-sm-12"
+                        col="col-lg-6 col-md-6 col-sm-12"
+                    />
+                    <ImageFormGroup
+                        eRef={bannerRef}
+                        label="Imagen solo del producto"
+                        aspect={1}
+                        col="col-lg-6 col-md-6 col-sm-12"
                     />
                 </div>
             </Modal>

@@ -18,6 +18,7 @@ class ItemColor extends Model
         'name',
         'summary',
         'image',
+        'banner',
         'item_id',
     ];
 

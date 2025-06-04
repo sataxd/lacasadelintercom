@@ -16,6 +16,7 @@ class Item extends Model
     protected $fillable = [
         'slug',
         'name',
+        'alias',
         'summary',
         'description',
         'price',
@@ -112,6 +113,30 @@ class Item extends Model
 
         // Usar directamente los nombres del array pack_items
         return collect($this->pack_items)->pluck('name')->implode(', ');
+    }
+
+    /**
+     * Obtiene la imagen específica del color de un producto
+     * @param string $colorName - Nombre del color seleccionado
+     * @return string - Imagen del color o imagen por defecto del producto
+     */
+    public function getImageForColor($colorName = null)
+    {
+        // Si no hay color especificado, usar imagen por defecto
+        if (!$colorName) {
+            return $this->banner ? $this->banner : $this->image;
+        }
+
+        // Buscar el color específico del producto
+        $itemColor = $this->colors()->where('name', $colorName)->first();
+        
+        // Si encontramos el color y tiene imagen, usarla
+        if ($itemColor) {
+            return $itemColor->banner ? $itemColor->banner : ($itemColor->image ? $itemColor->image : ($this->banner ? $this->banner : $this->image));
+        }
+
+        // Fallback: usar imagen por defecto del producto
+        return $this->banner ? $this->banner : $this->image;
     }
 
     protected static function booted()

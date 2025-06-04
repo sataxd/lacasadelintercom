@@ -39,11 +39,12 @@ const Items = ({ categories, brands }) => {
     const categoryRef = useRef();
 
     const nameRef = useRef();
+    const aliasRef = useRef();
     const summaryRef = useRef();
     const priceRef = useRef();
     const discountRef = useRef();
     const imageRef = useRef();
-    const bannerRef = useRef();
+    //const bannerRef = useRef();
     const manualRef = useRef();
     const descriptionRef = useRef();
     const scoreRef = useRef();
@@ -122,6 +123,7 @@ const Items = ({ categories, brands }) => {
             .trigger("change");
 
         nameRef.current.value = data?.name || "";
+        aliasRef.current.value = data?.alias || "";
         summaryRef.current.value = data?.summary || "";
         priceRef.current.value = data?.price || 0;
         discountRef.current.value = data?.discount || 0;
@@ -132,8 +134,8 @@ const Items = ({ categories, brands }) => {
         imageRef.current.value = null;
         imageRef.image.src = `/api/items/media/${data?.image ?? "undefined"}`;
 
-        bannerRef.current.value = null;
-        bannerRef.image.src = `/api/items/media/${data?.banner ?? "undefined"}`;
+       /* bannerRef.current.value = null;
+        bannerRef.image.src = `/api/items/media/${data?.banner ?? "undefined"}`;*/
         manualRef.current.value = null;
         if (data?.manual) {
             setManualPreview(`/storage/images/item/${data.manual}`);
@@ -191,6 +193,7 @@ const Items = ({ categories, brands }) => {
             id: idRef.current.value || undefined,
             category_id: categoryRef.current.value,
             name: nameRef.current.value,
+            alias: aliasRef.current.value,
             summary: summaryRef.current.value,
             price: priceRef.current.value,
             discount: discountRef.current.value,
@@ -218,10 +221,10 @@ const Items = ({ categories, brands }) => {
             formData.append("image", image);
         }
 
-        const banner = bannerRef.current.files[0];
+     /*   const banner = bannerRef.current.files[0];
         if (banner) {
             formData.append("banner", banner);
-        }
+        }*/
 
         const manual = manualRef.current.files[0];
 
@@ -639,6 +642,11 @@ const Items = ({ categories, brands }) => {
                             label="Nombre"
                             required
                         />
+                          <InputFormGroup
+                            eRef={aliasRef}
+                            label="Alias del producto"
+                            
+                        />
                         <InputFormGroup eRef={summaryRef} label="Resumen" />
                         <SelectFormGroup
                             eRef={categoryRef}
@@ -700,16 +708,16 @@ const Items = ({ categories, brands }) => {
                                 eRef={imageRef}
                                 label="Imagen"
                                 aspect={1}
-                                col="col-lg-4 col-md-12 col-sm-4"
+                                col="col-lg-6 col-md-12 col-sm-12"
                             />
-                            <ImageFormGroup
+                          {/*  <ImageFormGroup
                                 eRef={bannerRef}
                                 label="Imagen del producto"
                                 aspect={1}
                                 col="col-lg-4 col-md-12 col-sm-4"
-                            />
+                            /> */}
 
-                            <div className="col-lg-4 col-md-12 col-sm-4">
+                            <div className="col-lg-6 col-md-12 col-sm-12">
                                 <label className="form-label">Galeria</label>
                                 <input
                                     id="input-item-gallery"
@@ -730,7 +738,7 @@ const Items = ({ categories, brands }) => {
                                         boxShadow:
                                             "2.5px 2.5px 5px rgba(0,0,0,.125)",
                                         aspectRatio: "21/9",
-                                        height: "160px",
+                                        height: "250px",
                                         width: "100%",
                                         display: "flex",
                                         alignItems: "center",

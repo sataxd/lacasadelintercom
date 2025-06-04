@@ -12,7 +12,7 @@ class ItemColorController extends BasicController
 {
     public $model = ItemColor::class;
     public $reactView = 'Admin/Colors';
-    public $imageFields = ['image'];
+    public $imageFields = ['image','banner'];
     public $prefix4filter = 'item_colors';
 
 
