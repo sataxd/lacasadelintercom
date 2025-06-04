@@ -43,17 +43,57 @@ export const CarritoProvider = ({ children }) => {
             });
             
             itemsRest.verifyStock(payload).then((items) => {
-                const newCart = carrito.map((x) => {
-                    const found = items.find((item) => item.id === x.id);
-                    return found
-                        ? {
-                              ...x,
-                              price: found.price,
-                              final_price: found.final_price,
-                              discount: found.discount,
-                              name: found.name,
-                          }
-                        : x;
+                const newCart = carrito.map((producto) => {
+                    if (producto.variations && producto.variations.length > 0) {
+                        // Producto con variaciones - actualizar precio de cada variación
+                        const updatedVariations = producto.variations.map(variation => {
+                            // Buscar el item específico que corresponde a esta variación
+                            const found = items.find((item) => 
+                                item.id === producto.id && 
+                                item.color === variation.color && 
+                                item.size === variation.size
+                            );
+                            
+                            if (found) {
+                                return {
+                                    ...variation,
+                                    price: found.price,
+                                    final_price: found.final_price,
+                                    discount: found.discount,
+                                };
+                            }
+                            return variation;
+                        });
+                        
+                        // Para el producto principal, usamos los datos del primer item encontrado
+                        const firstFound = items.find((item) => item.id === producto.id);
+                        
+                        return {
+                            ...producto,
+                            variations: updatedVariations,
+                            price: firstFound ? firstFound.price : producto.price,
+                            final_price: firstFound ? firstFound.final_price : producto.final_price,
+                            discount: firstFound ? firstFound.discount : producto.discount,
+                            name: firstFound ? firstFound.name : producto.name,
+                        };
+                    } else {
+                        // Producto sin variaciones - buscar directamente
+                        const found = items.find((item) => 
+                            item.id === producto.id && 
+                            !item.color && 
+                            !item.size
+                        );
+                        
+                        return found
+                            ? {
+                                  ...producto,
+                                  price: found.price,
+                                  final_price: found.final_price,
+                                  discount: found.discount,
+                                  name: found.name,
+                              }
+                            : producto;
+                    }
                 });
                 setCarrito(newCart);
             });

@@ -161,12 +161,12 @@ const Header = ({
             return (
                 acc +
                 item.variations.reduce(
-                    (sum, v) => sum + item.final_price * v.quantity,
+                    (sum, v) => sum + (v.final_price || item.final_price || 0) * v.quantity,
                     0
                 )
             );
         }
-        return acc + item.final_price * item.quantity;
+        return acc + (item.final_price || 0) * item.quantity;
     }, 0);
 
     const [socials, setSocials] = useState([]);
@@ -566,7 +566,7 @@ const Header = ({
                                                             <p className="text-xl  items-center   font-bold text-[#5F48B7] ">
                                                                 S/{" "}
                                                                 {Number(
-                                                                    item.final_price
+                                                                    item.final_price || 0
                                                                 ).toFixed(2)}
                                                             </p>
                                                         </div>

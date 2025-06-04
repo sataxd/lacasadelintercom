@@ -265,12 +265,12 @@ const Checkout = ({ publicKey, session }) => {
             return (
                 acc +
                 item.variations.reduce(
-                    (sum, v) => sum + item.final_price * v.quantity,
+                    (sum, v) => sum + (v.final_price || item.final_price || 0) * v.quantity,
                     0
                 )
             );
         }
-        return acc + item.final_price * item.quantity;
+        return acc + (item.final_price || 0) * item.quantity;
     }, 0);
 
     const planDiscount = totalPrice * 0;
@@ -954,11 +954,11 @@ window.culqi = async () => {
                                                                             v
                                                                         ) =>
                                                                             sum +
-                                                                            item.final_price *
+                                                                            (v.final_price || item.final_price || 0) *
                                                                             v.quantity,
                                                                         0
                                                                     )
-                                                                    : item.final_price *
+                                                                    : (item.final_price || 0) *
                                                                     item.quantity
                                                             )}
                                                         </span>

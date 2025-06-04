@@ -87,6 +87,9 @@ class ItemController extends BasicController
                             'requested' => $item['quantity'],
                             'available' => $variant->stock >= $item['quantity'],
                             'name' => $itemJpa->name,
+                            'price' => $variant->price ?? $itemJpa->price,
+                            'final_price' => $variant->final_price ?? $itemJpa->final_price,
+                            'discount' => $variant->discount ?? $itemJpa->discount,
                             'color' => $item['color'] ?? null,
                             'size' => $item['size'] ?? null,
                         ];
@@ -98,6 +101,9 @@ class ItemController extends BasicController
                             'requested' => $item['quantity'],
                             'available' => false,
                             'name' => $itemJpa->name,
+                            'price' => $itemJpa->price,
+                            'final_price' => $itemJpa->final_price,
+                            'discount' => $itemJpa->discount,
                             'color' => $item['color'] ?? null,
                             'size' => $item['size'] ?? null,
                         ];
@@ -110,6 +116,9 @@ class ItemController extends BasicController
                         'requested' => $item['quantity'],
                         'available' => $itemJpa->stock >= $item['quantity'],
                         'name' => $itemJpa->name,
+                        'price' => $itemJpa->price,
+                        'final_price' => $itemJpa->final_price,
+                        'discount' => $itemJpa->discount,
                         'color' => null,
                         'size' => null,
                     ];
