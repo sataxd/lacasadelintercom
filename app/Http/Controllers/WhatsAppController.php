@@ -38,7 +38,11 @@ class WhatsAppController extends Controller
                     if ($packItemsData && is_array($packItemsData)) {
                         foreach ($packItemsData as $packItem) {
                             if (is_array($packItem) && isset($packItem['name'])) {
-                                $itemLine = "+ *{$packItem['name']}*";
+                                // Usar alias si existe, sino usar name
+                                $displayName = isset($packItem['alias']) && !empty($packItem['alias']) 
+                                    ? $packItem['alias'] 
+                                    : $packItem['name'];
+                                $itemLine = "+ *{$displayName}*";
                                 
                                 // Buscar el producto individual para verificar si acepta tallas/colores
                                 $individualItem = \App\Models\Item::where('name', $packItem['name'])->first();
