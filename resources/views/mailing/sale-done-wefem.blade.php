@@ -49,10 +49,9 @@
                                     }
                                 @endphp
                                 
-                                @if ($individualItem)
-                                    <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
+                                @if ($individualItem)                                    <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
                                         <span style="position: absolute; top: 8px; right: 12px; background: #000000; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; z-index:2;">x{{ (int) $detail->quantity }}</span>
-                                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $individualItem->image }}" alt="{{ $individualItem->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
+                                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $individualItem->banner ? $individualItem->banner : $individualItem->image }}" alt="{{ $individualItem->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
                                         <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $individualItem->name }}</div>
                                         @if ($shouldHaveSizeColor)
                                             <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
@@ -66,11 +65,10 @@
                             @endif
                         @endforeach
                     @endif
-                @else
-                    {{-- Producto normal --}}
+                @else                    {{-- Producto normal --}}
                     <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
                         <span style="position: absolute; top: 8px; right: 12px; background: #000000; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; z-index:2;">x{{ (int) $detail->quantity }}</span>
-                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $detail->item->image }}" alt="{{ $detail->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
+                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $detail->item->banner ? $detail->item->banner : $detail->item->image }}" alt="{{ $detail->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
                         <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $detail->name }}</div>
                         @if ($detail->size || $detail->color)
                             <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
