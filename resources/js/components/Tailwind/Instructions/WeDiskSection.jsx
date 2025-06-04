@@ -164,7 +164,7 @@ const WeDiskSection = () => {
                         </video>
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-[48.75px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
+                         <h2 className="text-[36px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
                             Paso 2:
                         </h2>
                         <div className="inline-block bg-[#DDEC4C] px-6 py-2 rounded-full mb-6 w-max">
@@ -200,7 +200,7 @@ const WeDiskSection = () => {
                         </video>
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-[48.75px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
+                          <h2 className="text-[36px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
                             Paso 3:
                         </h2>
                         <div className="inline-block bg-[#DDEC4C] px-6 py-2 rounded-full mb-6 w-max">
@@ -237,7 +237,7 @@ const WeDiskSection = () => {
                         </video>
                     </div>
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-[48.75px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
+                         <h2 className="text-[36px] md:text-[52.75px] lg:text-[42.75px] 2xl:text-[52.75px] leading-[42.73px] font-bold mb-4">
                             Paso 4:
                         </h2>
                         <div className="inline-block bg-[#DDEC4C] px-6 py-2 rounded-full mb-6 w-max">
