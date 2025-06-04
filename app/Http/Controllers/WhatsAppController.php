@@ -56,11 +56,11 @@ class WhatsAppController extends Controller
                                 $shouldReceiveColor = $acceptsColors && $hasColor;
                                 
                                 if ($shouldReceiveSize || $shouldReceiveColor) {
-                                    $itemLine .= ' (';
+                                    $itemLine .= ' ';
                                     if ($shouldReceiveSize) $itemLine .= ' ' . strtoupper($detail->size);
                                     if ($shouldReceiveSize && $shouldReceiveColor) $itemLine .= ' - ';
                                     if ($shouldReceiveColor) $itemLine .= ' ' . strtoupper($detail->color);
-                                    $itemLine .= ')';
+                                    $itemLine .= '';
                                 }
                                 
                                 $productos .= $itemLine . "\n";
@@ -71,11 +71,11 @@ class WhatsAppController extends Controller
                     // Producto normal
                     $linea = '+ *' . $detail->name . '*';
                     if ($detail->size || $detail->color) {
-                        $linea .= ' (';
+                        $linea .= ' ';
                         if ($detail->size) $linea .= ' ' . strtoupper($detail->size);
                         if ($detail->size && $detail->color) $linea .= ' - ';
                         if ($detail->color) $linea .= ' ' . strtoupper($detail->color);
-                        $linea .= ')';
+                        $linea .= '';
                     }
                     $productos .= $linea . "\n";
                 }

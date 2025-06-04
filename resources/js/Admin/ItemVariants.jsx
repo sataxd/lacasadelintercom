@@ -97,8 +97,8 @@ const ItemVariants = ({ itemId, colors, sizes }) => {
         const discount = discountRef.current ? discountRef.current.value : "";
         // Validación robusta: no vacío, no null, no string vacío, no solo espacios
         const isEmpty = (val) => val === undefined || val === null || String(val).trim() === '';
-        if (isEmpty(color_id) || isEmpty(zise_id) || isEmpty(stock) || isEmpty(price)) {
-            alert("Completa todos los campos obligatorios: Color, Talla, Stock y Precio.");
+        if ( isEmpty(stock) || isEmpty(price)) {
+            alert("Completa todos los campos obligatorios: Stock y Precio.");
             return;
         }
         let final_price = price;

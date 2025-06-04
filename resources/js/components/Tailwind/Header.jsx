@@ -61,6 +61,44 @@ const Header = ({
 
     const { carrito, eliminarProducto, agregarAlCarrito } = useContext(CarritoContext);
 
+    // Estados para manejo de variantes de ofertas en Header
+    const [headerOfferStates, setHeaderOfferStates] = useState({});
+
+    // Función para inicializar estados de ofertas
+    const initializeOfferState = (adId, offerItem) => {
+        if (!headerOfferStates[adId]) {
+            setHeaderOfferStates(prev => ({
+                ...prev,
+                [adId]: {
+                    selectedColor: offerItem?.colors?.length > 0 ? offerItem.colors[0].name : "",
+                    selectedSize: offerItem?.sizes?.length > 0 ? offerItem.sizes[0].name : ""
+                }
+            }));
+        }
+    };
+
+    // Función para actualizar estado de color de oferta
+    const updateOfferColor = (adId, color) => {
+        setHeaderOfferStates(prev => ({
+            ...prev,
+            [adId]: {
+                ...prev[adId],
+                selectedColor: color
+            }
+        }));
+    };
+
+    // Función para actualizar estado de talla de oferta
+    const updateOfferSize = (adId, size) => {
+        setHeaderOfferStates(prev => ({
+            ...prev,
+            [adId]: {
+                ...prev[adId],
+                selectedSize: size
+            }
+        }));
+    };
+
     // --- Múltiples banners de Ads en el modal del carrito ---
     // Buscar todos los Ads activos con banner_image y producto de oferta no presente en el carrito ni aceptado
     let bannerAds = [];
@@ -68,11 +106,36 @@ const Header = ({
         if (prod.ad && prod.ad.banner_image && prod.ad.offer_item) {
             // Solo mostrar si la oferta no está en el carrito
             const offerItemId = prod.ad.offer_item.id;
-            const ofertaEnCarrito = carrito.some(
-                (item) => item.id === offerItemId
-            );
-            if (!ofertaEnCarrito) {
-                bannerAds.push(prod.ad);
+            
+            // Verificar si la oferta ya está en el carrito
+            // Considerar tanto productos simples como con variantes
+            const ofertaEnCarrito = carrito.some((item) => {
+                if (item.id === offerItemId) {
+                    return true;
+                }
+                return false;
+            });
+            
+            // También verificar si ya fue aceptada anteriormente
+            const ofertaYaAceptada = localStorage.getItem(`ad_shown_${prod.id}`) === 'true';
+            
+            if (!ofertaEnCarrito && !ofertaYaAceptada) {
+                // Verificar que el producto de oferta tenga stock disponible
+                let tieneStock = false;
+                if (prod.ad.offer_item.variants && prod.ad.offer_item.variants.length > 0) {
+                    // Producto con variantes - verificar si alguna variante tiene stock
+                    tieneStock = prod.ad.offer_item.variants.some(variant => variant.stock > 0);
+                } else {
+                    // Producto simple - verificar stock directo
+                    tieneStock = (prod.ad.offer_item.stock || 0) > 0;
+                }
+                
+                if (tieneStock) {
+                    bannerAds.push({
+                        ...prod.ad,
+                        originalProductId: prod.id // Para marcar como mostrado después
+                    });
+                }
             }
         }
     }
@@ -558,27 +621,127 @@ const Header = ({
                                 {/* Múltiples banners de Ads activos */}
                                 {bannerAds.length > 0 && (
                                     <div className="my-4 flex flex-col items-center gap-6">
-                                        {bannerAds.map((bannerAd, idx) => (
-                                            <div key={bannerAd.id || idx} className="w-full flex flex-col items-center">
-                                                <div className="text-start mt-2 text-black font-bold my-2">
-                                                    ¡Aprovecha esta oferta exclusiva!
+                                        {bannerAds.map((bannerAd, idx) => {
+                                            // Inicializar estado si no existe
+                                            if (!headerOfferStates[bannerAd.id]) {
+                                                initializeOfferState(bannerAd.id, bannerAd.offer_item);
+                                            }
+                                            
+                                            const currentState = headerOfferStates[bannerAd.id] || {
+                                                selectedColor: bannerAd.offer_item?.colors?.length > 0 ? bannerAd.offer_item.colors[0].name : "",
+                                                selectedSize: bannerAd.offer_item?.sizes?.length > 0 ? bannerAd.offer_item.sizes[0].name : ""
+                                            };
+                                            
+                                            const hasVariants = (bannerAd.offer_item?.colors?.length > 0) || (bannerAd.offer_item?.sizes?.length > 0);
+                                            
+                                            return (
+                                                <div key={bannerAd.id || idx} className="w-full flex flex-col items-center">
+                                                    <div className="text-start mt-2 text-black font-bold my-2">
+                                                        ¡Aprovecha esta oferta exclusiva!
+                                                    </div>
+                                                    
+                                                    {/* Selectores de variantes si es necesario */}
+                                                    {hasVariants && (
+                                                        <div className="w-full max-w-md p-3 mb-2 bg-gray-50 rounded-lg">
+                                                            <div className="text-center mb-2">
+                                                                <h5 className="text-sm font-bold text-gray-700">Selecciona las opciones:</h5>
+                                                            </div>
+                                                            
+                                                            {/* Selector de color */}
+                                                            {bannerAd.offer_item?.colors?.length > 0 && (
+                                                                <div className="flex items-center justify-center gap-2 mb-2">
+                                                                    <span className="text-xs font-medium">Color:</span>
+                                                                    <div className="flex gap-1">
+                                                                        {bannerAd.offer_item.colors.map((color, colorIdx) => (
+                                                                            <button
+                                                                                key={colorIdx}
+                                                                                onClick={() => updateOfferColor(bannerAd.id, color.name)}
+                                                                                className={`w-6 h-6 rounded-full border-2 ${
+                                                                                    currentState.selectedColor === color.name 
+                                                                                    ? "border-gray-800" 
+                                                                                    : "border-gray-300"
+                                                                                }`}
+                                                                                style={{ backgroundColor: color.summary }}
+                                                                                title={color.name}
+                                                                            />
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                            
+                                                            {/* Selector de talla */}
+                                                            {bannerAd.offer_item?.sizes?.length > 0 && (
+                                                                <div className="flex items-center justify-center gap-2">
+                                                                    <span className="text-xs font-medium">Talla:</span>
+                                                                    <select
+                                                                        value={currentState.selectedSize}
+                                                                        onChange={(e) => updateOfferSize(bannerAd.id, e.target.value)}
+                                                                        className="text-xs px-2 py-1 border border-gray-300 rounded"
+                                                                    >
+                                                                        {bannerAd.offer_item.sizes.map((size, sizeIdx) => (
+                                                                            <option key={sizeIdx} value={size.name}>
+                                                                                Talla {size.name}
+                                                                            </option>
+                                                                        ))}
+                                                                    </select>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                    
+                                                    <img
+                                                        src={`/api/ads/media/${bannerAd.banner_image}`}
+                                                        alt="Promo especial"
+                                                        className="w-full max-w-md rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                                                        onClick={async () => {
+                                                            if (!bannerAd.offer_item) return;
+                                                            
+                                                            // Verificar stock si tiene variantes
+                                                            let stockDisponible = 0;
+                                                            if (bannerAd.offer_item.variants && bannerAd.offer_item.variants.length > 0) {
+                                                                const variante = bannerAd.offer_item.variants.find(
+                                                                    v =>
+                                                                        (!bannerAd.offer_item.colors?.length || v.color?.name === currentState.selectedColor) &&
+                                                                        (!bannerAd.offer_item.sizes?.length || v.size?.name === currentState.selectedSize)
+                                                                );
+                                                                stockDisponible = variante ? variante.stock : 0;
+                                                            } else {
+                                                                stockDisponible = bannerAd.offer_item.stock ?? 0;
+                                                            }
+                                                            
+                                                            if (stockDisponible <= 0) {
+                                                                alert('Sin stock disponible para esta oferta.');
+                                                                return;
+                                                            }
+                                                            
+                                                            try {
+                                                                const result = await agregarAlCarrito({
+                                                                    ...bannerAd.offer_item,
+                                                                    id: bannerAd.offer_item.id,
+                                                                    quantity: 1,
+                                                                    price: bannerAd.offer_price ?? bannerAd.offer_item.final_price ?? bannerAd.offer_item.price,
+                                                                    selectedColor: bannerAd.offer_item.colors?.length > 0 ? currentState.selectedColor : null,
+                                                                    selectedSize: bannerAd.offer_item.sizes?.length > 0 ? currentState.selectedSize : null,
+                                                                });
+                                                                
+                                                                if (result && result.success === false) {
+                                                                    alert(result.message || 'No se pudo agregar la oferta al carrito.');
+                                                                    return;
+                                                                }
+                                                                
+                                                                // Marcar la oferta como mostrada
+                                                                if (bannerAd.originalProductId) {
+                                                                    localStorage.setItem(`ad_shown_${bannerAd.originalProductId}`, 'true');
+                                                                }
+                                                            } catch (error) {
+                                                                console.error('Error al agregar oferta:', error);
+                                                                alert('Error al agregar la oferta. Inténtalo de nuevo.');
+                                                            }
+                                                        }}
+                                                    />
                                                 </div>
-                                                <img
-                                                    src={`/api/ads/media/${bannerAd.banner_image}`}
-                                                    alt="Promo especial"
-                                                    className="w-full max-w-md rounded-xl shadow-lg cursor-pointer"
-                                                    onClick={async () => {
-                                                        if (!bannerAd.offer_item) return;
-                                                        await agregarAlCarrito({
-                                                            ...bannerAd.offer_item,
-                                                            id: bannerAd.offer_item.id,
-                                                            quantity: 1,
-                                                            price: bannerAd.offer_price ?? bannerAd.offer_item.final_price ?? bannerAd.offer_item.price,
-                                                        });
-                                                    }}
-                                                />
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 )}
                                 {/* Total y botón de Checkout */}

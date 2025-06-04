@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use SoDe\Extend\Response;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Routing\ResponseFactory;
@@ -55,17 +56,29 @@ class ItemController extends BasicController
             foreach ($items as $item) {
                 $itemJpa = Item::find($item['id']);
                 if (!$itemJpa) continue;
+                
                 $hasVariants = $itemJpa->variants()->count() > 0;
+                
                 if ($hasVariants) {
                     // Buscar variante exacta
-                    $variant = $itemJpa->variants()
-                        ->whereHas('color', function($q) use ($item) {
-                            if (!empty($item['color'])) $q->where('name', $item['color']);
-                        })
-                        ->whereHas('zise', function($q) use ($item) {
-                            if (!empty($item['size'])) $q->where('name', $item['size']);
-                        })
-                        ->first();
+                    $variantQuery = $itemJpa->variants();
+                    
+                    // Solo aplicar filtro de color si se especifica
+                    if (!empty($item['color'])) {
+                        $variantQuery->whereHas('color', function($q) use ($item) {
+                            $q->where('name', $item['color']);
+                        });
+                    }
+                    
+                    // Solo aplicar filtro de talla si se especifica
+                    if (!empty($item['size'])) {
+                        $variantQuery->whereHas('zise', function($q) use ($item) {
+                            $q->where('name', $item['size']);
+                        });
+                    }
+                    
+                    $variant = $variantQuery->first();
+                    
                     if ($variant) {
                         $result[] = [
                             'id' => $itemJpa->id,

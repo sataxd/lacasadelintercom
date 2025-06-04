@@ -20,7 +20,29 @@ export const CarritoProvider = ({ children }) => {
     const actualizarPrecios = async () => {
         try {
             if (carrito.length === 0) return; // Evitar llamadas innecesarias
-            itemsRest.verifyStock(carrito.map((x) => x.id)).then((items) => {
+            
+            // Preparar payload correcto para verifyStock
+            const payload = carrito.flatMap(producto => {
+                if (producto.variations && producto.variations.length > 0) {
+                    // Producto con variaciones - crear un item por cada variación
+                    return producto.variations.map(variation => ({
+                        id: producto.id,
+                        quantity: variation.quantity,
+                        color: variation.color || null,
+                        size: variation.size || null,
+                    }));
+                } else {
+                    // Producto sin variaciones
+                    return [{
+                        id: producto.id,
+                        quantity: producto.quantity,
+                        color: null,
+                        size: null,
+                    }];
+                }
+            });
+            
+            itemsRest.verifyStock(payload).then((items) => {
                 const newCart = carrito.map((x) => {
                     const found = items.find((item) => item.id === x.id);
                     return found
@@ -90,7 +112,13 @@ export const CarritoProvider = ({ children }) => {
     const agregarAlCarrito = async (producto) => {
         // Preparar payload para verificar stock
         const payload = [];
-        if ((producto.sizes && producto.sizes.length > 0) || (producto.colors && producto.colors.length > 0)) {
+        
+        // Detectar si el producto tiene variantes (más flexible)
+        const hasColors = (producto.colors && producto.colors.length > 0) || producto.selectedColor;
+        const hasSizes = (producto.sizes && producto.sizes.length > 0) || producto.selectedSize;
+        const hasVariants = hasColors || hasSizes;
+        
+        if (hasVariants) {
             // Producto con variaciones
             payload.push({
                 id: producto.id,
@@ -109,6 +137,7 @@ export const CarritoProvider = ({ children }) => {
         }
 
         const stockResult = await itemsRest.verifyStock(payload);
+        
         const stockInfo = stockResult[0];
         if (!stockInfo || !stockInfo.available) {
             setAlerta({
@@ -117,13 +146,14 @@ export const CarritoProvider = ({ children }) => {
                 actionLabel: "Ver productos",
                 duration: 5000,
             });
-            return;
+            return { success: false, message: `No hay stock suficiente para "${producto.name}"` };
         }
 
         setCarrito((prev) => {
-            const tieneVariaciones =
-                (producto.sizes && producto.sizes.length > 0) ||
-                (producto.colors && producto.colors.length > 0);
+            // Usar la misma lógica de detección de variantes
+            const hasColors = (producto.colors && producto.colors.length > 0) || producto.selectedColor;
+            const hasSizes = (producto.sizes && producto.sizes.length > 0) || producto.selectedSize;
+            const tieneVariaciones = hasColors || hasSizes;
 
             if (!tieneVariaciones) {
                 // Producto sin variaciones
@@ -206,12 +236,16 @@ export const CarritoProvider = ({ children }) => {
                 ];
             }
         });
+        
+        console.log('🛒 DEBUG - Product added to cart successfully');
         setAlerta({
             id: Date.now(),
             message: "Se ha agregado el artículo al carrito",
             actionLabel: "Ver carrito",
             duration: 5000,
         });
+        
+        return { success: true };
     };
 
     // Función para eliminar un producto

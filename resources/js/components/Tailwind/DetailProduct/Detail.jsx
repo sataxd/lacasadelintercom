@@ -58,6 +58,11 @@ const Detail = ({ item }) => {
     const [selectedSize, setSelectedSize] = useState(
         item.sizes.length > 0 ? item.sizes[0].name : ""
     );
+
+    // Estados para el modal de oferta con variantes
+    const [selectedOfferColor, setSelectedOfferColor] = useState("");
+    const [selectedOfferSize, setSelectedOfferSize] = useState("");
+    const [showOfferVariants, setShowOfferVariants] = useState(false);
     const changeQuantity = (amount) => {
         setQuantity((prev) => Math.max(1, prev + amount));
     };
@@ -78,23 +83,49 @@ const Detail = ({ item }) => {
     }
 
     const addProduct = async (item) => {
+        console.log('🔧 DEBUG - addProduct called with:', { item, quantity, selectedColor, selectedSize, stockDisponible });
+        
         if (stockDisponible <= 0) {
             alert('Sin stock disponible para este producto.');
             return;
         }
-        const result = await agregarAlCarrito({
-            ...item,
-            quantity,
-            selectedColor: item.colors?.length > 0 ? selectedColor : null,
-            selectedSize: item.sizes?.length > 0 ? selectedSize : null,
-        });
-        if (result && result.success === false) {
-            alert(result.message || 'No se pudo agregar al carrito por falta de stock.');
-            return;
-        }
-        // Solo mostrar el modal si no se ha mostrado antes para este producto
-        if (item.ad && !localStorage.getItem(`ad_shown_${item.id}`)) {
-            setIsModalOpen(true);
+        
+        try {
+            console.log('🔧 DEBUG - Calling agregarAlCarrito...');
+            const result = await agregarAlCarrito({
+                ...item,
+                quantity,
+                selectedColor: item.colors?.length > 0 ? selectedColor : null,
+                selectedSize: item.sizes?.length > 0 ? selectedSize : null,
+            });
+            
+            console.log('🔧 DEBUG - agregarAlCarrito result:', result);
+            
+            if (result && result.success === false) {
+                alert(result.message || 'No se pudo agregar al carrito por falta de stock.');
+                return;
+            }
+            
+            // Solo mostrar el modal si no se ha mostrado antes para este producto
+            if (item.ad && !localStorage.getItem(`ad_shown_${item.id}`)) {
+                console.log('🔧 DEBUG - Showing ad modal for item:', item.id);
+                // Verificar si el producto de oferta tiene variantes
+                const offerItem = item.ad.offer_item;
+                if (offerItem && ((offerItem.colors && offerItem.colors.length > 0) || (offerItem.sizes && offerItem.sizes.length > 0))) {
+                    // El producto de oferta tiene variantes, inicializar selección
+                    setSelectedOfferColor(offerItem.colors && offerItem.colors.length > 0 ? offerItem.colors[0].name : "");
+                    setSelectedOfferSize(offerItem.sizes && offerItem.sizes.length > 0 ? offerItem.sizes[0].name : "");
+                    setShowOfferVariants(true);
+                } else {
+                    setShowOfferVariants(false);
+                }
+                setIsModalOpen(true);
+            } else {
+                console.log('🔧 DEBUG - Not showing ad modal - either no ad or already shown');
+            }
+        } catch (error) {
+            console.error('Error al agregar producto al carrito:', error);
+            alert('Error al agregar el producto. Inténtalo de nuevo.');
         }
     };
 
@@ -402,45 +433,124 @@ const Detail = ({ item }) => {
                 >
                     <div className="relative flex items-center justify-center">
                         <button
-                            className="absolute top-5 right-8 text-3xl text-[#9577B9]"
+                            className="absolute top-5 right-8 text-3xl text-[#9577B9] z-10"
                             onClick={() => setIsModalOpen(false)}
                         >
                             ×
                         </button>
-                        <div className="bg-white rounded-[30.58px]  2xl:rounded-[48.58px] md:w-[459px] md:h-[450.40px] 2xl:w-[519px] 2xl:h-[505.40px] flex flex-col items-center justify-center ">
+                        <div className="bg-white rounded-[30.58px] 2xl:rounded-[48.58px] md:w-[459px] md:h-[450.40px] 2xl:w-[519px] 2xl:h-[505.40px] flex flex-col items-center justify-center relative overflow-hidden">
                             <CountdownTimer
                                 startDate={item.ad.dete_begin}
                                 endDate={item.ad.date_end}
                             />
+                            
+                            {/* Selector de variantes si es necesario */}
+                            {showOfferVariants && (
+                                <div className="absolute top-16 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm z-20">
+                                    <div className="text-center mb-3">
+                                        <h4 className="text-sm font-bold text-[#333]">Selecciona las opciones para la oferta:</h4>
+                                    </div>
+                                    
+                                    {/* Selector de color para oferta */}
+                                    {item.ad.offer_item?.colors && item.ad.offer_item.colors.length > 0 && (
+                                        <div className="flex items-center justify-center gap-2 mb-3">
+                                            <p className="text-xs font-bold">Color:</p>
+                                            <div className="flex items-center gap-2">
+                                                {item.ad.offer_item.colors.map((color, index) => (
+                                                    <button
+                                                        key={index}
+                                                        onClick={() => setSelectedOfferColor(color.name)}
+                                                        className={`rounded-full p-1 border ${selectedOfferColor === color.name
+                                                            ? "border-[#222222] border-2"
+                                                            : "border-[#DDDDDD]"
+                                                        }`}
+                                                    >
+                                                        <div
+                                                            className="w-[18px] h-[18px] rounded-full"
+                                                            style={{
+                                                                backgroundColor: `${color.summary}`,
+                                                            }}
+                                                        ></div>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    
+                                    {/* Selector de talla para oferta */}
+                                    {item.ad.offer_item?.sizes && item.ad.offer_item.sizes.length > 0 && (
+                                        <div className="flex items-center justify-center gap-2">
+                                            <label className="text-xs font-bold">Talla:</label>
+                                            <select
+                                                className="text-xs font-medium px-2 py-1 bg-[#EFEDF8] rounded-[3px] appearance-none outline-none border-0 cursor-pointer"
+                                                value={selectedOfferSize}
+                                                onChange={(e) => setSelectedOfferSize(e.target.value)}
+                                            >
+                                                {item.ad.offer_item.sizes.map((size) => (
+                                                    <option
+                                                        key={size.id}
+                                                        value={size.name}
+                                                        className="text-[#000000] text-xs font-medium"
+                                                    >
+                                                        {`Talla ${size.name}`}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                            
                             <div className="flex flex-col items-center">
                                 <img
                                     src={`/api/ads/media/${item.ad.image}`}
                                     alt="Ad"
                                     className="w-full h-full object-cover rounded-[30.58px] 2xl:rounded-[48.58px] cursor-pointer"
                                     onClick={async () => {
-                                          // Agregar producto de oferta al carrito usando los datos completos
+                                        // Agregar producto de oferta al carrito usando los datos completos
                                         if (!item.ad.offer_item) return;
-                                        console.log(item)
-                                        await agregarAlCarrito({
-                                            ...item.ad.offer_item,
-
-                                            quantity: 1,
-                                            price: item.ad.offer_price ?? item.ad.offer_item.final_price ?? item.ad.offer_item.price,
-                                            selectedColor:
-                                                item?.ad?.colors?.length > 0
-                                                    ? selectedColor
-                                                    : null,
-                                            selectedSize:
-                                                item?.ad?.sizes?.length > 0
-                                                    ? selectedSize
-                                                    : null,
-                                            // Puedes agregar lógica para variantes si es necesario
-                                        });
-                                        // Ya no se guarda flag, siempre debe aparecer el modal de oferta
-                                        setIsModalOpen(false);
+                                        
+                                        // Verificar stock de la variante si aplica
+                                        let stockDisponibleOferta = 0;
+                                        if (item.ad.offer_item.variants && item.ad.offer_item.variants.length > 0) {
+                                            const varianteOferta = item.ad.offer_item.variants.find(
+                                                v =>
+                                                    (!item.ad.offer_item.colors?.length || v.color?.name === selectedOfferColor) &&
+                                                    (!item.ad.offer_item.sizes?.length || v.zise?.name === selectedOfferSize)
+                                            );
+                                            stockDisponibleOferta = varianteOferta ? varianteOferta.stock : 0;
+                                        } else {
+                                            stockDisponibleOferta = item.ad.offer_item.stock ?? 0;
+                                        }
+                                        
+                                        if (stockDisponibleOferta <= 0) {
+                                            alert('Sin stock disponible para esta oferta.');
+                                            return;
+                                        }
+                                        
+                                        try {
+                                            const result = await agregarAlCarrito({
+                                                ...item.ad.offer_item,
+                                                quantity: 1,
+                                                price: item.ad.offer_price ?? item.ad.offer_item.final_price ?? item.ad.offer_item.price,
+                                                selectedColor: item.ad.offer_item.colors?.length > 0 ? selectedOfferColor : null,
+                                                selectedSize: item.ad.offer_item.sizes?.length > 0 ? selectedOfferSize : null,
+                                            });
+                                            
+                                            if (result && result.success === false) {
+                                                alert(result.message || 'No se pudo agregar la oferta al carrito por falta de stock.');
+                                                return;
+                                            }
+                                            
+                                            // Marcar que el ad ya fue mostrado para este producto
+                                            localStorage.setItem(`ad_shown_${item.id}`, 'true');
+                                            setIsModalOpen(false);
+                                        } catch (error) {
+                                            console.error('Error al agregar oferta al carrito:', error);
+                                            alert('Error al agregar la oferta al carrito. Inténtalo de nuevo.');
+                                        }
                                     }}
                                 />
-
                             </div>
                         </div>
                     </div>

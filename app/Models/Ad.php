@@ -71,4 +71,9 @@ class Ad extends Model
     {
         return $this->belongsTo(Item::class);
     }
+
+    public function offer_item()
+    {
+        return $this->belongsTo(Item::class, 'offer_item_id')->with(['colors', 'sizes', 'variants']);
+    }
 }
