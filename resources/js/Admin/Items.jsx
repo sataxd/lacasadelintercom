@@ -738,7 +738,7 @@ const Items = ({ categories, brands }) => {
                                         boxShadow:
                                             "2.5px 2.5px 5px rgba(0,0,0,.125)",
                                         aspectRatio: "21/9",
-                                        height: "250px",
+                                        height: "160px",
                                         width: "100%",
                                         display: "flex",
                                         alignItems: "center",
