@@ -38,13 +38,14 @@ class WhatsAppController extends Controller
                     if ($packItemsData && is_array($packItemsData)) {
                         foreach ($packItemsData as $packItem) {
                             if (is_array($packItem) && isset($packItem['name'])) {
-                                // Usar alias si existe, sino usar name
-                                $displayName = isset($packItem['alias']) && !empty($packItem['alias']) 
-                                    ? $packItem['alias'] 
+                                // Buscar el producto individual para verificar si acepta tallas/colores
+                                $individualItem = \App\Models\Item::where('name', $packItem['name'])->first();
+                                
+                                // Usar alias si existe, sino usar name del item individual
+                                $displayName = ($individualItem && !empty($individualItem->alias)) 
+                                    ? $individualItem->alias 
                                     : $packItem['name'];
                                 $itemLine = "+ *{$displayName}*";
-                                
-                                // Buscar el producto individual para verificar si acepta tallas/colores
                                 $individualItem = \App\Models\Item::where('name', $packItem['name'])->first();
                                 
                                 // Verificar si el producto individual acepta tallas o colores
@@ -72,8 +73,11 @@ class WhatsAppController extends Controller
                         }
                     }
                 } else {
-                    // Producto normal
-                    $linea = '+ *' . $detail->name . '*';
+                    // Producto normal - usar alias si existe, sino usar name
+                    $displayName = (!empty($detail->item->alias)) 
+                        ? $detail->item->alias 
+                        : $detail->name;
+                    $linea = '+ *' . $displayName . '*';
                     if ($detail->size || $detail->color) {
                         $linea .= ' ';
                         if ($detail->size) $linea .= ' ' . strtoupper($detail->size);

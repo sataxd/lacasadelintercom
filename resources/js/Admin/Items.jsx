@@ -44,7 +44,7 @@ const Items = ({ categories, brands }) => {
     const priceRef = useRef();
     const discountRef = useRef();
     const imageRef = useRef();
-    //const bannerRef = useRef();
+    const bannerRef = useRef();
     const manualRef = useRef();
     const descriptionRef = useRef();
     const scoreRef = useRef();
@@ -134,8 +134,8 @@ const Items = ({ categories, brands }) => {
         imageRef.current.value = null;
         imageRef.image.src = `/api/items/media/${data?.image ?? "undefined"}`;
 
-       /* bannerRef.current.value = null;
-        bannerRef.image.src = `/api/items/media/${data?.banner ?? "undefined"}`;*/
+       bannerRef.current.value = null;
+        bannerRef.image.src = `/api/items/media/${data?.banner ?? "undefined"}`;
         manualRef.current.value = null;
         if (data?.manual) {
             setManualPreview(`/storage/images/item/${data.manual}`);
@@ -221,10 +221,10 @@ const Items = ({ categories, brands }) => {
             formData.append("image", image);
         }
 
-     /*   const banner = bannerRef.current.files[0];
+        const banner = bannerRef.current.files[0];
         if (banner) {
             formData.append("banner", banner);
-        }*/
+        }
 
         const manual = manualRef.current.files[0];
 
@@ -708,16 +708,16 @@ const Items = ({ categories, brands }) => {
                                 eRef={imageRef}
                                 label="Imagen"
                                 aspect={1}
-                                col="col-lg-6 col-md-12 col-sm-12"
+                                col="col-lg-4 col-md-4 col-sm-12"
                             />
-                          {/*  <ImageFormGroup
+                            <ImageFormGroup
                                 eRef={bannerRef}
                                 label="Imagen del producto"
                                 aspect={1}
-                                col="col-lg-4 col-md-12 col-sm-4"
-                            /> */}
+                                col="col-lg-4 col-md-4 col-sm-12"
+                            /> 
 
-                            <div className="col-lg-6 col-md-12 col-sm-12">
+                            <div className="col-lg-4 col-md-4 col-sm-12">
                                 <label className="form-label">Galeria</label>
                                 <input
                                     id="input-item-gallery"
