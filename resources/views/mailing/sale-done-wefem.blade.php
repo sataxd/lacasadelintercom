@@ -46,8 +46,8 @@
                                     $shouldReceiveSize = $acceptsSizes && $hasSize;
                                     $shouldReceiveColor = $acceptsColors && $hasColor;
                                 @endphp
-                                
-                                @if ($individualItem)                                    <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
+                                  @if ($individualItem)
+                                    <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
                                         <span style="position: absolute; top: 8px; right: 12px; background: #000000; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; z-index:2;">x{{ (int) $detail->quantity }}</span>
                                         @php
                                             // Obtener la imagen específica del color si este producto acepta colores
@@ -55,14 +55,12 @@
                                             $productImage = $individualItem->getImageForColor($colorForImage);
                                         @endphp
                                         <img src="https://wefem.atalaya.pe/api/items/media/{{ $productImage }}" alt="{{ $individualItem->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
-                                        <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $individualItem->name }}</div>@if ($shouldReceiveSize || $shouldReceiveColor)
+                                        <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $individualItem->name }}</div>
+                                        @if ($shouldReceiveSize || $shouldReceiveColor)
                                             <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
                                                 @if ($shouldReceiveSize) Talla {{ $detail->size }} @endif
                                                 @if ($shouldReceiveSize && $shouldReceiveColor) - @endif
                                                 @if ($shouldReceiveColor) Color {{ $detail->color }} @endif
-                                            </div>
-                                        @endif
-                                                @if ($acceptsColors && $detail->color) Color {{ $detail->color }} @endif
                                             </div>
                                         @endif
                                         <div style="font-size: 11px; color: #FF6B35; font-weight: 600;">Parte del Pack: {{ $detail->name }}</div>
