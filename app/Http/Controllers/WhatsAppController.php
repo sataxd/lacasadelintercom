@@ -29,29 +29,79 @@ class WhatsAppController extends Controller
             // Construir lista de productos
             $productos = '';
             foreach ($jpa->details as $detail) {
-                $linea = '+ ' . $detail->name;
-                if ($detail->size || $detail->color) {
-                    $linea .= ' ';
-                    if ($detail->size) $linea .= strtoupper($detail->size);
-                    if ($detail->color) $linea .= ' ' . strtoupper($detail->color);
+                // Verificar si el producto es un pack
+                if ($detail->item && $detail->item->isPack()) {
+                    // Es un pack, mostrar los productos que lo componen
+                    $productos .= "+ *PACK: {$detail->name}*\n";
+                    
+                    // Variable para controlar si ya se asignó la talla/color
+                    $sizeColorAssigned = false;
+                    
+                    // Usar pack_items directamente del JSON para evitar consultas adicionales
+                    $packItemsData = $detail->item->pack_items;
+                    if ($packItemsData && is_array($packItemsData)) {
+                        foreach ($packItemsData as $packItem) {
+                            if (is_array($packItem) && isset($packItem['name'])) {
+                                $itemLine = "  - *{$packItem['name']}*";
+                                
+                                // Buscar el producto individual para verificar si acepta tallas/colores
+                                $individualItem = \App\Models\Item::where('name', $packItem['name'])->first();
+                                
+                                // Si este producto individual tiene tallas/colores, el detalle tiene talla/color,
+                                // y aún no se ha asignado a ningún producto, asignarlo a este
+                                if ($individualItem && 
+                                    ($individualItem->sizes || $individualItem->colors) && 
+                                    ($detail->size || $detail->color) &&
+                                    !$sizeColorAssigned) {
+                                    
+                                    $itemLine .= ' (';
+                                    if ($detail->size) $itemLine .= 'Talla ' . strtoupper($detail->size);
+                                    if ($detail->size && $detail->color) $itemLine .= ' - ';
+                                    if ($detail->color) $itemLine .= 'Color ' . strtoupper($detail->color);
+                                    $itemLine .= ')';
+                                    
+                                    // Marcar que ya se asignó la talla/color
+                                    $sizeColorAssigned = true;
+                                }
+                                
+                                $productos .= $itemLine . "\n";
+                            }
+                        }
+                    }
+                } else {
+                    // Producto normal
+                    $linea = '+ *' . $detail->name . '*';
+                    if ($detail->size || $detail->color) {
+                        $linea .= ' (';
+                        if ($detail->size) $linea .= 'Talla ' . strtoupper($detail->size);
+                        if ($detail->size && $detail->color) $linea .= ' - ';
+                        if ($detail->color) $linea .= 'Color ' . strtoupper($detail->color);
+                        $linea .= ')';
+                    }
+                    $productos .= $linea . "\n";
                 }
-                $productos .= $linea . "\n";
             }
 
             // Monto y método de pago
-            $monto = 'S/' . number_format($jpa->amount, 2) . ' CULQI';
+            $monto = '*S/' . number_format($jpa->amount, 2) . ' CULQI*';
 
             // Dirección y datos
             $isLima = ($jpa->department == 'Lima Metropolitana');
             $direccion = $jpa->address . ($jpa->number ? ' ' . $jpa->number : '');
-            $referencia = $jpa->reference ? "\nReferencia: {$jpa->reference}" : '';
-            $provincia = $isLima ? 'LIMA METROPOLITANA' : ($jpa->province ? strtoupper($jpa->province) : '') . ($jpa->department ? ' - ' . strtoupper($jpa->department) : '') . ' - SHALOM';
+            $referencia = $jpa->reference ? "\n*Referencia:* {$jpa->reference}" : '';
+            $provincia = $isLima 
+                ? '*LIMA METROPOLITANA*' 
+                : (
+                    ($jpa->province ? '*' . strtoupper($jpa->province) . '*' : '') .
+                    ($jpa->department ? ' - *' . strtoupper($jpa->department) . '*' : '') .
+                    ' - *SHALOM*'
+                );
 
-            $mensaje = "PEDIDO #{$jpa->code}. {$jpa->name} {$jpa->lastname}\n";
+            $mensaje = "*PEDIDO #{$jpa->code}.* {$jpa->name} {$jpa->lastname}\n";
             $mensaje .= $productos . "\n";
             $mensaje .= $isLima
-                ? ("LIMA METROPOLITANA  $referencia\nDNI: {$jpa->dni}\nDirección: $direccion\nCorreo: {$jpa->email}\nCelular: {$jpa->phone}\n$monto")
-                : ("PROVINCIA $provincia\nDNI: {$jpa->dni}\nDirección: $direccion\n" . ($jpa->district ? $jpa->district . "\n" : '') . ($jpa->department ? strtoupper($jpa->department) . "\n" : '') . "Correo: {$jpa->email}\nCelular: {$jpa->phone}\n$monto");
+                ? ("*LIMA METROPOLITANA*$referencia\n*DNI:* {$jpa->dni}\n*Dirección:* $direccion\n*Correo:* {$jpa->email}\n*Celular:* {$jpa->phone}\n$monto")
+                : ("*PROVINCIA* $provincia\n*DNI:* {$jpa->dni}\n*Dirección:* $direccion\n" . ($jpa->district ? $jpa->district . "\n" : '') . ($jpa->department ? strtoupper($jpa->department) . "\n" : '') . "*Correo:* {$jpa->email}\n*Celular:* {$jpa->phone}\n$monto");
 
             try {
                 if ($send2client) {

@@ -24,17 +24,62 @@
                 </div>
               
             </div>
-        </div>
-        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+        </div>        <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
             @foreach ($sale->details as $detail)
-                <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
-                    <span style="position: absolute; top: 8px; right: 12px; background: #000000; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; z-index:2;">x{{ (int) $detail->quantity }}</span>
-                    <img src="https://wefem.atalaya.pe/api/items/media/{{ $detail->item->image }}" alt="{{ $detail->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
-                    <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $detail->name }}</div>
-                    @if ($detail->color)
-                        <div style="font-size: 13px; color: #333; margin-bottom: 2px;">Talla {{ $detail->size }} - Color {{ $detail->color }}</div>
+                @if ($detail->item && $detail->item->isPack())
+                    {{-- Es un pack, mostrar cards individuales para cada producto del pack --}}
+                    @if ($detail->item->pack_items && is_array($detail->item->pack_items))
+                        @php $sizeColorAssigned = false; @endphp
+                        @foreach ($detail->item->pack_items as $packItem)
+                            @if (is_array($packItem) && isset($packItem['name']))
+                                @php
+                                    // Buscar el producto individual por nombre
+                                    $individualItem = \App\Models\Item::where('name', $packItem['name'])->first();
+                                    
+                                    // Determinar si este producto debe tener la talla/color del detalle
+                                    // Solo si tiene sizes/colors, el detalle tiene size/color, y aún no se asignó
+                                    $shouldHaveSizeColor = $individualItem && 
+                                        ($individualItem->sizes || $individualItem->colors) && 
+                                        ($detail->size || $detail->color) &&
+                                        !$sizeColorAssigned;
+                                    
+                                    // Si se asigna, marcar como asignado
+                                    if ($shouldHaveSizeColor) {
+                                        $sizeColorAssigned = true;
+                                    }
+                                @endphp
+                                
+                                @if ($individualItem)
+                                    <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
+                                        <span style="position: absolute; top: 8px; right: 12px; background: #000000; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; z-index:2;">x{{ (int) $detail->quantity }}</span>
+                                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $individualItem->image }}" alt="{{ $individualItem->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
+                                        <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $individualItem->name }}</div>
+                                        @if ($shouldHaveSizeColor)
+                                            <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
+                                                @if ($detail->size) Talla {{ $detail->size }} @endif
+                                                @if ($detail->color) Color {{ $detail->color }} @endif
+                                            </div>
+                                        @endif
+                                        <div style="font-size: 11px; color: #FF6B35; font-weight: 600;">Parte del Pack: {{ $detail->name }}</div>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
                     @endif
-                </div>
+                @else
+                    {{-- Producto normal --}}
+                    <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
+                        <span style="position: absolute; top: 8px; right: 12px; background: #000000; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; z-index:2;">x{{ (int) $detail->quantity }}</span>
+                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $detail->item->image }}" alt="{{ $detail->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
+                        <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $detail->name }}</div>
+                        @if ($detail->size || $detail->color)
+                            <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
+                                @if ($detail->size) Talla {{ $detail->size }} @endif
+                                @if ($detail->color) Color {{ $detail->color }} @endif
+                            </div>
+                        @endif
+                    </div>
+                @endif
             @endforeach
         </div>
         <div style="background: #fff; color: #7B4EDB; border-radius: 16px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">

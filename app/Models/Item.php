@@ -35,7 +35,12 @@ class Item extends Model
         'stock',
         'score',
         'min_stock',
-        'manual'
+        'manual',
+        'pack_items'
+    ];
+
+    protected $casts = [
+        'pack_items' => 'array',
     ];
     /*
      
@@ -71,6 +76,42 @@ class Item extends Model
     public function images()
     {
         return $this->hasMany(ItemImage::class);
+    }
+
+    /**
+     * Verifica si el producto es un pack
+     */
+    public function isPack()
+    {
+        return !empty($this->pack_items) && is_array($this->pack_items);
+    }
+
+    /**
+     * Obtiene los productos que componen el pack
+     */
+    public function getPackItems()
+    {
+        if (!$this->isPack()) {
+            return collect();
+        }
+
+        // pack_items ahora contiene objetos con id y name
+        // Extraer solo los IDs para la consulta
+        $itemIds = collect($this->pack_items)->pluck('id')->toArray();
+        return Item::whereIn('id', $itemIds)->get();
+    }
+
+    /**
+     * Obtiene los nombres de los productos del pack para mostrar
+     */
+    public function getPackItemsDisplay()
+    {
+        if (!$this->isPack()) {
+            return null;
+        }
+
+        // Usar directamente los nombres del array pack_items
+        return collect($this->pack_items)->pluck('name')->implode(', ');
     }
 
     protected static function booted()

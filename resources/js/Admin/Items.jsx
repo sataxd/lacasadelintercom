@@ -49,6 +49,7 @@ const Items = ({ categories, brands }) => {
     // Nuevos campos
     const stockRef = useRef();
     const min_stockRef = useRef();
+    const packItemsRef = useRef();
 
     const [isEditing, setIsEditing] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -149,9 +150,12 @@ const Items = ({ categories, brands }) => {
         }
 
         // Nuevos campos
-
         stockRef.current.value = data?.stock;
         min_stockRef.current.value = data?.min_stock;
+        
+        // Pack items - cargar productos seleccionados si existen
+        SetSelectValue(packItemsRef.current, data?.pack_items ?? [], "id", 'name');
+  
         $(modalRef.current).modal("show");
     };
 
@@ -168,6 +172,17 @@ const Items = ({ categories, brands }) => {
             final_price = priceRef.current.value;
             discount_percent = 0;
         }
+
+        // Procesar pack_items - obtener objetos con id y name
+        const selectedPackItemIds = $(packItemsRef.current).val() || [];
+        const selectedPackItems = selectedPackItemIds.map(id => {
+            const option = $(packItemsRef.current).find(`option[value="${id}"]`);
+            return {
+                id: parseInt(id),
+                name: option.text()
+            };
+        });
+
         const request = {
             id: idRef.current.value || undefined,
             category_id: categoryRef.current.value,
@@ -181,11 +196,17 @@ const Items = ({ categories, brands }) => {
             score: scoreRef.current.value,
             final_price: final_price,
             discount_percent: discount_percent,
+            pack_items: selectedPackItems.length > 0 ? selectedPackItems : [],
         };
 
         const formData = new FormData();
         for (const key in request) {
-            formData.append(key, request[key]);
+            if (key === 'pack_items') {
+                // Para FormData, convertimos el array a JSON string
+                formData.append(key, JSON.stringify(request[key]));
+            } else {
+                formData.append(key, request[key]);
+            }
         }
 
         const image = imageRef.current.files[0];
@@ -813,6 +834,39 @@ const Items = ({ categories, brands }) => {
                     className="form-control"
                     placeholder="Descripción"
                 ></textarea>
+                
+                <hr className="my-1" />
+                <label className="form-label">Pack de Productos</label>
+                <p className="text-muted small">
+                    Selecciona los productos que formarán parte de este pack. Si no seleccionas ninguno, se tratará como un producto individual.
+                </p>
+                <SelectAPIFormGroup
+                    eRef={packItemsRef}
+                    label="Productos del Pack"
+                    searchAPI="/api/admin/items/paginate"
+                    searchBy="name"
+                    multiple={true}
+                    dropdownParent="#principal-container"
+                    templateResult={(item) => {
+                        if (!item.id) return item.text;
+                        return $(`
+                            <div class="d-flex align-items-center">
+                                <img src="/api/items/media/${item.data?.image || 'undefined'}" 
+                                     style="width: 32px; height: 32px; object-fit: cover; border-radius: 4px; margin-right: 8px;" 
+                                     onerror="this.src='/api/items/media/undefined'" />
+                                <div>
+                                    <div style="font-weight: 500;">${item.text}</div>
+                                    <small class="text-muted">SKU: ${item.data?.sku || 'N/A'} | Stock: ${item.data?.stock || 0}</small>
+                                </div>
+                            </div>
+                        `);
+                    }}
+                    templateSelection={(item) => {
+                        if (!item.id) return item.text;
+                        return item.text;
+                    }}
+                />
+                
                 {/* Modal de variantes solo visible si showVariantsModal está activo */}
                 {showVariantsModal && (
                     <ItemVariantsModal
