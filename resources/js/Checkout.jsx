@@ -816,6 +816,7 @@ const Checkout = ({ publicKey, session }) => {
                                     >
                                         Apartamento, habitación, piso, etc.
                                         (referencia)
+                                         <b className="text-red-500">*</b>
                                     </label>
                                     <input
                                         type="text"

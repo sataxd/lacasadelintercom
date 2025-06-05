@@ -186,12 +186,12 @@ const Menu = ({ session, hasRole, salesCount }) => {
                                 >
                                     Pop-ups
                                 </MenuItem>
-                                <MenuItem
+                               {/* <MenuItem
                                     href="/admin/sliders"
                                     icon="mdi mdi-page-layout-body"
                                 >
                                     Sliders
-                                </MenuItem>
+                                </MenuItem> */}
                                 <MenuItem
                                     href="/admin/about"
                                     icon="mdi mdi-briefcase"
@@ -210,12 +210,12 @@ const Menu = ({ session, hasRole, salesCount }) => {
                                 >
                                     Fortalezas
                                 </MenuItem>
-                                <MenuItem
+                              {/*  <MenuItem
                                     href="/admin/core_values"
                                     icon="mdi mdi-shield-half-full"
                                 >
                                     Valores
-                                </MenuItem>
+                                </MenuItem> */}
 
                                 <MenuItem
                                     href="/admin/testimonies"
@@ -229,12 +229,12 @@ const Menu = ({ session, hasRole, salesCount }) => {
                                 >
                                     Posts
                                 </MenuItem>
-                                <MenuItem
+                              {/*  <MenuItem
                                     href="/admin/faqs"
                                     icon="mdi mdi-frequently-asked-questions"
                                 >
                                     FAQs
-                                </MenuItem>
+                                </MenuItem> */}
                                 <MenuItem
                                     href="/admin/socials"
                                     icon="mdi mdi-web"
