@@ -18,7 +18,7 @@ class Sale extends Model
 
     protected $fillable = [
         'code',
-
+        'dni',
         'user_id',
         'name',
         'lastname',

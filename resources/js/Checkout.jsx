@@ -242,6 +242,7 @@ const Checkout = ({ publicKey, session }) => {
     const [sale, setSale] = useState({
         name: session?.name || null,
         lastname: session?.lastname || null,
+        dni: session?.dni || null,
         email: session?.email,
         phone: session?.phone || null,
         country: "Perú",
@@ -306,21 +307,21 @@ const Checkout = ({ publicKey, session }) => {
         if (loading) return;
         isLoading(true);
         let order_number = null;
-        
+
         // Validar que el carrito no esté vacío
         if (!cart || cart.length === 0) {
             alert('Error: Tu carrito está vacío. Agrega productos antes de continuar.');
             isLoading(false);
             return;
         }
-        
+
         // Validar que el total sea mayor a 0
         if (totalPrice <= 0) {
             alert('Error: El total de la compra debe ser mayor a 0. Por favor, verifica los productos en tu carrito y actualiza la página si es necesario.');
             isLoading(false);
             return;
         }
-        
+
         // Validar que todos los productos tengan precios válidos
         const hasInvalidPrices = cart.some(item => {
             if (item.variations && item.variations.length > 0) {
@@ -328,20 +329,20 @@ const Checkout = ({ publicKey, session }) => {
             }
             return !item.final_price;
         });
-        
+
         if (hasInvalidPrices) {
             alert('Error: Algunos productos no tienen precios válidos. Por favor, actualiza la página e intenta nuevamente.');
             isLoading(false);
             return;
         }
-        
+
         if (totalPrice > 0) {
             console.log('🚀 Creando orden Culqi:', {
                 totalPrice,
                 cart,
                 saleData: getSale()
             });
-            
+
             const resCQ = await CulqiRest.order(
                 {
                     ...getSale(),
@@ -351,9 +352,9 @@ const Checkout = ({ publicKey, session }) => {
                 },
                 cart
             );
-            
+
             console.log('📋 Respuesta de Culqi:', resCQ);
-            
+
             if (resCQ && resCQ.data && resCQ.data.id) {
                 order_number = resCQ.data.id;
                 Culqi.order_number = resCQ.data.order_number;
@@ -365,14 +366,14 @@ const Checkout = ({ publicKey, session }) => {
                 return;
             }
         }
-        
+
         // Validar que se haya generado la orden correctamente
         if (!order_number) {
             alert('Error: No se pudo generar el número de orden. Por favor, intenta nuevamente.');
             isLoading(false);
             return;
         }
-        
+
         isLoading(false);
         Culqi.settings({
             title: "WeFem",
@@ -385,24 +386,24 @@ const Checkout = ({ publicKey, session }) => {
         Culqi.open();
     };
 
-window.culqi = async () => {
-    if (Culqi.token) {
-        const resCQ = await CulqiRest.token({
-            order: Culqi.order_number,
-            token: Culqi.token,
-        });
-        if (resCQ) {
-            const order_number = Culqi.order_number.replace(
-                `#${Global.APP_CORRELATIVE}-`,
-                ""
-            );
-            //await fetch(`/api/sales/notify/${order_number}`);
-            location.href = "/thanks";
+    window.culqi = async () => {
+        if (Culqi.token) {
+            const resCQ = await CulqiRest.token({
+                order: Culqi.order_number,
+                token: Culqi.token,
+            });
+            if (resCQ) {
+                const order_number = Culqi.order_number.replace(
+                    `#${Global.APP_CORRELATIVE}-`,
+                    ""
+                );
+                //await fetch(`/api/sales/notify/${order_number}`);
+                location.href = "/thanks";
+            }
+        } else if (Culqi.order) {
+            redirectOnClose();
         }
-    } else if (Culqi.order) {
-        redirectOnClose();
-    }
-};
+    };
 
     const redirectOnClose = () => {
         setInterval(() => {
@@ -513,6 +514,30 @@ window.culqi = async () => {
                                         />
                                     </div>
                                 </div>
+                                <div className="mt-4">
+                                    <label
+                                        className="mb-1 block text-sm font-medium "
+                                        htmlFor="dni"
+                                    >
+                                        DNI{" "}
+                                        <b className="text-red-500">*</b>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="dni"
+                                        className="w-full rounded-md border border-gray-300 p-2 text-sm outline-none"
+                                        value={sale.dni}
+                                        onChange={(e) =>
+                                            setSale((old) => ({
+                                                ...old,
+                                                dni: e.target.value,
+                                            }))
+                                        }
+                                        required
+                                    />
+                                </div>
+
+
                                 <div className="mt-4">
                                     <label
                                         className="mb-1 block text-sm font-medium "
