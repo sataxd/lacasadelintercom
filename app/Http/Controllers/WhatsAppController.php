@@ -95,7 +95,7 @@ class WhatsAppController extends Controller
             // Dirección y datos
             $isLima = ($jpa->department == 'Lima Metropolitana');
             $direccion = $jpa->address . ($jpa->number ? ' ' . $jpa->number : '');
-            $referencia = $jpa->reference ? "\n*Referencia:* {$jpa->reference}" : '';
+            $referencia = $jpa->reference ? "*Referencia:* {$jpa->reference}" : '';
             $provincia = $isLima 
                 ? '*LIMA METROPOLITANA*' 
                 : (
@@ -107,7 +107,7 @@ class WhatsAppController extends Controller
             $mensaje = "*PEDIDO #{$jpa->code}.* {$jpa->name} {$jpa->lastname}\n";
             $mensaje .= $productos . "\n";
             $mensaje .= $isLima
-                ? ("*LIMA METROPOLITANA*$\n*DNI:* {$jpa->dni}\n*Dirección:* $direccion\n$referencia\n*Correo:* {$jpa->email}\n*Celular:* {$jpa->phone}\n$monto")
+                ? ("*LIMA METROPOLITANA*\n*DNI:* {$jpa->dni}\n*Dirección:* $direccion\n$referencia\n*Correo:* {$jpa->email}\n*Celular:* {$jpa->phone}\n$monto")
                 : ("*PROVINCIA* $provincia\n*DNI:* {$jpa->dni}\n*Dirección:* $direccion\n" . ($jpa->district ? $jpa->district . "\n" : '') . ($jpa->department ? strtoupper($jpa->department) . "\n" : '') . "*Correo:* {$jpa->email}\n*Celular:* {$jpa->phone}\n$monto");
 
             try {
