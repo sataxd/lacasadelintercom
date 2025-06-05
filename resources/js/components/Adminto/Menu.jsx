@@ -204,12 +204,12 @@ const Menu = ({ session, hasRole, salesCount }) => {
                                 >
                                     Indicadores
                                 </MenuItem>
-                                <MenuItem
+                              {/*  <MenuItem
                                     href="/admin/strengths"
                                     icon="mdi mdi-sprout"
                                 >
                                     Fortalezas
-                                </MenuItem>
+                                </MenuItem> */}
                               {/*  <MenuItem
                                     href="/admin/core_values"
                                     icon="mdi mdi-shield-half-full"
