@@ -11,6 +11,7 @@ import Base from "./Components/Tailwind/Base";
 import CreateReactScript from "./Utils/CreateReactScript";
 import { createRoot } from "react-dom/client";
 import Header from "./components/Tailwind/Header";
+import AlertComponent from "./context/AlertComponent";
 
 const places = {
     metropolitana: {
@@ -260,6 +261,7 @@ const Checkout = ({ publicKey, session }) => {
     });
     const [loading, isLoading] = useState(false);
     const [coupon, setCoupon] = useState(null);
+    const [alert, setAlert] = useState(null);
 
     const totalPrice = cart.reduce((acc, item) => {
         if (item.variations && item.variations.length > 0) {
@@ -278,6 +280,100 @@ const Checkout = ({ publicKey, session }) => {
 
     const couponDiscount =
         ((totalPrice - planDiscount) * (coupon?.amount || 0)) / 100;
+
+    const validateForm = () => {
+        const requiredFields = [
+            { field: 'name', label: 'Nombre' },
+            { field: 'lastname', label: 'Apellidos' },
+            { field: 'email', label: 'Correo electrónico' },
+            { field: 'phone', label: 'Teléfono' },
+            { field: 'department', label: 'Departamento' },
+          
+            { field: 'district', label: 'Distrito' },
+            { field: 'address', label: 'Dirección' },
+            { field: 'number', label: 'Número' },
+            { field: 'dni', label: 'DNI' },
+            { field: 'reference', label: 'Referencia' },
+        ];
+
+        // Validar campos obligatorios básicos
+        for (const { field, label } of requiredFields) {
+            if (!sale[field] || sale[field].toString().trim() === '') {
+                setAlert({
+                    message: `Por favor, completa el campo: ${label}`,
+                    type: 'error'
+                });
+                return false;
+            }
+        }
+
+        // Validar email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(sale.email)) {
+            setAlert({
+                message: 'Por favor, ingresa un correo electrónico válido',
+                type: 'error'
+            });
+            return false;
+        }
+
+        // Validar teléfono (mínimo 9 dígitos)
+        const phoneDigits = sale.phone?.replace(/\D/g, '') || '';
+        if (phoneDigits.length < 9) {
+            setAlert({
+                message: 'Por favor, ingresa un número de teléfono válido (mínimo 9 dígitos)',
+                type: 'error'
+            });
+            return false;
+        }
+
+        // Validaciones específicas según el departamento
+        if (sale.department === 'metropolitana' || sale.department === 'alrededores') {
+            if (!sale.province || sale.province.trim() === '') {
+                setAlert({
+                    message: 'Por favor, selecciona un distrito',
+                    type: 'error'
+                });
+                return false;
+            }
+        } else if (sale.department === 'provincias') {
+            if (!sale.province || sale.province.trim() === '') {
+                setAlert({
+                    message: 'Por favor, ingresa la provincia',
+                    type: 'error'
+                });
+                return false;
+            }
+            if (!sale.district || sale.district.trim() === '') {
+                setAlert({
+                    message: 'Por favor, ingresa el distrito',
+                    type: 'error'
+                });
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    const getInputClassName = (fieldName, baseClass = "w-full rounded-md border p-2 text-sm outline-none") => {
+        const hasError = alert && alert.type === 'error' && (!sale[fieldName] || sale[fieldName].toString().trim() === '');
+        return hasError 
+            ? `${baseClass} border-red-500 bg-red-50` 
+            : `${baseClass} border-gray-300`;
+    };
+
+    const handleInputChange = (field, value) => {
+        setSale((old) => ({
+            ...old,
+            [field]: value,
+        }));
+        
+        // Limpiar alert si el usuario está corrigiendo el campo
+        if (alert && alert.type === 'error') {
+            setAlert(null);
+        }
+    };
 
     const getSale = () => {
         let department = "Lima";
@@ -305,19 +401,31 @@ const Checkout = ({ publicKey, session }) => {
     const onCulqiOpen = async (e) => {
         e.preventDefault();
         if (loading) return;
+
+        // Validar formulario primero
+        if (!validateForm()) {
+            return;
+        }
+
         isLoading(true);
         let order_number = null;
 
         // Validar que el carrito no esté vacío
         if (!cart || cart.length === 0) {
-            alert('Error: Tu carrito está vacío. Agrega productos antes de continuar.');
+            setAlert({
+                message: 'Tu carrito está vacío. Agrega productos antes de continuar.',
+                type: 'error'
+            });
             isLoading(false);
             return;
         }
 
         // Validar que el total sea mayor a 0
         if (totalPrice <= 0) {
-            alert('Error: El total de la compra debe ser mayor a 0. Por favor, verifica los productos en tu carrito y actualiza la página si es necesario.');
+            setAlert({
+                message: 'El total de la compra debe ser mayor a 0. Por favor, verifica los productos en tu carrito y actualiza la página si es necesario.',
+                type: 'error'
+            });
             isLoading(false);
             return;
         }
@@ -331,7 +439,10 @@ const Checkout = ({ publicKey, session }) => {
         });
 
         if (hasInvalidPrices) {
-            alert('Error: Algunos productos no tienen precios válidos. Por favor, actualiza la página e intenta nuevamente.');
+            setAlert({
+                message: 'Algunos productos no tienen precios válidos. Por favor, actualiza la página e intenta nuevamente.',
+                type: 'error'
+            });
             isLoading(false);
             return;
         }
@@ -353,15 +464,18 @@ const Checkout = ({ publicKey, session }) => {
                 cart
             );
 
-            console.log('📋 Respuesta de Culqi:', resCQ);
+           // console.log('📋 Respuesta de Culqi:', resCQ);
 
             if (resCQ && resCQ.data && resCQ.data.id) {
                 order_number = resCQ.data.id;
                 Culqi.order_number = resCQ.data.order_number;
-                console.log('✅ Orden creada exitosamente:', order_number);
+              //  console.log('✅ Orden creada exitosamente:', order_number);
             } else {
                 console.error('❌ Error en respuesta de Culqi:', resCQ);
-                alert('Error al generar la orden. Por favor, intenta nuevamente.');
+                setAlert({
+                    message: 'Error al generar la orden. Por favor, intenta nuevamente.',
+                    type: 'error'
+                });
                 isLoading(false);
                 return;
             }
@@ -369,7 +483,10 @@ const Checkout = ({ publicKey, session }) => {
 
         // Validar que se haya generado la orden correctamente
         if (!order_number) {
-            alert('Error: No se pudo generar el número de orden. Por favor, intenta nuevamente.');
+            setAlert({
+                message: 'No se pudo generar el número de orden. Por favor, intenta nuevamente.',
+                type: 'error'
+            });
             isLoading(false);
             return;
         }
@@ -480,14 +597,9 @@ const Checkout = ({ publicKey, session }) => {
                                         <input
                                             type="text"
                                             id="firstName"
-                                            className="w-full rounded-md border border-gray-300 p-2 text-sm outline-none"
+                                            className={getInputClassName('name')}
                                             value={sale.name}
-                                            onChange={(e) =>
-                                                setSale((old) => ({
-                                                    ...old,
-                                                    name: e.target.value,
-                                                }))
-                                            }
+                                            onChange={(e) => handleInputChange('name', e.target.value)}
                                             required
                                         />
                                     </div>
@@ -502,14 +614,9 @@ const Checkout = ({ publicKey, session }) => {
                                         <input
                                             type="text"
                                             id="lastName"
-                                            className="w-full rounded-md border border-gray-300 p-2 text-sm outline-none"
+                                            className={getInputClassName('lastname')}
                                             value={sale.lastname}
-                                            onChange={(e) =>
-                                                setSale((old) => ({
-                                                    ...old,
-                                                    lastname: e.target.value,
-                                                }))
-                                            }
+                                            onChange={(e) => handleInputChange('lastname', e.target.value)}
                                             required
                                         />
                                     </div>
@@ -771,15 +878,10 @@ const Checkout = ({ publicKey, session }) => {
                                         <input
                                             type="text"
                                             id="address"
-                                            className="w-full rounded-md border border-gray-300 p-2 text-sm outline-none"
+                                            className={getInputClassName('address')}
                                             value={sale.address}
                                             placeholder="Nombre de la calle y número de la calle"
-                                            onChange={(e) =>
-                                                setSale((old) => ({
-                                                    ...old,
-                                                    address: e.target.value,
-                                                }))
-                                            }
+                                            onChange={(e) => handleInputChange('address', e.target.value)}
                                             required
                                         />
                                     </div>
@@ -843,15 +945,10 @@ const Checkout = ({ publicKey, session }) => {
                                     <input
                                         type="email"
                                         id="email"
-                                        className="w-full rounded-md border border-gray-300 p-2 text-sm outline-none"
+                                        className={getInputClassName('email')}
                                         value={sale.email}
                                         placeholder="Dirección de correo electrónico"
-                                        onChange={(e) =>
-                                            setSale((old) => ({
-                                                ...old,
-                                                email: e.target.value,
-                                            }))
-                                        }
+                                        onChange={(e) => handleInputChange('email', e.target.value)}
                                         required
                                     // disabled={Boolean(session?.email)}
                                     />
@@ -859,10 +956,7 @@ const Checkout = ({ publicKey, session }) => {
                                 <div>
                                     <PhoneInput
                                         onPhoneChange={(fullNumber) => {
-                                            setSale((old) => ({
-                                                ...old,
-                                                phone: fullNumber,
-                                            }));
+                                            handleInputChange('phone', fullNumber);
                                             console.log('Phone actualizado:', fullNumber);
                                         }}
                                     />
@@ -1158,6 +1252,15 @@ const Checkout = ({ publicKey, session }) => {
                     </form>
                 </div>
             </section>
+            
+            {/* Alert Component */}
+            {alert && (
+                <AlertComponent
+                    message={alert.message}
+                    onClose={() => setAlert(null)}
+                    duration={alert.type === 'error' ? 8000 : 5000}
+                />
+            )}
         </>
     );
 };
