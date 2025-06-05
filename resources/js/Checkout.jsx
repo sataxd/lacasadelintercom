@@ -525,7 +525,8 @@ const Checkout = ({ publicKey, session }) => {
                 // Tracking de evento Purchase
                 if (typeof window !== 'undefined' && window.TrackingPixels) {
                     const finalAmount = totalPrice - planDiscount - couponDiscount;
-                    const cartContents = carrito.flatMap(producto => {
+                    const currentCart = JSON.parse(localStorage.getItem("carrito")) || [];
+                    const cartContents = currentCart.flatMap(producto => {
                         if (producto.variations && producto.variations.length > 0) {
                             return producto.variations.map(variation => ({
                                 item_id: producto.id,
