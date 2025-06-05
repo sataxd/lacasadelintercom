@@ -24,7 +24,7 @@
                 </div>
               
             </div>
-        </div>        <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+        </div>        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
             @foreach ($sale->details as $detail)                @if ($detail->item && $detail->item->isPack())
                     {{-- Es un pack, mostrar cards individuales para cada producto del pack --}}
                     @if ($detail->item->pack_items && is_array($detail->item->pack_items))
