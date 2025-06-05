@@ -73,13 +73,12 @@ class SendSaleEmail implements ShouldQueue
         MailingController::simpleNotify('mailing.sale-done-mail', $jpa->email, [
           'title' => 'Resumen de tu pedido ' . $jpa->code,
           'image' => $imageName
-        ], $send2group ? [
-          'basiliohinostroza2003bradneve@gmail.com'
+        ], $send2group ? [env('MAIL_VENTAS_CC'),
         ] : []);
         $send2group = false;
       }
       if ($send2group) {
-        MailingController::simpleNotify('mailing.sale-done-wefem', 'basiliohinostroza2003bradneve@gmail.com', [
+        MailingController::simpleNotify('mailing.sale-done-wefem', env('MAIL_VENTAS_CC'), [
           'title' => 'Resumen de tu pedido ' . $jpa->code,
           'image' => $imageName
         ]);
