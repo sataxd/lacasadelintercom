@@ -7,10 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body style="background: #7B4EDB; font-family: 'Poppins', Arial, sans-serif; margin: 0; padding: 0;">
-    <div style="max-width: 750px; margin: 40px auto; background: #7B4EDB; border-radius: 24px; padding: 32px 32px 24px 32px; color: #fff;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+    <div style="max-width: 750px; margin: 40px auto; background: #7B4EDB; border-radius: 24px; padding: 32px 32px 24px 32px; color: #fff;">        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
             <div style="font-size: 22px; font-weight: 700; background: #fff; color: #7B4EDB; border-radius: 16px; padding: 8px 24px;">Pedido: <span style="font-weight: 400;">{{ $sale->code }}</span></div>
-            <img src="https://wefem.atalaya.pe/assets/img/logo.png" alt="wefem" style="height: 40px;">
+            <img src="{{ config('app.url') }}/assets/img/logo.png" alt="wefem" style="height: 40px;">
         </div>
         <div style="background: #fff; color: #7B4EDB; border-radius: 16px; padding: 24px; margin-bottom: 24px;">
             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;">
@@ -53,7 +52,7 @@
                                             // Obtener la imagen específica del color si este producto acepta colores
                                             $colorForImage = ($shouldReceiveColor) ? $detail->color : null;
                                             $productImage = $individualItem->getImageForColor($colorForImage);
-                                        @endphp                                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $productImage }}" alt="{{ $individualItem->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
+                                        @endphp                                        <img src="{{ config('app.url') }}/api/items/media/{{ $productImage }}" alt="{{ $individualItem->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
                                         <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $individualItem->alias ?? $individualItem->name }}</div>
                                         @if ($shouldReceiveSize || $shouldReceiveColor)
                                             <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
@@ -69,12 +68,11 @@
                         @endforeach
                     @endif                @else                    {{-- Producto normal --}}
                     <div style="background: #fff; border-radius: 16px; width: 140px; padding: 12px; color: #7B4EDB; text-align: center; position: relative;">
-                        <span style="position: absolute; top: 8px; right: 12px; background: #000000; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; z-index:2;">x{{ (int) $detail->quantity }}</span>
-                        @php
+                        <span style="position: absolute; top: 8px; right: 12px; background: #000000; color: #fff; border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 600; z-index:2;">x{{ (int) $detail->quantity }}</span>                        @php
                             // Obtener la imagen específica del color si hay color seleccionado
                             $productImage = $detail->item->getImageForColor($detail->color);
                         @endphp
-                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $productImage }}" alt="{{ $detail->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
+                        <img src="{{ config('app.url') }}/api/items/media/{{ $productImage }}" alt="{{ $detail->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
                         <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{$detail->item->alias ?? $detail->name }}</div>
                         @if ($detail->size || $detail->color)
                             <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
