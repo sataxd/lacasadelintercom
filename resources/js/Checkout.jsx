@@ -815,7 +815,7 @@ const Checkout = ({ publicKey, session }) => {
                                         htmlFor="apartment"
                                     >
                                         Apartamento, habitación, piso, etc.
-                                        (opcional)
+                                        (referencia)
                                     </label>
                                     <input
                                         type="text"
@@ -828,6 +828,7 @@ const Checkout = ({ publicKey, session }) => {
                                                 reference: e.target.value,
                                             }))
                                         }
+                                        required
                                     />
                                 </div>
                                 <div className="mb-4 mt-4">
