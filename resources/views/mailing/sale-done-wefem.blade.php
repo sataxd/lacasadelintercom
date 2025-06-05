@@ -53,9 +53,8 @@
                                             // Obtener la imagen específica del color si este producto acepta colores
                                             $colorForImage = ($shouldReceiveColor) ? $detail->color : null;
                                             $productImage = $individualItem->getImageForColor($colorForImage);
-                                        @endphp
-                                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $productImage }}" alt="{{ $individualItem->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
-                                        <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $individualItem->name }}</div>
+                                        @endphp                                        <img src="https://wefem.atalaya.pe/api/items/media/{{ $productImage }}" alt="{{ $individualItem->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
+                                        <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{ $individualItem->alias ?? $individualItem->name }}</div>
                                         @if ($shouldReceiveSize || $shouldReceiveColor)
                                             <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
                                                 @if ($shouldReceiveSize) Talla {{ $detail->size }} @endif

@@ -80,6 +80,7 @@ class SaleController extends Controller
             $saleJpa->code = Trace::getId();
             $saleJpa->user_id = Auth::check() ? Auth::user()->id : null;
             $saleJpa->name = $sale['name'];
+            $saleJpa->dni= $sale['dni'] ?? null;
             $saleJpa->lastname = $sale['lastname'];
             $saleJpa->email = $sale['email'];
             // Guardar el teléfono tal como viene (con código de país)
@@ -102,6 +103,7 @@ class SaleController extends Controller
                 $userJpa = User::find(Auth::user()->id);
                 // Guardar el teléfono tal como viene (con código de país)
                 $userJpa->phone = $sale['phone'];
+                $userJpa->dni = $sale['dni'] ?? null;
                 $userJpa->country = $sale['country'];
                 $userJpa->department = $sale['department'];
                 $userJpa->province = $sale['province'];
@@ -110,6 +112,7 @@ class SaleController extends Controller
                 $userJpa->address = $sale['address'];
                 $userJpa->address_number = $sale['number'];
                 $userJpa->address_reference = $sale['reference'];
+
                 $userJpa->save();
             }
 
