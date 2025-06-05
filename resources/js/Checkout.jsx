@@ -289,7 +289,7 @@ const Checkout = ({ publicKey, session }) => {
             { field: 'phone', label: 'Teléfono' },
             { field: 'department', label: 'Departamento' },
           
-            { field: 'district', label: 'Distrito' },
+            { field: 'province', label: 'Provincia' },
             { field: 'address', label: 'Dirección' },
             { field: 'number', label: 'Número' },
             { field: 'dni', label: 'DNI' },
