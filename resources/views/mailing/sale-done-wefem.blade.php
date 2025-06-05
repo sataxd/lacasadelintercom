@@ -75,7 +75,7 @@
                             $productImage = $detail->item->getImageForColor($detail->color);
                         @endphp
                         <img src="https://wefem.atalaya.pe/api/items/media/{{ $productImage }}" alt="{{ $detail->name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 8px; margin-bottom: 8px;">
-                        <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{$detail->alias ?? $detail->name }}</div>
+                        <div style="font-weight: 700; font-size: 15px; margin-bottom: 2px;">{{$detail->item->alias ?? $detail->name }}</div>
                         @if ($detail->size || $detail->color)
                             <div style="font-size: 13px; color: #333; margin-bottom: 2px;">
                                 @if ($detail->size) Talla {{ $detail->size }} @endif

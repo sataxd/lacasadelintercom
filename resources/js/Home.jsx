@@ -63,9 +63,9 @@ const Home = ({
                         <p className="text-[11.13px] leading-[100%]  md:text-[20.61px] 2xl:text-[26.61px] md:leading-[36.92px]  mt-4 mb-6 tracking-[1%]">
                             Copas y Discos menstruales weFem
                         </p>
-                        <button className="mt-0 w-[150.19px] h-[30.67px] md:w-[258.19px] md:h-[55.67px] xl:w-[300px]  2xl:w-[371px] xl:h-[70px] 2xl:h-[80px] bg-[#DDEC4C] text-[11.15px]  md:text-[17.15px] xl:text-[20.64px] 2xl:text-[24.64px] hover:brightness-90 transition duration-300  font-semibold rounded-[5.91px]  md:rounded-[13.91px] text-[#5F48B7] tracking-[1%]">
+                        <a href="/catalog" className="mt-0 block w-[150.19px] h-[30.67px] md:w-[258.19px] md:h-[55.67px] xl:w-[300px]  2xl:w-[371px] xl:h-[70px] 2xl:h-[80px] bg-[#DDEC4C] text-[11.15px]  md:text-[17.15px] xl:text-[20.64px] 2xl:text-[24.64px] hover:brightness-90 transition duration-300  font-semibold rounded-[5.91px]  md:rounded-[13.91px] text-[#5F48B7] tracking-[1%]">
                             ¡Realiza el cambio!
-                        </button>
+                        </a>
                     </div>
                 </div>
             </Header>
