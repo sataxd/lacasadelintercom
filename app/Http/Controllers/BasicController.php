@@ -8,6 +8,7 @@ use App\Models\dxDataGrid;
 use App\Models\General;
 use App\Models\Slider;
 use App\Models\Social;
+use App\Traits\TrackingPixelsTrait;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,6 +28,8 @@ use Illuminate\Support\Str;
 
 class BasicController extends Controller
 {
+  use TrackingPixelsTrait;
+  
   public $model = Model::class;
   public $softDeletion = true;
   public $reactView = 'Home';
@@ -96,9 +99,12 @@ class BasicController extends Controller
 
     if (Auth::check()) Auth::user()->getAllPermissions();
 
+    // Obtener píxeles de seguimiento de la base de datos usando trait
+    $trackingPixels = $this->getTrackingPixels();
+
     $properties = [
       'session' => Auth::user(),
-      'global' => [
+      'global' => array_merge([
         'PUBLIC_RSA_KEY' => Controller::$PUBLIC_RSA_KEY,
         'WA_URL' => env('WA_URL'),
         'APP_NAME' => env('APP_NAME', 'Trasciende'),
@@ -107,7 +113,7 @@ class BasicController extends Controller
         'APP_CORRELATIVE' => env('APP_CORRELATIVE'),
         'APP_PROTOCOL' => env('APP_PROTOCOL', 'https'),
         'GMAPS_API_KEY' => env('GMAPS_API_KEY')
-      ],
+      ], $trackingPixels),
     ];
     $reactViewProperties = $this->setReactViewProperties($request);
     if (\is_array($reactViewProperties)) {

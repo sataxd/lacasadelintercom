@@ -30,6 +30,13 @@ const Generals = ({ generals }) => {
     seoTitle: generals.find(x => x.correlative == 'seo_title')?.description ?? '',
     seoDescription: generals.find(x => x.correlative == 'seo_description')?.description ?? '',
     seoKeywords: generals.find(x => x.correlative == 'seo_keywords')?.description ?? '',
+    // Píxeles de seguimiento
+    facebookPixel: generals.find(x => x.correlative == 'facebook_pixel')?.description ?? '',
+    googleAnalytics: generals.find(x => x.correlative == 'google_analytics')?.description ?? '',
+    gtmContainer: generals.find(x => x.correlative == 'gtm_container')?.description ?? '',
+    tiktokPixel: generals.find(x => x.correlative == 'tiktok_pixel')?.description ?? '',
+    metaPixel: generals.find(x => x.correlative == 'meta_pixel')?.description ?? '',
+    microsoftClarity: generals.find(x => x.correlative == 'microsoft_clarity')?.description ?? '',
     location: {
       lat: Number(location.split(',').map(x => x.trim())[0]),
       lng: Number(location.split(',').map(x => x.trim())[1])
@@ -89,6 +96,13 @@ const Generals = ({ generals }) => {
         { correlative: 'seo_title', name: 'Titulo - SEO', description: formData.seoTitle },
         { correlative: 'seo_description', name: 'Descripcion - SEO', description: formData.seoDescription },
         { correlative: 'seo_keywords', name: 'Palabras clave - SEO', description: formData.seoKeywords },
+        // Píxeles de seguimiento
+        { correlative: 'facebook_pixel', name: 'Facebook Pixel ID', description: formData.facebookPixel },
+        { correlative: 'google_analytics', name: 'Google Analytics ID', description: formData.googleAnalytics },
+        { correlative: 'gtm_container', name: 'Google Tag Manager ID', description: formData.gtmContainer },
+        { correlative: 'tiktok_pixel', name: 'TikTok Pixel ID', description: formData.tiktokPixel },
+        { correlative: 'meta_pixel', name: 'Meta Pixel ID', description: formData.metaPixel },
+        { correlative: 'microsoft_clarity', name: 'Microsoft Clarity ID', description: formData.microsoftClarity },
         { correlative: 'location', name: 'Ubicación', description: `${formData.location.lat},${formData.location.lng}` }
       ]);
       // alert('Datos guardados exitosamente');
@@ -122,6 +136,11 @@ const Generals = ({ generals }) => {
           <li className="nav-item" role="presentation">
             <button className={`nav-link ${activeTab === 'seo' ? 'active' : ''}`} onClick={() => setActiveTab('seo')} type="button" role="tab">
               SEO (Metatags)
+            </button>
+          </li>
+          <li className="nav-item" role="presentation">
+            <button className={`nav-link ${activeTab === 'tracking' ? 'active' : ''}`} onClick={() => setActiveTab('tracking')} type="button" role="tab">
+              Píxeles de Seguimiento
             </button>
           </li>
           <li className="nav-item" role="presentation" hidden> {/* Quitar el hidden para que se muestren las opciones */}
@@ -233,6 +252,62 @@ const Generals = ({ generals }) => {
                 })
               }
             </SelectFormGroup>
+          </div>
+
+          <div className={`tab-pane fade ${activeTab === 'tracking' ? 'show active' : ''}`} role="tabpanel">
+            <div className="row">
+              <div className="col-md-6">
+                <h5 className="mb-3">Redes Sociales y Marketing</h5>
+                <InputFormGroup 
+                  label='Facebook Pixel ID' 
+                  value={formData.facebookPixel ?? ''} 
+                  onChange={(e) => setFormData({ ...formData, facebookPixel: e.target.value })}
+                  placeholder="Ej: 123456789012345"
+                  help="ID del píxel de Facebook para seguimiento de conversiones"
+                />
+                <InputFormGroup 
+                  label='Meta Pixel ID' 
+                  value={formData.metaPixel ?? ''} 
+                  onChange={(e) => setFormData({ ...formData, metaPixel: e.target.value })}
+                  placeholder="Ej: 123456789012345"
+                  help="ID del píxel de Meta (nuevo Facebook Pixel)"
+                />
+                <InputFormGroup 
+                  label='TikTok Pixel ID' 
+                  value={formData.tiktokPixel ?? ''} 
+                  onChange={(e) => setFormData({ ...formData, tiktokPixel: e.target.value })}
+                  placeholder="Ej: C9ABCD1234567890"
+                  help="ID del píxel de TikTok para seguimiento de eventos"
+                />
+              </div>
+              <div className="col-md-6">
+                <h5 className="mb-3">Analytics y Medición</h5>
+                <InputFormGroup 
+                  label='Google Analytics ID' 
+                  value={formData.googleAnalytics ?? ''} 
+                  onChange={(e) => setFormData({ ...formData, googleAnalytics: e.target.value })}
+                  placeholder="Ej: G-XXXXXXXXXX o UA-XXXXXXXXX-X"
+                  help="ID de Google Analytics (GA4 o Universal Analytics)"
+                />
+                <InputFormGroup 
+                  label='Google Tag Manager ID' 
+                  value={formData.gtmContainer ?? ''} 
+                  onChange={(e) => setFormData({ ...formData, gtmContainer: e.target.value })}
+                  placeholder="Ej: GTM-XXXXXXX"
+                  help="ID del contenedor de Google Tag Manager"
+                />
+                <InputFormGroup 
+                  label='Microsoft Clarity ID' 
+                  value={formData.microsoftClarity ?? ''} 
+                  onChange={(e) => setFormData({ ...formData, microsoftClarity: e.target.value })}
+                  placeholder="Ej: abcdefghij"
+                  help="ID de Microsoft Clarity para análisis de comportamiento"
+                />
+              </div>
+            </div>
+            <div className="alert alert-info mt-3">
+              <strong>Nota:</strong> Los píxeles y códigos de seguimiento se integrarán automáticamente en todas las páginas del sitio web cuando se configuren aquí.
+            </div>
           </div>
 
           <div className={`tab-pane fade ${activeTab === 'location' ? 'show active' : ''}`} role="tabpanel">

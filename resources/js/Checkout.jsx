@@ -492,6 +492,13 @@ const Checkout = ({ publicKey, session }) => {
         }
 
         isLoading(false);
+        
+        // Tracking de evento Initiate Checkout
+        if (typeof window !== 'undefined' && window.TrackingPixels) {
+            const finalAmount = totalPrice - planDiscount - couponDiscount;
+            window.TrackingPixels.trackInitiateCheckout(finalAmount, 'PEN');
+        }
+        
         Culqi.settings({
             title: "WeFem",
             currency: "PEN",
@@ -514,6 +521,31 @@ const Checkout = ({ publicKey, session }) => {
                     `#${Global.APP_CORRELATIVE}-`,
                     ""
                 );
+                
+                // Tracking de evento Purchase
+                if (typeof window !== 'undefined' && window.TrackingPixels) {
+                    const finalAmount = totalPrice - planDiscount - couponDiscount;
+                    const cartContents = carrito.flatMap(producto => {
+                        if (producto.variations && producto.variations.length > 0) {
+                            return producto.variations.map(variation => ({
+                                item_id: producto.id,
+                                item_name: producto.alias || producto.name,
+                                quantity: variation.quantity,
+                                price: variation.price || 0
+                            }));
+                        } else {
+                            return [{
+                                item_id: producto.id,
+                                item_name: producto.alias || producto.name,
+                                quantity: producto.quantity,
+                                price: producto.price || 0
+                            }];
+                        }
+                    });
+                    
+                    window.TrackingPixels.trackPurchase(finalAmount, 'PEN', cartContents);
+                }
+                
                 //await fetch(`/api/sales/notify/${order_number}`);
                 location.href = "/thanks";
             }

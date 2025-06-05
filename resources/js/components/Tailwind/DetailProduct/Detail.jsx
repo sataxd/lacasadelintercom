@@ -63,6 +63,18 @@ const Detail = ({ item }) => {
     const [selectedOfferColor, setSelectedOfferColor] = useState("");
     const [selectedOfferSize, setSelectedOfferSize] = useState("");
     const [showOfferVariants, setShowOfferVariants] = useState(false);
+    
+    // Tracking de View Content cuando se carga el producto
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.TrackingPixels && item) {
+            const productName = item.alias || item.name || 'Producto';
+            const productId = item.id;
+            const productPrice = item.price || 0;
+            
+            window.TrackingPixels.trackViewContent(productName, productId, productPrice, 'PEN');
+        }
+    }, [item]);
+    
     const changeQuantity = (amount) => {
         setQuantity((prev) => Math.max(1, prev + amount));
     };

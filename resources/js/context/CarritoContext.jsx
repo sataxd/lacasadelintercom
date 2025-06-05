@@ -278,6 +278,21 @@ export const CarritoProvider = ({ children }) => {
         });
         
         console.log('🛒 DEBUG - Product added to cart successfully');
+        
+        // Tracking de evento Add to Cart
+        if (typeof window !== 'undefined' && window.TrackingPixels) {
+            const productPrice = stockInfo.price || 0;
+            const productName = producto.alias || producto.name || 'Producto';
+            const productId = producto.id;
+            
+            window.TrackingPixels.trackAddToCart(
+                productPrice,
+                'PEN',
+                productName,
+                productId
+            );
+        }
+        
         setAlerta({
             id: Date.now(),
             message: "Se ha agregado el artículo al carrito",
