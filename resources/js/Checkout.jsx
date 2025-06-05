@@ -600,7 +600,7 @@ const Checkout = ({ publicKey, session }) => {
                                             className={getInputClassName('name')}
                                             value={sale.name}
                                             onChange={(e) => handleInputChange('name', e.target.value)}
-                                            required
+                                            
                                         />
                                     </div>
                                     <div>
@@ -617,7 +617,7 @@ const Checkout = ({ publicKey, session }) => {
                                             className={getInputClassName('lastname')}
                                             value={sale.lastname}
                                             onChange={(e) => handleInputChange('lastname', e.target.value)}
-                                            required
+                                            
                                         />
                                     </div>
                                 </div>
@@ -640,7 +640,7 @@ const Checkout = ({ publicKey, session }) => {
                                                 dni: e.target.value,
                                             }))
                                         }
-                                        required
+                                        
                                     />
                                 </div>
 
@@ -659,7 +659,7 @@ const Checkout = ({ publicKey, session }) => {
                                         className="w-full rounded-md border border-gray-300 p-2 text-sm outline-none"
                                         value={sale.country}
                                         disabled
-                                        required
+                                        
                                     />
                                 </div>
                                 <div className="mt-4 grid gap-4 md:grid-cols-5">
@@ -681,7 +681,7 @@ const Checkout = ({ publicKey, session }) => {
                                                     department: e.target.value,
                                                 }))
                                             }
-                                            required
+                                            
                                         >
                                             <option value="">
                                                 Elige una opción
@@ -729,7 +729,7 @@ const Checkout = ({ publicKey, session }) => {
                                                                         .value,
                                                             }))
                                                         }
-                                                        required
+                                                        
                                                     >
                                                         <option value="">
                                                             Elige una opción
@@ -809,7 +809,7 @@ const Checkout = ({ publicKey, session }) => {
                                                                         .value,
                                                             }))
                                                         }
-                                                        required
+                                                        
                                                     />
                                                 </div>
                                                 <div className="md:col-span-2">
@@ -836,7 +836,7 @@ const Checkout = ({ publicKey, session }) => {
                                                                         .value,
                                                             }))
                                                         }
-                                                        required
+                                                        
                                                     />
                                                 </div>
                                                 <div>
@@ -882,7 +882,7 @@ const Checkout = ({ publicKey, session }) => {
                                             value={sale.address}
                                             placeholder="Nombre de la calle y número de la calle"
                                             onChange={(e) => handleInputChange('address', e.target.value)}
-                                            required
+                                            
                                         />
                                     </div>
                                 </div>
@@ -907,7 +907,7 @@ const Checkout = ({ publicKey, session }) => {
                                                     number: e.target.value,
                                                 }))
                                             }
-                                            required
+                                            
                                         />
                                     </div>
                                 </div>
@@ -931,7 +931,7 @@ const Checkout = ({ publicKey, session }) => {
                                                 reference: e.target.value,
                                             }))
                                         }
-                                        required
+                                        
                                     />
                                 </div>
                                 <div className="mb-4 mt-4">
@@ -949,7 +949,7 @@ const Checkout = ({ publicKey, session }) => {
                                         value={sale.email}
                                         placeholder="Dirección de correo electrónico"
                                         onChange={(e) => handleInputChange('email', e.target.value)}
-                                        required
+                                        
                                     // disabled={Boolean(session?.email)}
                                     />
                                 </div>
@@ -988,7 +988,7 @@ const Checkout = ({ publicKey, session }) => {
                                                 }))
                                             }
                                             placeholder="900000000"
-                                            required
+                                            
                                         />
                                     </div>
                                 </div>
