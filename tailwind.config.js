@@ -8,9 +8,25 @@ export default {
     ],
     theme: {
         extend: {
+            animation: {
+                // Ajusté a 35s para que no sea tan rápido, puedes bajarlo a 25s si prefieres velocidad
+                'infinite-scroll': 'infinite-scroll 30s linear infinite',
+            },
+            keyframes: {
+                'infinite-scroll': {
+                from: { transform: 'translateX(0)' },
+                to: { transform: 'translateX(-50%)' },
+                }
+            },
+            screens: {
+                '3xl': '1600px',  // Pantallas ultra anchas
+                '4xl': '1920px',  // Pantallas 1080p full width
+            },
             fontFamily: {
                 bebas: ["Bebas Neue", "serif"],
                 poppins: ["Poppins", "serif"],
+                dmsans: ["DM Sans", "serif"],
+                sora: ["Sora", "serif"],
             },
             // Puedes agregar personalizaciones aquí si es necesario
         },
@@ -30,6 +46,9 @@ export default {
                     "&::-webkit-scrollbar": {
                         display: "none",
                     },
+                },
+                '.paused': {
+                'animation-play-state': 'paused',
                 },
             };
 

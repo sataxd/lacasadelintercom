@@ -196,22 +196,20 @@ const Header = ({
     );
     return (
         <>
-            {showSlogan && (
+            {/* {showSlogan && (
                 <div
-                    className={`text-center px-[5%] py-4 font-light bg-[#6048B7] text-white text-[10.21px] md:text-[16.21px] leading-6 uppercase tracking-[0.2em] font-poppins w-full  ${backgroundType === "none" && "mb-10 lg:mb-[78px] "
+                    className={`text-center px-[5%] py-2 font-normal bg-[#030e16] text-white font-sora w-full text-base 4xl:text-xl  ${backgroundType === "none" && "mb-10 lg:mb-[78px]"
                         }`}
                 >
-                    <span className="text-[#DDEC4C] font-semibold">
-                        ¡ENVÍO GRATIS
-                    </span>{" "}
-                    A TODO LIMA METROPOLITANA!
+                        Tenemos el mejor servicio técnico multimarca y post-venta
                 </div>
-            )}
+            )} */}
 
             <div
                 className={`w-full max-w-full relative ${backgroundHeight} overflow-clip `}
             >
                 {/* Fondo dinámico (imagen, video o nada) */}
+                
                 {backgroundType === "image" && (
                     <img
                         src={backgroundSrc}
@@ -219,6 +217,7 @@ const Header = ({
                         alt="Background"
                     />
                 )}
+
                 {backgroundType === "video" && (
                     <video
                         className={`absolute -z-10 inset-0  w-screen h-full  object-cover ${backgroundPosition}`}
@@ -241,28 +240,30 @@ const Header = ({
                         className="absolute inset-0 "
                         style={{
                             background:
-                                "linear-gradient(180deg, rgba(95, 72, 183, 0.75) 6.08%, rgba(96, 72, 183, 0.525) 100%)",
+                                "linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(0,0,0,0.1) 100%)",
                         }}
                     ></div>
                 )}
+
                 <header
-                    className={`font-poppins fixed lg:w-full top-0 overflow-hidden z-40 transition-colors duration-300 ${backgroundType === "none"
-                            ? "bg-[#5339B1] mt-12 "
+                    className={`font-sora fixed lg:w-full top-0 overflow-hidden z-40 transition-colors duration-300 ${backgroundType === "none"
+                            ? "bg-[#030e16]"
                             : isScrolled
-                                ? "bg-[#5339B1]  pt-0 !mt-0 "
-                                : "bg-transparent top-4 pt-8 md:pt-14 lg:pt-10"
+                                ? "bg-[#030e16]"
+                                : "bg-transparent"
                         } ${isScrolled &&
-                        "bg-[#5339B1]  pt-0 !mt-0 transition-all duration-150 "
+                        "bg-[#030e16] transition-all duration-150"
                         }`}
                 >
                     <div
-                        className={`px-[5%] w-screen py-4 lg:py-0 lg:max-w-7xl 2xl:max-w-[92rem] mx-auto flex  justify-between items-center text-white shadow-lg lg:shadow-none `}
+                        className={`px-[5%] w-screen py-5 lg:py-0 flex justify-between items-center text-white shadow-lg lg:shadow-none `}
                     >
-                        <div className="flex items-center w-full  lg:hidden">
+                        <div className="flex flex-row gap-6 justify-between items-center w-full lg:hidden">
+                            
                             <button
                                 ref={btnToggleRef}
                                 onClick={toggleMenu}
-                                className="text-white pr-4 md:pr-6 menu-toggle "
+                                className="text-white menu-toggle"
                                 aria-label="Toggle menu"
                             >
                                 <i
@@ -272,32 +273,59 @@ const Header = ({
                             </button>
                             <a href="/">
                                 <img
-                                    src="/assets/img/logo.png"
+                                    src="/assets/img/lacasadelintercom_white.webp"
                                     alt="WeFem Logo"
-                                    className="h-[20px] w-[120.55px] md:h-[36.8px] md:w-[210.55px] object-cover object-top"
+                                    className="h-[40px] object-cover -mt-2"
                                 />
                             </a>
+
+                            <div className="flex flex-row space-x-4 text-2xl items-end justify-end">
+                                {Instagram && (
+                                    <a
+                                        href={Instagram.link}
+                                        target="_blank"
+                                        className="flex justify-center items-center"
+                                    >
+                                        <i className="fa-brands fa-instagram"></i>
+                                    </a>
+                                )}
+                                {Facebook && (
+                                    <a
+                                        href={Facebook.link}
+                                        target="_blank"
+                                        className="flex justify-center items-center"
+                                    >
+                                        <i className="fa-brands fa-facebook"></i>
+                                    </a>
+                                )}
+                                {TikTok && (
+                                    <a href={TikTok.link} target="_blank">
+                                        <i className="fa-brands fa-tiktok"></i>
+                                    </a>
+                                )}
+
+                            </div>
                         </div>
-                        <div className="hidden lg:flex py-6 mx-auto w-full justify-between items-center font-normal text-[16px] leading-[18.55px] tracking-widest">
-                            <nav className="flex gap-6 ">
-                                <a href="/catalog">Tienda</a>
-                                <a href="/instructions">¿Cómo usar?</a>
-                                <a href="/about">Nosotrxs</a>
-                                <a href="/quiz">Quiz</a>
-                            </nav>
-                            <a href="/" className="flex justify-start">
+                        
+                        <div className="hidden lg:flex lg:flex-row py-5 w-full justify-between items-center font-normal text-base">
+                            
+                            <a href="/" className="flex justify-start xl:w-3/12">
                                 <img
-                                    src="/assets/img/logo.png"
-                                    alt="Wefem"
-                                    className="h-[40px] w-[230.55px] object-cover object-top"
-                                    style={{
-                                        textShadow:
-                                            "0px 4px 7.5px 0px #00000040",
-                                    }}
+                                    src="/assets/img/lacasadelintercom_white.webp"
+                                    alt="La casa del intercomunicador"
+                                    className="h-[43px] 4xl:h-[50px] object-cover -mt-2"
                                 />
                             </a>
-                            <div className="flex space-x-4 text-[21.93px] items-center">
-                                <span className="text-[16px]">Escríbenos</span>
+                            
+                            <nav className="flex flex-row justify-center gap-5 xl:gap-8 4xl:gap-10 xl:w-7/12 font-dmsans font-normal lg:text-lg xl:text-xl 4xl:text-[23px] text-center tracking-normal">
+                                <a href="/catalog">Inicio</a>
+                                <a href="/instructions">Productos</a>
+                                <a href="/about">Servicio Técnico</a>
+                                <a href="/quiz">Contacto</a>
+                                <a href="/quiz">Únete</a>
+                            </nav>
+                            
+                            <div className="flex flex-row space-x-6 text-2xl 4xl:text-4xl items-end justify-end xl:w-3/12">
                                 {WhatsApp && (
                                     <a
                                         href={WhatsApp.link}
@@ -332,59 +360,10 @@ const Header = ({
                                     </a>
                                 )}
 
-                                <button
-                                    onClick={() =>
-                                        setMostrarCarrito(!mostrarCarrito)
-                                    }
-                                    className="relative"
-                                >
-                                    <i className="fas fa-shopping-cart"></i>
-                                    <span
-                                        className={`absolute -top-1 -right-1 bg-[#FF9900] text-white rounded-full w-3 h-3 flex items-center justify-center text-[10px] font-medium transition-transform ${animar ? "scale-150" : "scale-100"
-                                            }`}
-                                        style={{
-                                            transition:
-                                                "transform 0.3s ease-in-out",
-                                        }}
-                                    >
-                                        {totalProductos}
-                                    </span>
-                                </button>
                             </div>
+
                         </div>
 
-                        <div className=" lg:hidden text-base">
-                            <div className="flex items-center gap-4">
-                                <a href="/quiz">Quiz</a>
-                                {WhatsApp && (
-                                    <a
-                                        href={WhatsApp.link}
-                                        target="_blank"
-                                        className="flex justify-center items-center cursor-pointer"
-                                    >
-                                        <i className="fa-brands fa-whatsapp"></i>
-                                    </a>
-                                )}
-                                <button
-                                    onClick={() =>
-                                        setMostrarCarrito(!mostrarCarrito)
-                                    }
-                                    className="relative"
-                                >
-                                    <i className="fas fa-shopping-cart"></i>
-                                    <span
-                                        className={`absolute -top-1 -right-1 bg-[#FF9900] text-white rounded-full w-3 h-3 flex items-center justify-center text-[7px] font-medium transition-transform ${animar ? "scale-150" : "scale-100"
-                                            }`}
-                                        style={{
-                                            transition:
-                                                "transform 0.3s ease-in-out",
-                                        }}
-                                    >
-                                        {totalProductos}
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
                     </div>
 
                     {WhatsApp && (
@@ -405,9 +384,10 @@ const Header = ({
                         </div>
                     )}
                 </header>
+                
                 <div
                     ref={menuRef}
-                    className={`fixed   md:top-20 inset-0 text-white z-[999] transform ${isOpen ? "opacity-1 block " : "hidden opacity-0 "
+                    className={`fixed md:top-20 inset-0 text-white z-[999] transform ${isOpen ? "opacity-1 block " : "hidden opacity-0 "
                         } ${isScrolled
                             ? "top-[3.75rem] bg-[#5339B1]"
                             : "top-24 bg-[#5339B1]"
@@ -424,7 +404,7 @@ const Header = ({
                             <a href="/about">Nosotrxs</a>
                         </li>
                         <li>
-                            <a href="/quiz">Quiz</a>
+                            <a href="/quiz">Quiz telefono</a>
                         </li>
                     </ul>
                 </div>
@@ -435,6 +415,7 @@ const Header = ({
                         {children}
                     </div>
                 )}
+
                 {/*Modal Carrito*/}
                 {mostrarCarrito && (
                     <>

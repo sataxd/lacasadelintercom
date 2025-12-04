@@ -22,12 +22,23 @@ import GuaranteeSection from "./components/Tailwind/Welcome/GuaranteeSection";
 import WeLoversSection from "./components/Tailwind/Welcome/WeLoversSections";
 import NotSureSection from "./components/Tailwind/Welcome/NotSureSection";
 import InstagramSection from "./components/Tailwind/Welcome/InstagramSection";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css/pagination';
+import 'swiper/css';
 import Footer from "./components/Tailwind/Footer";
 import { CarritoContext, CarritoProvider } from "./context/CarritoContext";
 import ItemsRest from "./actions/ItemRest";
+import Slider from "./components/Home/Slider";
+import AboutSection from "./components/Tailwind/Welcome/AboutSection";
+import CategoriesSection from "./components/Tailwind/Welcome/CategoriesSection";
+import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
+import Marquesina from "./components/Tailwind/Welcome/Marquesina";
+import Marcas from "./components/Tailwind/Welcome/Marcas";
+
 
 const Home = ({
-    slider,
+    sliders,
     items,
     supplies,
     testimonies,
@@ -40,39 +51,38 @@ const Home = ({
     new_product,
     posts,
 }) => {
-    const tipoSlider = "vua";
-
+    
     return (
         <div className=" ">
             <Header
                 showSlogan={showSlogan}
                 backgroundType="video"
-                backgroundSrc={
-                    slider
-                        ? `/api/sliders/media/${slider?.image}`
-                        : "/assets/img/backgrounds/home.mp4"
-                }
-                backgroundHeight="h-[320px] lg:h-[85vh] 2xl:h-[90vh]"
+                backgroundHeight="h-[520px] lg:h-[85vh] 2xl:h-[90vh]"
             >
-                <div className="absolute inset-0 flex items-center justify-center text-center pt-20 lg:pt-24">
-                    <div className="text-white p-6 flex items-center justify-center flex-col">
-                        <h1 className="text-[29.66px] pt-0 md:pt-0 -mt-16  leading-[100%] tracking-[1.5%] md:text-[58.54px] xl:text-[58.54px]  2xl:text-[81.54px] md:leading-[60.81px] xl:leading-[60.81px] 2xl:leading-[90.81px] font-bold max-w-4xl ">
-                            ¡Tener sexo con
-                            <br /> tu disco es posible!
-                        </h1>
-                        <p className="text-[11.13px] leading-[100%]  md:text-[20.61px] 2xl:text-[26.61px] md:leading-[36.92px]  mt-4 mb-6 tracking-[1%]">
-                            Copas y Discos menstruales weFem
-                        </p>
-                        <a href="/catalog" className="mt-0 flex items-center justify-center w-[150.19px] h-[30.67px] md:w-[258.19px] md:h-[55.67px] xl:w-[300px]  2xl:w-[371px] xl:h-[70px] 2xl:h-[80px] bg-[#DDEC4C] text-[11.15px]  md:text-[17.15px] xl:text-[20.64px] 2xl:text-[24.64px] hover:brightness-90 transition duration-300  font-semibold rounded-[5.91px]  md:rounded-[13.91px] text-[#5F48B7] tracking-[1%]">
-                            ¡Realiza el cambio!
-                        </a>
-                    </div>
+                <div className="absolute inset-0 items-center justify-center text-center h-full">
+                    <Slider items={sliders} />
                 </div>
             </Header>
+
             <div className="relative z-10">
+                
+                <AboutSection />
+
+                <CategoriesSection />
+
+                <ServiceTecnical />
+
+                <Marcas />
+                
+                
+                
+                
+                <Footer />
+                
+                {/*
+                --Wefem--
                 <FeaturesSection />
                 <BenefitsSection />
-                <div className="h-[30px] lg:h-0"></div>
                 <ProductCarousel products={products_featured}>
                     <h2 className="font-poppins text-lg md:text-3xl 2xl:text-4xl font-bold flex gap-2 md:gap-4 items-center justify-center">
                         <img
@@ -93,11 +103,10 @@ const Home = ({
                 <TopSaleSection producto={top_sale} />
                 <GuaranteeSection />
                 <WeLoversSection we_lovers={we_lovers} />
-                <NotSureSection producto={new_product} />
+                <NotSureSection producto={new_product} />   
                 <InstagramSection posts={posts} />
-                <Footer />
-                {/*
-               
+
+                --Vua--
                 <Banner sliders={sliders} />
                 <hr className="h-4 bg-transparent border-none" />
                 <Highlights />
@@ -109,6 +118,7 @@ const Home = ({
                 <CallToAction />
                 <Popups popups={popups} />
                */}
+
             </div>
         </div>
     );

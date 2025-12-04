@@ -186,12 +186,12 @@ const Menu = ({ session, hasRole, salesCount }) => {
                                 >
                                     Pop-ups
                                 </MenuItem>
-                               {/* <MenuItem
+                               <MenuItem
                                     href="/admin/sliders"
                                     icon="mdi mdi-page-layout-body"
                                 >
                                     Sliders
-                                </MenuItem> */}
+                                </MenuItem>
                                 <MenuItem
                                     href="/admin/about"
                                     icon="mdi mdi-briefcase"
