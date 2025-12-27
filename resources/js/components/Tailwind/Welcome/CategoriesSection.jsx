@@ -26,7 +26,7 @@ const CategoriesSection = () => {
     return (
 
         <div className="relative overflow-hidden">
-            <div className="relative w-full px-[5%] 4xl:px-[8%] gap-10 xl:gap-16 flex flex-col items-center py-10 xl:py-20 bg-[#030e16]">
+            <div className="relative w-full px-[5%] 4xl:px-[8%] gap-10 xl:gap-16 flex flex-col items-center py-10 xl:py-20 bg-[#0b0b0b]">
 
                     <div className="w-full flex flex-col items-center justify-center gap-5 max-w-5xl 4xl:max-w-6xl text-center">
                         <h2 className="font-sora text-white text-3xl sm:text-4xl 2xl:text-5xl 4xl:text-6xl font-semibold tracking-tight !leading-tight">

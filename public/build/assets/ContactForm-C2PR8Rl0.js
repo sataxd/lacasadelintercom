@@ -1,0 +1,26 @@
+var p=Object.defineProperty;var f=(s,t,a)=>t in s?p(s,t,{enumerable:!0,configurable:!0,writable:!0,value:a}):s[t]=a;var x=(s,t,a)=>(f(s,typeof t!="symbol"?t+"":t,a),a);import{j as e}from"./AboutHeader-CpM0iYLI.js";import{r}from"./index-B80Lgev0.js";import{B as h}from"./Results-B-D6O2Fz.js";import{S as g}from"./ItemVariants-CbycEICU.js";import{c as n}from"./createLucideIcon-Cx5eUsrb.js";/**
+ * @license lucide-react v0.445.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const b=n("ArrowUpRight",[["path",{d:"M7 7h10v10",key:"1tivn9"}],["path",{d:"M7 17 17 7",key:"1vkiza"}]]);/**
+ * @license lucide-react v0.445.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const w=n("Mail",[["rect",{width:"20",height:"16",x:"2",y:"4",rx:"2",key:"18n3k1"}],["path",{d:"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7",key:"1ocrg3"}]]);/**
+ * @license lucide-react v0.445.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const v=n("MessageSquare",[["path",{d:"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",key:"1lielz"}]]);/**
+ * @license lucide-react v0.445.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const y=n("PhoneCall",[["path",{d:"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z",key:"foiqr5"}],["path",{d:"M14.05 2a9 9 0 0 1 8 7.94",key:"vmijpz"}],["path",{d:"M14.05 6A5 5 0 0 1 18 10",key:"13nbpp"}]]);/**
+ * @license lucide-react v0.445.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const j=n("User",[["path",{d:"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2",key:"975kel"}],["circle",{cx:"12",cy:"7",r:"4",key:"17ys0d"}]]);class N extends h{constructor(){super(...arguments);x(this,"path","messages")}}const k=new N,C=({})=>{const s=r.useRef(),t=r.useRef(),a=r.useRef(),o=r.useRef(),[l,i]=r.useState(!1),c=async d=>{d.preventDefault(),i(!0);const u={name:s.current.value,email:t.current.value,subject:a.current.value,description:o.current.value},m=await k.save(u);i(!1),m&&(g.fire({icon:"success",title:"Mensaje enviado",text:"Tu mensaje ha sido enviado correctamente. ¡Nos pondremos en contacto contigo pronto!",showConfirmButton:!1,timer:3e3}),s.current.value=null,t.current.value=null,a.current.value=null,o.current.value=null)};return e.jsxs("form",{className:"w-full relative max-w-lg 2xl:max-w-xl",onSubmit:c,children:[e.jsx("div",{className:"absolute w-full h-full bg-white bg-opacity-5 z-0 rounded-2xl"}),e.jsxs("div",{className:"relative w-full p-[6%] sm:p-10 md:py-9 md:px-8 mx-auto z-10 flex flex-col gap-5",children:[e.jsx("h2",{className:"font-sora text-white text-2xl 2xl:text-3xl 4xl:text-4xl font-semibold tracking-tight !leading-tight",children:"Tambien puedes enviarnos un mensaje"}),e.jsxs("div",{className:"flex flex-col space-y-4 text-sm text-black",children:[e.jsxs("div",{className:"flex items-center bg-white bg-opacity-5 rounded-md w-full",children:[e.jsx(j,{className:"ml-3 text-gray-400",size:20}),e.jsx("input",{ref:s,type:"text",placeholder:"Nombres y/o Apellidos",className:"flex-grow text-white p-2 outline-none w-full rounded-md font-dmsans text-base 2xl:text-lg 4xl:text-xl bg-transparent",disabled:l,required:!0})]}),e.jsxs("div",{className:"flex items-center bg-white bg-opacity-5 rounded-md w-full",children:[e.jsx(w,{className:"ml-3 text-gray-400",size:20}),e.jsx("input",{ref:t,type:"email",placeholder:"Correo electrónico",className:"flex-grow text-white p-2 outline-none w-full rounded-md font-dmsans text-base 2xl:text-lg 4xl:text-xl bg-transparent",disabled:l,required:!0})]}),e.jsxs("div",{className:"flex items-center bg-white bg-opacity-5 rounded-md w-full",children:[e.jsx(y,{className:"ml-3 text-gray-400",size:20}),e.jsx("input",{ref:a,type:"text",placeholder:"Teléfono móvil",className:"flex-grow text-white p-2  outline-none w-full rounded-md font-dmsans text-base 2xl:text-lg 4xl:text-xl bg-transparent",disabled:l,required:!0})]}),e.jsxs("div",{className:"flex items-start bg-white bg-opacity-5 rounded w-full",children:[e.jsx(v,{className:"ml-3 mt-3 text-gray-400",size:20}),e.jsx("textarea",{ref:o,placeholder:"Mensaje",className:"min-h-[70px] flex-grow text-white p-2 outline-none w-full rounded-md font-dmsans text-base 2xl:text-lg 4xl:text-xl bg-transparent",style:{fieldSizing:"content"},disabled:l,required:!0})]})]}),e.jsxs("button",{className:"group flex items-center justify-center border-[1.5px] border-white border-opacity-50 text-white hover:text-black font-dmsans gap-2 px-6 py-2.5  text-base 2xl:text-lg 4xl:text-xl rounded-xl font-medium hover:bg-white transition-colors duration-300 w-max disabled:cursor-not-allowed disabled:opacity-50",disabled:l,children:[e.jsx("span",{children:"Enviar mensaje"}),e.jsx(b,{className:"text-white group-hover:text-black",size:20})]})]})]})};export{C};

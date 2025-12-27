@@ -82,20 +82,45 @@ const Footer = ({ terms, footerLinks = [] }) => {
 
     return (
         <>
-            <footer className="bg-[#5F48B7] text-white">
-                <div className="pl-[5%] max-w-[20rem] lg:max-w-6xl xl:max-w-5xl 2xl:max-w-7xl md:px-0 mx-auto py-11 lg:py-16">
-                    <div className=" flex md:flex-row flex-wrap xl:flex-nowrap gap-4 lg:gap-8">
-                        <div className="hidden w-3/12 lg:flex justify-center">
-                            <img
-                                src="https://i.ibb.co/pvgT612S/image.png"
-                                alt="weFem Logo"
-                                className="md:w-[170.52px] md:h-[120.27px] 2xl:w-[197.52px] 2xl:h-[136.27px] object-cover"
-                            />
+            <footer className="bg-[#0b0b0b] text-white">
+                <div className="px-[5%] py-10 lg:py-12">
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 lg:gap-8">
+                        
+                        <div className="w-full sm:col-span-6 flex flex-col gap-6 sm:gap-4 2xl:gap-5 4xl:gap-6 justify-start">
+                            <a href="/">
+                                <img
+                                    src="/assets/img/lacasadelintercom_white.webp"
+                                    alt="WeFem Logo"
+                                    className="h-[43px] 2xl:h-[50px] 4xl:h-[55px] object-cover -mt-2"
+                                />
+                            </a>
+
+                            <div className="flex flex-col gap-0">
+                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Calle Morelli 341 - San Borja, Lima</p>
+                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">San Borja, Lima</p>
+                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Perú</p>
+                            </div>
+
+                            <div className="flex flex-row gap-5 max-w-md">
+                                <div className="flex flex-col gap-1">
+                                    <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Teléfono fijo</p>
+                                    <p className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">+51 1234567</p>
+                                </div>
+                                <div className="flex flex-col gap-1">
+                                    <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Email</p>
+                                    <p className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">ventas@lacasadelintercom.com</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="w-8/12  text-[12.77px] lg:w-3/12 xl:w-4/12  border-r-[#FFFFFF]  border-r-2 lg:pr-4 md:text-[18.77px] 2xl:text-[23.77px] leading-[23.77px] tracking-[-0.07px] font-light">
-                            <nav className="space-y-2 lg:space-y-4">
-                                {WhatsApp && (
+                        <div className="w-full sm:col-span-2 sm:pl-5">
+                            
+                            <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Menu</p>
+                            
+                            <nav className="flex flex-col gap-2 2xl:gap-4 mt-3 sm:mt-5">
+                                
+                                {/* {WhatsApp && (
                                     <a
                                         href={WhatsApp.link}
                                         aria-label="WhatsApp"
@@ -104,35 +129,29 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                     >
                                         Conversemos
                                     </a>
-                                )}
+                                )} */}
+                                
+                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Inicio</a>
 
-                                {/* <a
-                                    href="#"
-                                    className="block hover:opacity-80 transition-opacity "
-                                >
-                                    Preguntas frecuentes
-                                </a>*/}
-                                <a
-                                    onClick={openModal}
-                                    className="cursor-pointer block hover:opacity-80 transition-opacity "
-                                >
-                                    Términos y condiciones
-                                </a>
-                                {libroReclamaciones && (
-                                    <a
-                                        href={libroReclamaciones}
-                                        target="_blank"
-                                        className=" cursor-pointer block hover:opacity-80 transition-opacity "
-                                    >
-                                        Libro de Reclamaciones
-                                    </a>
-                                )}
+                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Servicio Técnico</a>
+
+                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Contacto</a>
+
+                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Únete</a>
+
                             </nav>
                         </div>
 
-                        <div className="w-2/12 md:w-[35%] text-[14px] lg:w-2/12 lg:border-r-[#FFFFFF]  lg:border-r-2 md:text-[18.77px] 2xl:text-[23.77px] leading-[23.77px] tracking-[-0.07px] font-normal">
-                            <nav className="space-y-2 lg:space-y-4">
-                                {telefono && (
+                        <div className="w-full sm:col-span-2">
+
+                            <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Servicio al cliente</p>
+
+                            <nav className="flex flex-col gap-2 2xl:gap-4 mt-3 sm:mt-5">
+
+                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Terminos y Condiciones</a>
+
+                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Politicas de privacidad</a>
+                                {/* {telefono && (
                                     <a
                                         href={`tel:${telefono}`}
                                         className="block hover:opacity-80 transition-opacity "
@@ -157,19 +176,15 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                     >
                                         Whatsapp
                                     </a>
-                                )}
+                                )} */}
                             </nav>
                         </div>
-                        <div className=" w-6/12 mt-4 lg:mt-0  lg:hidden  flex items-center justify-start md:block">
-                            <img
-                                src="https://i.ibb.co/pvgT612S/image.png"
-                                alt="weFem Logo"
-                                className="h-[70.27px]  md:w-[170.52px] md:h-[120.27px] 2xl:w-[197.52px] 2xl:h-[136.27px] object-cover"
-                            />
-                        </div>
+                        
+                        <div className="w-full sm:col-span-2 flex flex-col">
 
-                        <div className="w-5/12 mt-4 lg:mt-0  md:w-[35%] lg:w-3/12 flex items-center lg:items-start lg:pt-4">
-                            <div className="flex flex-row gap-1 lg:gap-4 ">
+                            <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Redes Sociales</p>
+
+                            <div className="flex flex-row justify-end gap-4 max-w-32 mt-3 sm:mt-5">
                                 {Instagram && (
                                     <a
                                         href={Instagram.link}
@@ -179,7 +194,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/instagram.png"
                                             alt="facebook"
-                                            className=" h-[35.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto"
+                                            className="w-auto"
                                         />
                                     </a>
                                 )}
@@ -193,7 +208,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/facebook.png"
                                             alt="Facebook"
-                                            className="h-[35.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto "
+                                            className="w-auto"
                                         />
                                     </a>
                                 )}
@@ -207,23 +222,22 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/whatsapp.png"
                                             alt="WhatsApp"
-                                            className="h-[35.65px] md:h-[59.65px] xl:h-[41.33px] 2xl:h-[61.33px] w-auto "
+                                            className="w-auto"
                                         />
                                     </a>
                                 )}
                             </div>
                         </div>
+
                     </div>
+
                 </div>
 
-                <div className="border-t border-[#FFFFFF]">
-                    <div className="px-[5%]  md:max-w-xl lg:max-w-5xl 2xl:max-w-7xl md:px-0 mx-auto md:h-[77.91px] md:py-0 flex items-center justify-start">
-                        <p className="hidden md:block text-[14.72px] leading-[22.26px] text-[#EFEDF8]">
-                            Copyright © {new Date().getFullYear()} weFem® | Todos los derechos
-                            reservados | Juntxs sin límites
-                        </p>
-                        <p className="md:hidden flex font-extralight w-full items-center justify-center text-center text-[8px] py-4 leading-[22.26px] text-[#EFEDF8]">
-                            Copyright © {new Date().getFullYear()} weFem® | Todos los derechos reservados | Juntxs sin límites
+                <div className="border-t border-white border-opacity-20 mx-[5%] py-5">
+                    <div className="flex items-center justify-start">
+                        <p className="text-center font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">
+                            Copyright © {new Date().getFullYear()} La Casa del Intercomunicador | Todos los derechos
+                            reservados
                         </p>
                     </div>
                 </div>

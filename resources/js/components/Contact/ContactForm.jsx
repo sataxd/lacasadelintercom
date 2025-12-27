@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Mail, User, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { Mail, User, MessageSquare, ArrowUpRight, PhoneCallIcon } from 'lucide-react';
 import MessagesRest from '../../Actions/MessagesRest';
 import Swal from 'sweetalert2';
 
@@ -45,63 +45,70 @@ const ContactForm = ({ }) => {
   }
 
   return (
-    <form className="w-full bg-slate-100 " onSubmit={onMessageSubmit}>
-      <div className="w-full max-w-[1280px] p-[5%] mx-auto">
-        <h2 className="text-2xl font-medium text-[#2B384F] mb-4">
-          Pregúntanos cualquier cosa aquí
+    <form className="w-full relative max-w-lg 2xl:max-w-xl" onSubmit={onMessageSubmit}>
+      <div className='absolute w-full h-full bg-white bg-opacity-5 z-0 rounded-2xl'></div>
+      <div className="relative w-full p-[6%] sm:p-10 md:py-9 md:px-8 mx-auto z-10 flex flex-col gap-5">
+        
+        <h2 className="font-sora text-white text-2xl 2xl:text-3xl 4xl:text-4xl font-semibold tracking-tight !leading-tight">
+          Tambien puedes enviarnos un mensaje
         </h2>
-        <div className="flex flex-col space-y-6 text-sm text-[#2E405E]" >
-          <div className="flex flex-col md:flex-row gap-6 w-full">
-            <div className="flex items-center bg-white rounded w-full">
-              <User className="ml-3 text-gray-400" size={20} />
-              <input
-                ref={nameRef}
-                type="text"
-                placeholder="Nombre completo"
-                className="flex-grow p-4 outline-none w-full"
-                disabled={sending}
-                required
-              />
-            </div>
-            <div className="flex items-center bg-white rounded w-full">
-              <Mail className="ml-3 text-gray-400" size={20} />
-              <input
-                ref={emailRef}
-                type="email"
-                placeholder="Correo electrónico"
-                className="flex-grow p-4 outline-none w-full"
-                disabled={sending}
-                required
-              />
-            </div>
-          </div>
-          <div className="flex items-center bg-white rounded w-full">
-            <MessageSquare className="ml-3 text-gray-400" size={20} />
+
+        <div className="flex flex-col space-y-4 text-sm text-black" >
+          
+          <div className="flex items-center bg-white bg-opacity-5 rounded-md w-full">
+            <User className="ml-3 text-gray-400" size={20} />
             <input
-              ref={subjectRef}
+              ref={nameRef}
               type="text"
-              placeholder="Asunto"
-              className="flex-grow p-4 outline-none w-full"
+              placeholder="Nombres y/o Apellidos"
+              className="flex-grow text-white p-2 outline-none w-full rounded-md font-dmsans text-base 2xl:text-lg 4xl:text-xl bg-transparent"
               disabled={sending}
               required
             />
           </div>
-          <div className="flex items-start bg-white rounded w-full">
+          
+          <div className="flex items-center bg-white bg-opacity-5 rounded-md w-full">
+            <Mail className="ml-3 text-gray-400" size={20} />
+            <input
+              ref={emailRef}
+              type="email"
+              placeholder="Correo electrónico"
+              className="flex-grow text-white p-2 outline-none w-full rounded-md font-dmsans text-base 2xl:text-lg 4xl:text-xl bg-transparent"
+              disabled={sending}
+              required
+            />
+          </div>
+
+          <div className="flex items-center bg-white bg-opacity-5 rounded-md w-full">
+            <PhoneCallIcon className="ml-3 text-gray-400" size={20} />
+            <input
+              ref={subjectRef}
+              type="text"
+              placeholder="Teléfono móvil"
+              className="flex-grow text-white p-2  outline-none w-full rounded-md font-dmsans text-base 2xl:text-lg 4xl:text-xl bg-transparent"
+              disabled={sending}
+              required
+            />
+          </div>
+
+          <div className="flex items-start bg-white bg-opacity-5 rounded w-full">
             <MessageSquare className="ml-3 mt-3 text-gray-400" size={20} />
             <textarea
               ref={descriptionRef}
               placeholder="Mensaje"
-              className="flex-grow p-4 outline-none w-full min-h-[100px]"
+              className="min-h-[70px] flex-grow text-white p-2 outline-none w-full rounded-md font-dmsans text-base 2xl:text-lg 4xl:text-xl bg-transparent"
               style={{ fieldSizing: 'content' }}
               disabled={sending}
               required
             />
           </div>
         </div>
-        <button className="flex items-center justify-center gap-2 mt-8 px-6 py-4 text-base font-medium text-white uppercase rounded-full bg-[#2E405E] hover:bg-[#3A516E] transition-colors duration-300 w-max disabled:cursor-not-allowed disabled:opacity-50" disabled={sending}>
-          <span>enviar mensaje</span>
-          <ArrowUpRight size={20} />
+
+        <button className="group flex items-center justify-center border-[1.5px] border-white border-opacity-50 text-white hover:text-black font-dmsans gap-2 px-6 py-2.5  text-base 2xl:text-lg 4xl:text-xl rounded-xl font-medium hover:bg-white transition-colors duration-300 w-max disabled:cursor-not-allowed disabled:opacity-50" disabled={sending}>
+          <span>Enviar mensaje</span>
+          <ArrowUpRight className='text-white group-hover:text-black' size={20} />
         </button>
+
       </div>
     </form>
   );

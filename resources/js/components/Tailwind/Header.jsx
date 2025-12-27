@@ -247,12 +247,12 @@ const Header = ({
 
                 <header
                     className={`font-sora fixed lg:w-full top-0 overflow-hidden z-40 transition-colors duration-300 ${backgroundType === "none"
-                            ? "bg-[#030e16]"
+                            ? "bg-[#0b0b0b]"
                             : isScrolled
-                                ? "bg-[#030e16]"
+                                ? "bg-[#0b0b0b] shadow-md shadow-gray-800 transition-all duration-150"
                                 : "bg-transparent"
                         } ${isScrolled &&
-                        "bg-[#030e16] transition-all duration-150"
+                        "bg-[#0b0b0b] transition-all duration-150"
                         }`}
                 >
                     <div
@@ -317,7 +317,7 @@ const Header = ({
                                 />
                             </a>
                             
-                            <nav className="flex flex-row justify-center gap-5 xl:gap-8 4xl:gap-10 xl:w-7/12 font-dmsans font-normal lg:text-lg xl:text-xl 4xl:text-[23px] text-center tracking-normal">
+                            <nav className="flex flex-row justify-center gap-5 xl:gap-8 4xl:gap-10 xl:w-7/12 font-dmsans font-normal lg:text-lg 2xl:text-xl 4xl:text-[23px] text-center tracking-normal">
                                 <a href="/catalog">Inicio</a>
                                 <a href="/instructions">Productos</a>
                                 <a href="/about">Servicio Técnico</a>

@@ -35,6 +35,8 @@ import CategoriesSection from "./components/Tailwind/Welcome/CategoriesSection";
 import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
 import Marquesina from "./components/Tailwind/Welcome/Marquesina";
 import Marcas from "./components/Tailwind/Welcome/Marcas";
+import ContactSection from "./components/Tailwind/Welcome/ContactSection";
+import SectoresClientes from "./components/Tailwind/Welcome/SectoresClientes.jsx";
 
 
 const Home = ({
@@ -57,7 +59,7 @@ const Home = ({
             <Header
                 showSlogan={showSlogan}
                 backgroundType="video"
-                backgroundHeight="h-[520px] lg:h-[85vh] 2xl:h-[90vh]"
+                backgroundHeight="h-[520px] lg:h-[95vh] 2xl:h-[90vh]"
             >
                 <div className="absolute inset-0 items-center justify-center text-center h-full">
                     <Slider items={sliders} />
@@ -74,8 +76,9 @@ const Home = ({
 
                 <Marcas />
                 
-                
-                
+                <ContactSection />
+
+                <SectoresClientes />
                 
                 <Footer />
                 

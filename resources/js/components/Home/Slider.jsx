@@ -69,7 +69,7 @@ const Slider = ({ items }) => {
                         }}
                 ></div>
 
-                <div className="relative grid grid-cols-1 lg:grid-cols-2  w-full px-[5%] p-4 h-[520px] lg:h-[85vh] 2xl:h-[90vh]">
+                <div className="relative grid grid-cols-1 lg:grid-cols-2  w-full px-[5%] p-4 h-[520px] lg:h-[95vh] 2xl:h-[90vh]">
                     <div className="flex flex-col col-span-1 lg:col-span-1  gap-5 2xl:gap-7 4xl:gap-10 items-start justify-center text-start">
                         <h2 className='font-sora text-white text-3xl sm:text-5xl 2xl:text-[52px] 4xl:text-6xl tracking-normal font-semibold !leading-[1.15]'>
                             {slider?.name}
