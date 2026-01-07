@@ -1,3 +1,4 @@
+import { Medal, ShieldCheck, Wrench } from 'lucide-react';
 import React from 'react';
 
 const Portada = ({ textoshome }) => {
@@ -8,28 +9,25 @@ const Portada = ({ textoshome }) => {
   };
 
   const benefits = [
-  {
-    id: "uid_1", // El ID interno puede ser cualquiera
-    title: "Reparaciones",
-    subtitle: "Diagnóstico de Precisión",
-    description: "Restauramos la operatividad de sus equipos con repuestos originales y protocolos técnicos avanzados.",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1000"
-  },
-  {
-    id: "uid_2",
-    title: "Mantenimiento",
-    subtitle: "Rendimiento Continuo",
-    description: "Programas preventivos diseñados para mitigar riesgos operativos y extender la vida útil de su infraestructura.",
-    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=1000"
-  },
-  {
-    id: "uid_3",
-    title: "Instalaciones",
-    subtitle: "Ingeniería en Seguridad",
-    description: "Despliegue estratégico de sistemas de intercomunicación y cercos eléctricos bajo normativas internacionales.",
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1000"
-  },
-];
+    {
+      id: 1,
+      icon: <ShieldCheck className="w-10 h-10 text-primary" />, 
+      title: "Máxima Seguridad",
+      description: "Identifique a sus visitas antes de abrir y evite riesgos, protegiendo el acceso a su hogar o negocio de personas no autorizadas."
+    },
+    {
+      id: 2,
+      icon: <Wrench className="w-10 h-10 text-primary" />, 
+      title: "Soporte Integral",
+      description: "Nos encargamos de todo el proceso técnico, garantizando calidad desde la instalación y configuración hasta la puesta en marcha."
+    },
+    {
+      id: 3,
+      icon: <Medal className="w-10 h-10 text-primary" />, 
+      title: "Las Mejores Marcas",
+      description: "Contamos con sistemas analógicos y digitales de fabricantes líderes para asegurar tecnología de punta y alta durabilidad."
+    }
+  ];
 
   return (
     <section>
@@ -74,18 +72,23 @@ const Portada = ({ textoshome }) => {
 
           {/* Columna Derecha: Lista de Beneficios */}
           <div className="col-span-2 lg:col-span-1 flex flex-col sm:flex-row gap-5 sm:gap-10 lg:flex-col justify-around items-start lg:items-end">
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 xl:gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 xl:gap-7">
               {benefits && benefits.map((beneficio, index) => {
                 const content = (
-                  <div className="flex flex-col pl-2 max-w-xs text-left xl:text-right">
-                    <h3 className="text-[#052F4E] text-4xl font-galano_bold">
-                      {beneficio?.descripcionshort ?? "Ingrese texto"}
-                    </h3>
-                    <h2 className="text-[#052F4E] text-sm 3xs:text-base md:text-lg font-galano_medium leading-none">
-                      {beneficio?.titulo ?? "Ingrese texto"}
-                    </h2>
-                    <p className="text-[#052F4E] text-xs 3xs:text-sm md:text-sm font-galano_regular !leading-none mt-2">
-                      {beneficio?.descripcion ?? "Ingrese texto"}
+                  <div className="flex flex-col pl-2 max-w-md text-left xl:text-right">
+                    
+                    <div className="col-span-2 flex flex-row justify-end items-center gap-3">
+                     
+                      {beneficio?.icon}
+                      
+                      <h2 className="text-black text-base sm:text-lg md:text-xl 4xl:text-2xl font-dmsans tracking-tight font-semibold">
+                        {beneficio?.title}
+                      </h2>
+
+                    </div>
+                    
+                    <p className="text-black text-sm 4xl:text-lg font-sora mt-2">
+                      {beneficio?.description}
                     </p>
                   </div>
                 );

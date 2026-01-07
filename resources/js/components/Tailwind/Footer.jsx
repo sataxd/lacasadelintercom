@@ -90,7 +90,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                         <div className="w-full sm:col-span-6 flex flex-col gap-6 sm:gap-4 2xl:gap-5 4xl:gap-6 justify-start">
                             <a href="/">
                                 <img
-                                    src="/assets/img/lacasadelintercom_white.webp"
+                                    src="/assets/img/lacasadelintercom_whitered.webp"
                                     alt="WeFem Logo"
                                     className="h-[43px] 2xl:h-[50px] 4xl:h-[55px] object-cover -mt-2"
                                 />
