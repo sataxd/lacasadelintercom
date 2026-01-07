@@ -4,7 +4,7 @@ import ContactForm from "../../Contact/ContactForm";
 
 const generalRest = new GeneralRest();
 
-const ContactSection = () => {
+const ContactSection = ({tieneMargen = false}) => {
     const [Benefits, setBenefits] = useState(null);
     const [Toallas, setToallas] = useState(null);
     const [Soles, setSoles] = useState(null);
@@ -13,6 +13,8 @@ const ContactSection = () => {
     const handleToggleImage = () => {
         setActiveImage(prev => prev === 1 ? 2 : 1);
     };
+
+    const bgVariable = tieneMargen ? "mt-[70px]" : "mt-0";
 
     useEffect(() => {
         // ... (Tu lógica de fetch se mantiene igual)
@@ -28,9 +30,9 @@ const ContactSection = () => {
     }, []);
     
     return (
-//e6e9eb
+
         <div className="relative overflow-hidden">
-            <div className="relative w-full px-[5%] 4xl:px-[8%] gap-10 xl:gap-16 flex flex-col items-center py-10 xl:py-16 bg-[#0b0b0b]">
+            <div className={`relative w-full px-[5%] 4xl:px-[8%] gap-10 xl:gap-16 flex flex-col items-center py-10 xl:py-16 bg-[#0b0b0b] ${bgVariable}`}>
 
                     <div className="flex flex-col lg:flex-row gap-10 xl:gap-16 2xl:gap-20 w-full items-center justify-center">
                         <div className="w-full xl:w-1/2 flex flex-col gap-2 justify-center items-start">
@@ -99,15 +101,7 @@ const ContactSection = () => {
                                     </div>
                                 </div>
                             </div> 
-                            <div className="flex flex-row mt-2">
-                                <a href="/"
-                                    className="text-white font-dmsans border-[1.5px] border-white border-opacity-50 flex flex-row items-center px-3 md:px-5 py-1.5 text-base 2xl:text-lg 4xl:text-xl rounded-xl font-medium">
-                                    Quiero mas informacion
-                                    <div className="rounded-full flex flex-row justify-center items-center ml-2">
-                                        <i className="mdi mdi-redo text-2xl text-white "></i>
-                                    </div>
-                                </a>
-                            </div>
+                            
                         </div>
                         <div className="w-full xl:w-1/2 flex flex-col justify-center items-center">
                             <ContactForm />

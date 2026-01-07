@@ -1,7 +1,7 @@
 import React from 'react';
 import { Building2, Briefcase, Factory, Hospital, School, Landmark } from 'lucide-react';
-import Espiral3D from './OrbitingWords';
-import OrbitingWords from './OrbitingWords';
+import { OrbitingCirclesDemo } from './OrbitingCirclesDemo';
+
 
 const SectoresClientes = () => {
   const sectores = [
@@ -35,11 +35,7 @@ const SectoresClientes = () => {
                            
                         </div>
                         <div className="w-full xl:w-1/2 flex flex-col justify-center items-center">
-                            <h3 className="font-sora text-black text-lg sm:text-xl 2xl:text-2xl 4xl:text-3xl font-semibold tracking-tight !leading-tight">
-                              Constructoras
-                             
-                            </h3>
-                            <OrbitingWords />
+                              <OrbitingCirclesDemo className="hidden" />
                         </div>
                         
                     </div>

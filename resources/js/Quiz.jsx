@@ -344,6 +344,7 @@ const ThreeQuiz = ({ setCurrentStep, handleAnswer }) => {
         </div>
     );
 };
+
 const FourQuiz = ({ setCurrentStep, handleResult, emailRef,setEmailRef }) => {
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState(false);
@@ -438,6 +439,7 @@ const FourQuiz = ({ setCurrentStep, handleResult, emailRef,setEmailRef }) => {
         </div>
     );
 };
+
 const Result1Quiz = ({emailRef }) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">
@@ -490,6 +492,7 @@ const Result1Quiz = ({emailRef }) => {
         </div>
     );
 };
+
 const Result2Quiz = ({ emailRef}) => {
     return (
         <div className="flex flex-col md:flex-row w-full justify-between bg-[#EFE5FF] items-center md:h-[75vh]">

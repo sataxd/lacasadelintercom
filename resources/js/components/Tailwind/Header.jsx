@@ -194,6 +194,16 @@ const Header = ({
     const Facebook = socials.find(
         (social) => social.description === "Facebook"
     );
+
+    const subMenuProductos = [
+        { name: "Sistemas de Intercomunicadores", link: "/intercomunicadores" },
+        { name: "Sistemas de Videoporteros", link: "/videoporteros" },
+        { name: "Sistemas de alarmas contra incendio", link: "/alarma-contra-incendio" },
+        { name: "Sistema de alarma contra robo", link: "/alarmas-robo" },
+        { name: "Intercomunicador Hospitalario", link: "/hospitalario" },
+        { name: "Sistema de cerco eléctrico", link: "/cerco-electrico" },
+    ];
+
     return (
         <>
             {/* {showSlogan && (
@@ -246,13 +256,13 @@ const Header = ({
                 )}
 
                 <header
-                    className={`font-sora fixed lg:w-full top-0 overflow-hidden z-40 transition-colors duration-300 ${backgroundType === "none"
+                    className={`font-sora fixed lg:w-full top-0 z-40 transition-colors duration-300 ${backgroundType === "none"
                             ? "bg-[#0b0b0b]"
                             : isScrolled
                                 ? "bg-[#0b0b0b] shadow-md shadow-gray-800 transition-all duration-150"
                                 : "bg-transparent"
                         } ${isScrolled &&
-                        "bg-[#0b0b0b] transition-all duration-150"
+                        "bg-[#0b0b0b] shadow-md shadow-gray-800 transition-all duration-150"
                         }`}
                 >
                     <div
@@ -317,12 +327,33 @@ const Header = ({
                                 />
                             </a>
                             
-                            <nav className="flex flex-row justify-center gap-5 xl:gap-8 4xl:gap-10 xl:w-7/12 font-dmsans font-normal lg:text-lg 2xl:text-xl 4xl:text-[23px] text-center tracking-normal">
-                                <a href="/catalog">Inicio</a>
-                                <a href="/instructions">Productos</a>
-                                <a href="/about">Servicio Técnico</a>
-                                <a href="/quiz">Contacto</a>
-                                <a href="/quiz">Únete</a>
+                            <nav className="flex flex-row justify-center items-center gap-5 xl:gap-8 4xl:gap-10 xl:w-7/12 font-dmsans font-medium lg:text-lg 2xl:text-xl 4xl:text-[23px] text-center tracking-normal h-full">
+                                <a href="/">Inicio</a>
+                                <div className="relative group h-full flex items-center cursor-pointer">
+                                    <a href="/" className="flex items-center gap-2 ">
+                                        Productos
+                                        <i className="fa-solid fa-chevron-down text-[0.6em] transition-transform duration-300 group-hover:rotate-180"></i>
+                                    </a>
+                                    <div className="absolute top-[80%] left-0 w-[340px] 4xl:w-[400px] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 z-50 text-left">
+                                        <div className="bg-white rounded-[12px] shadow-xl overflow-hidden">
+                                            <ul className="flex flex-col">
+                                                {subMenuProductos.map((item, index) => (
+                                                    <li key={index}>
+                                                        <a
+                                                            href={item.link}
+                                                            className="tracking-tight block px-5 py-3 4xl:py-4 font-dmsans text-lg 4xl:text-xl text-black bg-gradient-to-r from-transparent to-transparent hover:from-[#00000017] hover:to-transparent transition-colors font-medium"
+                                                        >
+                                                            {item.name}
+                                                        </a>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/servicio-tecnico">Servicio Técnico</a>
+                                <a href="/contacto">Contacto</a>
+                                <a href="/">Únete</a>
                             </nav>
                             
                             <div className="flex flex-row space-x-6 text-2xl 4xl:text-4xl items-end justify-end xl:w-3/12">

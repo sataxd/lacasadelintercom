@@ -22,6 +22,7 @@
         "aos": "^2.3.4",
         "apexcharts": "^4.7.0",
         "chart.js": "^4.4.3",
+        "clsx": "^2.1.1",
         "framer-motion": "^11.18.2",
         "jquery": "^3.7.1",
         "jsencrypt": "^3.3.2",
@@ -41,6 +42,7 @@
         "sode-extend-react": "^1.2.5",
         "sweetalert2": "^11.11.1",
         "swiper": "^11.1.14",
-        "swiper-react": "^1.0.0"
+        "swiper-react": "^1.0.0",
+        "tailwind-merge": "^3.4.0"
     }
 }

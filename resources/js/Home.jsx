@@ -35,8 +35,12 @@ import CategoriesSection from "./components/Tailwind/Welcome/CategoriesSection";
 import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
 import Marquesina from "./components/Tailwind/Welcome/Marquesina";
 import Marcas from "./components/Tailwind/Welcome/Marcas";
+import Customer from "./components/Tailwind/Welcome/Customer";
 import ContactSection from "./components/Tailwind/Welcome/ContactSection";
 import SectoresClientes from "./components/Tailwind/Welcome/SectoresClientes.jsx";
+
+
+
 
 
 const Home = ({
@@ -79,7 +83,9 @@ const Home = ({
                 <ContactSection />
 
                 <SectoresClientes />
-                
+
+                <Customer />
+
                 <Footer />
                 
                 {/*

@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AlarmaIncendioController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CatalogController;
@@ -46,14 +47,17 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FormulaController;
 use App\Http\Controllers\InstructionController;
+use App\Http\Controllers\IntercomunicatorController;
 use App\Http\Controllers\LoginVuaController;
 use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PopupController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestResultController;
 use App\Http\Controllers\ThankController;
+use App\Http\Controllers\VideoporterosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,19 +73,23 @@ use App\Http\Controllers\ThankController;
 // Public routes
 Route::get('/', [HomeController::class, 'reactView'])->name('Home.jsx');
 Route::get('/catalog', [CatalogController::class, 'reactView'])->name('CatalogProducts.jsx');
-Route::get('/instructions', [InstructionController::class, 'reactView'])->name('Instructions.jsx');
-Route::get('/quiz', [CatalogController::class, 'reactView'])->name('Quiz.jsx');
 Route::get('/product/{slug}', [DetailController::class, 'reactView'])->name('DetailProduct.jsx');
-
-Route::get('/plans', [PlanController::class, 'reactView'])->name('Plans.jsx');
-Route::get('/supplies', [SupplyController::class, 'reactView'])->name('Supplies.jsx');
-Route::get('/faqs', [FaqController::class, 'reactView'])->name('FAQs.jsx');
-Route::get('/test', [TestController::class, 'reactView'])->name('Test.jsx');
-Route::get('/test/result/{formula}', [TestResultController::class, 'reactView'])->name('TestResult.jsx');
-Route::get('/about', [AboutController::class, 'reactView'])->name('About.jsx');
 Route::get('/blog', [BlogController::class, 'reactView'])->name('Blog.jsx');
 Route::get('/blog/{articleId}', [ArticleController::class, 'reactView'])->name('BlogArticle.jsx');
-Route::get('/contact', [ContactController::class, 'reactView'])->name('Contact.jsx');
+Route::get('/contacto', [ContactController::class, 'reactView'])->name('Contact.jsx');
+Route::get('/servicio-tecnico', [ServiceController::class, 'reactView'])->name('Services.jsx');
+Route::get('/intercomunicadores', [IntercomunicatorController::class, 'reactView'])->name('Intercomunicadores.jsx');
+Route::get('/videoporteros', [VideoporterosController::class, 'reactView'])->name('Videoporteros.jsx');
+Route::get('/alarma-contra-incendios', [AlarmaIncendioController::class, 'reactView'])->name('AlarmaIncendios.jsx');
+//Route::get('/instructions', [InstructionController::class, 'reactView'])->name('Instructions.jsx');
+//Route::get('/quiz', [CatalogController::class, 'reactView'])->name('Quiz.jsx');
+//Route::get('/plans', [PlanController::class, 'reactView'])->name('Plans.jsx');
+//Route::get('/supplies', [SupplyController::class, 'reactView'])->name('Supplies.jsx');
+//Route::get('/faqs', [FaqController::class, 'reactView'])->name('FAQs.jsx');
+//Route::get('/test', [TestController::class, 'reactView'])->name('Test.jsx');
+//Route::get('/test/result/{formula}', [TestResultController::class, 'reactView'])->name('TestResult.jsx');
+//Route::get('/about', [AboutController::class, 'reactView'])->name('About.jsx');
+
 
 // Vistas maquetadas finalizadas
 Route::get('/checkout', [CheckoutController::class, 'reactView'])->name('Checkout.jsx');

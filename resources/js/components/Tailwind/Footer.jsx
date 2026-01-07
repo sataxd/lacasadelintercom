@@ -118,7 +118,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                             
                             <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Menu</p>
                             
-                            <nav className="flex flex-col gap-2 2xl:gap-4 mt-3 sm:mt-5">
+                            <nav className="flex flex-col gap-1 2xl:gap-2 4xl:gap-4 mt-3 sm:mt-5">
                                 
                                 {/* {WhatsApp && (
                                     <a
@@ -146,7 +146,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
 
                             <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Servicio al cliente</p>
 
-                            <nav className="flex flex-col gap-2 2xl:gap-4 mt-3 sm:mt-5">
+                            <nav className="flex flex-col gap-1 2xl:gap-2 4xl:gap-4 mt-3 sm:mt-5">
 
                                 <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Terminos y Condiciones</a>
 
@@ -235,7 +235,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
 
                 <div className="border-t border-white border-opacity-20 mx-[5%] py-5">
                     <div className="flex items-center justify-start">
-                        <p className="text-center font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">
+                        <p className="text-center font-dmsans text-white text-opacity-70 text-[15px] 4xl:text-lg">
                             Copyright © {new Date().getFullYear()} La Casa del Intercomunicador | Todos los derechos
                             reservados
                         </p>

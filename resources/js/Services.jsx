@@ -9,9 +9,10 @@ import { CarritoProvider } from "./context/CarritoContext";
 import Footer from "./components/Tailwind/Footer";
 import MapLocation from "./components/Contact/MapLocation";
 import ContactSection from "./components/Tailwind/Welcome/ContactSection";
+import TabPanel from "./components/Tailwind/Services/TabPanel";
 
 
-const Contact = ({generals, showSlogan = true}) => {
+const Services = ({generals, showSlogan = true}) => {
   return <>
 
     <Header
@@ -19,21 +20,10 @@ const Contact = ({generals, showSlogan = true}) => {
     >
     </Header>
 
-    <ContactSection tieneMargen={true} />
-
-    <MapLocation generals={generals} />
-
+    <TabPanel />
+    
     <Footer />
-
-    {/* <div className="flex flex-row mt-2">
-        <a href="/"
-            className="text-white font-dmsans border-[1.5px] border-white border-opacity-50 flex flex-row items-center px-3 md:px-5 py-1.5 text-base 2xl:text-lg 4xl:text-xl rounded-xl font-medium">
-            Quiero mas informacion
-            <div className="rounded-full flex flex-row justify-center items-center ml-2">
-                <i className="mdi mdi-redo text-2xl text-white "></i>
-            </div>
-        </a>
-    </div> */}
+   
   </>
 }
 
@@ -41,7 +31,7 @@ CreateReactScript((el, properties) => {
     createRoot(el).render(
         <CarritoProvider>
             <Base {...properties}>
-                <Contact {...properties} />
+                <Services {...properties} />
             </Base>
         </CarritoProvider>
     );
