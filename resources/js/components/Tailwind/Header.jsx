@@ -283,7 +283,7 @@ const Header = ({
                             </button>
                             <a href="/">
                                 <img
-                                    src="/assets/img/lacasadelintercom_white.webp"
+                                    src="/assets/img/lacasadelintercom_whitered.webp"
                                     alt="WeFem Logo"
                                     className="h-[40px] object-cover -mt-2"
                                 />
@@ -321,7 +321,7 @@ const Header = ({
                             
                             <a href="/" className="flex justify-start xl:w-3/12">
                                 <img
-                                    src="/assets/img/lacasadelintercom_white.webp"
+                                    src="/assets/img/lacasadelintercom_whitered.webp"
                                     alt="La casa del intercomunicador"
                                     className="h-[43px] 4xl:h-[50px] object-cover -mt-2"
                                 />
