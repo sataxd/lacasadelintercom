@@ -17,9 +17,17 @@ class Slider extends Model
         'name',
         'description',
         'image',
+        'video',
         'button_text',
         'button_link',
+        'esimagen',
         'visible',
         'status',
+    ];
+
+    protected $casts = [
+        'esimagen' => 'boolean',
+        'visible' => 'boolean',
+        'status' => 'boolean',
     ];
 }

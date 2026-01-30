@@ -43,6 +43,9 @@ export default {
     },
     plugins: [
         require("tailwindcss-animated"),
+        require('@tailwindcss/forms')({
+            strategy: 'class', 
+        }),
         function ({ addUtilities }) {
             const newUtilities = {
                 ".scrollbar-hide": {

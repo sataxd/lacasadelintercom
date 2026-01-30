@@ -6,6 +6,7 @@ import Header from "./components/Tailwind/Header";
 import { CarritoProvider } from "./context/CarritoContext";
 import Footer from "./components/Tailwind/Footer";
 import Portada from "./components/Tailwind/Services/Portada";
+import Products from "./components/Tailwind/Services/Products";
 
 
 
@@ -18,6 +19,8 @@ const Intercomunicadores = ({generals, showSlogan = true}) => {
     </Header>
 
     <Portada />
+
+    <Products />
   
     <Footer />
    

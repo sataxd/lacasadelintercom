@@ -47,6 +47,15 @@ class SliderController extends BasicController
             $body = $this->beforeSave($request);
             $snake_case = Text::camelToSnakeCase(str_replace('App\\Models\\', '', $this->model));
 
+            if ($request->has('esimagen')) {
+               
+                $esImagenBool = filter_var($request->input('esimagen'), FILTER_VALIDATE_BOOLEAN);
+                $body['esimagen'] = $esImagenBool ? 1 : 0;
+
+            } else {
+                unset($body['esimagen']); 
+            }
+
             // Manejo de imágenes (código existente)
             foreach ($this->imageFields as $field) {
                 if (!$request->hasFile($field)) continue;
@@ -81,7 +90,7 @@ class SliderController extends BasicController
                 Storage::put($videoPath, file_get_contents($video));
 
                 // Guardar referencia en la base de datos
-                $body['image'] = "{$uuid}.{$ext}"; // Solo guardamos el nombre del archivo
+                $body['video'] = "{$uuid}.{$ext}"; // Solo guardamos el nombre del archivo
             }
 
             $jpa = $this->model::find(isset($body['id']) ? $body['id'] : null);

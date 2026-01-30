@@ -23,12 +23,12 @@ const SectoresClientes = () => {
                             <h3 className="font-sora text-black text-3xl sm:text-4xl 2xl:text-4xl 4xl:text-5xl font-semibold tracking-tight !leading-tight mb-3">
                                 Nuestros Clientes
                             </h3>
-                            <p className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-wide font-light">
+                            <p className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light">
                                 Desde Instituciones públicas hasta grandes corporaciones y proyectos residenciales,
                                 La Casa del Intercomunicador provee soluciones estratégicas en comunicación y seguridad electrónica. 
                                 
                             </p>
-                            <p className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-wide font-light">
+                            <p className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light">
                               Garantizamos un producto de calidad, soporte técnico especializado y atención personalizada.
                               Por ello, la confianza de empresas del estado y clientes particulares respalda nuestra trayectoria.
                             </p>

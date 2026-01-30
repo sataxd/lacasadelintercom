@@ -24,25 +24,47 @@ const Sliders = () => {
     const idRef = useRef();
     const nameRef = useRef();
     const descriptionRef = useRef();
-    const bgImageRef = useRef();
+    const videoRef = useRef();
+    const imageRef = useRef();
     const buttonTextRef = useRef();
     const buttonLinkRef = useRef();
 
+    const [esImagen, setEsImagen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
     const onModalOpen = (data) => {
+
+        const isImgMode = data ? (data.esimagen == 1 || data.esimagen === true) : false;
+        setEsImagen(isImgMode);
+
         if (data?.id) setIsEditing(true);
         else setIsEditing(false);
 
         idRef.current.value = data?.id ?? "";
         nameRef.current.value = data?.name ?? "";
         descriptionRef.current.value = data?.description ?? "";
-        // Configurar video existente si estamos editando
-        if (bgImageRef.current && data?.image) {
-            bgImageRef.current.setVideoSrc(`/api/sliders/media/${data.image}`);
-        }
         buttonTextRef.current.value = data?.button_text ?? "";
         buttonLinkRef.current.value = data?.button_link ?? "";
+        
+
+        // Configurar video existente si estamos editando
+        if (videoRef.current) {
+            if (data?.video) {
+                videoRef.current.setVideoSrc(`/api/sliders/media/${data.video}`);
+            } else {
+                videoRef.current.setVideoSrc(null); 
+                if(videoRef.current.setFile) videoRef.current.setFile(null); 
+            }
+        }
+
+        if (imageRef.current) {
+            imageRef.current.value = ""; 
+            if (data?.image) {
+                if(imageRef.image) imageRef.image.src = `/api/sliders/media/${data?.image}`;
+            } else {
+                if(imageRef.image) imageRef.image.src = "/api/cover/thumbnail/null"; 
+            }
+        }
 
         $(modalRef.current).modal("show");
     };
@@ -56,6 +78,7 @@ const Sliders = () => {
             description: descriptionRef.current.value,
             button_text: buttonTextRef.current.value,
             button_link: buttonLinkRef.current.value,
+            esimagen: esImagen ? 1 : 0,
         };
 
         const formData = new FormData();
@@ -64,11 +87,16 @@ const Sliders = () => {
         }
 
         // Obtener el archivo de video
-        if (bgImageRef.current) {
-            const videoFile = bgImageRef.current.getFile();
+        if (videoRef.current) {
+            const videoFile = videoRef.current.getFile();
             if (videoFile) {
                 formData.append("video", videoFile);
             }
+        }
+
+        const file = imageRef.current.files[0];
+        if (file) {
+            formData.append("image", file);
         }
 
         const result = await slidersRest.save(formData);
@@ -138,6 +166,10 @@ const Sliders = () => {
                         dataField: "id",
                         caption: "ID",
                         visible: false,
+                    },
+                    {
+                        dataField: "esimagen", 
+                        visible: false, 
                     },
                     {
                         dataField: "name",
@@ -269,10 +301,19 @@ const Sliders = () => {
             >
                 <div className="row" id="sliders-container">
                     <input ref={idRef} type="hidden" />
+                    
                     <VideoFormGroup
-                        eRef={bgImageRef}
+                        eRef={videoRef}
                         label="Selecciona un video"
-                        col="col-12"
+                        col="col-6"
+                    />
+
+                    <ImageFormGroup
+                        eRef={imageRef}
+                        label="Imagen"
+                        col="col-6"
+                        aspect={3/2}
+                        fit="contain"
                     />
 
                     <TextareaFormGroup
@@ -297,6 +338,15 @@ const Sliders = () => {
                         label="URL botón primario"
                         col="col-sm-6"
                     />
+
+                    <SwitchFormGroup
+                        col="col-sm-6 mt-2"
+                        leftl="Solo video"
+                        rightl="Solo imagen"
+                        checked={esImagen}
+                        onChange={() => setEsImagen(!esImagen)}
+                    />
+                    
                 </div>
             </Modal>
         </>

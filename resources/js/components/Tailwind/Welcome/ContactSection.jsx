@@ -40,7 +40,7 @@ const ContactSection = ({tieneMargen = false}) => {
                             <h3 className="font-sora text-white text-3xl sm:text-4xl 2xl:text-4xl 4xl:text-5xl font-semibold tracking-tight !leading-tight mb-3">
                                 Ponte en contacto
                             </h3>
-                            <p className="font-dmsans text-white text-base 2xl:text-lg 4xl:text-xl tracking-wide font-light">
+                            <p className="font-dmsans text-white text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light">
                                 Enviando un mensaje al correo comunicaciones.compras@gmail.com o completar el formulario de contacto en nuestro sitio web. También puede encontrarnos en las redes sociales, donde compartimos noticias y actualizaciones de la empresa.
                             </p>
                             <div className="flex flex-col gap-3 w-full max-w-md my-3">

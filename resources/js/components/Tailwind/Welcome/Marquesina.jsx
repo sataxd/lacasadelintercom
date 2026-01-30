@@ -11,8 +11,8 @@ const logos = [
   { id: 7, src: '/assets/img/logo_7.jpg', alt: 'Logo 6' },
   { id: 8, src: '/assets/img/logo_8.jpg', alt: 'Logo 6' },
   { id: 9, src: '/assets/img/logo_9.png', alt: 'Logo 6' },
-  { id: 9, src: '/assets/img/logo_11.png', alt: 'Logo 6' },
-  { id: 9, src: '/assets/img/logo_12.png', alt: 'Logo 6' },
+  { id: 10, src: '/assets/img/logo_11.png', alt: 'Logo 6' },
+  { id: 11, src: '/assets/img/logo_12.png', alt: 'Logo 6' },
 ];
 
 const Marquesina = () => {
