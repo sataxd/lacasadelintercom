@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,6 +87,8 @@ Route::get('/items/get-testimonies', [TestimonyController::class, 'getTestimonie
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::get('/sliders/media/{uuid}', [AdminSliderController::class, 'media']);
+Route::get('/aboutus/media/{uuid}', [AdminAboutusController::class, 'media']);
+Route::get('/category/media/{uuid}', [AdminCategoryController::class, 'media']);
 Route::get('/testimonies/media/{uuid}', [AdminTestimonyController::class, 'media']);
 Route::get('/posts/media/{uuid}', [AdminPostController::class, 'media']);
 Route::get('/items/media/{uuid}', [ItemController::class, 'media']);

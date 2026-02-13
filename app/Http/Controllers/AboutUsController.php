@@ -14,17 +14,16 @@ use App\Models\Testimony;
 use Illuminate\Http\Request;
 
 class AboutUsController extends BasicController
-{
+{   
+    public $model = Aboutus::class;
     public $reactView = 'About';
     public $reactRootView = 'public';
 
     public function setReactViewProperties(Request $request)
     {
-
         $posts = InstagramPost::all();
-        // dump($top_sale);
+        
         return [
-
             'posts' => $posts
         ];
     }

@@ -18,6 +18,11 @@ class Aboutus extends Model
         'name',
         'description',
         'visible',
-        'status'
+        'status',
+        'icon',
+        'image',
+        'button_text',
+        'button_link',
+        'subtitle'
     ];
 }

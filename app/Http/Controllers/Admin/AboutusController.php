@@ -11,6 +11,7 @@ class AboutusController extends BasicController
 {
     public $model = Aboutus::class;
     public $reactView = 'Admin/About';
+    public $imageFields = ['image','icon'];
 
     public function setReactViewProperties(Request $request)
     {

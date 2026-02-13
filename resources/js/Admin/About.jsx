@@ -10,6 +10,8 @@ import DxButton from '../Components/dx/DxButton';
 import InputFormGroup from '../Components/form/InputFormGroup';
 import CreateReactScript from '../Utils/CreateReactScript';
 import ReactAppend from '../Utils/ReactAppend';
+import ImageFormGroup from '../Components/Adminto/form/ImageFormGroup';
+import TextareaCKeditorFormGroup from '../components/Adminto/form/TextareaCKeditorFormGroup';
 
 const aboutusRest = new AboutusRest()
 
@@ -22,8 +24,13 @@ const About = () => {
   const idRef = useRef()
   const nameRef = useRef()
   const descriptionRef = useRef()
-
+  const subtitleRef = useRef()
+  const iconRef = useRef();
+  const imageRef = useRef();
+  const buttonTextRef = useRef();
+  const buttonLinkRef = useRef();
   const [isEditing, setIsEditing] = useState(false)
+  const [descriptionfinal, setDescription] = useState('')
 
   const onModalOpen = (data) => {
     if (data?.id) setIsEditing(true)
@@ -31,7 +38,36 @@ const About = () => {
 
     idRef.current.value = data?.id ?? ''
     nameRef.current.value = data?.name ?? ''
-    descriptionRef.current.value = data?.description ?? ''
+    subtitleRef.current.value = data?.subtitle ?? ''
+    // descriptionRef.current.value = data?.description ?? ''
+    buttonTextRef.current.value = data?.button_text ?? ''
+    buttonLinkRef.current.value = data?.button_link ?? ''
+
+    if (data?.id) {
+        setIsEditing(true);
+        setDescription(data.description || ''); // Carga datos al editar
+    } else {
+        setIsEditing(false);
+        setDescription(''); // Limpia el editor al crear uno nuevo
+    }
+
+    if (imageRef.current) {
+        imageRef.current.value = ""; 
+        if (data?.image) {
+            if(imageRef.image) imageRef.image.src = `/api/aboutus/media/${data?.image}`;
+        } else {
+            if(imageRef.image) imageRef.image.src = "/api/cover/thumbnail/null"; 
+        }
+    }
+
+    if (iconRef.current) {
+        iconRef.current.value = ""; 
+        if (data?.icon) {
+            if(iconRef.image) iconRef.image.src = `/api/aboutus/media/${data?.icon}`;
+        } else {
+            if(iconRef.image) iconRef.image.src = "/api/cover/thumbnail/null"; 
+        }
+    }
 
     $(modalRef.current).modal('show')
   }
@@ -42,10 +78,30 @@ const About = () => {
     const request = {
       id: idRef.current.value || undefined,
       name: nameRef.current.value,
-      description: descriptionRef.current.value,
+      // description: descriptionRef.current.value,
+      description: descriptionfinal,
+      button_text: buttonTextRef.current.value,
+      button_link: buttonLinkRef.current.value,
+      subtitle: subtitleRef.current.value,
     }
 
-    const result = await aboutusRest.save(request)
+    const formData = new FormData();
+    
+    for (const key in request) {
+        formData.append(key, request[key]);
+    }
+    
+    const file = imageRef.current.files[0];
+    if (file) {
+        formData.append("image", file);
+    }
+
+    const iconfile = iconRef.current.files[0];
+    if (iconfile) {
+        formData.append("icon", iconfile);
+    }
+    
+    const result = await aboutusRest.save(formData)
     if (!result) return
 
     $(gridRef.current).dxDataGrid('instance').refresh()
@@ -90,6 +146,10 @@ const About = () => {
           dataField: 'id',
           caption: 'ID',
           visible: false
+        },
+        {
+          dataField: 'correlative',
+          caption: 'Correlativo',
         },
         {
           dataField: 'name',
@@ -145,12 +205,61 @@ const About = () => {
           allowExporting: false
         }
       ]} />
-    <Modal modalRef={modalRef} title={isEditing ? 'Editar about' : 'Agregar about'} onSubmit={onModalSubmit} size='md'>
-      <div className='row' id='benefits-container'>
-        <input ref={idRef} type='hidden' />
-        <InputFormGroup eRef={nameRef} label='Titulo' col='col-12' rows={2} required disabled />
-        <TextareaFormGroup eRef={descriptionRef} label='Descripción' rows={3} />
-      </div>
+      
+    <Modal modalRef={modalRef} 
+            title={isEditing ? 'Editar about' : 'Agregar about'} 
+            onSubmit={onModalSubmit} size='lg'>
+        <div className='row' id='benefits-container'>
+          <input ref={idRef} type='hidden' />
+          
+          <InputFormGroup 
+            eRef={subtitleRef} 
+            label='Subtitulo' 
+            col='col-lg-6' 
+            rows={2}/>
+
+
+          <InputFormGroup 
+            eRef={nameRef} 
+            label='Titulo' 
+            col='col-lg-6' 
+            rows={2} required />
+
+          <TextareaCKeditorFormGroup 
+            label="Descripción"
+            col="col-12"
+            value={descriptionfinal}
+            onChange={(e) => setDescription(e.target.value)}
+            />
+
+          <ImageFormGroup
+                eRef={imageRef}
+                label="Imagen"
+                col="col-6"
+                aspect={3/2}
+                fit="contain"
+          />
+
+          <ImageFormGroup
+              eRef={iconRef}
+              label="Icono"
+              col="col-6"
+              aspect={3/2}
+              fit="contain"
+          />
+
+          <InputFormGroup 
+            eRef={buttonTextRef} 
+            label='Texto de botón' 
+            col='col-lg-6' 
+            rows={2}/>
+
+          <InputFormGroup 
+          eRef={buttonLinkRef} 
+          label='Url de botón' 
+          col='col-lg-6' 
+          rows={2}/>
+        </div>
     </Modal>
   </>
   )

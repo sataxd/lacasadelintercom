@@ -232,16 +232,16 @@ class BasicController extends Controller
     try {
 
       $body = $this->beforeSave($request);
-
+    
 
       $snake_case = Text::camelToSnakeCase(str_replace('App\\Models\\', '', $this->model));
-      // dump($snake_case);
+      
       if ($snake_case === "item_image" || $snake_case === "item_color" || $snake_case === "item_zise") {
         $snake_case = 'item';
       }
 
       foreach ($this->imageFields as $field) {
-
+        
         if (!$request->hasFile($field)) continue;
         $full = $request->file($field);
         $uuid = Crypto::randomUUID();

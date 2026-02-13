@@ -34,7 +34,7 @@ const Sliders = () => {
 
     const onModalOpen = (data) => {
 
-        const isImgMode = data ? (data.esimagen == 1 || data.esimagen === true) : false;
+        const isImgMode = data ? (data.esimagen == 1 || data.esimagen === true) : true;
         setEsImagen(isImgMode);
 
         if (data?.id) setIsEditing(true);

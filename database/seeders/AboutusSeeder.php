@@ -38,6 +38,38 @@ class AboutusSeeder extends Seeder
                 'correlative' => 'customer-complaints',
                 'name' => 'Libro de reclamaciones',
                 'description' => 'https://docs.google.com/forms/d/e/1FAIpQLSesYBA7aagw3XFpqZelSLb70mx4qEI4XO2PXh6JcVV5ghnkrQ/viewform'
+            ],
+            [   
+                'correlative' => 'home-about-title',
+                'subtitle' =>  'Tu tranquilidad es nuestra prioridad',
+                'name' => 'Comunicación y Seguridad en tu Hogar o Espacio de Trabajo',
+                'description' => '',
+                'button_text' =>  '',
+                'button_link' =>  '',
+            ],
+            [
+                'correlative' => 'home-about-description',
+                'subtitle' =>  '',
+                'name' => 'Nosotros',
+                'description' => '<p>Conocemos las necesidades de nuestros clientes, en términos de seguridad y comunicación electrónica.</p>',
+                'button_text' =>  '',
+                'button_link' =>  '',
+            ],
+            [
+                'correlative' => 'home-about-cardone',
+                'subtitle' =>  '',
+                'name' => 'Prestigio a través de los años',
+                'description' => '<p>Desde 1988, en La Casa del Intercomunicador, cada solución que ofrecemos lleva el sello de una experiencia perfeccionada durante más de tres décadas, dedicadas enteramente a la mejor atención y servicio en todos los productos.</p>',
+                'button_text' =>  '',
+                'button_link' =>  '',
+            ],
+            [
+                'correlative' => 'home-about-cardsecond',
+                'subtitle' =>  '',
+                'name' => 'Empresa líder en el país',
+                'description' => '<p>Llevamos seguridad y conectividad a hogares y empresas. Contamos con la fuerza operativa de más de 50 técnicos expertos en seguridad electrónica, listos para implementar las soluciones más avanzadas del mercado.</p>',
+                'button_text' =>  '',
+                'button_link' =>  '',
             ]
         ];
 

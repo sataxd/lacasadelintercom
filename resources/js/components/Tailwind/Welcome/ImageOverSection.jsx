@@ -2,15 +2,17 @@ import React from 'react'; // Ya no necesitamos useState aquí
 import { motion } from 'framer-motion';
 
 // Recibimos activeImage y onToggle como props
-const ImageOverSection = ({ activeImage, onToggle }) => {
+const ImageOverSection = ({ activeImage, onToggle, image1, image2, visible1, visible2 }) => {
+  
+  if (!visible1 && !visible2) return null;
   
   // Derivamos la lógica booleana del prop que recibimos
   // Si activeImage es 1, isFirstFront es true. Si es 2, es false.
   const isFirstFront = activeImage === 1;
 
   // Rutas de tus imágenes
-  const img1 = "/assets/img/casadelintercom_nosotros_1.webp"; 
-  const img2 = "/assets/img/casadelintercom_nosotros_2.webp"; 
+  const img1 = image1 
+  const img2 = image2 
 
   // --- CONFIGURACIÓN DE LA ANIMACIÓN (Se mantiene igual) ---
   const frontVariant = {
@@ -41,23 +43,27 @@ const ImageOverSection = ({ activeImage, onToggle }) => {
       <div className="relative w-[350px] sm:w-[600px] h-[240px] sm:h-[400px]">
         
         {/* === IMAGEN 1 === */}
-        <motion.img
-          src={img1}
-          alt="Imagen Principal"
-          className="absolute w-full h-full object-cover rounded-lg shadow-xl"
-          animate={isFirstFront ? frontVariant : jumpToBack}
-          initial={frontVariant}
-        />
-
+        {!!visible1 && (
+          <motion.img
+            key={img1}
+            src={img1}
+            alt="Imagen Principal"
+            className="absolute w-full h-full object-cover rounded-lg shadow-xl"
+            animate={isFirstFront ? frontVariant : jumpToBack}
+            initial={frontVariant}
+          />
+        )}
         {/* === IMAGEN 2 === */}
-        <motion.img
-          src={img2}
-          alt="Imagen Secundaria"
-          className="absolute w-full h-full object-cover rounded-lg shadow-xl"
-          animate={!isFirstFront ? frontVariant : jumpToBack}
-          initial={backVariant}
-        />
-
+        {!!visible2 && (
+          <motion.img
+            key={img2}
+            src={img2}
+            alt="Imagen Secundaria"
+            className="absolute w-full h-full object-cover rounded-lg shadow-xl"
+            animate={!isFirstFront ? frontVariant : jumpToBack}
+            initial={backVariant}
+          />
+        )}
         {/* === BOTÓN MÓVIL === */}
         {/* Usamos la función onToggle que viene del padre para cambiar la imagen */}
         <button 

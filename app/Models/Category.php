@@ -19,5 +19,6 @@ class Category extends Model
         'description',
         'visible',
         'status',
+        'image'
     ];
 }
