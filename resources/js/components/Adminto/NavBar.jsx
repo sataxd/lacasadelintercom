@@ -116,7 +116,7 @@ const NavBar = ({ session = {}, title = "Pagina", whatsappStatus }) => {
             <div
                 className="logo-box"
                 style={{
-                    background: "#6745BA",
+                    background: "#000000",
                 }}
             >
                 <a href="/home" className="logo logo-light text-center">

@@ -353,35 +353,51 @@ const Header = ({
                                 </div>
                                 <a href="/servicio-tecnico">Servicio Técnico</a>
                                 <a href="/contacto">Contacto</a>
-                                <a href="/">Únete</a>
+                                {/* <a href="/">Únete</a> */}
                             </nav>
                             
-                            <div className="flex flex-row space-x-6 text-2xl 4xl:text-4xl items-end justify-end xl:w-3/12">
-                                {WhatsApp && (
-                                    <a
-                                        href={WhatsApp.link}
-                                        target="_blank"
-                                        className="flex justify-center items-center cursor-pointer"
-                                    >
-                                        <i className="fa-brands fa-whatsapp"></i>
-                                    </a>
-                                )}
+                            <div className="flex flex-row space-x-4 4xl:space-x-6 text-2xl 4xl:text-4xl items-end justify-end xl:w-3/12">
+                                
                                 {Instagram && (
                                     <a
                                         href={Instagram.link}
+                                        aria-label="Instagram"
                                         target="_blank"
-                                        className="flex justify-center items-center"
                                     >
-                                        <i className="fa-brands fa-instagram"></i>
+                                        <img
+                                            src="/assets/img/footer/instagram.png"
+                                            alt="facebook"
+                                            className="w-8 4xl:w-10"
+                                        />
                                     </a>
                                 )}
+
                                 {Facebook && (
                                     <a
                                         href={Facebook.link}
+                                        aria-label="Facebook"
                                         target="_blank"
-                                        className="flex justify-center items-center"
                                     >
-                                        <i className="fa-brands fa-facebook"></i>
+                                        <img
+                                            src="/assets/img/footer/facebook.png"
+                                            alt="Facebook"
+                                            className="w-8 4xl:w-10"
+                                        />
+                                    </a>
+                                )}
+
+
+                                {WhatsApp && (
+                                    <a
+                                        href={WhatsApp.link}
+                                        aria-label="WhatsApp"
+                                        target="_blank"
+                                    >
+                                        <img
+                                            src="/assets/img/footer/whatsapp.png"
+                                            alt="WhatsApp"
+                                            className="w-8 4xl:w-10"
+                                        />
                                     </a>
                                 )}
 

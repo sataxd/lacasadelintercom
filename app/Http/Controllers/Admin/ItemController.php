@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\BasicController;
 use App\Http\Classes\dxResponse;
 use App\Models\Category;
+use App\Models\CoreValue;
 use App\Models\Item;
+use App\Models\Subcategory;
+use App\Models\Testimony;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Routing\ResponseFactory;
@@ -17,23 +20,28 @@ class ItemController extends BasicController
 {
     public $model = Item::class;
     public $reactView = 'Admin/Items';
-    public $imageFields = ['image', 'manual','banner'];
+    public $imageFields = ['image','banner'];
     public $prefix4filter = 'items';
 
     public function setReactViewProperties(Request $request)
     {
         $categories = Category::all();
+        $subcategories = Subcategory::all();
+        $tags = Testimony::all();
+        $brands = CoreValue::all();
 
         return [
             'categories' => $categories,
-
+            'subcategories' => $subcategories,
+            'tags' => $tags,
+            'brands' => $brands,
         ];
     }
 
     public function setPaginationInstance(string $model)
     {
         return $model::select(['items.*'])
-            ->with(['category', 'images'])
+            ->with(['category', 'subcategory', 'images', 'brand'])
             ->leftJoin('categories AS category', 'category.id', 'items.category_id');
     }
 
@@ -58,12 +66,25 @@ class ItemController extends BasicController
             // Si no hay pack_items, lo seteamos como array vacío
             $data['pack_items'] = [];
         }
+
+
+        if (isset($data['tags'])) {
+            if (is_string($data['tags'])) {
+                $decoded = json_decode($data['tags'], true);
+                $data['tags'] = $decoded ?: [];
+            } elseif (!is_array($data['tags'])) {
+                $data['tags'] = [];
+            }
+        } else {
+            $data['tags'] = [];
+        }
         
         return $data;
     }
 
     public function afterSave(Request $request, object $jpa)
-    {
+    {   
+        
         if ($request->hasFile('gallery')) {
             foreach ($request->file('gallery') as $file) {
                 if (!$file) continue;

@@ -22,6 +22,10 @@ const Generals = ({ generals }) => {
     phones: generals.find(x => x.correlative == 'phone_contact')?.description?.split(',')?.map(x => x.trim()) ?? [''],
     emails: generals.find(x => x.correlative == 'email_contact')?.description?.split(',')?.map(x => x.trim()) ?? [''],
     address: generals.find(x => x.correlative == 'address')?.description ?? '',
+    district: generals.find(x => x.correlative == 'district')?.description ?? '',
+    country: generals.find(x => x.correlative == 'country')?.description ?? '',
+    lat: generals.find(x => x.correlative == 'lat')?.description ?? '',
+    long: generals.find(x => x.correlative == 'long')?.description ?? '',
     openingHours: generals.find(x => x.correlative == 'opening_hours')?.description ?? '',
     supportPhone: generals.find(x => x.correlative == 'support_phone')?.description ?? '',
     supportEmail: generals.find(x => x.correlative == 'support_email')?.description ?? '',
@@ -88,6 +92,10 @@ const Generals = ({ generals }) => {
         { correlative: 'phone_contact', name: 'Teléfono de contacto', description: formData.phones.join(',') },
         { correlative: 'email_contact', name: 'Correo de contacto', description: formData.emails.join(',') },
         { correlative: 'address', name: 'Dirección', description: formData.address },
+        { correlative: 'district', name: 'Distrito', description: formData.district },
+        { correlative: 'country', name: 'País', description: formData.country },
+        { correlative: 'lat', name: 'Latitud', description: formData.lat },
+        { correlative: 'long', name: 'Longitud', description: formData.long },
         { correlative: 'opening_hours', name: 'Horarios de atención', description: formData.openingHours },
         { correlative: 'support_phone', name: 'Número de soporte', description: formData.supportPhone },
         { correlative: 'support_email', name: 'Correo de soporte', description: formData.supportEmail },
@@ -123,7 +131,7 @@ const Generals = ({ generals }) => {
     <div className="card">
       <form className='card-body' onSubmit={handleSubmit}>
         <ul className="nav nav-tabs" id="contactTabs" role="tablist">
-          <li className="nav-item" role="presentation" hidden> {/* Quitar el hidden para que se muestren las opciones */}
+          <li className="nav-item" role="presentation"> {/* Quitar el hidden para que se muestren las opciones */}
             <button className={`nav-link ${activeTab === 'contact' ? 'active' : ''}`} onClick={() => setActiveTab('contact')} type="button" role="tab">
               Información de Contacto
             </button>
@@ -143,7 +151,7 @@ const Generals = ({ generals }) => {
               Píxeles de Seguimiento
             </button>
           </li>
-          <li className="nav-item" role="presentation" hidden> {/* Quitar el hidden para que se muestren las opciones */}
+          <li className="nav-item" role="presentation" hidden> 
             <button className={`nav-link ${activeTab === 'location' ? 'active' : ''}`} onClick={() => setActiveTab('location')} type="button" role="tab">
               Ubicación
             </button>
@@ -151,90 +159,142 @@ const Generals = ({ generals }) => {
         </ul>
 
         <div className="tab-content" id="contactTabsContent">
+          
           <div className={`tab-pane fade ${activeTab === 'contact' ? 'show active' : ''}`} role="tabpanel">
-            <div className="row">
-              <div className="col-md-6">
-                {formData.phones.map((phone, index) => (
-                  <div key={`phone-${index}`} className="mb-3">
-                    <label htmlFor={`phone-${index}`} className="form-label">Teléfono {index + 1}</label>
-                    <div className="input-group">
-                      <input
-                        type="tel"
-                        className="form-control"
-                        id={`phone-${index}`}
-                        value={phone}
-                        onChange={(e) => handleInputChange(e, index, 'phones')}
-                        required
-                      />
-                      <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveField(index, 'phones')}>
-                        <i className='fa fa-trash'></i>
-                      </button>
+            
+              <div className="row" hidden>
+                <div className="col-md-6" >
+                  {formData.phones.map((phone, index) => (
+                    <div key={`phone-${index}`} className="mb-3">
+                      <label htmlFor={`phone-${index}`} className="form-label">Teléfono {index + 1}</label>
+                      <div className="input-group">
+                        <input
+                          type="tel"
+                          className="form-control"
+                          id={`phone-${index}`}
+                          value={phone}
+                          onChange={(e) => handleInputChange(e, index, 'phones')}
+                        />
+                        <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveField(index, 'phones')}>
+                          <i className='fa fa-trash'></i>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
-                <button type="button" className="btn btn-outline-primary" onClick={() => handleAddField('phones')}>Agregar teléfono</button>
-              </div>
-              <div className="col-md-6">
-                {formData.emails.map((email, index) => (
-                  <div key={`email-${index}`} className="mb-3">
-                    <label htmlFor={`email-${index}`} className="form-label">Correo {index + 1}</label>
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id={`email-${index}`}
-                        value={email}
-                        onChange={(e) => handleInputChange(e, index, 'emails')}
-                        required
-                      />
-                      <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveField(index, 'emails')}>
-                        <i className='fa fa-trash'></i>
-                      </button>
+                  ))}
+                  <button type="button" className="btn btn-outline-primary" onClick={() => handleAddField('phones')}>Agregar teléfono</button>
+                </div>
+                <div className="col-md-6">
+                  {formData.emails.map((email, index) => (
+                    <div key={`email-${index}`} className="mb-3">
+                      <label htmlFor={`email-${index}`} className="form-label">Correo {index + 1}</label>
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id={`email-${index}`}
+                          value={email}
+                          onChange={(e) => handleInputChange(e, index, 'emails')}
+                        />
+                        <button type="button" className="btn btn-outline-danger" onClick={() => handleRemoveField(index, 'emails')}>
+                          <i className='fa fa-trash'></i>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
-                <button type="button" className="btn btn-outline-primary" onClick={() => handleAddField('emails')}>Agregar correo</button>
+                  ))}
+                  <button type="button" className="btn btn-outline-primary" onClick={() => handleAddField('emails')}>Agregar correo</button>
+                </div>
               </div>
-            </div>
-            <div className="mb-3">
-              <label htmlFor="address" className="form-label">Dirección</label>
-              <textarea
-                className="form-control"
-                id="address"
-                value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                required
-              ></textarea>
-            </div>
-            <div className="mb-3">
-              <TextareaFormGroup label='Horarios de atencion' onChange={(e) => setFormData({ ...formData, openingHours: e.target.value })} value={formData.openingHours} required />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="supportPhone" className="form-label">Número de soporte</label>
-              <input
-                type="tel"
-                className="form-control"
-                id="supportPhone"
-                value={formData.supportPhone}
-                onChange={(e) => setFormData({ ...formData, supportPhone: e.target.value })}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="supportEmail" className="form-label">Correo de soporte</label>
-              <input
-                type="email"
-                className="form-control"
-                id="supportEmail"
-                value={formData.supportEmail}
-                onChange={(e) => setFormData({ ...formData, supportEmail: e.target.value })}
-                required
-              />
-            </div>
+
+              <div className="row">
+                <div className="mb-3 col-md-4">
+                  <label htmlFor="address" className="form-label">Dirección</label>
+                  <textarea
+                    className="form-control"
+                    id="address"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    required
+                  ></textarea>
+                </div>
+
+                <div className="mb-3 col-md-4">
+                  <label htmlFor="district" className="form-label">Distrito</label>
+                  <textarea
+                    className="form-control"
+                    id="district"
+                    value={formData.district}
+                    onChange={(e) => setFormData({ ...formData, district: e.target.value })}
+                  ></textarea>
+                </div>
+
+                <div className="mb-3 col-md-4">
+                  <label htmlFor="country" className="form-label">Pais</label>
+                  <textarea
+                    className="form-control"
+                    id="country"
+                    value={formData.country}
+                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                  ></textarea>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="mb-3 col-md-6">
+                  <label htmlFor="lat" className="form-label">Latitud</label>
+                  <textarea
+                    className="form-control"
+                    id="lat"
+                    value={formData.lat}
+                    onChange={(e) => setFormData({ ...formData, lat: e.target.value })}
+                    required
+                  ></textarea>
+                </div>
+
+                <div className="mb-3 col-md-6">
+                  <label htmlFor="long" className="form-label">Longitud</label>
+                  <textarea
+                    className="form-control"
+                    id="long"
+                    value={formData.long}
+                    onChange={(e) => setFormData({ ...formData, long: e.target.value })}
+                    required
+                  ></textarea>
+                </div>
+              </div>  
+
+              <div className="mb-3">
+                <TextareaFormGroup label='Horarios de atencion' onChange={(e) => setFormData({ ...formData, openingHours: e.target.value })} value={formData.openingHours} required />
+              </div>
+
+              <div className="mb-3">
+                <label htmlFor="supportPhone" className="form-label">Número de soporte</label>
+                <input
+                  type="tel"
+                  className="form-control"
+                  id="supportPhone"
+                  value={formData.supportPhone}
+                  onChange={(e) => setFormData({ ...formData, supportPhone: e.target.value })}
+                  required
+                />
+              </div>
+            
+
+              <div className="mb-3">
+                <label htmlFor="supportEmail" className="form-label">Correo de soporte</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="supportEmail"
+                  value={formData.supportEmail}
+                  onChange={(e) => setFormData({ ...formData, supportEmail: e.target.value })}
+                  required
+                />
+              </div>
+
           </div>
 
           <div className={`tab-pane fade ${activeTab === 'policies' ? 'show active' : ''}`} role="tabpanel">
-            <div className="mb-3" hidden>
+            <div className="mb-3">
               <QuillFormGroup label='Política de privacidad' value={formData.privacyPolicy} onChange={(value) => setFormData({ ...formData, privacyPolicy: value })} />
             </div>
             <div className="mb-3">

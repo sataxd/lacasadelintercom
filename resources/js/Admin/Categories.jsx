@@ -108,15 +108,15 @@ const Categories = () => {
             onClick: () => $(gridRef.current).dxDataGrid('instance').refresh()
           }
         });
-        container.unshift({
-          widget: 'dxButton', location: 'after',
-          options: {
-            icon: 'plus',
-            text: 'Nuevo registro',
-            hint: 'Nuevo registro',
-            onClick: () => onModalOpen()
-          }
-        });
+        // container.unshift({
+        //   widget: 'dxButton', location: 'after',
+        //   options: {
+        //     icon: 'plus',
+        //     text: 'Nuevo registro',
+        //     hint: 'Nuevo registro',
+        //     onClick: () => onModalOpen()
+        //   }
+        // });
       }}
       columns={[
         {
@@ -156,12 +156,12 @@ const Categories = () => {
               icon: 'fa fa-pen',
               onClick: () => onModalOpen(data)
             }))
-            container.append(DxButton({
-              className: 'btn btn-xs btn-soft-danger',
-              title: 'Eliminar',
-              icon: 'fa fa-trash',
-              onClick: () => onDeleteClicked(data.id)
-            }))
+            // container.append(DxButton({
+            //   className: 'btn btn-xs btn-soft-danger',
+            //   title: 'Eliminar',
+            //   icon: 'fa fa-trash',
+            //   onClick: () => onDeleteClicked(data.id)
+            // }))
           },
           allowFiltering: false,
           allowExporting: false

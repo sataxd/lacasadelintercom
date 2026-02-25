@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Route;
 // Admin
 use App\Http\Controllers\ItemVariantController;
 use App\Http\Controllers\Admin\AboutusController as AdminAboutusController;
+use App\Http\Controllers\Admin\ServicesController as AdminServicesController;
 use App\Http\Controllers\Admin\IndicatorController as AdminIndicatorController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Admin\SliderController as AdminSliderController;
 use App\Http\Controllers\Admin\TestimonyController as AdminTestimonyController;
 use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\SubcategoryController as AdminSubcategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\SocialController as AdminSocialController;
 use App\Http\Controllers\Admin\StrengthController as AdminStrengthController;
@@ -81,6 +83,7 @@ Route::get('/generals/get-socials', [GeneralController::class, 'getSocials']);
 Route::get('/generals/get-benefits', [GeneralController::class, 'getBenefits']);
 Route::get('/generals/get-aboutuses', [GeneralController::class, 'getAboutuses']);
 
+
 Route::get('/items/get-destacados', [ItemController::class, 'getDestacados']);
 Route::get('/items/get-testimonies', [TestimonyController::class, 'getTestimonies']);
 /*OTROS */
@@ -88,6 +91,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::get('/sliders/media/{uuid}', [AdminSliderController::class, 'media']);
 Route::get('/aboutus/media/{uuid}', [AdminAboutusController::class, 'media']);
+Route::get('/services/media/{uuid}', [AdminServicesController::class, 'media']);
 Route::get('/category/media/{uuid}', [AdminCategoryController::class, 'media']);
 Route::get('/testimonies/media/{uuid}', [AdminTestimonyController::class, 'media']);
 Route::get('/posts/media/{uuid}', [AdminPostController::class, 'media']);
@@ -99,7 +103,7 @@ Route::get('/instagram_post/media/{uuid}', [InstagramPostsController::class, 'me
 Route::get('/fragrances/media/{uuid}', [FragranceController::class, 'media']);
 Route::get('/ads/media/{uuid}', [AdController::class, 'media']);
 Route::get('/strength/media/{uuid}', [StrengthController::class, 'media']);
-Route::get('/core_value/media/{uuid}', [CoreValueController::class, 'media']);
+Route::get('/core_value/media/{uuid}', [AdminCoreValueController::class, 'media']);
 Route::get('/instagram_post/media/{uuid}', [InstagramPostsController::class, 'media']);
 
 Route::get('/mailing/media/{uuid}', [MailingController::class, 'media']);
@@ -247,6 +251,12 @@ Route::middleware('auth')->group(function () {
         Route::patch('/aboutus/{field}', [AdminAboutusController::class, 'boolean']);
         Route::delete('/aboutus/{id}', [AdminAboutusController::class, 'delete']);
 
+        Route::post('/services', [AdminServicesController::class, 'save']);
+        Route::post('/services/paginate', [AdminServicesController::class, 'paginate']);
+        Route::patch('/services/status', [AdminServicesController::class, 'status']);
+        Route::patch('/services/{field}', [AdminServicesController::class, 'boolean']);
+        Route::delete('/services/{id}', [AdminServicesController::class, 'delete']);
+
         Route::post('/indicators', [AdminIndicatorController::class, 'save']);
         Route::post('/indicators/paginate', [AdminIndicatorController::class, 'paginate']);
         Route::patch('/indicators/status', [AdminIndicatorController::class, 'status']);
@@ -270,6 +280,12 @@ Route::middleware('auth')->group(function () {
         Route::patch('/categories/status', [AdminCategoryController::class, 'status']);
         Route::patch('/categories/{field}', [AdminCategoryController::class, 'boolean']);
         Route::delete('/categories/{id}', [AdminCategoryController::class, 'delete']);
+
+        Route::post('/subcategories', [AdminSubcategoryController::class, 'save']);
+        Route::post('/subcategories/paginate', [AdminSubcategoryController::class, 'paginate']);
+        Route::patch('/subcategories/status', [AdminSubcategoryController::class, 'status']);
+        Route::patch('/subcategories/{field}', [AdminSubcategoryController::class, 'boolean']);
+        Route::delete('/subcategories/{id}', [AdminSubcategoryController::class, 'delete']);
 
         Route::post('/faqs', [AdminFaqController::class, 'save']);
         Route::post('/faqs/paginate', [AdminFaqController::class, 'paginate']);

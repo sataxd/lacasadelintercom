@@ -1,6 +1,6 @@
 import React from "react"
 
-const TextareaFormGroup = ({ col, label, eRef, placeholder, specification, required = false, rows = 3, value, onChange = () => {} }) => {
+const TextareaFormGroup = ({ col, label, eRef, placeholder, specification, required = false, rows = 3, value, onChange = () => {}, disabled = false }) => {
   return <div className={`form-group ${col} mb-2`}>
     <label htmlFor='' className="form-label mb-1">
       {
@@ -14,7 +14,7 @@ const TextareaFormGroup = ({ col, label, eRef, placeholder, specification, requi
         </>
       }
     </label>
-    <textarea ref={eRef} className='form-control' placeholder={placeholder} required={required} rows={rows} defaultValue={value} style={{ minHeight: (rows * 27), fieldSizing: 'content' }} onChange={onChange} />
+    <textarea ref={eRef} className='form-control' disabled={disabled} placeholder={placeholder} required={required} rows={rows} defaultValue={value} style={{ minHeight: (rows * 27), fieldSizing: 'content' }} onChange={onChange} />
   </div>
 }
 

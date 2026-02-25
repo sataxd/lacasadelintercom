@@ -1,4 +1,5 @@
 import React from "react";
+import HtmlContent from "../../../Utils/HtmlContent";
 
 const ProductCard = ({ product, visible = true, onClick, isDetailView }) => {
     
@@ -48,15 +49,21 @@ const ProductCard = ({ product, visible = true, onClick, isDetailView }) => {
                                     {product.name}
                                 </h3>
 
-                                <p className={`text-black font-dmsans text-wrap tracking-normal   ${isDetailView ? 'block text-sm lg:text-base 4xl:text-xl' : 'block md:hidden text-sm 4xl:text-lg'}`}>
+                                {/* <p className={`text-black font-dmsans text-wrap tracking-normal   ${isDetailView ? 'block text-sm lg:text-base 4xl:text-xl' : 'block md:hidden text-sm 4xl:text-lg'}`}>
                                     {product.summary}
                                 </p>
 
-                                <ul className={`block w-full list-disc pl-4 text-start text-black font-normal  font-dmsans text-wrap ${isDetailView ? 'space-y-2 text-sm lg:text-base 4xl:text-xl' : 'text-sm lg:text-base 4xl:text-lg md:line-clamp-4'}`}>
+                                <ul >
                                     <li>Característica primero primero primero primeroprimeroprimero primero</li>
                                     <li>Característica segundo primero primero primeroprim</li>
                                     <li>Característica tercero primero primero primeroprim</li>
-                                </ul>
+                                </ul> */}
+
+                                <HtmlContent
+                                    className={`block w-full list-disc text-start text-black font-normal  font-dmsans text-wrap ${isDetailView ? 'space-y-1 text-sm lg:text-base 4xl:text-xl' : 'text-sm lg:text-base 4xl:text-lg md:line-clamp-4'}`}
+                                    html={product?.description}
+                                    htmlcontent={'html-content-second'}
+                                />
                             
                         </div>
                         

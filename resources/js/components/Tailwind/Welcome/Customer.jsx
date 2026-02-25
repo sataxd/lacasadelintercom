@@ -4,7 +4,7 @@ import Marquesina from "./Marquesina";
 
 const generalRest = new GeneralRest();
 
-const Customer = () => {
+const Customer = ({brands, apiFolder}) => {
     const [Benefits, setBenefits] = useState(null);
     const [Toallas, setToallas] = useState(null);
     const [Soles, setSoles] = useState(null);
@@ -30,7 +30,7 @@ const Customer = () => {
     return (
 
         <div className="relative overflow-hidden">
-            <Marquesina />
+            <Marquesina brands={brands} apiFolder={apiFolder} />
         </div>
     );
 };

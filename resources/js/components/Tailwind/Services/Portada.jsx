@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import GeneralRest from '../../../actions/GeneralRest';
+import HtmlContent from "../../../Utils/HtmlContent";
+
+const generalRest = new GeneralRest();
 
 const Portada = ({ textoshome }) => {
   
@@ -7,27 +11,57 @@ const Portada = ({ textoshome }) => {
     e.currentTarget.onerror = null; 
   };
 
+  const [aboutuses, setAboutuses] = useState(null);
+                    
+    useEffect(() => {
+        const fetchAboutuses = async () => {
+            try {
+                const data = await generalRest.getAboutuses();
+                setAboutuses(data);
+            } catch (error) {
+                console.error("Error fetching about:", error);
+            }
+        };
+  
+        fetchAboutuses();
+    }, []);
+    
+    const aboutusData = aboutuses?.aboutus || [];
+  
+    const seventeenSection = aboutusData.find(
+      (item) => item.correlative === "products-intercomunicadores-section"
+    );
+
+    const beneficio1 = aboutusData.find(
+      (item) => item.correlative === "products-intercomunicadoressecond-1benefit"
+    );
+
+    const beneficio2 = aboutusData.find(
+      (item) => item.correlative === "products-intercomunicadoressecond-2benefit"
+    );
+
+    const beneficio3 = aboutusData.find(
+      (item) => item.correlative === "products-intercomunicadoressecond-3benefit"
+    );
+
   const benefits = [
   {
-    id: "uid_1", // El ID interno puede ser cualquiera
-    title: "Reparaciones",
-    subtitle: "Diagnóstico de Precisión",
-    description: "Restauramos la operatividad de sus equipos con repuestos originales y protocolos técnicos avanzados.",
-    image: "/assets/img/crecimiento.png"
+    id: beneficio1?.id,
+    title: beneficio1?.name,
+    description: beneficio1?.description,
+    image: beneficio1?.image,
   },
   {
-    id: "uid_2",
-    title: "Mantenimiento",
-    subtitle: "Rendimiento Continuo",
-    description: "Programas preventivos diseñados para mitigar riesgos operativos y extender la vida útil de su infraestructura.",
-    image: "/assets/img/crecimiento.png"
+    id: beneficio2?.id,
+    title: beneficio2?.name,
+    description: beneficio2?.description,
+    image: beneficio2?.image,
   },
   {
-    id: "uid_3",
-    title: "Instalaciones",
-    subtitle: "Ingeniería en Seguridad",
-    description: "Despliegue estratégico de sistemas de intercomunicación y cercos eléctricos bajo normativas internacionales.",
-    image: "/assets/img/crecimiento.png"
+    id: beneficio3?.id,
+    title: beneficio3?.name,
+    description: beneficio3?.description,
+    image: beneficio3?.image,
   },
 ];
 
@@ -42,22 +76,23 @@ const Portada = ({ textoshome }) => {
             <div className="flex flex-col p-2 justify-center items-start gap-5">
               
                 <h2 className="font-sora text-black text-3xl sm:text-4xl 2xl:text-5xl 4xl:text-6xl font-semibold tracking-tight !leading-tight">
-                    Intercomunicadores
+                    {seventeenSection?.name}
                 </h2>
               
                 <div className="flex flex-row mb-2">
                     <a href="/"
                         className="group bg-black text-white font-dmsans border-[1.5px] border-white border-opacity-50 flex flex-row items-center px-3 md:px-5 py-1.5 text-base 2xl:text-lg 4xl:text-xl rounded-xl font-medium">
-                        Ver todos los productos
+                        {seventeenSection?.button_text}
                         <div className="rounded-full flex flex-row justify-center items-center ml-2">
                             <i className="mdi mdi-arrow-up-circle text-2xl text-white group-hover:rotate-180 transition-all duration-500"></i>
                         </div>
                     </a>
                 </div>
               
-                <h2 className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light">
-                    Los sistemas de intercomunicadores permiten identificar a las personas desde el momento en que habla con ellos a través del intercomunicador o portero, de la misma forma que usted se comunica por un teléfono convencional o monitor.
-                </h2>
+                <HtmlContent
+                    className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light"
+                    html={seventeenSection?.description}
+                />
 
             </div>
           </div>
@@ -66,8 +101,8 @@ const Portada = ({ textoshome }) => {
           <div className="col-span-2 xl:col-span-3 flex flex-col justify-end items-center">
             <img 
               className="h-96 md:h-[550px] w-full object-contain object-center" 
-              src="/assets/img/intercomunicador_h.png" 
-              alt="Estadística Helado"
+              src={`/api/aboutus/media/${seventeenSection?.image}`} 
+              alt={seventeenSection?.name}
               onError={handleImageError} 
             />
           </div>
@@ -80,16 +115,20 @@ const Portada = ({ textoshome }) => {
                   <div className="flex flex-col gap-1.5 pl-2 max-w-lg text-left xl:text-right justify-center items-start xl:items-end mx-auto">
                     
                     <div className="w-14 h-14 4xl:w-16 4xl:h-16 rounded-full bg-[#030e16] flex flex-col justify-center items-center">
-                        <img className="w-8 4xl:w-10" src={beneficio?.image}></img>
+                        <img className="w-8 4xl:w-10" 
+                        src={`/api/aboutus/media/${beneficio?.image}`} 
+                        alt={beneficio?.name}
+                       ></img>
                     </div>
                     
                     <h2 className="font-sora text-black text-xl 2xl:text-2xl 4xl:text-3xl font-semibold tracking-tight !leading-tight">
-                      {beneficio?.title ?? "Ingrese texto"}
+                      {beneficio?.title}
                     </h2>
 
-                    <p className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light">
-                      {beneficio?.description ?? "Ingrese texto"}
-                    </p>
+                    <HtmlContent
+                        className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light"
+                        html={beneficio?.description}
+                    />
 
                   </div>
                 );

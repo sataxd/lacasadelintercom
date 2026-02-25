@@ -60,45 +60,45 @@ class TestimonyController extends BasicController
         return null;
     }
 
-    public function save(Request $request): HttpResponse|ResponseFactory
-    {
-        dump($request->all());
-        $response = new Response();
-        try {
+    // public function save(Request $request): HttpResponse|ResponseFactory
+    // {
+    //     dump($request->all());
+    //     $response = new Response();
+    //     try {
 
-            $data = $request->validate([
-                'name' => 'required|string|max:255',
-                'correlative' => 'required|string',
-                'description' => 'required|url',
-            ]);
+    //         $data = $request->validate([
+    //             'name' => 'required|string|max:255',
+    //             'correlative' => 'required|string',
+    //             'description' => 'required|url',
+    //         ]);
 
-            // Extraer la UID de YouTube
-            $uuid = $this->ObtenerUuidYoutube($request->description);
+    //         // Extraer la UID de YouTube
+    //         $uuid = $this->ObtenerUuidYoutube($request->description);
 
-            // Validar que se haya obtenido un ID válido
-            if (!$uuid) {
-                $response->status = 400;
-                $response->message = "La URL de YouTube no es válida y no se pudo extraer el link.";
-                return response(
-                    $response->toArray(),
-                    $response->status
-                );
-            }
-            // Agregar el ID de YouTube al array de datos
-            $data['description'] = $uuid;
-            // Guardar los datos en la base de datos
-            Testimony::create($data);
-            $response->status = 200;
-            $response->message = 'Operacion correcta';
-        } catch (\Throwable $th) {
-            dump($th->getMessage());
-            $response->status = 400;
-            $response->message = $th->getMessage();
-        } finally {
-            return response(
-                $response->toArray(),
-                $response->status
-            );
-        }
-    }
+    //         // Validar que se haya obtenido un ID válido
+    //         if (!$uuid) {
+    //             $response->status = 400;
+    //             $response->message = "La URL de YouTube no es válida y no se pudo extraer el link.";
+    //             return response(
+    //                 $response->toArray(),
+    //                 $response->status
+    //             );
+    //         }
+    //         // Agregar el ID de YouTube al array de datos
+    //         $data['description'] = $uuid;
+    //         // Guardar los datos en la base de datos
+    //         Testimony::create($data);
+    //         $response->status = 200;
+    //         $response->message = 'Operacion correcta';
+    //     } catch (\Throwable $th) {
+    //         dump($th->getMessage());
+    //         $response->status = 400;
+    //         $response->message = $th->getMessage();
+    //     } finally {
+    //         return response(
+    //             $response->toArray(),
+    //             $response->status
+    //         );
+    //     }
+    // }
 }

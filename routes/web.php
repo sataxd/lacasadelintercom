@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 
 // Admin
 use App\Http\Controllers\Admin\AboutusController as AdminAboutusController;
+use App\Http\Controllers\Admin\ServicesController as AdminServicesController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\IndicatorController as AdminIndicatorController;
 use App\Http\Controllers\Admin\SliderController as AdminSliderController;
 use App\Http\Controllers\Admin\TestimonyController as AdminTestimonyController;
 use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\SubcategoryController as AdminSubcategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\SocialController as AdminSocialController;
 use App\Http\Controllers\Admin\StrengthController as AdminStrengthController;
@@ -52,7 +54,7 @@ use App\Http\Controllers\LoginVuaController;
 use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PopupController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SupplyController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestResultController;
@@ -77,7 +79,7 @@ Route::get('/product/{slug}', [DetailController::class, 'reactView'])->name('Det
 Route::get('/blog', [BlogController::class, 'reactView'])->name('Blog.jsx');
 Route::get('/blog/{articleId}', [ArticleController::class, 'reactView'])->name('BlogArticle.jsx');
 Route::get('/contacto', [ContactController::class, 'reactView'])->name('Contact.jsx');
-Route::get('/servicio-tecnico', [ServiceController::class, 'reactView'])->name('Services.jsx');
+Route::get('/servicio-tecnico', [ServicesController::class, 'reactView'])->name('Services.jsx');
 Route::get('/intercomunicadores', [IntercomunicatorController::class, 'reactView'])->name('Intercomunicadores.jsx');
 Route::get('/videoporteros', [VideoporterosController::class, 'reactView'])->name('Videoporteros.jsx');
 Route::get('/alarma-contra-incendios', [AlarmaIncendioController::class, 'reactView'])->name('AlarmaIncendios.jsx');
@@ -130,10 +132,12 @@ Route::middleware(['can:Admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/messages', [AdminSubscriptionController::class, 'reactView'])->name('Admin/Messages.jsx');
     Route::get('/subscriptions', [AdminSubscriptionController::class, 'reactView'])->name('Admin/Subscriptions.jsx');
     Route::get('/about', [AdminAboutusController::class, 'reactView'])->name('Admin/About.jsx');
+    Route::get('/services', [AdminServicesController::class, 'reactView'])->name('Admin/Services.jsx');
     Route::get('/indicators', [AdminIndicatorController::class, 'reactView'])->name('Admin/Indicators.jsx');
     Route::get('/sliders', [AdminSliderController::class, 'reactView'])->name('Admin/Sliders.jsx');
     Route::get('/testimonies', [AdminTestimonyController::class, 'reactView'])->name('Admin/Testimonies.jsx');
     Route::get('/categories', [AdminCategoryController::class, 'reactView'])->name('Admin/Categories.jsx');
+    Route::get('/subcategories', [AdminSubcategoryController::class, 'reactView'])->name('Admin/Subcategories.jsx');
     Route::get('/tags', [AdminTagController::class, 'reactView'])->name('Admin/Tags.jsx');
     Route::get('/faqs', [AdminFaqController::class, 'reactView'])->name('Admin/Faqs.jsx');
     Route::get('/socials', [AdminSocialController::class, 'reactView'])->name('Admin/Socials.jsx');

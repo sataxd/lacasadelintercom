@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { OrbitingCircles } from "../Components/OrbitingCircles";
 
-export function OrbitingCirclesDemo() {
+export function OrbitingCirclesDemo({strengthin, strengthout}) {
   
   const [radius, setRadius] = useState({ outer: 200, inner: 100 });
 
@@ -24,7 +24,6 @@ export function OrbitingCirclesDemo() {
     
     handleResize();
     window.addEventListener("resize", handleResize);
-    
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -33,20 +32,26 @@ export function OrbitingCirclesDemo() {
       
       {/* Círculo Exterior */}
       <OrbitingCircles duration={20} radius={radius.outer}>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Fabricas</h2>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Minería</h2>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Colegios</h2>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Hoteles</h2>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Residencias</h2>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Edificios</h2>
+        {strengthout && strengthout.map((item) => (
+          <h2 
+            key={item?.id || item?.name} 
+            className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold whitespace-nowrap"
+          >
+            {item?.name}
+          </h2>
+        ))}
       </OrbitingCircles>
 
       {/* Círculo Interior */}
       <OrbitingCircles radius={radius.inner} reverse speed={1}>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Gobierno</h2>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Empresas</h2>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Super</h2>
-        <h2 className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold">Oficinas</h2>
+        {strengthin && strengthin.map((item) => (
+          <h2 
+            key={item?.id || item?.name} 
+            className="text-center font-sora text-black text-xs 2xs:text-sm md:text-base 4xl:text-lg font-semibold whitespace-nowrap"
+          >
+            {item?.name}
+          </h2>
+        ))}
       </OrbitingCircles>
     </div>
   );

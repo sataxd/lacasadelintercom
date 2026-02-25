@@ -26,6 +26,8 @@ class Item extends Model
         'banner',
         'image',
         'category_id',
+        'subcategory_id',
+        'marca_id',
         'is_new',
         'offering',
         'recommended',
@@ -37,11 +39,13 @@ class Item extends Model
         'score',
         'min_stock',
         'manual',
-        'pack_items'
+        'pack_items',
+        'tags'
     ];
 
     protected $casts = [
         'pack_items' => 'array',
+        'tags' => 'array',
     ];
     /*
      
@@ -50,6 +54,16 @@ class Item extends Model
     public function category()
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(CoreValue::class, 'marca_id', 'id');
     }
 
     // Un producto tiene muchos colores

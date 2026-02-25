@@ -13,26 +13,47 @@ class StrengthSeeder extends Seeder
      */
     public function run(): void
     {
+
         $strengths = [
             [
-                'name' => 'Compromiso con el bienestar',
-                'description' => 'Nos enfocamos en promover hábitos que mejoren la calidad de vida, motivando a cada persona a cuidar de su salud física y mental.'
+                'name' => 'Minería',
+                'description' => 'out'
             ],
             [
-                'name' => 'Enfoque integral',
-                'description' => 'Ofrecemos una metodología que abarca el desarrollo personal, profesional y emocional para lograr una transformación completa.'
+                'name' => 'Fabricas',
+                'description' => 'out'
             ],
             [
-                'name' => 'Crecimiento sostenido',
-                'description' => 'Promovemos el crecimiento a través de cambios progresivos y sostenibles, generando resultados que perduran en el tiempo.'
+                'name' => 'Colegios',
+                'description' => 'out'
             ],
             [
-                'name' => 'Resiliencia y superación',
-                'description' => 'Enseñamos a enfrentar y superar los desafíos, desarrollando una mentalidad fuerte y resiliente ante cualquier adversidad.'
+                'name' => 'Hoteles',
+                'description' => 'out'
             ],
             [
-                'name' => 'Inspiración constante',
-                'description' => 'Motivamos a nuestros estudiantes a mantenerse inspirados y enfocados en sus metas, creando un ambiente de constante superación.'
+                'name' => 'Residencias',
+                'description' => 'out'
+            ],
+            [
+                'name' => 'Edificios',
+                'description' => 'out'
+            ],
+            [
+                'name' => 'Gobierno',
+                'description' => 'in'
+            ],
+            [
+                'name' => 'Empresas',
+                'description' => 'in'
+            ],
+            [
+                'name' => 'Mercados',
+                'description' => 'in'
+            ],
+            [
+                'name' => 'Oficinas',
+                'description' => 'in'
             ]
         ];
 

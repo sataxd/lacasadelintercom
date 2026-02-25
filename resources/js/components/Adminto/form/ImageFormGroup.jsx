@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react"
 
-const ImageFormGroup = ({ id, col, label, eRef, required = false, onChange = () => { }, aspect = '21/9', fit = 'cover', onError = '/api/cover/thumbnail/null'}) => {
+const ImageFormGroup = ({ id, col, label, eRef, required = false, onChange = () => { }, aspect = '21/9', fit = 'cover', onError = '/api/cover/thumbnail/null', disabled=false}) => {
 
   if (!id) id = `ck-${crypto.randomUUID()}`
   if (!eRef) eRef = useRef()
@@ -32,7 +32,7 @@ const ImageFormGroup = ({ id, col, label, eRef, required = false, onChange = () 
         objectPosition: 'center'
       }} />
     </label>
-    <input ref={eRef} id={id} type="file" src="" alt="" hidden accept="image/*" onChange={onImageChange} />
+    <input disabled={disabled} ref={eRef} id={id} type="file" src="" alt="" hidden accept="image/*" onChange={onImageChange} />
   </div>
 }
 

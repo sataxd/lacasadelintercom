@@ -230,7 +230,7 @@ const About = () => {
             col="col-12"
             value={descriptionfinal}
             onChange={(e) => setDescription(e.target.value)}
-            />
+          />
 
           <ImageFormGroup
                 eRef={imageRef}

@@ -34,7 +34,7 @@ const CoreValues = () => {
 
         idRef.current.value = data?.id ?? "";
         nameRef.current.value = data?.name ?? "";
-        imageRef.image.src = `/api/strength/media/${data?.image}`;
+        imageRef.image.src = `/api/core_value/media/${data?.image}`;
         imageRef.current.value = null;
         descriptionRef.current.value = data?.description ?? "";
 
@@ -94,7 +94,7 @@ const CoreValues = () => {
         <>
             <Table
                 gridRef={gridRef}
-                title="Valores"
+                title="Marcas"
                 rest={coreValuesRest}
                 toolBar={(container) => {
                     container.unshift({
@@ -135,7 +135,7 @@ const CoreValues = () => {
                             ReactAppend(
                                 container,
                                 <img
-                                    src={`/api/strength/media/${data.image}`}
+                                    src={`/api/core_value/media/${data.image}`}
                                     style={{
                                         width: "50px",
                                         aspectRatio: 1,
@@ -149,7 +149,7 @@ const CoreValues = () => {
                     },
                     {
                         dataField: "name",
-                        caption: "Fortaleza",
+                        caption: "Marca",
                         width: "30%",
                     },
 
@@ -158,7 +158,7 @@ const CoreValues = () => {
                         caption: "Descripción",
                         width: "50%",
                     },
-                    /* {
+                    {
                         dataField: "visible",
                         caption: "Visible",
                         dataType: "boolean",
@@ -177,7 +177,7 @@ const CoreValues = () => {
                                 />
                             );
                         },
-                    },*/
+                    },
                     {
                         caption: "Acciones",
                         cellTemplate: (container, { data }) => {
@@ -190,14 +190,14 @@ const CoreValues = () => {
                                     onClick: () => onModalOpen(data),
                                 })
                             );
-                            /* container.append(
+                           container.append(
                                 DxButton({
                                     className: "btn btn-xs btn-soft-danger",
                                     title: "Eliminar",
                                     icon: "fa fa-trash",
                                     onClick: () => onDeleteClicked(data.id),
                                 })
-                            );*/
+                            );
                         },
                         allowFiltering: false,
                         allowExporting: false,

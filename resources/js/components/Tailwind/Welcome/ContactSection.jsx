@@ -1,33 +1,51 @@
 import { useEffect, useState, useRef } from "react";
 import GeneralRest from "../../../actions/GeneralRest";
 import ContactForm from "../../Contact/ContactForm";
+import HtmlContent from "../../../Utils/HtmlContent";
 
 const generalRest = new GeneralRest();
 
 const ContactSection = ({tieneMargen = false}) => {
-    const [Benefits, setBenefits] = useState(null);
-    const [Toallas, setToallas] = useState(null);
-    const [Soles, setSoles] = useState(null);
-    
-    const [activeImage, setActiveImage] = useState(1);
-    const handleToggleImage = () => {
-        setActiveImage(prev => prev === 1 ? 2 : 1);
-    };
-
+   
     const bgVariable = tieneMargen ? "mt-[70px]" : "mt-0";
 
+    const [aboutuses, setAboutuses] = useState(null);
+                
     useEffect(() => {
-        // ... (Tu lógica de fetch se mantiene igual)
-        const fetchBenefits = async () => {
+        const fetchAboutuses = async () => {
             try {
-                const data = await generalRest.getBenefits();
-                setBenefits(data);
+                const data = await generalRest.getAboutuses();
+                setAboutuses(data);
             } catch (error) {
-                console.error("Error fetching benefits:", error);
+                console.error("Error fetching about:", error);
             }
         };
-        fetchBenefits();
+
+        fetchAboutuses();
     }, []);
+
+    const aboutusData = aboutuses?.aboutus || [];
+    const generalsData = aboutuses?.generals || [];
+
+    const tenSection = aboutusData.find(
+        (item) => item.correlative === "home-contact-section"
+    );
+
+    const elevenSection = generalsData.find(
+        (item) => item.correlative === "email_contact"
+    );
+
+    const twuelveSection = generalsData.find(
+        (item) => item.correlative === "phone_contact"
+    );
+
+    const thirtenSection = generalsData.find(
+        (item) => item.correlative === "address"
+    );
+
+    const fourteenSection = generalsData.find(
+        (item) => item.correlative === "district"
+    );
     
     return (
 
@@ -38,11 +56,12 @@ const ContactSection = ({tieneMargen = false}) => {
                         <div className="w-full xl:w-1/2 flex flex-col gap-2 justify-center items-start">
                             
                             <h3 className="font-sora text-white text-3xl sm:text-4xl 2xl:text-4xl 4xl:text-5xl font-semibold tracking-tight !leading-tight mb-3">
-                                Ponte en contacto
+                                {tenSection?.name}
                             </h3>
-                            <p className="font-dmsans text-white text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light">
-                                Enviando un mensaje al correo comunicaciones.compras@gmail.com o completar el formulario de contacto en nuestro sitio web. También puede encontrarnos en las redes sociales, donde compartimos noticias y actualizaciones de la empresa.
-                            </p>
+                            <HtmlContent
+                                className="font-dmsans text-white text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light"
+                                html={tenSection?.description}
+                            />
                             <div className="flex flex-col gap-3 w-full max-w-md my-3">
                                 <div className="flex flex-row gap-3 border border-gray-100 border-opacity-20 rounded-2xl p-3 bg-gray-900 bg-opacity-10 group">
                                     <div className="flex flex-col justify-center items-center">
@@ -52,8 +71,8 @@ const ContactSection = ({tieneMargen = false}) => {
                                     </div>
                                     <div className="flex flex-row justify-between w-full">
                                         <div className="flex flex-col">
-                                            <h2 className="font-sora font-medium text-white text-sm 2xl:text-base">Correo Electronico</h2>
-                                            <p className="font-dmsans text-white text-sm 2xl:text-base">diego.martinez.r@tecsup.edu.pe</p>
+                                            <h2 className="font-sora font-medium text-white text-sm 2xl:text-base">Correo Electrónico</h2>
+                                            <p className="font-dmsans text-white text-sm 2xl:text-base">{elevenSection?.description}</p>
                                         </div>
                                         <div className="flex flex-row justify-center items-center">
                                             <div className="rounded-full w-9 h-9 flex flex-row justify-center items-center bg-gray-300 bg-opacity-10">
@@ -72,7 +91,7 @@ const ContactSection = ({tieneMargen = false}) => {
                                     <div className="flex flex-row justify-between w-full">
                                         <div className="flex flex-col">
                                             <h2 className="font-sora font-medium text-white text-sm 2xl:text-base">Teléfono móvil</h2>
-                                            <p className="font-dmsans text-white text-sm 2xl:text-base">+51 123456789</p>
+                                            <p className="font-dmsans text-white text-sm 2xl:text-base">{twuelveSection?.description}</p>
                                         </div>
                                         <div className="flex flex-row justify-center items-center">
                                             <div className="rounded-full w-9 h-9 flex flex-row justify-center items-center bg-gray-300 bg-opacity-10">
@@ -91,7 +110,7 @@ const ContactSection = ({tieneMargen = false}) => {
                                     <div className="flex flex-row justify-between w-full">
                                         <div className="flex flex-col">
                                             <h2 className="font-sora font-medium text-white text-sm 2xl:text-base">Dirección</h2>
-                                            <p className="font-dmsans text-white text-sm 2xl:text-base">C. Morelli 341 - San Borja, Lima</p>
+                                            <p className="font-dmsans text-white text-sm 2xl:text-base">{thirtenSection?.description} - {fourteenSection?.description}</p>
                                         </div>
                                         <div className="flex flex-row justify-center items-center">
                                             <div className="rounded-full w-9 h-9 flex flex-row justify-center items-center bg-gray-300 bg-opacity-10">
@@ -104,7 +123,7 @@ const ContactSection = ({tieneMargen = false}) => {
                             
                         </div>
                         <div className="w-full xl:w-1/2 flex flex-col justify-center items-center">
-                            <ContactForm />
+                            <ContactForm title={tenSection?.subtitle} button={tenSection?.button_text} />
                         </div>
                     </div>
             </div>

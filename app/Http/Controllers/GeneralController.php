@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Classes\dxResponse;
 use App\Models\Aboutus;
+use App\Models\Category;
 use App\Models\dxDataGrid;
 use App\Models\General;
 use App\Models\Indicator;
@@ -35,8 +36,7 @@ class GeneralController extends BasicController
     {
         $response = new Response();
         try {
-            $data = Social::all();
-            // dump($data);
+            $data = Social::where('status',true)->where('visible',true)->get();
             $response->data = $data;
             $response->status = 200;
             $response->message = 'Operacion correcta';
@@ -95,4 +95,5 @@ class GeneralController extends BasicController
             );
         }
     }
+    
 }

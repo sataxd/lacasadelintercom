@@ -21,7 +21,7 @@ const Testimonies = ({}) => {
     // Form elements ref
     const idRef = useRef();
     const nameRef = useRef();
-    const correlativeRef = useRef();
+    // const correlativeRef = useRef();
     const descriptionRef = useRef();
 
     const [isEditing, setIsEditing] = useState(false);
@@ -32,7 +32,7 @@ const Testimonies = ({}) => {
 
         idRef.current.value = data?.id ?? "";
         nameRef.current.value = data?.name ?? "";
-        correlativeRef.current.value = data?.correlative ?? "";
+        // correlativeRef.current.value = data?.correlative ?? "";
         descriptionRef.current.value = data?.description ?? "";
 
         $(modalRef.current).modal("show");
@@ -44,7 +44,7 @@ const Testimonies = ({}) => {
         const request = {
             id: idRef.current.value || undefined,
             name: nameRef.current.value,
-            correlative: correlativeRef.current.value,
+            // correlative: correlativeRef.current.value,
             description: descriptionRef.current.value,
         };
 
@@ -84,7 +84,7 @@ const Testimonies = ({}) => {
         <>
             <Table
                 gridRef={gridRef}
-                title="Testimonios"
+                title="Etiquetas"
                 rest={testimoniesRest}
                 toolBar={(container) => {
                     container.unshift({
@@ -104,8 +104,8 @@ const Testimonies = ({}) => {
                         location: "after",
                         options: {
                             icon: "plus",
-                            text: "Nuevo testimonio",
-                            hint: "Nuevo testimonio",
+                            text: "Nueva Etiqueta",
+                            hint: "Nueva Etiqueta",
                             onClick: () => onModalOpen(),
                         },
                     });
@@ -118,29 +118,30 @@ const Testimonies = ({}) => {
                     },
                     {
                         dataField: "name",
-                        caption: "Autor",
-                        width: "100px",
+                        caption: "Etiqueta",
+                       
                         cellTemplate: (container, { data }) => {
                             ReactAppend(
                                 container,
                                 <p className="mb-0" style={{ width: "100%" }}>
                                     <b className="d-block">{data.name}</b>
-                                    <small className="text-nowrap text-muted truncate">
+                                    {/* <small className="text-nowrap text-muted truncate">
                                         @{data.correlative}
-                                    </small>
+                                    </small> */}
                                 </p>
                             );
                         },
                     },
-                    {
-                        dataField: "description",
-                        caption: "Youtube",
-                        width: "50%",
-                    },
+                    // {
+                    //     dataField: "description",
+                    //     caption: "Youtube",
+                    //     width: "50%",
+                    // },
                     {
                         dataField: "visible",
                         caption: "Visible",
                         dataType: "boolean",
+                        width: "100px",
                         cellTemplate: (container, { data }) => {
                             $(container).empty();
                             ReactAppend(
@@ -159,6 +160,7 @@ const Testimonies = ({}) => {
                     },
                     {
                         caption: "Acciones",
+                        width: "120px",
                         cellTemplate: (container, { data }) => {
                             container.append(
                                 DxButton({
@@ -184,7 +186,7 @@ const Testimonies = ({}) => {
             />
             <Modal
                 modalRef={modalRef}
-                title={isEditing ? "Editar testimonio" : "Agregar testimonio"}
+                title={isEditing ? "Editar etiqueta" : "Agregar etiqueta"}
                 onSubmit={onModalSubmit}
                 size="sm"
             >
@@ -196,16 +198,20 @@ const Testimonies = ({}) => {
                         rows={2}
                         required
                     />
-                    <InputFormGroup
+                    {/* <InputFormGroup
                         eRef={correlativeRef}
                         label="Usuario"
                         required
-                    />
-                    <InputFormGroup
+                    /> */}
+                    {/* <InputFormGroup
                         type="url"
                         eRef={descriptionRef}
                         label="URL de youtube"
                         required
+                    /> */}
+                    <TextareaFormGroup
+                        eRef={descriptionRef}
+                        label="Descripción"
                     />
                 </div>
             </Modal>
@@ -215,7 +221,7 @@ const Testimonies = ({}) => {
 
 CreateReactScript((el, properties) => {
     createRoot(el).render(
-        <BaseAdminto {...properties} title="Testimonios">
+        <BaseAdminto {...properties} title="Etiquetas">
             <Testimonies {...properties} />
         </BaseAdminto>
     );

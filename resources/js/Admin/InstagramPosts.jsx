@@ -26,7 +26,7 @@ const InstagramPosts = ({ items }) => {
     const nameRef = useRef();
     const summaryRef = useRef();
     const imageRef = useRef();
-    const linkRef = useRef();
+    // const linkRef = useRef();
     const [isEditing, setIsEditing] = useState(false);
 
     const onModalOpen = (data) => {
@@ -39,7 +39,7 @@ const InstagramPosts = ({ items }) => {
         imageRef.image.src = `/api/instagram_post/media/${
             data?.image ?? "undefined"
         }`;
-        linkRef.current.value = data?.link ?? "";
+        // linkRef.current.value = data?.link ?? "";
 
         $(modalRef.current).modal("show");
     };
@@ -51,7 +51,7 @@ const InstagramPosts = ({ items }) => {
             id: idRef.current.value || undefined,
             name: nameRef.current.value,
             summary: summaryRef.current.value,
-            link: linkRef.current.value,
+            // link: linkRef.current.value,
         };
         const formData = new FormData();
         for (const key in request) {
@@ -98,7 +98,7 @@ const InstagramPosts = ({ items }) => {
         <>
             <Table
                 gridRef={gridRef}
-                title="Posts"
+                title="Clientes"
                 rest={instagramRest}
                 toolBar={(container) => {
                     container.unshift({
@@ -227,7 +227,7 @@ const InstagramPosts = ({ items }) => {
                 modalRef={modalRef}
                 title={isEditing ? "Editar color" : "Agregar color"}
                 onSubmit={onModalSubmit}
-                size="sm"
+                size="md"
             >
                 <div className="row" id="principal-container">
                     <input ref={idRef} type="hidden" />
@@ -236,17 +236,16 @@ const InstagramPosts = ({ items }) => {
                     <ImageFormGroup
                         eRef={imageRef}
                         label="Imagen"
-                        aspect={1}
+                        aspect={5/3}
                         col="col-lg-12 col-md-12 col-sm-12"
                         required
                     />
 
-                    <InputFormGroup
+                    {/* <InputFormGroup
                         type="url"
                         eRef={linkRef}
                         label="Link"
-                        required
-                    />
+                    /> */}
                 </div>
             </Modal>
         </>
@@ -255,7 +254,7 @@ const InstagramPosts = ({ items }) => {
 
 CreateReactScript((el, properties) => {
     createRoot(el).render(
-        <BaseAdminto {...properties} title="Colores">
+        <BaseAdminto {...properties} title="Clientes">
             <InstagramPosts {...properties} />
         </BaseAdminto>
     );

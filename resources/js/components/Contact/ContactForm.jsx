@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 const messagesRest = new MessagesRest()
 
-const ContactForm = ({ }) => {
+const ContactForm = ({ title, button}) => {
 
   const nameRef = useRef()
   const emailRef = useRef()
@@ -50,7 +50,7 @@ const ContactForm = ({ }) => {
       <div className="relative w-full p-[6%] sm:p-10 md:py-9 md:px-8 mx-auto z-10 flex flex-col gap-5">
         
         <h2 className="font-sora text-white text-2xl 2xl:text-3xl 4xl:text-4xl font-semibold tracking-tight !leading-tight">
-          Tambien puedes enviarnos un mensaje
+          {title}
         </h2>
 
         <div className="flex flex-col space-y-4 text-sm text-black" >
@@ -105,7 +105,7 @@ const ContactForm = ({ }) => {
         </div>
 
         <button className="group flex items-center justify-center border-[1.5px] border-white border-opacity-50 text-white hover:text-black font-dmsans gap-2 px-6 py-2.5  text-base 2xl:text-lg 4xl:text-xl rounded-xl font-medium hover:bg-white transition-colors duration-300 w-max disabled:cursor-not-allowed disabled:opacity-50" disabled={sending}>
-          <span>Enviar mensaje</span>
+          <span>{button}</span>
           <ArrowUpRight className='text-white group-hover:text-black' size={20} />
         </button>
 

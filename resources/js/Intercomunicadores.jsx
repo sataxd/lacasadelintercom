@@ -10,7 +10,7 @@ import Products from "./components/Tailwind/Services/Products";
 
 
 
-const Intercomunicadores = ({generals, showSlogan = true}) => {
+const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true}) => {
   return <>
 
     <Header
@@ -20,7 +20,16 @@ const Intercomunicadores = ({generals, showSlogan = true}) => {
 
     <Portada />
 
-    <Products />
+    <div className="flex flex-col gap-10 pb-10">
+      {brandsData && brandsData.map((brandInfo, index) => (
+        <Products 
+           key={index} 
+           brandData={brandInfo} 
+           globalSubcategories={globalSubcategories} 
+           globalTags={globalTags} 
+        />
+      ))}
+    </div>
   
     <Footer />
    

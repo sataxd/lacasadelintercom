@@ -108,16 +108,16 @@ const Strengths = () => {
                                     .refresh(),
                         },
                     });
-                    container.unshift({
-                        widget: "dxButton",
-                        location: "after",
-                        options: {
-                            icon: "plus",
-                            text: "Nuevo registro",
-                            hint: "Nuevo registro",
-                            onClick: () => onModalOpen(),
-                        },
-                    });
+                    // container.unshift({
+                    //     widget: "dxButton",
+                    //     location: "after",
+                    //     options: {
+                    //         icon: "plus",
+                    //         text: "Nuevo registro",
+                    //         hint: "Nuevo registro",
+                    //         onClick: () => onModalOpen(),
+                    //     },
+                    // });
                 }}
                 columns={[
                     {
@@ -125,27 +125,27 @@ const Strengths = () => {
                         caption: "ID",
                         visible: false,
                     },
-                    {
-                        dataField: "image",
-                        caption: "Imagen",
-                        width: "60px",
-                        allowFiltering: false,
-                        cellTemplate: (container, { data }) => {
-                            ReactAppend(
-                                container,
-                                <img
-                                    src={`/api/strength/media/${data.image}`}
-                                    style={{
-                                        width: "50px",
-                                        aspectRatio: 1,
-                                        objectFit: "contain",
-                                        objectPosition: "center",
-                                        borderRadius: "4px",
-                                    }}
-                                />
-                            );
-                        },
-                    },
+                    // {
+                    //     dataField: "image",
+                    //     caption: "Imagen",
+                    //     width: "60px",
+                    //     allowFiltering: false,
+                    //     cellTemplate: (container, { data }) => {
+                    //         ReactAppend(
+                    //             container,
+                    //             <img
+                    //                 src={`/api/strength/media/${data.image}`}
+                    //                 style={{
+                    //                     width: "50px",
+                    //                     aspectRatio: 1,
+                    //                     objectFit: "contain",
+                    //                     objectPosition: "center",
+                    //                     borderRadius: "4px",
+                    //                 }}
+                    //             />
+                    //         );
+                    //     },
+                    // },
                     {
                         dataField: "name",
                         caption: "Fortaleza",
@@ -211,25 +211,30 @@ const Strengths = () => {
             >
                 <div className="row" id="faqs-container">
                     <input ref={idRef} type="hidden" />
+                    
                     <InputFormGroup
                         eRef={nameRef}
                         label="Fortaleza"
                         col="col-12"
                         required
                     />
+                    
                     <ImageFormGroup
                         eRef={imageRef}
                         label="Imagen"
                         col="col-md-4"
                         aspect={1}
                         fit="contain"
-                        required
+                        disabled={true}
                     />
+                    
                     <TextareaFormGroup
                         eRef={descriptionRef}
                         label="Descripción"
                         rows={3}
+                        disabled={true}
                     />
+
                 </div>
             </Modal>
         </>

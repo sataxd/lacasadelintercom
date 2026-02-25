@@ -19,3 +19,55 @@
   transform-style: preserve-3d;
 }
 
+.html-content ul {
+    list-style-type: disc !important;
+    margin-left: 1.5rem !important;
+    margin-bottom: 1rem;
+}
+
+.html-content ol {
+    list-style-type: decimal !important;
+    margin-left: 1.5rem !important;
+    margin-bottom: 1rem;
+}
+
+.html-content li {
+    display: list-item !important; /* Asegura que se comporte como lista */
+}
+
+.html-content ul, 
+.html-content ol {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    margin-left: 1.5rem;
+    list-style-position: outside;
+}
+
+
+
+
+.html-content-second ul {
+    list-style-type: disc !important;
+    margin-left: 1.5rem !important;
+    margin-bottom: 1rem;
+}
+
+.html-content-second ol {
+    list-style-type: decimal !important;
+    margin-left: 1.5rem !important;
+    margin-bottom: 1rem;
+}
+
+.html-content-second li {
+    display: list-item !important; /* Asegura que se comporte como lista */
+}
+
+.html-content-second ul, 
+.html-content-second ol {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; 
+    margin-left: 1.5rem;
+    list-style-position: outside;
+}

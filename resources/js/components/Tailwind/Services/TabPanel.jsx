@@ -1,39 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import HtmlContent from '../../../Utils/HtmlContent';
+import GeneralRest from '../../../actions/GeneralRest';
 
-// --- DATOS (Ya no necesitamos el ID manual para mostrarlo, solo para keys si quieres) ---
-const services = [
-  {
-    id: "uid_1", // El ID interno puede ser cualquiera
-    title: "Reparaciones",
-    subtitle: "Diagnóstico de Precisión",
-    description: "Restauramos la operatividad de sus equipos con repuestos originales y protocolos técnicos avanzados.",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1000"
-  },
-  {
-    id: "uid_2",
-    title: "Mantenimiento",
-    subtitle: "Rendimiento Continuo",
-    description: "Programas preventivos diseñados para mitigar riesgos operativos y extender la vida útil de su infraestructura.",
-    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=1000"
-  },
-  {
-    id: "uid_3",
-    title: "Instalaciones",
-    subtitle: "Ingeniería en Seguridad",
-    description: "Despliegue estratégico de sistemas de intercomunicación y cercos eléctricos bajo normativas internacionales.",
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1000"
-  },
-  {
-    id: "uid_4",
-    title: "Ampliaciones",
-    subtitle: "Escalabilidad Modular",
-    description: "Adaptamos y expandimos sus sistemas actuales integrando nuevas tecnologías sin comprometer la estructura.",
-    image: "https://images.unsplash.com/photo-1590059132213-f91575ee301b?auto=format&fit=crop&q=80&w=1000"
-  }
-];
+const generalRest = new GeneralRest();
 
-const SplitText = ({ text, className, delay = 0 }) => {
+const SplitText = ({ text, className, delay = 0}) => {
   const letters = text.split("");
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -84,9 +56,37 @@ const SplitText = ({ text, className, delay = 0 }) => {
   );
 };
 
-// --- COMPONENTE PRINCIPAL ---
-const TabPanel = () => {
-  const [activeTab, setActiveTab] = useState(services[0]);
+const TabPanel = ( {servicios} ) => {
+  
+  if (!servicios || servicios.length === 0) return null;
+
+  const [activeTab, setActiveTab] = useState(servicios[0]);
+
+  useEffect(() => {
+    setActiveTab(servicios[0]);
+  }, [servicios]);
+
+
+  const [aboutuses, setAboutuses] = useState(null);
+                  
+  useEffect(() => {
+      const fetchAboutuses = async () => {
+          try {
+              const data = await generalRest.getAboutuses();
+              setAboutuses(data);
+          } catch (error) {
+              console.error("Error fetching about:", error);
+          }
+      };
+
+      fetchAboutuses();
+  }, []);
+  
+  const aboutusData = aboutuses?.aboutus || [];
+
+  const sixteenSection = aboutusData.find(
+    (item) => item.correlative === "services-title-section"
+  );
 
   // ANIMACIÓN DE IMAGEN MÁS RÁPIDA
   const jumpImageVariants = {
@@ -128,17 +128,17 @@ const TabPanel = () => {
               
               <div className='flex flex-col gap-2 justify-center items-start'>
                 <h3 className="font-sora text-black text-3xl sm:text-4xl 2xl:text-4xl 4xl:text-5xl font-semibold tracking-tight !leading-tight mb-3">
-                    Nuestros Clientes
+                    {sixteenSection?.name}
                 </h3>
-                <p className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-wide font-light">
-                    Desde Instituciones públicas hasta grandes corporaciones y proyectos residenciales,
-                    La Casa del Intercomunicador provee soluciones estratégicas en comunicación y seguridad electrónica. 
-                </p>
+                <HtmlContent
+                    className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-wide font-light"
+                    html={sixteenSection?.description}
+                />
               </div>
 
               <div className='flex flex-col w-full'>
                 {/* AQUI AGREGAMOS EL INDEX */}
-                {services.map((service, index) => (
+                {servicios.map((service, index) => (
                   <button
                     key={service.id}
                     onClick={() => setActiveTab(service)}
@@ -158,7 +158,7 @@ const TabPanel = () => {
                           ? 'text-xl sm:text-2xl 4xl:text-3xl font-semibold text-black' 
                           : 'text-base sm:text-lg  4xl:text-2xl text-gray-800'
                         }`}>
-                        {service.title}
+                        {service.name}
                     </h2>
                   </button>
                 ))}
@@ -179,8 +179,8 @@ const TabPanel = () => {
                       initial="initial"
                       animate="animate"
                       exit="exit"
-                      src={activeTab.image} 
-                      alt={activeTab.title} 
+                      src={`/api/services/media/${activeTab.image}`}
+                      alt={activeTab.name} 
                       className="w-full h-full object-cover transition-all duration-500"
                     />
                   </div>
@@ -189,23 +189,26 @@ const TabPanel = () => {
                   <div className="relative z-0 px-2">
                   
                     <SplitText 
-                      text={activeTab.subtitle} 
+                      text={activeTab.name} 
                       className="font-sora text-black text-2xl sm:text-3xl 4xl:text-4xl font-semibold tracking-tight mb-4 !leading-tight"
                       // CAMBIO: Delay reducido a 0.3s (antes 0.5) para que aparezca apenas entra la imagen
                       delay={0.3}  
                     />
                   
                     <div className="mt-4">
-                      <motion.p
+                      <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
                           // CAMBIO: Delay reducido a 0.5s y duración 0.4s
                           transition={{ delay: 0.5, duration: 0.4 }}
-                          className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-wide"
+                          className=""
                       >
-                          {activeTab.description}
-                      </motion.p>
+                          <HtmlContent
+                              className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-wide"
+                              html={activeTab?.description}
+                          />
+                      </motion.div>
                     </div>
 
                   </div>

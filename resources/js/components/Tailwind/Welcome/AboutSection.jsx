@@ -4,30 +4,15 @@ import ImageOverSection from "./ImageOverSection";
 import HtmlContent from "../../../Utils/HtmlContent";
 import GeneralRest from "../../../actions/GeneralRest";
 
-
 const generalRest = new GeneralRest();
 
 const AboutSection = () => {
-    const [Benefits, setBenefits] = useState(null);
-    const [Toallas, setToallas] = useState(null);
-    const [Soles, setSoles] = useState(null);
+  
     const [activeImage, setActiveImage] = useState(1);
 
     const handleToggleImage = () => {
         setActiveImage(prev => prev === 1 ? 2 : 1);
     };
-
-    useEffect(() => {
-        const fetchBenefits = async () => {
-            try {
-                const data = await generalRest.getBenefits();
-                setBenefits(data);
-            } catch (error) {
-                console.error("Error fetching benefits:", error);
-            }
-        };
-        fetchBenefits();
-    }, []);
 
     const [aboutuses, setAboutuses] = useState(null);
     

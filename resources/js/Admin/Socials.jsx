@@ -99,15 +99,15 @@ const Socials = ({ icons }) => {
             onClick: () => $(gridRef.current).dxDataGrid('instance').refresh()
           }
         });
-        container.unshift({
-          widget: 'dxButton', location: 'after',
-          options: {
-            icon: 'plus',
-            text: 'Nuevo registro',
-            hint: 'Nuevo registro',
-            onClick: () => onModalOpen()
-          }
-        });
+        // container.unshift({
+        //   widget: 'dxButton', location: 'after',
+        //   options: {
+        //     icon: 'plus',
+        //     text: 'Nuevo registro',
+        //     hint: 'Nuevo registro',
+        //     onClick: () => onModalOpen()
+        //   }
+        // });
       }}
       columns={[
         {

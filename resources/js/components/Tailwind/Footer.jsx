@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
-
 import Tippy from "@tippyjs/react";
 import HtmlContent from "../../Utils/HtmlContent";
 import GeneralRest from "../../actions/GeneralRest";
 
 ReactModal.setAppElement("#app");
 
-const Footer = ({ terms, footerLinks = [] }) => {
+const Footer = () => {
+    
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = () => setModalOpen(true);
     const closeModal = () => setModalOpen(false);
     const generalRest = new GeneralRest();
-    const links = {};
-    /* footerLinks.forEach((fl) => {
-        links[fl.correlative] = fl.description;
-    });*/
+    
+
     const [socials, setSocials] = useState([]);
 
     useEffect(() => {
@@ -29,9 +27,12 @@ const Footer = ({ terms, footerLinks = [] }) => {
         };
 
         fetchSocials();
-    }, []); // Asegúrate de que este array de dependencias está vacío si solo se ejecuta una vez
+    }, []); 
 
-    const TikTok = socials.find((social) => social.description === "TikTok");
+    const TikTok = socials.find(
+        (social) => social.description === "TikTok"
+    );
+    
     const WhatsApp = socials.find(
         (social) => social.description === "WhatsApp"
     );
@@ -42,7 +43,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
         (social) => social.description === "Facebook"
     );
 
-    const [aboutuses, setAboutuses] = useState(null); // o useState({});
+    const [aboutuses, setAboutuses] = useState(null);
 
     useEffect(() => {
         const fetchAboutuses = async () => {
@@ -65,12 +66,27 @@ const Footer = ({ terms, footerLinks = [] }) => {
     const libroReclamaciones = aboutusData.find(
         (item) => item.correlative === "customer-complaints"
     )?.description;
-    const telefono = aboutusData.find(
-        (item) => item.correlative === "phone"
+
+    const telefono = generalsData.find(
+        (item) => item.correlative === "phone_contact"
     )?.description;
-    const mail = aboutusData.find(
-        (item) => item.correlative === "email"
+
+    const direccion = generalsData.find(
+        (item) => item.correlative === "address"
     )?.description;
+
+    const distrito = generalsData.find(
+        (item) => item.correlative === "district"
+    )?.description;
+
+    const pais = generalsData.find(
+        (item) => item.correlative === "country"
+    )?.description;
+
+    const mail = generalsData.find(
+        (item) => item.correlative === "email_contact"
+    )?.description;
+
     const f_whatsapp = aboutusData.find(
         (item) => item.correlative === "whatsapp"
     )?.description;
@@ -97,19 +113,19 @@ const Footer = ({ terms, footerLinks = [] }) => {
                             </a>
 
                             <div className="flex flex-col gap-0">
-                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Calle Morelli 341 - San Borja, Lima</p>
-                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">San Borja, Lima</p>
-                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Perú</p>
+                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">{direccion}</p>
+                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">{distrito}</p>
+                                <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">{pais}</p>
                             </div>
-
+                            
                             <div className="flex flex-row gap-5 max-w-md">
                                 <div className="flex flex-col gap-1">
                                     <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Teléfono fijo</p>
-                                    <p className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">+51 1234567</p>
+                                    <a href={`tel:${telefono}`} className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">{telefono}</a>
                                 </div>
                                 <div className="flex flex-col gap-1">
                                     <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Email</p>
-                                    <p className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">ventas@lacasadelintercom.com</p>
+                                    <a href={`mailto:${mail}`} className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">{mail}</a>
                                 </div>
                             </div>
                         </div>
@@ -119,17 +135,6 @@ const Footer = ({ terms, footerLinks = [] }) => {
                             <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Menu</p>
                             
                             <nav className="flex flex-col gap-1 2xl:gap-2 4xl:gap-4 mt-3 sm:mt-5">
-                                
-                                {/* {WhatsApp && (
-                                    <a
-                                        href={WhatsApp.link}
-                                        aria-label="WhatsApp"
-                                        target="_blank"
-                                        className="block hover:opacity-80 transition-opacity "
-                                    >
-                                        Conversemos
-                                    </a>
-                                )} */}
                                 
                                 <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Inicio</a>
 
@@ -151,32 +156,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                 <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Terminos y Condiciones</a>
 
                                 <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Politicas de privacidad</a>
-                                {/* {telefono && (
-                                    <a
-                                        href={`tel:${telefono}`}
-                                        className="block hover:opacity-80 transition-opacity "
-                                    >
-                                        Teléfono
-                                    </a>
-                                )}
-                                {mail && (
-                                    <a
-                                        href={`mailto:${mail}`}
-                                        className="block hover:opacity-80 transition-opacity "
-                                    >
-                                        Mail
-                                    </a>
-                                )}
-                                {f_whatsapp && (
-                                    <a
-                                        href={`//wa.me/${f_whatsapp}`}
-                                        aria-label="WhatsApp"
-                                        target="_blank"
-                                        className="block hover:opacity-80 transition-opacity "
-                                    >
-                                        Whatsapp
-                                    </a>
-                                )} */}
+                                
                             </nav>
                         </div>
                         
@@ -194,7 +174,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/instagram.png"
                                             alt="facebook"
-                                            className="w-auto"
+                                            className="w-8 4xl:w-10"
                                         />
                                     </a>
                                 )}
@@ -208,7 +188,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/facebook.png"
                                             alt="Facebook"
-                                            className="w-auto"
+                                            className="w-8 4xl:w-10"
                                         />
                                     </a>
                                 )}
@@ -222,7 +202,7 @@ const Footer = ({ terms, footerLinks = [] }) => {
                                         <img
                                             src="/assets/img/footer/whatsapp.png"
                                             alt="WhatsApp"
-                                            className="w-auto"
+                                            className="w-8 4xl:w-10"
                                         />
                                     </a>
                                 )}

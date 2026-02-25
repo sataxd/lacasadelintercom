@@ -20,7 +20,7 @@ const Indicators = () => {
 
     // Form elements ref
     const idRef = useRef();
-    // const symbolRef = useRef();
+    const symbolRef = useRef();
     const nameRef = useRef();
     const descriptionRef = useRef();
 
@@ -31,7 +31,7 @@ const Indicators = () => {
         else setIsEditing(false);
 
         idRef.current.value = data?.id ?? "";
-        // symbolRef.current.value = data?.symbol ?? "";
+        symbolRef.current.value = data?.symbol ?? "";
         nameRef.current.value = data?.name ?? "";
         descriptionRef.current.value = data?.description ?? "";
 
@@ -43,7 +43,7 @@ const Indicators = () => {
 
         const request = {
             id: idRef.current.value || undefined,
-            // symbol: symbolRef.current.value,
+            symbol: symbolRef.current.value,
             name: nameRef.current.value,
             description: descriptionRef.current.value,
         };
@@ -202,8 +202,8 @@ const Indicators = () => {
             >
                 <div className="row" id="indicators-container">
                     <input ref={idRef} type="hidden" />
-                    <InputFormGroup eRef={nameRef} label="Título" disabled />
-                    {/*<InputFormGroup eRef={symbolRef} label='Símbolo' col='col-sm-4' rows={2} required />*/}
+                    <InputFormGroup eRef={symbolRef} label='Símbolo' col='col-sm-4' rows={2}/>
+                    <InputFormGroup eRef={nameRef} label="Título"/>
                     <TextareaFormGroup
                         eRef={descriptionRef}
                         label="Descripción"

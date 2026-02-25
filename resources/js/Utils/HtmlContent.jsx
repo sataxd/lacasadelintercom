@@ -1,8 +1,8 @@
 import React from 'react';
 
-const HtmlContent = ({ className, html, properties }) => {
+const HtmlContent = ({ className, html, properties, htmlcontent='html-content' }) => {
   return (
-    <div className={className} dangerouslySetInnerHTML={{ __html: html }} {...properties} />
+    <div className={`${htmlcontent || ''} flex flex-col gap-3 ${className || ''}`} dangerouslySetInnerHTML={{ __html: html }} {...properties} />
   );
 };
 

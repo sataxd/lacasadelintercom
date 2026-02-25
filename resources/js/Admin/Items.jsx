@@ -23,39 +23,49 @@ import ItemVariants from "./ItemVariants";
 import ItemVariantsModal from "./ItemVariantsModal";
 import ColorsRest from "../Actions/Admin/ColorsRest";
 import SizesRest from "../Actions/Admin/SizesRest";
+import TextareaCKeditorFormGroup from "../components/Adminto/form/TextareaCKeditorFormGroup";
 
 const itemsRest = new ItemsRest();
 
-const Items = ({ categories, brands }) => {
+const Items = ({ categories, subcategories, brands, tags }) => {
+    
     // Estados para colores y tallas del producto actual
     const [colors, setColors] = useState([]);
     const [sizes, setSizes] = useState([]);
     const [itemData, setItemData] = useState([]);
     const [showVariantsModal, setShowVariantsModal] = useState(false);
+    const [filteredSubcategories, setFilteredSubcategories] = useState([]);
     const gridRef = useRef();
     const modalRef = useRef();
     // Form elements ref
     const idRef = useRef();
     const categoryRef = useRef();
-
+    const brandRef = useRef();
+    const subcategoryRef = useRef();
     const nameRef = useRef();
-    const aliasRef = useRef();
-    const summaryRef = useRef();
-    const priceRef = useRef();
-    const discountRef = useRef();
+    const tagsRef = useRef();
+    // const aliasRef = useRef();
+    // const summaryRef = useRef();
+    // const priceRef = useRef();
+    // const discountRef = useRef();
     const imageRef = useRef();
     const bannerRef = useRef();
-    const manualRef = useRef();
+    // const manualRef = useRef();
     const descriptionRef = useRef();
-    const scoreRef = useRef();
+    // const scoreRef = useRef();
+    
     // Nuevos campos
-    const stockRef = useRef();
-    const min_stockRef = useRef();
-    const packItemsRef = useRef();
+    // const stockRef = useRef();
+    // const min_stockRef = useRef();
+    // const packItemsRef = useRef();
 
     const [isEditing, setIsEditing] = useState(false);
+    const [descriptionfinal, setDescription] = useState('');
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedBrand, setSelectedBrand] = useState(null);
     const [selectedScore, setSelectedScore] = useState(null);
+
+    
 
     /*ADD NEW LINES GALLERY */
     const [gallery, setGallery] = useState([]);
@@ -109,41 +119,51 @@ const Items = ({ categories, brands }) => {
         }
     }, [itemData]);
 
-    const [manualPreview, setManualPreview] = useState(null);
+    // const [manualPreview, setManualPreview] = useState(null);
 
     const onModalOpen = (data) => {
-        // console.log(data);
-        setItemData(data || null); // Guardamos los datos en el estado
+       
+        setItemData(data || null);
         if (data?.id) setIsEditing(true);
         else setIsEditing(false);
 
         idRef.current.value = data?.id || "";
+        
+        if (data?.id) setDescription(data.description || ''); 
+        else setDescription('');
+
         $(categoryRef.current)
             .val(data?.category_id || null)
             .trigger("change");
 
-        nameRef.current.value = data?.name || "";
-        aliasRef.current.value = data?.alias || "";
-        summaryRef.current.value = data?.summary || "";
-        priceRef.current.value = data?.price || 0;
-        discountRef.current.value = data?.discount || 0;
-
-        $(scoreRef.current)
-            .val(data?.score || null)
+        $(brandRef.current)
+            .val(data?.marca_id || null)
             .trigger("change");
+
+        nameRef.current.value = data?.name || "";
+        // aliasRef.current.value = data?.alias || "";
+        // summaryRef.current.value = data?.summary || "";
+        // priceRef.current.value = data?.price || 0;
+        // discountRef.current.value = data?.discount || 0;
+
+        // $(scoreRef.current)
+        //     .val(data?.score || null)
+        //     .trigger("change");
+
         imageRef.current.value = null;
         imageRef.image.src = `/api/items/media/${data?.image ?? "undefined"}`;
 
-       bannerRef.current.value = null;
+        bannerRef.current.value = null;
         bannerRef.image.src = `/api/items/media/${data?.banner ?? "undefined"}`;
-        manualRef.current.value = null;
-        if (data?.manual) {
-            setManualPreview(`/storage/images/item/${data.manual}`);
-        } else {
-            setManualPreview(null);
-        }
+        
+        // manualRef.current.value = null;
+        // if (data?.manual) {
+        //     setManualPreview(`/storage/images/item/${data.manual}`);
+        // } else {
+        //     setManualPreview(null);
+        // }
 
-        descriptionRef.current.value = data?.description ?? "";
+        //descriptionRef.current.value = data?.description ?? "";
 
         if (data?.images) {
             const existingImages = data.images.map((img) => ({
@@ -156,59 +176,92 @@ const Items = ({ categories, brands }) => {
         }
 
         // Nuevos campos
-        stockRef.current.value = data?.stock;
-        min_stockRef.current.value = data?.min_stock;
+
+        // stockRef.current.value = data?.stock;
+        // min_stockRef.current.value = data?.min_stock;
         
         // Pack items - cargar productos seleccionados si existen
-        SetSelectValue(packItemsRef.current, data?.pack_items ?? [], "id", 'name');
-  
+
+        // SetSelectValue(packItemsRef.current, data?.pack_items ?? [], "id", 'name');
+
+        setTimeout(() => {
+             // Forzar el filtrado inicial basado en la categoría seleccionada
+            if(data?.category_id) {
+                const filtered = subcategories.filter(sub => sub.category_id === data.category_id);
+                setFilteredSubcategories(filtered);
+                
+                // Esperar a que React renderice las opciones filtradas antes de asignar el valor de jQuery
+                setTimeout(() => {
+                    $(subcategoryRef.current).val(data?.subcategory_id || null).trigger("change");
+                }, 100);
+            } else {
+                setFilteredSubcategories([]);
+                $(subcategoryRef.current).val(null).trigger("change");
+            }
+
+            // ASIGNAR TAGS GUARDADOS
+            // Si data.tags es un array (ej: ["Nuevo", "Popular"]), Select2 los marcará
+            if (tagsRef.current) {
+                $(tagsRef.current).val(data?.tags || []).trigger("change");
+            }
+
+        }, 100);
+
         $(modalRef.current).modal("show");
     };
 
     const onModalSubmit = async (e) => {
         e.preventDefault();
-        let final_price = 0.0;
-        let discount_percent = 0.0;
-        if (discountRef.current.value && discountRef.current.value > 0) {
-            final_price = discountRef.current.value;
-            discount_percent =
-                100 -
-                (discountRef.current.value * 100) / priceRef.current.value;
-        } else {
-            final_price = priceRef.current.value;
-            discount_percent = 0;
-        }
+        
+        let final_price = 1; // momentaeamente 1
+        //let discount_percent = 0.0;
+        // if (discountRef.current.value && discountRef.current.value > 0) {
+        //     final_price = discountRef.current.value;
+        //     discount_percent =
+        //         100 -
+        //         (discountRef.current.value * 100) / priceRef.current.value;
+        // } else {
+        //     final_price = priceRef.current.value;
+        //     discount_percent = 0;
+        // }
 
         // Procesar pack_items - obtener objetos con id y name
-        const selectedPackItemIds = $(packItemsRef.current).val() || [];
-        const selectedPackItems = selectedPackItemIds.map(id => {
-            const option = $(packItemsRef.current).find(`option[value="${id}"]`);
-            return {
-                id: parseInt(id),
-                name: option.text()
-            };
-        });
+
+        // const selectedPackItemIds = $(packItemsRef.current).val() || [];
+        // const selectedPackItems = selectedPackItemIds.map(id => {
+        //     const option = $(packItemsRef.current).find(`option[value="${id}"]`);
+        //     return {
+        //         id: parseInt(id),
+        //         name: option.text()
+        //     };
+        // });
 
         const request = {
             id: idRef.current.value || undefined,
+            marca_id: brandRef.current.value,
             category_id: categoryRef.current.value,
+            subcategory_id: subcategoryRef.current.value,
             name: nameRef.current.value,
-            alias: aliasRef.current.value,
-            summary: summaryRef.current.value,
-            price: priceRef.current.value,
-            discount: discountRef.current.value,
-            description: descriptionRef.current.value,
-            stock: stockRef.current.value,
-            min_stock: min_stockRef.current.value,
-            score: scoreRef.current.value,
+            description: descriptionfinal,
             final_price: final_price,
-            discount_percent: discount_percent,
-            pack_items: selectedPackItems.length > 0 ? selectedPackItems : [],
+            tags: $(tagsRef.current).val() || [],
+            // alias: aliasRef.current.value,
+            // summary: summaryRef.current.value,
+            // price: priceRef.current.value,
+            // discount: discountRef.current.value,
+            // description: descriptionRef.current.value,
+            // stock: stockRef.current.value,
+            // min_stock: min_stockRef.current.value,
+            // score: scoreRef.current.value,
+            // final_price: final_price,
+            // discount_percent: discount_percent,
+            // pack_items: selectedPackItems.length > 0 ? selectedPackItems : [],
         };
 
         const formData = new FormData();
+        
         for (const key in request) {
-            if (key === 'pack_items') {
+            if (key === 'pack_items' || key === 'tags') {
                 // Para FormData, convertimos el array a JSON string
                 formData.append(key, JSON.stringify(request[key]));
             } else {
@@ -226,11 +279,11 @@ const Items = ({ categories, brands }) => {
             formData.append("banner", banner);
         }
 
-        const manual = manualRef.current.files[0];
+        // const manual = manualRef.current.files[0];
 
-        if (manual && manualPreview) {
-            formData.append("manual", manual);
-        }
+        // if (manual && manualPreview) {
+        //     formData.append("manual", manual);
+        // }
 
         gallery.forEach((img, index) => {
             if (!img.toDelete) {
@@ -293,6 +346,7 @@ const Items = ({ categories, brands }) => {
         { value: 4, label: "4" },
         { value: 5, label: "5" },
     ];
+
     const handleManualChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -349,6 +403,18 @@ const Items = ({ categories, brands }) => {
         setShowVariantsModal(true);
     };
 
+    const handleCategoryChange = (e) => {
+        const catId = e.target.value;
+        setSelectedCategory(catId);
+        
+        // Filtrar subcategorías relacionadas
+        const filtered = subcategories.filter(sub => sub.category_id === catId);
+        setFilteredSubcategories(filtered);
+        
+        // Limpiar el select de subcategoría
+        $(subcategoryRef.current).val(null).trigger("change");
+    };
+
     return (
         <>
             <Table
@@ -400,22 +466,18 @@ const Items = ({ categories, brands }) => {
                                             {data.category?.name}
                                         </b>
                                         <small className="text-muted">
-                                            {data.subcategory?.name}
+                                            {data.subcategory?.name || 'Sin Subcategoría'} 
                                         </small>
                                     </>
                                 )
                             );
                         },
                     },
-                    {
-                        dataField: "category.name",
-                        caption: "Categoria",
-                        visible: false,
-                    },
+                    
                     {
                         dataField: "name",
                         caption: "Nombre",
-                        width: "300px",
+                        
                         cellTemplate: (container, { data }) => {
                             container.html(
                                 renderToString(
@@ -430,38 +492,43 @@ const Items = ({ categories, brands }) => {
                             );
                         },
                     },
+                    // {
+                    //     dataField: "final_price",
+                    //     caption: "Precio",
+                    //     dataType: "number",
+                    //     width: "75px",
+                    //     cellTemplate: (container, { data }) => {
+                    //         container.html(
+                    //             renderToString(
+                    //                 <>
+                    //                     {data.discount > 0 && (
+                    //                         <small
+                    //                             className="d-block text-muted"
+                    //                             style={{
+                    //                                 textDecoration:
+                    //                                     "line-through",
+                    //                             }}
+                    //                         >
+                    //                             S/.{Number2Currency(data.price)}
+                    //                         </small>
+                    //                     )}
+                    //                     <span>
+                    //                         S/.
+                    //                         {Number2Currency(
+                    //                             data.discount > 0
+                    //                                 ? data.discount
+                    //                                 : data.price
+                    //                         )}
+                    //                     </span>
+                    //                 </>
+                    //             )
+                    //         );
+                    //     },
+                    // },
                     {
-                        dataField: "final_price",
-                        caption: "Precio",
-                        dataType: "number",
-                        width: "75px",
-                        cellTemplate: (container, { data }) => {
-                            container.html(
-                                renderToString(
-                                    <>
-                                        {data.discount > 0 && (
-                                            <small
-                                                className="d-block text-muted"
-                                                style={{
-                                                    textDecoration:
-                                                        "line-through",
-                                                }}
-                                            >
-                                                S/.{Number2Currency(data.price)}
-                                            </small>
-                                        )}
-                                        <span>
-                                            S/.
-                                            {Number2Currency(
-                                                data.discount > 0
-                                                    ? data.discount
-                                                    : data.price
-                                            )}
-                                        </span>
-                                    </>
-                                )
-                            );
-                        },
+                        dataField: "brand.name",
+                        caption: "Marca",
+                        width: "120px",
                     },
                     {
                         dataField: "image",
@@ -488,90 +555,90 @@ const Items = ({ categories, brands }) => {
                             );
                         },
                     },
-                    {
-                        dataField: "is_new",
-                        caption: "Nuevo",
-                        dataType: "boolean",
-                        width: "80px",
-                        cellTemplate: (container, { data }) => {
-                            ReactAppend(
-                                container,
-                                <SwitchFormGroup
-                                    checked={data.is_new}
-                                    onChange={(e) =>
-                                        onBooleanChange({
-                                            id: data.id,
-                                            field: "is_new",
-                                            value: e.target.checked,
-                                        })
-                                    }
-                                />
-                            );
-                        },
-                    },
-                    {
-                        dataField: "offering",
-                        caption: "En oferta",
-                        dataType: "boolean",
-                        width: "80px",
-                        cellTemplate: (container, { data }) => {
-                            ReactAppend(
-                                container,
-                                <SwitchFormGroup
-                                    checked={data.offering}
-                                    onChange={(e) =>
-                                        onBooleanChange({
-                                            id: data.id,
-                                            field: "offering",
-                                            value: e.target.checked,
-                                        })
-                                    }
-                                />
-                            );
-                        },
-                    },
-                    {
-                        dataField: "recommended",
-                        caption: "Recomendado",
-                        dataType: "boolean",
-                        width: "80px",
-                        cellTemplate: (container, { data }) => {
-                            ReactAppend(
-                                container,
-                                <SwitchFormGroup
-                                    checked={data.recommended}
-                                    onChange={(e) =>
-                                        onBooleanChange({
-                                            id: data.id,
-                                            field: "recommended",
-                                            value: e.target.checked,
-                                        })
-                                    }
-                                />
-                            );
-                        },
-                    },
-                    {
-                        dataField: "featured",
-                        caption: "Destacado",
-                        dataType: "boolean",
-                        width: "80px",
-                        cellTemplate: (container, { data }) => {
-                            ReactAppend(
-                                container,
-                                <SwitchFormGroup
-                                    checked={data.featured}
-                                    onChange={(e) =>
-                                        onBooleanChange({
-                                            id: data.id,
-                                            field: "featured",
-                                            value: e.target.checked,
-                                        })
-                                    }
-                                />
-                            );
-                        },
-                    },
+                    // {
+                    //     dataField: "is_new",
+                    //     caption: "Nuevo",
+                    //     dataType: "boolean",
+                    //     width: "80px",
+                    //     cellTemplate: (container, { data }) => {
+                    //         ReactAppend(
+                    //             container,
+                    //             <SwitchFormGroup
+                    //                 checked={data.is_new}
+                    //                 onChange={(e) =>
+                    //                     onBooleanChange({
+                    //                         id: data.id,
+                    //                         field: "is_new",
+                    //                         value: e.target.checked,
+                    //                     })
+                    //                 }
+                    //             />
+                    //         );
+                    //     },
+                    // },
+                    // {
+                    //     dataField: "offering",
+                    //     caption: "En oferta",
+                    //     dataType: "boolean",
+                    //     width: "80px",
+                    //     cellTemplate: (container, { data }) => {
+                    //         ReactAppend(
+                    //             container,
+                    //             <SwitchFormGroup
+                    //                 checked={data.offering}
+                    //                 onChange={(e) =>
+                    //                     onBooleanChange({
+                    //                         id: data.id,
+                    //                         field: "offering",
+                    //                         value: e.target.checked,
+                    //                     })
+                    //                 }
+                    //             />
+                    //         );
+                    //     },
+                    // },
+                    // {
+                    //     dataField: "recommended",
+                    //     caption: "Recomendado",
+                    //     dataType: "boolean",
+                    //     width: "80px",
+                    //     cellTemplate: (container, { data }) => {
+                    //         ReactAppend(
+                    //             container,
+                    //             <SwitchFormGroup
+                    //                 checked={data.recommended}
+                    //                 onChange={(e) =>
+                    //                     onBooleanChange({
+                    //                         id: data.id,
+                    //                         field: "recommended",
+                    //                         value: e.target.checked,
+                    //                     })
+                    //                 }
+                    //             />
+                    //         );
+                    //     },
+                    // },
+                    // {
+                    //     dataField: "featured",
+                    //     caption: "Destacado",
+                    //     dataType: "boolean",
+                    //     width: "80px",
+                    //     cellTemplate: (container, { data }) => {
+                    //         ReactAppend(
+                    //             container,
+                    //             <SwitchFormGroup
+                    //                 checked={data.featured}
+                    //                 onChange={(e) =>
+                    //                     onBooleanChange({
+                    //                         id: data.id,
+                    //                         field: "featured",
+                    //                         value: e.target.checked,
+                    //                     })
+                    //                 }
+                    //             />
+                    //         );
+                    //     },
+                    // },
                     {
                         dataField: "visible",
                         caption: "Visible",
@@ -605,14 +672,14 @@ const Items = ({ categories, brands }) => {
                                     onClick: () => onModalOpen(data),
                                 })
                             );
-                            container.append(
-                                DxButton({
-                                    className: "btn btn-xs btn-soft-secondary",
-                                    title: "Variantes",
-                                    icon: "fa fa-layer-group",
-                                    onClick: () => onVariantsClicked(data.id),
-                                })
-                            );
+                            // container.append(
+                            //     DxButton({
+                            //         className: "btn btn-xs btn-soft-secondary",
+                            //         title: "Variantes",
+                            //         icon: "fa fa-layer-group",
+                            //         onClick: () => onVariantsClicked(data.id),
+                            //     })
+                            // );
                             container.append(
                                 DxButton({
                                     className: "btn btn-xs btn-soft-danger",
@@ -642,13 +709,72 @@ const Items = ({ categories, brands }) => {
                             label="Nombre"
                             required
                         />
-                          <InputFormGroup
+                        {/* <InputFormGroup
                             eRef={aliasRef}
                             label="Alias del producto"
-                            
-                        />
-                        <InputFormGroup eRef={summaryRef} label="Resumen" />
+                        /> */}
+                        
+                        {/* <InputFormGroup eRef={summaryRef} label="Resumen" /> */}
+
                         <SelectFormGroup
+                            eRef={brandRef}
+                            label="Marca"
+                            required
+                            dropdownParent="#principal-container"
+                            onChange={(e) =>
+                                setSelectedBrand(e.target.value)
+                            }
+                        >
+                            {brands.map((item, index) => (
+                                <option key={item.id} value={item.id}>
+                                    {item.name}
+                                </option>
+                            ))}
+                        </SelectFormGroup>    
+                        
+                        <SelectFormGroup
+                            eRef={categoryRef}
+                            label="Categoría"
+                            required
+                            dropdownParent="#principal-container"
+                            onChange={handleCategoryChange} // <-- Actualizado
+                        >   
+                            <option value="">Seleccione una categoría...</option>
+                            {categories.map((item, index) => (
+                                <option key={item.id} value={item.id}>
+                                    {item.name}
+                                </option>
+                            ))}
+                        </SelectFormGroup>
+
+                        <SelectFormGroup
+                            eRef={subcategoryRef}
+                            label="Subcategoría"
+                            dropdownParent="#principal-container"
+                        >
+                            <option value="">Seleccione una subcategoría...</option>
+                            {filteredSubcategories.map((sub, index) => (
+                                <option key={sub.id} value={sub.id}>
+                                    {sub.name}
+                                </option>
+                            ))}
+                        </SelectFormGroup>
+
+                        <SelectFormGroup
+                            eRef={tagsRef}
+                            label="Etiquetas"
+                            dropdownParent="#principal-container"
+                            multiple={true} // <-- Permite seleccionar varios
+                        >
+                            {tags && tags.map((tag) => (
+                                // Usamos tag.name como value para guardar los strings directamente en el JSON
+                                <option key={tag.id} value={tag.name}>
+                                    {tag.name}
+                                </option>
+                            ))}
+                        </SelectFormGroup>
+
+                        {/* <SelectFormGroup
                             eRef={categoryRef}
                             label="Categoría"
                             required
@@ -662,8 +788,9 @@ const Items = ({ categories, brands }) => {
                                     {item.name}
                                 </option>
                             ))}
-                        </SelectFormGroup>
-                        <InputFormGroup
+                        </SelectFormGroup> */}
+
+                        {/* <InputFormGroup
                             label="Stock mínimo"
                             eRef={min_stockRef}
                             type="number"
@@ -672,22 +799,24 @@ const Items = ({ categories, brands }) => {
                             label="Stock"
                             eRef={stockRef}
                             type="number"
-                        />
+                        /> */}
 
-                        <InputFormGroup
+                        {/* <InputFormGroup
                             eRef={priceRef}
                             label="Precio"
                             type="number"
                             step="0.01"
                             required
-                        />
-                        <InputFormGroup
+                        /> */}
+
+                        {/* <InputFormGroup
                             eRef={discountRef}
                             label="Descuento"
                             type="number"
                             step="0.01"
-                        />
-                        <SelectFormGroup
+                        /> */}
+
+                        {/* <SelectFormGroup
                             eRef={scoreRef}
                             label="Calificación"
                             required
@@ -699,25 +828,28 @@ const Items = ({ categories, brands }) => {
                                     {score.label}
                                 </option>
                             ))}
-                        </SelectFormGroup>
+                        </SelectFormGroup> */}
+
                     </div>
 
                     <div className="col-md-6">
                         <div className="row">
+                            
                             <ImageFormGroup
                                 eRef={imageRef}
                                 label="Imagen"
                                 aspect={1}
-                                col="col-lg-4 col-md-4 col-sm-12"
+                                col="col-lg-6 col-md-6 col-sm-12"
                             />
+
                             <ImageFormGroup
                                 eRef={bannerRef}
                                 label="Imagen del producto"
                                 aspect={1}
-                                col="col-lg-4 col-md-4 col-sm-12"
+                                col="col-lg-6 col-md-6 col-sm-12"
                             /> 
 
-                            <div className="col-lg-4 col-md-4 col-sm-12">
+                            <div hidden className="col-lg-4 col-md-4 col-sm-12">
                                 <label className="form-label">Galeria</label>
                                 <input
                                     id="input-item-gallery"
@@ -754,7 +886,8 @@ const Items = ({ categories, brands }) => {
                                     </span>
                                 </div>
                             </div>
-                            <div className="col-md-12 col-sm-12">
+
+                            <div hidden className="col-md-12 col-sm-12">
                                 <div className="d-flex flex-wrap gap-1  mt-2">
                                     {gallery.map((image, index) => (
                                         <div
@@ -788,7 +921,8 @@ const Items = ({ categories, brands }) => {
                                     ))}
                                 </div>
                             </div>
-                            <div className="form-group">
+
+                            {/* <div className="form-group">
                                 <label>Manual PDF</label>
                                 <div className="input-group mb-2">
                                     <input
@@ -846,24 +980,34 @@ const Items = ({ categories, brands }) => {
                                         </div>
                                     </div>
                                 )}
-                            </div>
+                            </div> */}
+
                         </div>
                     </div>
                 </div>
-                <hr className="my-1" />
-                <label className="form-label">Descripción</label>
-                <textarea
+                {/* <hr className="my-2" /> */}
+                
+                <TextareaCKeditorFormGroup 
+                    label="Descripción"
+                    col="col-12"
+                    value={descriptionfinal}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+
+                {/* <label className="form-label">Descripción</label> */}
+                {/* <textarea
                     ref={descriptionRef}
                     className="form-control"
                     placeholder="Descripción"
-                ></textarea>
+                ></textarea> */}
                 
-                <hr className="my-1" />
+                {/* <hr className="my-1" />
                 <label className="form-label">Pack de Productos</label>
                 <p className="text-muted small">
                     Selecciona los productos que formarán parte de este pack. Si no seleccionas ninguno, se tratará como un producto individual.
-                </p>
-                <SelectAPIFormGroup
+                </p> */}
+                
+                {/* <SelectAPIFormGroup
                     eRef={packItemsRef}
                     label="Productos del Pack"
                     searchAPI="/api/admin/items/paginate"
@@ -888,10 +1032,10 @@ const Items = ({ categories, brands }) => {
                         if (!item.id) return item.text;
                         return item.text;
                     }}
-                />
+                /> */}
                 
                 {/* Modal de variantes solo visible si showVariantsModal está activo */}
-                {showVariantsModal && (
+                {/* {showVariantsModal && (
                     <ItemVariantsModal
                         show={showVariantsModal}
                         onClose={handleCloseVariantsModal}
@@ -899,7 +1043,7 @@ const Items = ({ categories, brands }) => {
                         colors={colors}
                         sizes={sizes}
                     />
-                )}
+                )} */}
             </Modal>
         </>
     );

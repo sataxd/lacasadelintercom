@@ -40,21 +40,20 @@ import ContactSection from "./components/Tailwind/Welcome/ContactSection";
 import SectoresClientes from "./components/Tailwind/Welcome/SectoresClientes.jsx";
 
 
-
-
-
 const Home = ({
     sliders,
+    category,
+    brands,
+    strengthout,
+    strengthin,
+    clientes,
+    indicadores,
     items,
     supplies,
     testimonies,
     popups,
     top_sale,
     showSlogan = true,
-
-    we_lovers,
-    products_featured,
-    new_product,
     posts,
 }) => {
     
@@ -74,20 +73,21 @@ const Home = ({
                 
                 <AboutSection />
 
-                <CategoriesSection />
+                <CategoriesSection category={category} />
 
                 <ServiceTecnical />
 
-                <Marcas />
+                <Marcas brands={brands} apiFolder='core_value' />
                 
                 <ContactSection />
 
-                <SectoresClientes />
+                <SectoresClientes strengthin={strengthin} strengthout={strengthout} indicadores={indicadores}/>
 
-                <Customer />
+                <Customer brands={clientes} apiFolder='instagram_post'/>
 
                 <Footer />
                 
+
                 {/*
                 --Wefem--
                 <FeaturesSection />
@@ -126,6 +126,7 @@ const Home = ({
                 <Testimonies testimonies={testimonies} />
                 <CallToAction />
                 <Popups popups={popups} />
+
                */}
 
             </div>
@@ -134,6 +135,7 @@ const Home = ({
 };
 
 CreateReactScript((el, properties) => {
+    console.log("Propiedades recibidas de Laravel:", properties);
     createRoot(el).render(
         <CarritoProvider>
             <Base {...properties}>
