@@ -76,7 +76,7 @@ use App\Http\Controllers\VideoporterosController;
 */
 
 // Public routes
-Route::get('/', [HomeController::class, 'reactView'])->name('Home');
+Route::get('/', [HomeController::class, 'reactView'])->name('Home.jsx');
 Route::get('/contacto', [ContactController::class, 'reactView'])->name('Contact.jsx');
 Route::get('/servicio-tecnico', [ServicesController::class, 'reactView'])->name('Services.jsx');
 Route::get('/intercomunicadores', [IntercomunicatorController::class, 'reactView'])->name('Intercomunicadores.jsx');
