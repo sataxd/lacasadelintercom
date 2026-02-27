@@ -1,6 +1,7 @@
 @php
     $component = Route::currentRouteName();
     
+    $props = $page['props'] ?? [];
     // Crear una instancia del trait para obtener datos SEO y píxeles
     $trackingHelper = new class {
         use App\Traits\TrackingPixelsTrait;
@@ -11,9 +12,9 @@
     $trackingPixels = $trackingHelper->getTrackingPixels();
     
     // Extraer datos SEO
-    $seoTitle = $seoData['seo_title'];
-    $seoDescription = $seoData['seo_description'];
-    $seoKeywords = $seoData['seo_keywords'];
+    $seoTitle = $props['seo_title'] ?? $seoData['seo_title'];
+    $seoDescription = $props['seo_description'] ?? $seoData['seo_description'];
+    $seoKeywords = $props['seo_keywords'] ?? $seoData['seo_keywords'];
     
     // Extraer píxeles de seguimiento
     $facebookPixel = $trackingPixels['FACEBOOK_PIXEL'];

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import Base from './Components/Tailwind/Base';
+import Base from './components/Tailwind/Base';
 import CreateReactScript from './Utils/CreateReactScript';
 import SupplieCard from './Components/Supplies/components/SupplieCard';
 import ProgressBar from './Components/Test/components/ProgressBar';

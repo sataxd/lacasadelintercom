@@ -1,12 +1,12 @@
 import React from "react";
 import CreateReactScript from "./Utils/CreateReactScript";
 import { createRoot } from "react-dom/client";
-import Base from "./Components/Tailwind/Base";
+import Base from "./components/Tailwind/Base";
 import Header from "./components/Tailwind/Header";
 import { CarritoProvider } from "./context/CarritoContext";
 import Footer from "./components/Tailwind/Footer";
-import Portada from "./components/Tailwind/Services/Portada";
 import Products from "./components/Tailwind/Services/Products";
+import SectionIntercomunicador from "./components/Tailwind/Services/SectionIntercomunicador";
 
 
 
@@ -18,9 +18,9 @@ const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTa
     >
     </Header>
 
-    <Portada />
+    <SectionIntercomunicador />
 
-    <div className="flex flex-col gap-10 pb-10">
+    <div className="flex flex-col gap-10">
       {brandsData && brandsData.map((brandInfo, index) => (
         <Products 
            key={index} 

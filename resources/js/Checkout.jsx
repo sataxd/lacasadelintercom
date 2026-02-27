@@ -7,7 +7,7 @@ import Number2Currency from "./Utils/Number2Currency";
 import CouponsRest from "./Actions/CouponsRest";
 import Tippy from "@tippyjs/react";
 import { CarritoProvider } from "./context/CarritoContext";
-import Base from "./Components/Tailwind/Base";
+import Base from "./components/Tailwind/Base";
 import CreateReactScript from "./Utils/CreateReactScript";
 import { createRoot } from "react-dom/client";
 import Header from "./components/Tailwind/Header";

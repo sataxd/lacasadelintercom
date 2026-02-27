@@ -1,25 +1,30 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import GeneralRest from "../../../actions/GeneralRest";
 import Marquesina from "./Marquesina";
+import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
 const Marcas = ({ brands, apiFolder }) => {
 
     const [aboutuses, setAboutuses] = useState(null);
-            
+    const { registerTask, completeTask } = useContext(LoadingContext);  
+
     useEffect(() => {
+        registerTask("BrandSection");
         const fetchAboutuses = async () => {
             try {
                 const data = await generalRest.getAboutuses();
                 setAboutuses(data);
             } catch (error) {
                 console.error("Error fetching about:", error);
+            } finally {
+                completeTask("BrandSection");
             }
         };
 
         fetchAboutuses();
-    }, []);
+    }, [registerTask, completeTask]);
 
     const aboutusData = aboutuses?.aboutus || [];
 

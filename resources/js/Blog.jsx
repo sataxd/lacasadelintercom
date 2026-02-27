@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CreateReactScript from './Utils/CreateReactScript';
 import { createRoot } from 'react-dom/client';
-import Base from './Components/Tailwind/Base';
+import Base from './components/Tailwind/Base';
 
 import BlogHeader from './Components/Blog/BlogHeader';
 import Filter from './Components/Blog/Filter';

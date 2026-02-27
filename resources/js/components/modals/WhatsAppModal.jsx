@@ -15,6 +15,7 @@ const WhatsAppModal = ({ status: whatsappStatus, setStatus }) => {
   const [sessionInfo, setSessionInfo] = useState({})
 
   useEffect(() => {
+    return;
     if (whatsappStatus == 'verifying') {
       const searchParams = new URLSearchParams({
         session: Global.APP_CORRELATIVE

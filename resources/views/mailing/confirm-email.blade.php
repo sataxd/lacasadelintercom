@@ -19,7 +19,7 @@
 
 <body
   style="background-image: url('{{ asset('assets/mailing/background.png') }}'); background-repeat: no-repeat; background-size: cover; min-height: 100vh; background-position: center;">
-  <img src="{{ asset('assets/img/logo.png') }}" alt="Vuá" style="width: 100px; display: block; margin: 2.5% auto;">
+  <img src="{{ asset('assets/img/lacasadelintercom_whitered.webp') }}" alt="Vuá" style="width: 100px; display: block; margin: 2.5% auto;">
   <div
     style="background-image: url('{{ asset('assets/mailing/background-2.png') }}'); background-repeat: no-repeat; background-size: cover; height: max-content; background-position: top center;">
     <div style="max-width: 600px; width: 100%; margin: auto; text-align: center; padding: 7.5%;">

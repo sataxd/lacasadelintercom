@@ -1,27 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import Base from "./Components/Tailwind/Base";
+import Base from "./components/Tailwind/Base";
 import CreateReactScript from "./Utils/CreateReactScript";
-
-import Banner from "./Components/Home/Banner";
-import Highlights from "./Components/Home/Highlights";
-import HowItWorks from "./Components/Home/HowItWorks";
-import Routine from "./Components/Home/Routine";
-import Highlights2 from "./Components/Home/Highlights2";
-import Supplies from "./Components/Home/Supplies";
-import Testimonies from "./Components/Home/Testimonies";
-import CallToAction from "./Components/Home/CallToAction";
 import Popups from "./Components/Home/Popups";
 import Header from "./components/Tailwind/Header";
-import FeaturesSection from "./components/Tailwind/Welcome/FeaturesSection";
-import BenefitsSection from "./components/Tailwind/Welcome/BenefitsSection";
-import ProductCarousel from "./components/Tailwind/Products/ProductCarousel";
-import QuizSection from "./components/Tailwind/Welcome/QuizSection";
-import TopSaleSection from "./components/Tailwind/Welcome/TopSaleSection";
-import GuaranteeSection from "./components/Tailwind/Welcome/GuaranteeSection";
-import WeLoversSection from "./components/Tailwind/Welcome/WeLoversSections";
-import NotSureSection from "./components/Tailwind/Welcome/NotSureSection";
-import InstagramSection from "./components/Tailwind/Welcome/InstagramSection";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css/pagination';
@@ -86,48 +68,6 @@ const Home = ({
                 <Customer brands={clientes} apiFolder='instagram_post'/>
 
                 <Footer />
-                
-
-                {/*
-                --Wefem--
-                <FeaturesSection />
-                <BenefitsSection />
-                <ProductCarousel products={products_featured}>
-                    <h2 className="font-poppins text-lg md:text-3xl 2xl:text-4xl font-bold flex gap-2 md:gap-4 items-center justify-center">
-                        <img
-                            src="/assets/img/emojis/growing-heart.png"
-                            className="h-4 md:h-8 lg:h-9"
-                        />{" "}
-                        Preferidos por nosotrxs{" "}
-                        <img
-                            src="/assets/img/emojis/growing-heart.png"
-                            className="h-4 md:h-8 lg:h-9"
-                        />
-                    </h2>
-                    <p className="font-poppins text-[13.3px] md:text-[19.3px] leading-[19.77px] lg:mt-4">
-                        ¿Estás listx para el cambio?
-                    </p>
-                </ProductCarousel>
-                <QuizSection />
-                <TopSaleSection producto={top_sale} />
-                <GuaranteeSection />
-                <WeLoversSection we_lovers={we_lovers} />
-                <NotSureSection producto={new_product} />   
-                <InstagramSection posts={posts} />
-
-                --Vua--
-                <Banner sliders={sliders} />
-                <hr className="h-4 bg-transparent border-none" />
-                <Highlights />
-                <HowItWorks />
-                <Routine items={items} />
-                <Highlights2 />
-                <Supplies supplies={supplies} />
-                <Testimonies testimonies={testimonies} />
-                <CallToAction />
-                <Popups popups={popups} />
-
-               */}
 
             </div>
         </div>
@@ -135,7 +75,6 @@ const Home = ({
 };
 
 CreateReactScript((el, properties) => {
-    console.log("Propiedades recibidas de Laravel:", properties);
     createRoot(el).render(
         <CarritoProvider>
             <Base {...properties}>

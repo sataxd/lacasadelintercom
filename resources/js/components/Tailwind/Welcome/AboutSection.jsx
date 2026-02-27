@@ -1,13 +1,13 @@
-import { useEffect, useState, useRef } from "react";
-
+import { useEffect, useState, useRef, useContext } from "react";
 import ImageOverSection from "./ImageOverSection";
 import HtmlContent from "../../../Utils/HtmlContent";
 import GeneralRest from "../../../actions/GeneralRest";
+import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
 const AboutSection = () => {
-  
+    const { registerTask, completeTask } = useContext(LoadingContext);
     const [activeImage, setActiveImage] = useState(1);
 
     const handleToggleImage = () => {
@@ -18,16 +18,19 @@ const AboutSection = () => {
     
     useEffect(() => {
         const fetchAboutuses = async () => {
+            registerTask("AboutSection");
             try {
                 const data = await generalRest.getAboutuses();
                 setAboutuses(data);
             } catch (error) {
                 console.error("Error fetching about:", error);
+            } finally {
+                completeTask("AboutSection");
             }
         };
 
         fetchAboutuses();
-    }, []);
+    }, [registerTask, completeTask]);
 
     const aboutusData = aboutuses?.aboutus || [];
 

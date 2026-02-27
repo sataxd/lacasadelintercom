@@ -65,7 +65,7 @@ const Login = ({}) => {
 
     return (
         <>
-            <div className=" w-full px-[5%] min-h-screen flex items-center mx-auto py-16 bg-[#F3E5FF]">
+            <div className=" w-full px-[5%] min-h-screen flex items-center mx-auto py-16 bg-[#080808]">
                 <div className="max-w-5xl mx-auto p-8 lg:grid lg:grid-cols-2 gap-8 bg-white rounded-xl">
                     <div className="hidden lg:block">
                         <video
@@ -75,7 +75,7 @@ const Login = ({}) => {
                             alt="Imagen decorativa"
                             className="h-[400px] w-full object-cover rounded-xl"
                         >
-                            <source src="/assets/img/backgrounds/home.mp4" />
+                            <source src="/assets/img/videologin.mp4" />
                         </video>
                     </div>
                     <div className="flex items-center justify-center px-8">
@@ -83,9 +83,6 @@ const Login = ({}) => {
                             <div className="space-y-2">
                                 <h1 className="text-3xl font-bold text-center">
                                     Bienvenido{" "}
-                                    <span className="text-[#6745BA]">
-                                        WeLover
-                                    </span>
                                 </h1>
                             </div>
                             <form

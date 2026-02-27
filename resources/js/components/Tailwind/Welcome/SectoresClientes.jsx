@@ -1,15 +1,16 @@
 import React from 'react';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { Building2, Briefcase, Factory, Hospital, School, Landmark } from 'lucide-react';
 import { OrbitingCirclesDemo } from './OrbitingCirclesDemo';
 import GeneralRest from '../../../actions/GeneralRest';
 import HtmlContent from '../../../Utils/HtmlContent';
+import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
 const Counter = ({ end, duration = 5000 }) => {
   const [count, setCount] = useState(0);
-
+  
   useEffect(() => {
     let startTime = null;
     const endValue = parseInt(end.replace(/,/g, ''), 10) || 0; // Limpia comas si existen
@@ -33,20 +34,24 @@ const Counter = ({ end, duration = 5000 }) => {
 
 const SectoresClientes = ({strengthin, strengthout, indicadores}) => {
   
-  const [aboutuses, setAboutuses] = useState(null);
-                  
+    const [aboutuses, setAboutuses] = useState(null);
+    const { registerTask, completeTask } = useContext(LoadingContext);       
+
       useEffect(() => {
+          registerTask("SectorSection");
           const fetchAboutuses = async () => {
               try {
                   const data = await generalRest.getAboutuses();
                   setAboutuses(data);
               } catch (error) {
                   console.error("Error fetching about:", error);
-              }
+              } finally {
+                completeTask("SectorSection");
+            }
           };
   
           fetchAboutuses();
-      }, []);
+      }, [registerTask, completeTask]);
   
       const aboutusData = aboutuses?.aboutus || [];
 

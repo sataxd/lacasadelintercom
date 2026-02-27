@@ -18,7 +18,7 @@ const ProductCard = ({ product, visible = true, onClick, isDetailView }) => {
     };
 
     return (
-        <div onClick={handleClick} className={`block w-full transition-transform duration-300  mx-auto 
+        <div onClick={handleClick} className={`block rounded-3xl border border-opacity-35 overflow-hidden shadow-md w-full transition-transform duration-300  mx-auto 
                 ${isDetailView ? 'cursor-default' : 'hover:-translate-y-2 cursor-pointer max-w-sm'}
             `}>
             <div className="w-full flex items-center justify-center">
@@ -60,7 +60,7 @@ const ProductCard = ({ product, visible = true, onClick, isDetailView }) => {
                                 </ul> */}
 
                                 <HtmlContent
-                                    className={`block w-full list-disc text-start text-black font-normal  font-dmsans text-wrap ${isDetailView ? 'space-y-1 text-sm lg:text-base 4xl:text-xl' : 'text-sm lg:text-base 4xl:text-lg md:line-clamp-4'}`}
+                                    className={`block w-full list-disc text-start text-black font-normal  font-dmsans text-wrap ${isDetailView ? 'space-y-1 text-sm lg:text-base 4xl:text-xl' : 'text-sm lg:text-base 4xl:text-lg md:max-h-28 md:mb-1'}`}
                                     html={product?.description}
                                     htmlcontent={'html-content-second'}
                                 />

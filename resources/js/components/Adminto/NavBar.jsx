@@ -13,7 +13,7 @@ const NavBar = ({ session = {}, title = "Pagina", whatsappStatus }) => {
     return (
         <div className="navbar-custom">
             <ul className="list-unstyled topnav-menu float-end mb-0">
-                <li className="dropdown notification-list topbar-dropdown">
+                {/* <li className="dropdown notification-list topbar-dropdown">
                     <li className="notification-list topbar-dropdown d-none d-lg-block">
                         <a
                             className="nav-link waves-effect waves-light"
@@ -32,7 +32,7 @@ const NavBar = ({ session = {}, title = "Pagina", whatsappStatus }) => {
                             </span>
                         </a>
                     </li>
-                </li>
+                </li> */}
                 <li className="dropdown notification-list topbar-dropdown">
                     <a
                         className="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
@@ -119,20 +119,20 @@ const NavBar = ({ session = {}, title = "Pagina", whatsappStatus }) => {
                     background: "#000000",
                 }}
             >
-                <a href="/home" className="logo logo-light text-center">
+                <a href="/admin/messages" className="logo logo-light text-center">
                     <span className="logo-sm">
                         <img src="/assets/img/favicon.png" alt="" height="22" />
                     </span>
                     <span className="logo-lg">
-                        <img src="/assets/img/logo.png" alt="" height="36" />
+                        <img src="/assets/img/lacasadelintercom_whitered.webp" alt="" height="36" />
                     </span>
                 </a>
-                <a href="/home" className="logo logo-dark text-center">
+                <a href="/admin/messages" className="logo logo-dark text-center">
                     <span className="logo-sm">
                         <img src="/assets/img/favicon.png" alt="" height="22" />
                     </span>
                     <span className="logo-lg">
-                        <img src="/assets/img/logo.png" alt="" height="16" />
+                        <img src="/assets/img/lacasadelintercom_whitered.webp" alt="" height="16" />
                     </span>
                 </a>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import Base from './Components/Tailwind/Base';
+import Base from './components/Tailwind/Base';
 import CreateReactScript from './Utils/CreateReactScript';
 import { Local } from 'sode-extend-react';
 // import Email from './Components/Test/Email';

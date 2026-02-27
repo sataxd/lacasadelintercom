@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect, useRef } from "react";
 import { Local } from "sode-extend-react";
 import ItemsRest from "../actions/ItemRest";
-import { i } from "framer-motion/client";
 import AlertComponent from "./AlertComponent";
 
 export const CarritoContext = createContext();

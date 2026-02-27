@@ -198,10 +198,10 @@ const Header = ({
     const subMenuProductos = [
         { name: "Sistemas de Intercomunicadores", link: "/intercomunicadores" },
         { name: "Sistemas de Videoporteros", link: "/videoporteros" },
-        { name: "Sistemas de alarmas contra incendio", link: "/alarma-contra-incendio" },
-        { name: "Sistema de alarma contra robo", link: "/alarmas-robo" },
-        { name: "Intercomunicador Hospitalario", link: "/hospitalario" },
-        { name: "Sistema de cerco eléctrico", link: "/cerco-electrico" },
+        { name: "Sistemas de alarmas contra incendio", link: "/alarma-contra-incendios" },
+        { name: "Sistema de alarma contra robo", link: "/sistema-de-alarma-contra-robo" },
+        { name: "Intercomunicador Hospitalario", link: "/intercomunicador-hospitalario" },
+        { name: "Sistema de cerco eléctrico", link: "/sistema-de-cerco-electrico" },
     ];
 
     return (
@@ -330,7 +330,7 @@ const Header = ({
                             <nav className="flex flex-row justify-center items-center gap-5 xl:gap-8 4xl:gap-10 xl:w-7/12 font-dmsans font-medium lg:text-lg 2xl:text-xl 4xl:text-[23px] text-center tracking-normal h-full">
                                 <a href="/">Inicio</a>
                                 <div className="relative group h-full flex items-center cursor-pointer">
-                                    <a href="/" className="flex items-center gap-2 ">
+                                    <a  className="flex items-center gap-2 ">
                                         Productos
                                         <i className="fa-solid fa-chevron-down text-[0.6em] transition-transform duration-300 group-hover:rotate-180"></i>
                                     </a>
@@ -493,7 +493,7 @@ const Header = ({
                                     {carrito.length === 0 ? (
                                         <div className="w-full flex flex-col items-center justify-center gap-5 text-3xl h-max my-5">
                                             <img
-                                                src="/assets/img/logo.png"
+                                                src="/assets/img/lacasadelintercom_whitered.webp"
                                                 alt="Wefem"
                                                 className="h-[58px] w-[330.55px] object-cover object-top"
                                                 style={{

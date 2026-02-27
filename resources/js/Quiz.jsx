@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 
 import { createRoot } from "react-dom/client";
-import Base from "./Components/Tailwind/Base";
+import Base from "./components/Tailwind/Base";
 import CreateReactScript from "./Utils/CreateReactScript";
 import Header from "./components/Tailwind/Header";
 import Footer from "./components/Tailwind/Footer";
-import SubscriptionsRest from "./actions/SubscriptionsRest";
+import SubscriptionsRest from "./Actions/SubscriptionsRest";
 import { CarritoProvider } from "./context/CarritoContext";
 import Swal from "sweetalert2";
 import Global from "./Utils/Global";

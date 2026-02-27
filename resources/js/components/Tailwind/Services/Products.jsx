@@ -60,16 +60,16 @@ const Products = ({ brandData, globalSubcategories, globalTags }) => {
   }
 
   return (
-    <section className='mx-[5%] 4xl:mx-[8%] rounded-3xl overflow-hidden'>
-      <div className="flex flex-col relative w-full py-5"
-        style={{
-          backgroundImage: "url('/assets/img/fondoproductosf.webp')",
-          backgroundSize: 'cover',   
-          backgroundPosition: 'right',
-          backgroundRepeat: 'no-repeat' 
-        }}>
-        
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-5 lg:gap-10">
+    <section className='mx-[5%] 4xl:mx-[8%] rounded-3xl'>
+      <div className="flex flex-col relative w-full py-5 border-t border-opacity-35"
+        // style={{
+        //   backgroundImage: "url('/assets/img/fondoproductosf.webp')",
+        //   backgroundSize: 'cover',   
+        //   backgroundPosition: 'right',
+        //   backgroundRepeat: 'no-repeat' 
+        // }}
+        >
+        <div className="grid grid-cols-1 xl:grid-cols-4 lg:gap-10">
           
           {/* Columna Izquierda: Logo y Filtros Desplegables */}
           <div className="col-span-1 xl:col-span-1 flex flex-col gap-5 sm:gap-10 justify-start items-start p-5">
@@ -83,7 +83,7 @@ const Products = ({ brandData, globalSubcategories, globalTags }) => {
 
             <div className='flex flex-col gap-1 w-full max-w-sm'>
                 {activeSubcategories.length > 0 && (
-                    <h3 className="font-dmsans font-semibold text-lg text-black border-b border-gray-300 pb-1 mb-2">Categorías</h3>
+                    <h3 className="font-dmsans font-semibold text-lg text-black border-b border-opacity-35 pb-1 mb-2">Categorías</h3>
                 )}
 
                 {/* --- OPCIÓN GLOBAL: TODOS --- */}

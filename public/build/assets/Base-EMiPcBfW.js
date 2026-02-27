@@ -1,1 +1,0 @@
-import{j as s}from"./AboutHeader-CpM0iYLI.js";import"./index-B80Lgev0.js";const x=({children:t,footerLinks:o,session:r,socials:e,terms:n,showSlogan:i=!0,showFooter:a=!0,gradientStart:d="#c4b8d3",gradientEnd:c="#f1d7c1",menuGradientEnd:m="#dbc8c9"})=>s.jsx("section",{children:t});export{x as B};

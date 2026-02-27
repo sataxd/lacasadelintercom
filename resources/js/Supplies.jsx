@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import CreateReactScript from './Utils/CreateReactScript';
-import Base from './Components/Tailwind/Base';
+import Base from './components/Tailwind/Base';
 import SupplieCard from './Components/Supplies/components/SupplieCard';
 
 const Supplies = ({ supplies = [] }) => {

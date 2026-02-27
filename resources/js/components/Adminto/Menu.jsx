@@ -115,11 +115,17 @@ const Menu = ({ session, hasRole, salesCount }) => {
                         <li className="menu-title">Navigation Panel</li>
                         {hasRole("Admin") && (
                             <>
-                                <MenuItem
+                                {/* <MenuItem
                                     href="/admin/home"
                                     icon="mdi mdi-home"
                                 >
                                     Dashboard
+                                </MenuItem> */}
+                                <MenuItem
+                                    href="/admin/messages"
+                                    icon="mdi mdi-home"
+                                >
+                                    Mensajes
                                 </MenuItem>
                                 {/* <MenuItem
                                     href="/admin/sales"

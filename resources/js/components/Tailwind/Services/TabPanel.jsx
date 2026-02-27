@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState, useRef, useContext } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import HtmlContent from '../../../Utils/HtmlContent';
 import GeneralRest from '../../../actions/GeneralRest';
+import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
@@ -59,7 +60,7 @@ const SplitText = ({ text, className, delay = 0}) => {
 const TabPanel = ( {servicios} ) => {
   
   if (!servicios || servicios.length === 0) return null;
-
+  const { registerTask, completeTask } = useContext(LoadingContext);
   const [activeTab, setActiveTab] = useState(servicios[0]);
 
   useEffect(() => {
@@ -70,17 +71,20 @@ const TabPanel = ( {servicios} ) => {
   const [aboutuses, setAboutuses] = useState(null);
                   
   useEffect(() => {
+    registerTask("AboutSection");
       const fetchAboutuses = async () => {
           try {
               const data = await generalRest.getAboutuses();
               setAboutuses(data);
           } catch (error) {
               console.error("Error fetching about:", error);
+          } finally {
+                completeTask("AboutSection");
           }
       };
 
       fetchAboutuses();
-  }, []);
+  }, [registerTask, completeTask]);
   
   const aboutusData = aboutuses?.aboutus || [];
 
@@ -131,7 +135,7 @@ const TabPanel = ( {servicios} ) => {
                     {sixteenSection?.name}
                 </h3>
                 <HtmlContent
-                    className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-wide font-light"
+                    className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl font-light"
                     html={sixteenSection?.description}
                 />
               </div>
@@ -205,7 +209,7 @@ const TabPanel = ( {servicios} ) => {
                           className=""
                       >
                           <HtmlContent
-                              className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-wide"
+                              className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl"
                               html={activeTab?.description}
                           />
                       </motion.div>

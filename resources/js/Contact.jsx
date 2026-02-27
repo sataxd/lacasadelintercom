@@ -1,7 +1,7 @@
 import React from "react";
 import CreateReactScript from "./Utils/CreateReactScript";
 import { createRoot } from "react-dom/client";
-import Base from "./Components/Tailwind/Base";
+import Base from "./components/Tailwind/Base";
 import Address from "./Components/Contact/Address";
 import ContactForm from "./components/Contact/ContactForm";
 import Header from "./components/Tailwind/Header";
@@ -9,9 +9,10 @@ import { CarritoProvider } from "./context/CarritoContext";
 import Footer from "./components/Tailwind/Footer";
 import MapLocation from "./components/Contact/MapLocation";
 import ContactSection from "./components/Tailwind/Welcome/ContactSection";
+import Faqs from "./components/Tailwind/Welcome/Faqs";
 
 
-const Contact = ({generals, showSlogan = true}) => {
+const Contact = ({generals, showSlogan = true, faqs}) => {
   return <>
 
     <Header
@@ -19,7 +20,9 @@ const Contact = ({generals, showSlogan = true}) => {
     >
     </Header>
 
-    <ContactSection tieneMargen={true} />
+    <Faqs tieneMargen={true} faqs={faqs}/>
+
+    <ContactSection />
 
     <MapLocation generals={generals} />
 

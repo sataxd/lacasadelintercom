@@ -135,7 +135,7 @@ const Messages = () => {
         <span className='ms-1'>{dataLoaded?.email || <i className='text-muted'>- Sin correo -</i>}</span>
       </p>
       <p>
-        <b>Asunto</b>:
+        <b>Teléfono</b>:
         <span className='ms-1'>{dataLoaded?.subject}</span>
       </p>
       <p>

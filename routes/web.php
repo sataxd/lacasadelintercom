@@ -40,14 +40,17 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AlarmaIncendioController;
+use App\Http\Controllers\AlarmaRobosController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\ElectricoController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FormulaController;
+use App\Http\Controllers\HospitalarioController;
 use App\Http\Controllers\InstructionController;
 use App\Http\Controllers\IntercomunicatorController;
 use App\Http\Controllers\LoginVuaController;
@@ -73,16 +76,20 @@ use App\Http\Controllers\VideoporterosController;
 */
 
 // Public routes
-Route::get('/', [HomeController::class, 'reactView'])->name('Home.jsx');
-Route::get('/catalog', [CatalogController::class, 'reactView'])->name('CatalogProducts.jsx');
-Route::get('/product/{slug}', [DetailController::class, 'reactView'])->name('DetailProduct.jsx');
-Route::get('/blog', [BlogController::class, 'reactView'])->name('Blog.jsx');
-Route::get('/blog/{articleId}', [ArticleController::class, 'reactView'])->name('BlogArticle.jsx');
+Route::get('/', [HomeController::class, 'reactView'])->name('Home');
 Route::get('/contacto', [ContactController::class, 'reactView'])->name('Contact.jsx');
 Route::get('/servicio-tecnico', [ServicesController::class, 'reactView'])->name('Services.jsx');
 Route::get('/intercomunicadores', [IntercomunicatorController::class, 'reactView'])->name('Intercomunicadores.jsx');
 Route::get('/videoporteros', [VideoporterosController::class, 'reactView'])->name('Videoporteros.jsx');
 Route::get('/alarma-contra-incendios', [AlarmaIncendioController::class, 'reactView'])->name('AlarmaIncendios.jsx');
+Route::get('/sistema-de-alarma-contra-robo', [AlarmaRobosController::class, 'reactView'])->name('AlarmaRobos.jsx');
+Route::get('/intercomunicador-hospitalario', [HospitalarioController::class, 'reactView'])->name('Hospitalario.jsx');
+Route::get('/sistema-de-cerco-electrico', [ElectricoController::class, 'reactView'])->name('CercoElectrico.jsx');
+// Route::get('/catalog', [CatalogController::class, 'reactView'])->name('CatalogProducts.jsx');
+// Route::get('/product/{slug}', [DetailController::class, 'reactView'])->name('DetailProduct.jsx');
+// Route::get('/blog', [BlogController::class, 'reactView'])->name('Blog.jsx');
+// Route::get('/blog/{articleId}', [ArticleController::class, 'reactView'])->name('BlogArticle.jsx');
+
 //Route::get('/instructions', [InstructionController::class, 'reactView'])->name('Instructions.jsx');
 //Route::get('/quiz', [CatalogController::class, 'reactView'])->name('Quiz.jsx');
 //Route::get('/plans', [PlanController::class, 'reactView'])->name('Plans.jsx');
@@ -113,7 +120,7 @@ Route::middleware(['can:Admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/home-data', [AdminHomeController::class, 'setReactViewProperties']);
     // Endpoint para ventas por rango de fechas (gráfica personalizada)
     Route::get('/sales-by-range', [AdminHomeController::class, 'salesByDateRange']);
-    Route::get('/', fn() => redirect('Admin/Home.jsx'));
+    Route::get('/', fn() => redirect('Admin/Messages.jsx'));
     Route::get('/home', [AdminHomeController::class, 'reactView'])->name('Admin/Home.jsx');
     Route::get('/sales', [AdminSaleController::class, 'reactView'])->name('Admin/Sales.jsx');
     Route::get('/posts', [AdminPostController::class, 'reactView'])->name('Admin/Posts.jsx');

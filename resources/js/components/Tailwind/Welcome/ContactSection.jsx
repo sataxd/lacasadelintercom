@@ -1,28 +1,32 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import GeneralRest from "../../../actions/GeneralRest";
 import ContactForm from "../../Contact/ContactForm";
 import HtmlContent from "../../../Utils/HtmlContent";
+import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
 const ContactSection = ({tieneMargen = false}) => {
    
     const bgVariable = tieneMargen ? "mt-[70px]" : "mt-0";
-
+    const { registerTask, completeTask } = useContext(LoadingContext);
     const [aboutuses, setAboutuses] = useState(null);
                 
     useEffect(() => {
         const fetchAboutuses = async () => {
+            registerTask("ContactSection");
             try {
                 const data = await generalRest.getAboutuses();
                 setAboutuses(data);
             } catch (error) {
                 console.error("Error fetching about:", error);
+            } finally {
+                completeTask("ContactSection");
             }
         };
 
         fetchAboutuses();
-    }, []);
+    }, [registerTask, completeTask]);
 
     const aboutusData = aboutuses?.aboutus || [];
     const generalsData = aboutuses?.generals || [];
@@ -122,6 +126,7 @@ const ContactSection = ({tieneMargen = false}) => {
                             </div> 
                             
                         </div>
+                        
                         <div className="w-full xl:w-1/2 flex flex-col justify-center items-center">
                             <ContactForm title={tenSection?.subtitle} button={tenSection?.button_text} />
                         </div>
