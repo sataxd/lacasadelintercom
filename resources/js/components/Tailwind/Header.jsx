@@ -50,6 +50,7 @@ const Header = ({
     }, []);
 
     const [isScrolled, setIsScrolled] = useState(false);
+    const [showMobileSubMenu, setShowMobileSubMenu] = useState(false);    
 
     useEffect(() => {
         const handleScroll = () => {
@@ -247,7 +248,7 @@ const Header = ({
                 {/* Capa de color si hay fondo */}
                 {(backgroundType === "image" || backgroundType === "video") && (
                     <div
-                        className="absolute inset-0 "
+                        className="absolute inset-0"
                         style={{
                             background:
                                 "linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(0,0,0,0.1) 100%)",
@@ -256,7 +257,7 @@ const Header = ({
                 )}
 
                 <header
-                    className={`font-sora fixed lg:w-full top-0 z-40 transition-colors duration-300 ${backgroundType === "none"
+                    className={`font-sora fixed lg:w-full top-0 z-40 transition-colors duration-300 ${backgroundType === "none" || isScrolled || isOpen
                             ? "bg-[#0b0b0b]"
                             : isScrolled
                                 ? "bg-[#0b0b0b] shadow-md shadow-gray-800 transition-all duration-150"
@@ -266,7 +267,7 @@ const Header = ({
                         }`}
                 >
                     <div
-                        className={`px-[5%] w-screen py-5 lg:py-0 flex justify-between items-center text-white shadow-lg lg:shadow-none `}
+                        className={`px-[5%] w-screen py-5 lg:py-0 flex justify-between items-center text-white`}
                     >
                         <div className="flex flex-row gap-6 justify-between items-center w-full lg:hidden">
                             
@@ -432,28 +433,75 @@ const Header = ({
                     )}
                 </header>
                 
+                {/* Menú Móvil */}
                 <div
                     ref={menuRef}
-                    className={`fixed md:top-20 inset-0 text-white z-[999] transform ${isOpen ? "opacity-1 block " : "hidden opacity-0 "
-                        } ${isScrolled
-                            ? "top-[3.75rem] bg-[#5339B1]"
-                            : "top-24 bg-[#5339B1]"
-                        } transition-transform duration-300 ease-in-out p-[5%] h-max overflow-y-auto `}
+                    className={`fixed inset-0 z-[999] transition-all duration-500 ease-in-out ${
+                        isOpen 
+                            ? "translate-x-0 opacity-100" 
+                            : "-translate-x-full opacity-0 pointer-events-none"
+                    } top-[70px]`}
                 >
-                    <ul className="flex flex-col gap-4 items-center justify-center">
-                        <li>
-                            <a href="/catalog">Tienda</a>
-                        </li>
-                        <li>
-                            <a href="/instructions">¿Cómo usar?</a>
-                        </li>
-                        <li>
-                            <a href="/about">Nosotrxs</a>
-                        </li>
-                        <li>
-                            <a href="/quiz">Quiz telefono</a>
-                        </li>
-                    </ul>
+                    {/* Overlay */}
+                    <div 
+                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        onClick={() => setIsOpen(false)}
+                    ></div>
+
+                    {/* Contenido del Menú (Ajustado a bg-[#0b0b0b]) */}
+                    <nav className="absolute left-0 top-0 h-full w-full max-w-md bg-[#0b0b0b] shadow-2xl flex flex-col overflow-y-auto border-r border-white/5">
+                        <ul className="flex flex-col text-white font-dmsans font-medium text-lg tracking-normal">
+                            
+                            {/* Inicio */}
+                            <li className="border-b border-white/10">
+                                <a className="block px-8 py-5 hover:bg-white/5 transition-colors" href="/">
+                                    Inicio
+                                </a>
+                            </li>
+
+                            {/* Productos con Desplegable */}
+                            <li className="border-b border-white/10">
+                                <button 
+                                    onClick={() => setShowMobileSubMenu(!showMobileSubMenu)}
+                                    className="w-full flex justify-between items-center px-8 py-5 hover:bg-white/5 transition-colors"
+                                >
+                                    <span className="font-dmsans">Productos</span>
+                                    <i className={`fa-solid fa-chevron-down text-base transition-transform duration-300 ${showMobileSubMenu ? 'rotate-180' : ''}`}></i>
+                                </button>
+                                
+                                {/* Contenedor del Submenú Animado */}
+                                <div className={`overflow-hidden transition-all duration-300 ease-in-out bg-[#141414] ${showMobileSubMenu ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                    <ul className="flex flex-col border-l-2 border-red-600 ml-4">
+                                        {subMenuProductos.map((item, index) => (
+                                            <li key={index}>
+                                                <a 
+                                                    href={item.link} 
+                                                    className="block px-8 py-4 text-base text-gray-300 hover:text-white hover:bg-white/5"
+                                                >
+                                                    {item.name}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </li>
+
+                            {/* Servicio Técnico */}
+                            <li className="border-b border-white/10">
+                                <a className="block px-8 py-5 hover:bg-white/5 transition-colors" href="/servicio-tecnico">
+                                    Servicio Técnico
+                                </a>
+                            </li>
+
+                            {/* Contacto */}
+                            <li className="border-b border-white/10">
+                                <a className="block px-8 py-5 hover:bg-white/5 transition-colors" href="/contacto">
+                                    Contacto
+                                </a>
+                            </li>
+                        </ul>
+
+                    </nav>
                 </div>
 
                 {/* Contenido dinámico */}
@@ -803,6 +851,7 @@ const Header = ({
                         </div>
                     </>
                 )}
+                
             </div>
         </>
     );

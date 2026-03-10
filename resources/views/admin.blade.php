@@ -49,18 +49,18 @@
   <link href="/lte/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-      <!-- Leaflet CSS -->
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
+  <!-- Leaflet CSS -->
+  <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
 
-    <!-- Leaflet JS (global) -->
-    <script
-        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-o9N1j7kP6+HkldQxs+g7W+U7Z3w3kM4DAEJOfGraaD8rMEY"
-        crossOrigin=""
-    ></script>
+  <!-- Leaflet JS (global) -->
+  <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-o9N1j7kP6+HkldQxs+g7W+U7Z3w3kM4DAEJOfGraaD8rMEY"
+      crossOrigin=""
+  ></script>
 
     
   @vite('resources/js/' . $route)

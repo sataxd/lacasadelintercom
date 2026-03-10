@@ -74,9 +74,9 @@ const SectoresClientes = ({strengthin, strengthout, indicadores}) => {
                                 html={fiveteenSection?.description}
                             />
 
-                            <div className='grid grid-cols-1 sm:grid-cols-3 w-full max-w-xl gap-10 mt-4'>
+                            <div className='grid grid-cols-1 sm:grid-cols-3 w-full max-w-xl gap-0 sm:gap-10 mt-4'>
                                 {indicadores && indicadores.map((item) => (
-                                    <div className='flex flex-col gap-2 justify-center w-full h-40'>
+                                    <div className='flex flex-col gap-2 justify-center w-full h-28 sm:h-40'>
                                         <span className='font-sora text-4xl font-bold flex flex-row justify-start items-start'>
                                             {item.symbol} <Counter end={item.name} duration={5000} />
                                         </span>

@@ -33,18 +33,34 @@ const SplitText = ({ text, isActive, delay = 0, className = '' }) => {
     },
   };
 
+  // Separamos por palabras para evitar cortes de línea a mitad de palabra
+  const words = text.split(" ");
+
   return (
     <motion.h2
-      style={{ display: 'flex', flexWrap: 'wrap', overflow: 'hidden' }}
+      style={{ display: 'flex', flexWrap: 'wrap' }}
       variants={container}
       initial="hidden"
       animate={isActive ? "visible" : "hidden"} 
       className={className}
     >
-      {text.split("").map((letter, index) => (
-        <motion.span variants={child} key={index}>
-          {letter === " " ? "\u00A0" : letter}
-        </motion.span>
+      {words.map((word, wordIndex) => (
+        // Cada palabra se envuelve en un span con whitespace-nowrap
+        <span 
+          key={wordIndex} 
+          style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
+          className="mr-[0.25em]" // Espacio manual entre palabras
+        >
+          {word.split("").map((letter, letterIndex) => (
+            <motion.span 
+              variants={child} 
+              key={letterIndex} 
+              style={{ display: 'inline-block' }}
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </span>
       ))}
     </motion.h2>
   );
@@ -91,6 +107,8 @@ const Slider = ({ items }) => {
 
   const validItems = items.filter(item => item && (item.image || item.video));
 
+  const hasMultipleSlides = validItems.length > 1;
+
   if (validItems.length === 0) return null;
 
   // 1. Verificamos si TODOS los items son imágenes
@@ -117,10 +135,10 @@ const Slider = ({ items }) => {
             }
         }}
         
-        speed={2000}
+        speed={4000}
         slidesPerView={1}
         autoplay={{
-            delay: 5000, 
+            delay: 8000, 
             disableOnInteraction: false, 
             pauseOnMouseEnter: true,
         }}
@@ -175,14 +193,14 @@ const Slider = ({ items }) => {
                                     <SplitText 
                                         text={slider?.name || ""}
                                         isActive={isActive}
-                                        delay={0.2}
+                                        delay={1}
                                         className='font-sora text-white text-3xl sm:text-5xl 2xl:text-[52px] 4xl:text-6xl tracking-normal font-semibold !leading-[1.15]'
                                     />
                                     
                                     <motion.p 
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                                        transition={{ duration: 0.8, delay: 0.4 }}
+                                        transition={{ duration: 1.8, delay: 1 }}
                                         className="font-dmsans text-white text-lg xl:text-xl 4xl:text-2xl tracking-wide font-light"
                                     >
                                         {slider?.description}
@@ -205,18 +223,26 @@ const Slider = ({ items }) => {
           })
         }
       </Swiper>
+        
+      {hasMultipleSlides && (
+        <>
+          {/* Paginación móvil */}
+          <div className="swiper-pagination-slider md:hidden !bottom-4 flex justify-center w-full z-30 absolute"></div>
 
-      {/* Flechas */}
-        <div className="custom-prev-button absolute md:left-4 top-1/2 -translate-y-1/2 z-30 cursor-pointer text-white hover:text-accent transition-colors duration-300">
+          {/* Flechas Desktop */}
+          <div className="custom-prev-button absolute hidden md:flex md:left-4 top-1/2 -translate-y-1/2 z-30 cursor-pointer text-white hover:text-accent transition-colors duration-300">
             <div className="group/circle w-12 h-12 md:w-14 md:h-14 4xl:w-16 4xl:h-16 rounded-full border border-white/30 bg-black/40 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-all">
-                <ArrowLeft />
+              <ArrowLeft />
             </div>
-        </div>
-        <div className="custom-next-button absolute md:right-4 top-1/2 -translate-y-1/2 z-30 cursor-pointer text-white hover:text-accent transition-colors duration-300">
+          </div>
+          
+          <div className="custom-next-button absolute hidden md:flex md:right-4 top-1/2 -translate-y-1/2 z-30 cursor-pointer text-white hover:text-accent transition-colors duration-300">
             <div className="group/circle w-12 h-12 md:w-14 md:h-14 4xl:w-16 4xl:h-16 rounded-full border border-white/30 bg-black/40 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:text-black transition-all">
-                <ArrowRight />
+              <ArrowRight />
             </div>
-        </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

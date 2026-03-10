@@ -11,6 +11,20 @@
   opacity: 1;
 }
 
+.swiper-pagination-slider .swiper-pagination-bullet {
+  background: #fff !important;
+  opacity: 0.5;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px !important;
+}
+
+.swiper-pagination-slider .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #fff !important;
+  transform: scale(1.2);
+}
+
 .perspective-1000 {
   perspective: 1000px;
 }
