@@ -87,6 +87,10 @@ const Footer = () => {
         (item) => item.correlative === "support_email"
     )?.description;
 
+    const telefonos = generalsData.find(
+        (item) => item.correlative === "phone_contact"
+    )?.description;
+
     const f_whatsapp = aboutusData.find(
         (item) => item.correlative === "whatsapp"
     )?.description;
@@ -95,6 +99,8 @@ const Footer = () => {
     const termsConditions = generalsData.find(
         (item) => item.correlative === "terms_conditions"
     )?.description;
+
+    const telefonosArray = telefonos ? telefonos.split(',') : [];
 
     return (
         <>
@@ -119,15 +125,47 @@ const Footer = () => {
                             </div>
                             
                             <div className="flex flex-row gap-5 max-w-md">
+                                <div  className="flex flex-col gap-1">
+                                        <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">
+                                            Teléfono fijo
+                                        </p>
+                                        
+                                        <div className="flex flex-row flex-wrap items-center gap-2">
+                                            {telefonosArray.map((telefono, index) => {
+                                                const telMostrado = telefono.trim();
+                                                const telEnlace = telMostrado.replace(/\s+/g, '');
+                                                
+                                                // Evaluamos si NO es el último elemento del array
+                                                const isLast = index === telefonosArray.length - 1;
+
+                                                return (
+                                                    <React.Fragment key={index}>
+                                                        <a
+                                                            href={`tel:${telEnlace}`}
+                                                            className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg"
+                                                        >
+                                                            {telMostrado}
+                                                        </a>
+                                                        {/* Renderizamos el guion solo si no es el último número */}
+                                                        {!isLast && (
+                                                            <span className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">
+                                                                -
+                                                            </span>
+                                                        )}
+                                                    </React.Fragment>
+                                                );
+                                            })}
+                                        </div>
+                                </div>
+
                                 <div className="flex flex-col gap-1">
-                                    <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Teléfono fijo</p>
+                                    <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Teléfono móvil</p>
                                     <a href={`tel:${telefono}`} className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">{telefono}</a>
                                 </div>
-                                <div className="flex flex-col gap-1">
-                                    <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Email</p>
-                                    <a href={`mailto:${mail}`} className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">{mail}</a>
-                                </div>
+                                
                             </div>
+                            
+                            
                         </div>
 
                         <div className="w-full sm:col-span-2 sm:pl-5">
@@ -136,13 +174,17 @@ const Footer = () => {
                             
                             <nav className="flex flex-col gap-1 2xl:gap-2 4xl:gap-4 mt-3 sm:mt-5">
                                 
-                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Inicio</a>
+                                <a href="/" className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Inicio</a>
+                                
+                                <a href="/intercomunicadores" className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Intercomunicadores</a>
+                                
+                                <a href="/videoporteros" className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Videoporteros</a>
 
-                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Servicio Técnico</a>
+                                <a href="/servicio-tecnico" className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Servicio Técnico</a>
 
-                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Contacto</a>
+                                <a href="/contacto" className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Contacto</a>
 
-                                <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Únete</a>
+                                {/* <a onClick={openModal} className="cursor-pointer hover:opacity-80 transition-opacity font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">Únete</a> */}
 
                             </nav>
                         </div>
@@ -207,6 +249,12 @@ const Footer = () => {
                                     </a>
                                 )}
                             </div>
+
+                            <div className="flex flex-col gap-1 mt-3 sm:mt-5">
+                                    <p className="font-dmsans text-white text-opacity-70 text-sm 2xl:text-base 4xl:text-lg">Email</p>
+                                    <a href={`mailto:${mail}`} className="font-dmsans text-white text-sm 2xl:text-base 4xl:text-lg">{mail}</a>
+                            </div>
+
                         </div>
 
                     </div>

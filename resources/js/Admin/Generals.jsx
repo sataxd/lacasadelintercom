@@ -162,7 +162,7 @@ const Generals = ({ generals }) => {
           
           <div className={`tab-pane fade ${activeTab === 'contact' ? 'show active' : ''}`} role="tabpanel">
             
-              <div className="row" hidden>
+              <div className="row">
                 <div className="col-md-6" >
                   {formData.phones.map((phone, index) => (
                     <div key={`phone-${index}`} className="mb-3">
@@ -183,7 +183,7 @@ const Generals = ({ generals }) => {
                   ))}
                   <button type="button" className="btn btn-outline-primary" onClick={() => handleAddField('phones')}>Agregar teléfono</button>
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-6" hidden>
                   {formData.emails.map((email, index) => (
                     <div key={`email-${index}`} className="mb-3">
                       <label htmlFor={`email-${index}`} className="form-label">Correo {index + 1}</label>
@@ -267,7 +267,7 @@ const Generals = ({ generals }) => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="supportPhone" className="form-label">Número de soporte</label>
+                <label htmlFor="supportPhone" className="form-label">Número de whatsapp</label>
                 <input
                   type="tel"
                   className="form-control"
@@ -280,7 +280,7 @@ const Generals = ({ generals }) => {
             
 
               <div className="mb-3">
-                <label htmlFor="supportEmail" className="form-label">Correo de soporte</label>
+                <label htmlFor="supportEmail" className="form-label">Correo de contacto</label>
                 <input
                   type="email"
                   className="form-control"
