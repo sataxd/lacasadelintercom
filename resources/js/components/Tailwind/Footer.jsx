@@ -84,7 +84,7 @@ const Footer = () => {
     )?.description;
 
     const mail = generalsData.find(
-        (item) => item.correlative === "email_contact"
+        (item) => item.correlative === "support_email"
     )?.description;
 
     const f_whatsapp = aboutusData.find(
