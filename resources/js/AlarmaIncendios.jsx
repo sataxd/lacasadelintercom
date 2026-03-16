@@ -7,11 +7,13 @@ import { CarritoProvider } from "./context/CarritoContext";
 import Footer from "./components/Tailwind/Footer";
 import SectionAlarmasIndencios from "./components/Tailwind/Services/SectionAlarmasIndencios";
 import Products from "./components/Tailwind/Services/Products";
+import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
+import Marcas from "./components/Tailwind/Welcome/Marcas";
 
 
 
 
-const AlarmaIncendios = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true}) => {
+const AlarmaIncendios = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands}) => {
   return <>
 
     <Header
@@ -31,6 +33,10 @@ const AlarmaIncendios = ({generals, brandsData, globalSubcategories, globalTags,
         />
       ))}
     </div>
+
+    <ServiceTecnical marginTop={false} />
+
+    <Marcas brands={brands} apiFolder='core_value' />
   
     <Footer />
    

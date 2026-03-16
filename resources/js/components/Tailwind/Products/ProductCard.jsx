@@ -43,24 +43,14 @@ const ProductCard = ({ product, visible = true, onClick, isDetailView }) => {
                         </div>
 
                         {/* Información del producto */}
-                        <div className={`flex flex-col justify-center  4xl:py-4 4xl:px-5 gap-2 ${isDetailView ? 'w-1/2 py-4 lg:py-8 px-5 gap-5' : 'w-full p-5'}`}>
+                        <div className={`flex flex-col  4xl:py-4 4xl:px-5 gap-2 ${isDetailView ? 'w-1/2 py-4 lg:py-8 px-5 gap-5 justify-center' : 'w-full p-3 md:p-5 overflow-hidden md:mb-6 4xl:mb-4 justify-start'}`}>
                             
-                                <h3 className={`text-black font-semibold font-sora tracking-tight ${isDetailView ? 'text-lg md:text-xl lg:text-2xl xl:text-3xl 4xl:text-4xl' : 'text-lg 4xl:text-xl line-clamp-1'}`}>
+                                <h2 className={`text-black font-semibold font-sora tracking-tight ${isDetailView ? 'text-lg md:text-xl lg:text-2xl xl:text-3xl 4xl:text-4xl' : 'text-lg 4xl:text-xl md:line-clamp-1'}`}>
                                     {product.name}
-                                </h3>
-
-                                {/* <p className={`text-black font-dmsans text-wrap tracking-normal   ${isDetailView ? 'block text-sm lg:text-base 4xl:text-xl' : 'block md:hidden text-sm 4xl:text-lg'}`}>
-                                    {product.summary}
-                                </p>
-
-                                <ul >
-                                    <li>Característica primero primero primero primeroprimeroprimero primero</li>
-                                    <li>Característica segundo primero primero primeroprim</li>
-                                    <li>Característica tercero primero primero primeroprim</li>
-                                </ul> */}
+                                </h2>
 
                                 <HtmlContent
-                                    className={`block w-full list-disc text-start text-black font-normal  font-dmsans text-wrap ${isDetailView ? 'space-y-1 text-sm lg:text-base 4xl:text-xl' : 'text-sm lg:text-base 4xl:text-lg md:max-h-28 md:mb-1'}`}
+                                    className={`block w-full list-disc text-start text-black font-normal  font-dmsans text-wrap ${isDetailView ? 'space-y-1 text-sm lg:text-base 4xl:text-xl' : 'text-sm lg:text-base 4xl:text-lg md:max-h-28'}`}
                                     html={product?.description}
                                     htmlcontent={'html-content-second'}
                                 />

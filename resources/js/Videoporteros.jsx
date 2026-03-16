@@ -7,10 +7,12 @@ import { CarritoProvider } from "./context/CarritoContext";
 import Footer from "./components/Tailwind/Footer";
 import SectionVideoporteros from "./components/Tailwind/Services/SectionVideoporteros";
 import Products from "./components/Tailwind/Services/Products";
+import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
+import Marcas from "./components/Tailwind/Welcome/Marcas";
 
 
 
-const Videoporteros = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true}) => {
+const Videoporteros = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands}) => {
   return <>
 
     <Header
@@ -30,6 +32,10 @@ const Videoporteros = ({generals, brandsData, globalSubcategories, globalTags, s
         />
       ))}
     </div>
+
+    <ServiceTecnical indeci={false} marginTop={false} />
+
+    <Marcas brands={brands} apiFolder='core_value' />
   
     <Footer />
    

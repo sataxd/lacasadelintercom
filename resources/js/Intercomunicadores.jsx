@@ -7,10 +7,12 @@ import { CarritoProvider } from "./context/CarritoContext";
 import Footer from "./components/Tailwind/Footer";
 import Products from "./components/Tailwind/Services/Products";
 import SectionIntercomunicador from "./components/Tailwind/Services/SectionIntercomunicador";
+import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
+import Marcas from "./components/Tailwind/Welcome/Marcas";
 
 
 
-const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true}) => {
+const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands}) => {
   return <>
 
     <Header
@@ -20,7 +22,7 @@ const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTa
 
     <SectionIntercomunicador />
 
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-4 lg:gap-8">
       {brandsData && brandsData.map((brandInfo, index) => (
         <Products 
            key={index} 
@@ -30,6 +32,10 @@ const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTa
         />
       ))}
     </div>
+
+    <ServiceTecnical indeci={false} marginTop={false} />
+
+    <Marcas brands={brands} apiFolder='core_value' />
   
     <Footer />
    

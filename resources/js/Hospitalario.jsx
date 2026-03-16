@@ -7,8 +7,10 @@ import { CarritoProvider } from "./context/CarritoContext";
 import Footer from "./components/Tailwind/Footer";
 import SectionHospitalario from "./components/Tailwind/Services/SectionHospitalario";
 import Products from "./components/Tailwind/Services/Products";
+import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
+import Marcas from "./components/Tailwind/Welcome/Marcas";
 
-const Hospitalario = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true}) => {
+const Hospitalario = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands}) => {
   return <>
 
     <Header
@@ -28,6 +30,10 @@ const Hospitalario = ({generals, brandsData, globalSubcategories, globalTags, sh
         />
       ))}
     </div>
+
+    <ServiceTecnical indeci={false} marginTop={false} />
+
+    <Marcas brands={brands} apiFolder='core_value' />
   
     <Footer />
    

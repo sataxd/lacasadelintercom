@@ -90,16 +90,6 @@ const benefits = rawBenefits.filter(
                     {incendiosSection?.name}
                 </h2>
               
-                <div className="flex flex-row mb-2">
-                    <a href="/"
-                        className="group bg-black text-white font-dmsans border-[1.5px] border-white border-opacity-50 flex flex-row items-center px-3 md:px-5 py-1.5 text-base 2xl:text-lg 4xl:text-xl rounded-xl font-medium">
-                        {incendiosSection?.button_text}
-                        <div className="rounded-full flex flex-row justify-center items-center ml-2">
-                            <i className="mdi mdi-arrow-up-circle text-2xl text-white group-hover:rotate-180 transition-all duration-500"></i>
-                        </div>
-                    </a>
-                </div>
-              
                 <HtmlContent
                     className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl tracking-normal font-light"
                     html={incendiosSection?.description}

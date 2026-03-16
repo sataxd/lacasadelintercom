@@ -5,7 +5,7 @@ import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
-const ServiceTecnical = () => {
+const ServiceTecnical = ({ indeci = true, marginTop = true }) => {
     const [aboutuses, setAboutuses] = useState(null);
     const { registerTask, completeTask } = useContext(LoadingContext);    
     useEffect(() => {
@@ -41,7 +41,11 @@ const ServiceTecnical = () => {
     return (
 
         <div className="relative overflow-hidden">
-            <div className="relative w-full px-[5%] 4xl:px-[8%] gap-10 xl:gap-16 flex flex-col items-center py-10 xl:py-20">
+            <div className={`relative w-full px-[5%] 4xl:px-[8%] gap-10 xl:gap-16 flex flex-col items-center ${
+                marginTop 
+                ? "py-10 xl:py-20"   // Si marginTop es true (por defecto)
+                : "py-10 xl:pb-20"   // Si marginTop es false
+            }`}>
                 {!!sixtSection?.visible && (
                     <div className="w-full flex flex-col items-center justify-center gap-5 max-w-3xl 4xl:max-w-4xl text-center">
                         <h3 className="font-dmsans text-black text-base sm:text-lg 2xl:text-xl 4xl:text-2xl tracking-normal font-light">
@@ -71,17 +75,17 @@ const ServiceTecnical = () => {
                             </div>
                         </div>
                         <div className="w-full xl:w-1/2 flex flex-col justify-center items-center  order-1 lg:order-2">
-                            <div className="relative h-[250px] sm:h-[350px] 4xl:h-[450px] overflow-hidden rounded-2xl group">
+                            <div className="relative h-[250px] sm:h-[350px] 4xl:h-[450px] overflow-hidden rounded-xl xl:rounded-2xl 4xl:rounded-3xl group">
                                 <img src={`/api/aboutus/media/${sevenSection?.image}`} alt={sevenSection?.name} className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110 " />
                             </div>
                         </div>
                     </div>
                 )}  
-                {!!eightSection?.visible && (
+                {!!eightSection?.visible && indeci && (
                     <div className="flex flex-col lg:flex-row gap-10 xl:gap-16 2xl:gap-20 w-full items-center justify-center">
                         
                         <div className="w-full xl:w-1/2 flex flex-col justify-center items-center">
-                            <div className="relative h-[250px] sm:h-[350px] 4xl:h-[450px] overflow-hidden rounded-2xl group">
+                            <div className="relative h-[250px] sm:h-[350px] 4xl:h-[450px] overflow-hidden rounded-xl xl:rounded-2xl 4xl:rounded-3xl group">
                                 <img src={`/api/aboutus/media/${eightSection?.image}`} alt={eightSection?.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 " />
                             </div>
                         </div>

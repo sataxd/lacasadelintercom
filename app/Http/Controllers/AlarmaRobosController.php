@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoreValue;
 use App\Models\General;
 use App\Models\Item;
 use App\Models\Subcategory;
@@ -17,7 +18,7 @@ class AlarmaRobosController extends BasicController
     {
         $generals = General::all();
         $categoryId = 'a10c346b-8512-4238-9a5b-61690f40d5b2';
-       
+        $brands = CoreValue::where('status', true)->where('visible', true)->get();
         $items = Item::with(['images', 'subcategory', 'brand'])
             ->where('category_id', $categoryId)
             ->where('visible', true)
@@ -68,6 +69,7 @@ class AlarmaRobosController extends BasicController
             'brandsData' => $brandsData, // Array de marcas con sus respectivos items
             'globalSubcategories' => $validSubcategories,
             'globalTags' => $validTags,
+            'brands' => $brands,
         ];
     }
 }

@@ -43,13 +43,13 @@ const SectionElectrico = ({ textoshome }) => {
 
   return (
     <section>
-      <div className="flex flex-col relative gap-10 xl:gap-16 w-full px-[5%] 4xl:px-[8%] py-10 md:py-16 bg-white mt-[70px]">
+      <div className="flex flex-col relative gap-10 xl:gap-16 w-full px-[5%] 4xl:px-[8%] pt-10 md:pt-16 md:pb-4 bg-white mt-[70px]">
         
-        <div className="grid grid-cols-2 xl:grid-cols-12 gap-5 lg:gap-10">
+        <div className="grid grid-cols-2 xl:grid-cols-12 gap-10">
           {!!electricoSection1?.visible && (
             <>
             <div className="order-1 xl:order-none col-span-2 xl:col-span-6 flex flex-col justify-center">
-              <div className="flex flex-col p-2 justify-center items-start gap-5">
+              <div className="flex flex-col p-0 md:p-2 justify-center items-start gap-5">
                   <h2 className="font-sora text-black text-3xl sm:text-4xl 2xl:text-5xl 4xl:text-6xl font-semibold tracking-tight !leading-tight">
                       {electricoSection1?.name}
                   </h2>
@@ -73,7 +73,7 @@ const SectionElectrico = ({ textoshome }) => {
           
             <div className="order-2 xl:order-none col-span-2 xl:col-span-6 flex flex-col justify-end items-center">
               <img 
-                className="h-auto xl:h-96 w-full object-contain object-center rounded-xl xl:rounded-3xl" 
+                className="h-auto xl:h-96 4xl:h-[450px] object-contain object-center rounded-xl xl:rounded-2xl 4xl:rounded-3xl" 
                 src={`/api/aboutus/media/${electricoSection1?.image}`} 
                 alt={electricoSection1?.name}
                 onError={handleImageError} 
@@ -85,7 +85,7 @@ const SectionElectrico = ({ textoshome }) => {
           {!!electricoSection2?.visible && (
             <>
             <div className="order-3 lg:order-4 col-span-2 xl:col-span-6 flex flex-col justify-center">
-              <div className="flex flex-col p-2 justify-center items-start gap-5">
+              <div className="flex flex-col p-0 md:p-2 justify-center items-start gap-5">
                   <h2 className="font-sora text-black text-3xl sm:text-4xl 2xl:text-5xl 4xl:text-6xl font-semibold tracking-tight !leading-tight">
                       {electricoSection2?.name}
                   </h2>
@@ -110,7 +110,7 @@ const SectionElectrico = ({ textoshome }) => {
             
             <div className="order-4 lg:order-3 col-span-2 xl:col-span-6 flex flex-col justify-end items-center">
               <img 
-                className="h-auto xl:h-96  w-full object-contain object-center rounded-xl xl:rounded-3xl" 
+                className="h-auto xl:h-96 4xl:h-[450px] object-contain object-center rounded-xl xl:rounded-2xl 4xl:rounded-3xl" 
                 src={`/api/aboutus/media/${electricoSection2?.image}`} 
                 alt={electricoSection2?.name}
                 onError={handleImageError} 

@@ -61,7 +61,7 @@ const Products = ({ brandData, globalSubcategories, globalTags }) => {
 
   return (
     <section className='mx-[5%] 4xl:mx-[8%] rounded-3xl'>
-      <div className="flex flex-col relative w-full py-5 border-t border-opacity-35"
+      <div className="flex flex-col relative w-full pt-5 border-t border-opacity-35"
         // style={{
         //   backgroundImage: "url('/assets/img/fondoproductosf.webp')",
         //   backgroundSize: 'cover',   
