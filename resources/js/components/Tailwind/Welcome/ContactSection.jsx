@@ -36,11 +36,11 @@ const ContactSection = ({tieneMargen = false}) => {
     );
 
     const elevenSection = generalsData.find(
-        (item) => item.correlative === "email_contact"
+        (item) => item.correlative === "support_email"
     );
 
     const twuelveSection = generalsData.find(
-        (item) => item.correlative === "phone_contact"
+        (item) => item.correlative === "support_phone"
     );
 
     const thirtenSection = generalsData.find(

@@ -68,7 +68,7 @@ const Footer = () => {
     )?.description;
 
     const telefono = generalsData.find(
-        (item) => item.correlative === "phone_contact"
+        (item) => item.correlative === "support_phone"
     )?.description;
 
     const direccion = generalsData.find(
