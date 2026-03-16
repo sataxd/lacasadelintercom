@@ -12,9 +12,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        DB::table('statistics_sales')->delete();
-
         Schema::table('statistics_sales', function (Blueprint $table) {
             $table->foreignUuid('website_statistic_id')
                 ->nullable()
