@@ -12,7 +12,7 @@ import Marcas from "./components/Tailwind/Welcome/Marcas";
 
 
 
-const Videoporteros = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands}) => {
+const Videoporteros = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands, dataAbout}) => {
   return <>
 
     <Header
@@ -20,9 +20,9 @@ const Videoporteros = ({generals, brandsData, globalSubcategories, globalTags, s
     >
     </Header>
 
-    <SectionVideoporteros />
+    <SectionVideoporteros dataAbout={dataAbout} />
 
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10" id="productos">
       {brandsData && brandsData.map((brandInfo, index) => (
         <Products 
            key={index} 
@@ -35,7 +35,7 @@ const Videoporteros = ({generals, brandsData, globalSubcategories, globalTags, s
 
     <ServiceTecnical indeci={false} marginTop={false} />
 
-    <Marcas brands={brands} apiFolder='core_value' />
+    <Marcas dataAbout={dataAbout} brands={brands} apiFolder='core_value' />
   
     <Footer />
    

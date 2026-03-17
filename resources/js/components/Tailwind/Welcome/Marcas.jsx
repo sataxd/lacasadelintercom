@@ -5,28 +5,9 @@ import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
-const Marcas = ({ brands, apiFolder }) => {
+const Marcas = ({ brands, apiFolder, dataAbout }) => {
 
-    const [aboutuses, setAboutuses] = useState(null);
-    const { registerTask, completeTask } = useContext(LoadingContext);  
-
-    useEffect(() => {
-        registerTask("BrandSection");
-        const fetchAboutuses = async () => {
-            try {
-                const data = await generalRest.getAboutuses();
-                setAboutuses(data);
-            } catch (error) {
-                console.error("Error fetching about:", error);
-            } finally {
-                completeTask("BrandSection");
-            }
-        };
-
-        fetchAboutuses();
-    }, [registerTask, completeTask]);
-
-    const aboutusData = aboutuses?.aboutus || [];
+    const aboutusData = dataAbout || [];
 
     const nineSection = aboutusData.find(
         (item) => item.correlative === "home-brands-section"

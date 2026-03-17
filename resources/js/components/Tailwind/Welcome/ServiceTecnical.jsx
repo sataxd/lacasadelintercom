@@ -5,26 +5,9 @@ import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
-const ServiceTecnical = ({ indeci = true, marginTop = true }) => {
-    const [aboutuses, setAboutuses] = useState(null);
-    const { registerTask, completeTask } = useContext(LoadingContext);    
-    useEffect(() => {
-        registerTask("ServicesSection");
-        const fetchAboutuses = async () => {
-            try {
-                const data = await generalRest.getAboutuses();
-                setAboutuses(data);
-            } catch (error) {
-                console.error("Error fetching about:", error);
-            } finally {
-                completeTask("ServicesSection");
-            }
-        };
-
-        fetchAboutuses();
-    }, [registerTask, completeTask]);
-
-    const aboutusData = aboutuses?.aboutus || [];
+const ServiceTecnical = ({ indeci = true, marginTop = true, dataAbout }) => {
+    
+    const aboutusData = dataAbout || [];
 
     const sixtSection = aboutusData.find(
         (item) => item.correlative === "home-tecnician-title"

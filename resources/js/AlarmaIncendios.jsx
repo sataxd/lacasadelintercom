@@ -13,7 +13,7 @@ import Marcas from "./components/Tailwind/Welcome/Marcas";
 
 
 
-const AlarmaIncendios = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands}) => {
+const AlarmaIncendios = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands, dataAbout}) => {
   return <>
 
     <Header
@@ -21,7 +21,7 @@ const AlarmaIncendios = ({generals, brandsData, globalSubcategories, globalTags,
     >
     </Header>
 
-    <SectionAlarmasIndencios />
+    <SectionAlarmasIndencios dataAbout={dataAbout} />
 
     <div className="flex flex-col gap-10">
       {brandsData && brandsData.map((brandInfo, index) => (
@@ -36,7 +36,7 @@ const AlarmaIncendios = ({generals, brandsData, globalSubcategories, globalTags,
 
     <ServiceTecnical marginTop={false} />
 
-    <Marcas brands={brands} apiFolder='core_value' />
+    <Marcas dataAbout={dataAbout} brands={brands} apiFolder='core_value' />
   
     <Footer />
    

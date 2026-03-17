@@ -6,33 +6,15 @@ import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
-const AboutSection = () => {
-    const { registerTask, completeTask } = useContext(LoadingContext);
+const AboutSection = ({dataAbout}) => {
+    
     const [activeImage, setActiveImage] = useState(1);
 
     const handleToggleImage = () => {
         setActiveImage(prev => prev === 1 ? 2 : 1);
     };
 
-    const [aboutuses, setAboutuses] = useState(null);
-    
-    useEffect(() => {
-        const fetchAboutuses = async () => {
-            registerTask("AboutSection");
-            try {
-                const data = await generalRest.getAboutuses();
-                setAboutuses(data);
-            } catch (error) {
-                console.error("Error fetching about:", error);
-            } finally {
-                completeTask("AboutSection");
-            }
-        };
-
-        fetchAboutuses();
-    }, [registerTask, completeTask]);
-
-    const aboutusData = aboutuses?.aboutus || [];
+    const aboutusData = dataAbout || [];
 
     const firstSection = aboutusData.find(
         (item) => item.correlative === "home-about-title"

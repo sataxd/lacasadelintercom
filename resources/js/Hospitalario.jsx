@@ -10,7 +10,7 @@ import Products from "./components/Tailwind/Services/Products";
 import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
 import Marcas from "./components/Tailwind/Welcome/Marcas";
 
-const Hospitalario = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands}) => {
+const Hospitalario = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands, dataAbout}) => {
   return <>
 
     <Header
@@ -18,7 +18,7 @@ const Hospitalario = ({generals, brandsData, globalSubcategories, globalTags, sh
     >
     </Header>
 
-    <SectionHospitalario />
+    <SectionHospitalario dataAbout={dataAbout} />
 
     <div className="flex flex-col gap-10">
       {brandsData && brandsData.map((brandInfo, index) => (
@@ -33,7 +33,7 @@ const Hospitalario = ({generals, brandsData, globalSubcategories, globalTags, sh
 
     <ServiceTecnical indeci={false} marginTop={false} />
 
-    <Marcas brands={brands} apiFolder='core_value' />
+    <Marcas dataAbout={dataAbout} brands={brands} apiFolder='core_value' />
   
     <Footer />
    

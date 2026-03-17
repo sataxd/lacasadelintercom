@@ -5,32 +5,13 @@ import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
-const SectionHospitalario = ({ textoshome }) => {
+const SectionHospitalario = ({ dataAbout }) => {
   const handleImageError = (e) => {
     e.currentTarget.src = '/images/imagen/noimagen.jpg';
     e.currentTarget.onerror = null; 
   };
 
-  const [aboutuses, setAboutuses] = useState(null);
-  const { registerTask, completeTask } = useContext(LoadingContext);    
-
-    useEffect(() => {
-        registerTask("SectionHospitalario");
-        const fetchAboutuses = async () => {
-            try {
-                const data = await generalRest.getAboutuses();
-                setAboutuses(data);
-            } catch (error) {
-                console.error("Error fetching about:", error);
-            } finally {
-                completeTask("SectionHospitalario");
-            }
-        };
-  
-        fetchAboutuses();
-    }, [registerTask, completeTask]);
-    
-    const aboutusData = aboutuses?.aboutus || [];
+    const aboutusData = dataAbout || [];
   
     const hospitalarioSection1 = aboutusData.find(
       (item) => item.correlative === "products-hospitalario-1section"

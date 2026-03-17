@@ -12,7 +12,7 @@ import Marcas from "./components/Tailwind/Welcome/Marcas";
 
 
 
-const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands}) => {
+const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTags, showSlogan = true, brands, dataAbout}) => {
   return <>
 
     <Header
@@ -20,9 +20,9 @@ const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTa
     >
     </Header>
 
-    <SectionIntercomunicador />
+    <SectionIntercomunicador dataAbout={dataAbout} />
 
-    <div className="flex flex-col gap-4 lg:gap-8">
+    <div id="productos" className="flex flex-col gap-4 lg:gap-8">
       {brandsData && brandsData.map((brandInfo, index) => (
         <Products 
            key={index} 
@@ -35,7 +35,7 @@ const Intercomunicadores = ({generals, brandsData, globalSubcategories, globalTa
 
     <ServiceTecnical indeci={false} marginTop={false} />
 
-    <Marcas brands={brands} apiFolder='core_value' />
+    <Marcas dataAbout={dataAbout} brands={brands} apiFolder='core_value' />
   
     <Footer />
    

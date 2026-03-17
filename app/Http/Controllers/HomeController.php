@@ -6,6 +6,7 @@ use App\Models\Aboutus;
 use App\Models\Ad;
 use App\Models\Category;
 use App\Models\CoreValue;
+use App\Models\General;
 use App\Models\Indicator;
 use App\Models\InstagramPost;
 use App\Models\Item;
@@ -33,6 +34,8 @@ class HomeController extends BasicController
         $strengthin = Strength::where('status', true)->where('visible', true)->where('description', 'in')->get();
         $clientes = InstagramPost::where('status', true)->where('visible', true)->get();
         $indicadores = Indicator::where('status', true)->where('visible', true)->get();
+        $dataAbout = Aboutus::all();
+        $dataGeneral = General::all();
         $popups = Ad::today();
         // $top_sale = Item::where('status', true)->where('visible', true)->where('featured', true)->with(['colors', 'sizes'])->orderBy('updated_at', 'DESC')->first();
 
@@ -51,6 +54,8 @@ class HomeController extends BasicController
             'strengthin' => $strengthin,
             'clientes' => $clientes,
             'indicadores' => $indicadores,
+            'dataAbout' => $dataAbout,
+            'dataGeneral' => $dataGeneral,
         ];
     }
 }

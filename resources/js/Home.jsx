@@ -30,11 +30,10 @@ const Home = ({
     strengthin,
     clientes,
     indicadores,
-    items,
-    supplies,
+    dataAbout,
+    dataGeneral,
     testimonies,
     popups,
-    top_sale,
     showSlogan = true,
     posts,
 }) => {
@@ -53,13 +52,13 @@ const Home = ({
 
             <div className="relative z-10">
                 
-                <AboutSection />
+                <AboutSection dataAbout={dataAbout} />
 
-                <CategoriesSection category={category} />
+                <CategoriesSection category={category} dataAbout={dataAbout} />
 
-                <ServiceTecnical />
+                <ServiceTecnical dataAbout={dataAbout} />
 
-                <Marcas brands={brands} apiFolder='core_value' />
+                <Marcas dataAbout={dataAbout} brands={brands} apiFolder='core_value' />
                 
                 <ContactSection />
 

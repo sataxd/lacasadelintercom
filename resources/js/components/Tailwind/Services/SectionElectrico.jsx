@@ -5,32 +5,13 @@ import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
-const SectionElectrico = ({ textoshome }) => {
+const SectionElectrico = ({ dataAbout }) => {
   const handleImageError = (e) => {
     e.currentTarget.src = '/images/imagen/noimagen.jpg';
     e.currentTarget.onerror = null; 
   };
 
-  const [aboutuses, setAboutuses] = useState(null);
-  const { registerTask, completeTask } = useContext(LoadingContext);    
-
-    useEffect(() => {
-        registerTask("SectionElectrico");
-        const fetchAboutuses = async () => {
-            try {
-                const data = await generalRest.getAboutuses();
-                setAboutuses(data);
-            } catch (error) {
-                console.error("Error fetching about:", error);
-            } finally {
-                completeTask("SectionElectrico");
-            }
-        };
-  
-        fetchAboutuses();
-    }, [registerTask, completeTask]);
-    
-    const aboutusData = aboutuses?.aboutus || [];
+    const aboutusData = dataAbout || [];
   
     const electricoSection1 = aboutusData.find(
       (item) => item.correlative === "products-cerco-1section"

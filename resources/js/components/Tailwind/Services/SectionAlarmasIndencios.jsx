@@ -5,32 +5,13 @@ import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
-const SectionAlarmasIndencios = ({ textoshome }) => {
+const SectionAlarmasIndencios = ({ dataAbout }) => {
   const handleImageError = (e) => {
     e.currentTarget.src = '/images/imagen/noimagen.jpg';
     e.currentTarget.onerror = null; 
   };
 
-  const [aboutuses, setAboutuses] = useState(null);
-  const { registerTask, completeTask } = useContext(LoadingContext);    
-
-    useEffect(() => {
-        registerTask("SectionAlarmasIndencios");
-        const fetchAboutuses = async () => {
-            try {
-                const data = await generalRest.getAboutuses();
-                setAboutuses(data);
-            } catch (error) {
-                console.error("Error fetching about:", error);
-            } finally {
-                completeTask("SectionAlarmasIndencios");
-            }
-        };
-  
-        fetchAboutuses();
-    }, [registerTask, completeTask]);
-    
-    const aboutusData = aboutuses?.aboutus || [];
+    const aboutusData = dataAbout || [];
   
     const incendiosSection = aboutusData.find(
       (item) => item.correlative === "products-incendios-section"

@@ -5,32 +5,13 @@ import { LoadingContext } from "../Base";
 
 const generalRest = new GeneralRest();
 
-const SectionVideoporteros = ({ textoshome }) => {
+const SectionVideoporteros = ({ dataAbout }) => {
   const handleImageError = (e) => {
     e.currentTarget.src = '/images/imagen/noimagen.jpg';
     e.currentTarget.onerror = null; 
   };
 
-  const [aboutuses, setAboutuses] = useState(null);
-  const { registerTask, completeTask } = useContext(LoadingContext);    
-
-    useEffect(() => {
-        registerTask("SectionVideoporteros");
-        const fetchAboutuses = async () => {
-            try {
-                const data = await generalRest.getAboutuses();
-                setAboutuses(data);
-            } catch (error) {
-                console.error("Error fetching about:", error);
-            } finally {
-                completeTask("SectionVideoporteros");
-            }
-        };
-  
-        fetchAboutuses();
-    }, [registerTask, completeTask]);
-    
-    const aboutusData = aboutuses?.aboutus || [];
+    const aboutusData = dataAbout || [];
   
     const videoporterosSection = aboutusData.find(
       (item) => item.correlative === "products-videoporteros-section"
@@ -48,35 +29,45 @@ const SectionVideoporteros = ({ textoshome }) => {
       (item) => item.correlative === "products-videoporteros-3benefit"
     );
 
-  // 1. Creamos el arreglo igual que antes
-  const rawBenefits = [
-  {
-    id: vbeneficio1?.id,
-    title: vbeneficio1?.name,
-    description: vbeneficio1?.description,
-    image: vbeneficio1?.image,
-    visible: vbeneficio1?.visible,
-  },
-  {
-    id: vbeneficio2?.id,
-    title: vbeneficio2?.name,
-    description: vbeneficio2?.description,
-    image: vbeneficio2?.image,
-    visible: vbeneficio2?.visible,
-  },
-  {
-    id: vbeneficio3?.id,
-    title: vbeneficio3?.name,
-    description: vbeneficio3?.description,
-    image: vbeneficio3?.image,
-    visible: vbeneficio3?.visible,
-  },
-];
+    // 1. Creamos el arreglo igual que antes
+    const rawBenefits = [
+    {
+      id: vbeneficio1?.id,
+      title: vbeneficio1?.name,
+      description: vbeneficio1?.description,
+      image: vbeneficio1?.image,
+      visible: vbeneficio1?.visible,
+    },
+    {
+      id: vbeneficio2?.id,
+      title: vbeneficio2?.name,
+      description: vbeneficio2?.description,
+      image: vbeneficio2?.image,
+      visible: vbeneficio2?.visible,
+    },
+    {
+      id: vbeneficio3?.id,
+      title: vbeneficio3?.name,
+      description: vbeneficio3?.description,
+      image: vbeneficio3?.image,
+      visible: vbeneficio3?.visible,
+    },
+  ];
 
+  const benefits = rawBenefits.filter(
+      (b) => b.title && (b.visible === true || b.visible === 1 || b.visible === "1")
+  );
 
-const benefits = rawBenefits.filter(
-    (b) => b.title && (b.visible === true || b.visible === 1 || b.visible === "1")
-);
+  const handleSmoothScroll = (e) => {
+      e.preventDefault(); // Evitamos el salto brusco por defecto del navegador
+      const target = document.getElementById('productos');
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start', // Alinea el elemento al principio de la pantalla
+        });
+      }
+  };
 
   return (
     <section>
@@ -91,7 +82,9 @@ const benefits = rawBenefits.filter(
                 </h2>
               
                 <div className="flex flex-row mb-2">
-                    <a href="/"
+                    <a 
+                        href="#productos"
+                        onClick={handleSmoothScroll} 
                         className="group bg-black text-white font-dmsans border-[1.5px] border-white border-opacity-50 flex flex-row items-center px-3 md:px-5 py-1.5 text-base 2xl:text-lg 4xl:text-xl rounded-xl font-medium">
                         {videoporterosSection?.button_text}
                         <div className="rounded-full flex flex-row justify-center items-center ml-2">

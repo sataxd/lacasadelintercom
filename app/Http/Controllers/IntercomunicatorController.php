@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aboutus;
 use App\Models\CoreValue;
 use App\Models\General;
 use App\Models\Item;
@@ -19,6 +20,8 @@ class IntercomunicatorController extends BasicController
         $generals = General::all();
         $categoryId = 'a10c346b-7f2b-49b2-9444-1e588a2f24ef';
         $brands = CoreValue::where('status', true)->where('visible', true)->get();
+        $dataAbout = Aboutus::all();
+        $dataGeneral = General::all();
         $items = Item::with(['images', 'subcategory', 'brand'])
             ->where('category_id', $categoryId)
             ->where('visible', true)
@@ -70,6 +73,8 @@ class IntercomunicatorController extends BasicController
             'globalSubcategories' => $validSubcategories,
             'globalTags' => $validTags,
             'brands' => $brands,
+            'dataAbout' => $dataAbout,
+            'dataGeneral' => $dataGeneral,
         ];
     }
 }
