@@ -85,10 +85,11 @@ Route::get('/alarma-contra-incendios', [AlarmaIncendioController::class, 'reactV
 Route::get('/sistema-de-alarma-contra-robo', [AlarmaRobosController::class, 'reactView'])->name('AlarmaRobos.jsx');
 Route::get('/intercomunicador-hospitalario', [HospitalarioController::class, 'reactView'])->name('Hospitalario.jsx');
 Route::get('/sistema-de-cerco-electrico', [ElectricoController::class, 'reactView'])->name('CercoElectrico.jsx');
+Route::get('/blog', [BlogController::class, 'reactView'])->name('Blog.jsx');
+Route::get('/blog/{articleId}', [ArticleController::class, 'reactView'])->name('BlogArticle.jsx');
 // Route::get('/catalog', [CatalogController::class, 'reactView'])->name('CatalogProducts.jsx');
 // Route::get('/product/{slug}', [DetailController::class, 'reactView'])->name('DetailProduct.jsx');
-// Route::get('/blog', [BlogController::class, 'reactView'])->name('Blog.jsx');
-// Route::get('/blog/{articleId}', [ArticleController::class, 'reactView'])->name('BlogArticle.jsx');
+
 
 //Route::get('/instructions', [InstructionController::class, 'reactView'])->name('Instructions.jsx');
 //Route::get('/quiz', [CatalogController::class, 'reactView'])->name('Quiz.jsx');

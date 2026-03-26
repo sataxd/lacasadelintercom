@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionContro
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\SubcategoryController as AdminSubcategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\Admin\SocialController as AdminSocialController;
 use App\Http\Controllers\Admin\StrengthController as AdminStrengthController;
 use App\Http\Controllers\Admin\CoreValueController as AdminCoreValueController;
@@ -59,6 +60,7 @@ use App\Http\Controllers\ItemImageController;
 use App\Http\Controllers\MailingController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StrengthController;
 use App\Http\Controllers\SubscriptionController;
@@ -82,6 +84,7 @@ use App\Models\InstagramPost;
 Route::get('/generals/get-socials', [GeneralController::class, 'getSocials']);
 Route::get('/generals/get-benefits', [GeneralController::class, 'getBenefits']);
 Route::get('/generals/get-aboutuses', [GeneralController::class, 'getAboutuses']);
+Route::get('/generals/get-blogs', [GeneralController::class, 'getBlogs']);
 
 
 Route::get('/items/get-destacados', [ItemController::class, 'getDestacados']);
@@ -180,6 +183,12 @@ Route::middleware('auth')->group(function () {
         Route::patch('/colors/status', [AdminItemColorController::class, 'status']);
         Route::patch('/colors/{field}', [AdminItemColorController::class, 'boolean']);
         Route::delete('/colors/{id}', [AdminItemColorController::class, 'delete']);
+
+        Route::post('/tags', [AdminTagController::class, 'save']);
+        Route::post('/tags/paginate', [AdminTagController::class, 'paginate']);
+        Route::patch('/tags/status', [AdminTagController::class, 'status']);
+        Route::patch('/tags/{field}', [AdminTagController::class, 'boolean']);
+        Route::delete('/tags/{id}', [AdminTagController::class, 'delete']);
 
         Route::post('/instagram_posts', [AdminInstagramPostsController::class, 'save']);
         Route::post('/instagram_posts/paginate', [AdminInstagramPostsController::class, 'paginate']);
