@@ -362,6 +362,7 @@ const Header = ({
                             
                             <nav className="flex flex-row justify-center items-center gap-5 xl:gap-8 4xl:gap-10 xl:w-7/12 font-dmsans font-medium lg:text-lg 2xl:text-xl 4xl:text-[23px] text-center tracking-normal h-full">
                                 <a href="/">Inicio</a>
+                                <a href="/nosotros">Nosotros</a>
                                 <div className="relative group h-full flex items-center cursor-pointer">
                                     <a  className="flex items-center gap-2 ">
                                         Productos
@@ -522,6 +523,12 @@ const Header = ({
                             <li className="border-b border-white/10">
                                 <a className="block px-8 py-5 hover:bg-white/5 transition-colors" href="/">
                                     Inicio
+                                </a>
+                            </li>
+
+                            <li className="border-b border-white/10">
+                                <a className="block px-8 py-5 hover:bg-white/5 transition-colors" href="/nosotros">
+                                    Nosotros
                                 </a>
                             </li>
 
