@@ -78,7 +78,8 @@ use App\Http\Controllers\VideoporterosController;
 // Public routes
 Route::get('/', [HomeController::class, 'reactView'])->name('Home.jsx');
 Route::get('/contacto', [ContactController::class, 'reactView'])->name('Contact.jsx');
-Route::get('/servicio-tecnico', [ServicesController::class, 'reactView'])->name('Services.jsx');
+Route::get('/nosotros', [AboutController::class, 'reactView'])->name('About.jsx');
+Route::get('/servicio/{slug}', [ServicesController::class, 'reactView'])->name('Services.jsx');
 Route::get('/intercomunicadores', [IntercomunicatorController::class, 'reactView'])->name('Intercomunicadores.jsx');
 Route::get('/videoporteros', [VideoporterosController::class, 'reactView'])->name('Videoporteros.jsx');
 Route::get('/alarma-contra-incendios', [AlarmaIncendioController::class, 'reactView'])->name('AlarmaIncendios.jsx');
@@ -98,7 +99,6 @@ Route::get('/blog/{articleId}', [ArticleController::class, 'reactView'])->name('
 //Route::get('/faqs', [FaqController::class, 'reactView'])->name('FAQs.jsx');
 //Route::get('/test', [TestController::class, 'reactView'])->name('Test.jsx');
 //Route::get('/test/result/{formula}', [TestResultController::class, 'reactView'])->name('TestResult.jsx');
-//Route::get('/about', [AboutController::class, 'reactView'])->name('About.jsx');
 
 
 // Vistas maquetadas finalizadas

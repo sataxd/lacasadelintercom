@@ -125,17 +125,75 @@ const TabPanel = ( {servicios} ) => {
   return (
     <section className="relative overflow-hidden mt-[70px]">
       <div className="relative w-full px-[5%] 4xl:px-[8%] gap-10 xl:gap-16 flex flex-col items-center py-10 xl:py-16">
-            
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={servicios.id}
-            className="flex flex-col lg:flex-row gap-10 lg:gap-16 w-full items-center justify-center"
-          >
+          
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 w-full items-start justify-center">
 
-            <div className="w-full lg:w-1/2">
-                <div className="relative z-0 px-2">
+            <div className="w-full xl:w-2/5 flex flex-col gap-4">
+              
+              <div className='flex flex-col gap-2 justify-center items-start'>
+                <h3 className="font-sora text-black text-3xl sm:text-4xl 2xl:text-4xl 4xl:text-5xl font-semibold tracking-tight !leading-tight mb-3">
+                    {sixteenSection?.name}
+                </h3>
+                <HtmlContent
+                    className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl font-light"
+                    html={sixteenSection?.description}
+                />
+              </div>
+
+              <div className='flex flex-col w-full'>
+                {/* AQUI AGREGAMOS EL INDEX */}
+                {servicios.map((service, index) => (
+                  <button
+                    key={service.id}
+                    onClick={() => setActiveTab(service)}
+                    className={`flex items-center gap-3 py-4 sm:py-6 max-w-md border-b border-gray-200 transition-all duration-300 group text-left ${
+                    activeTab.id === service.id ? 'opacity-100' : 'opacity-60 hover:opacity-70'
+                  }`}
+                  >
+                    {/* CAMBIO: Generación automática del número */}
+                    <span className={`font-sora font-bold ${
+                        activeTab.id === service.id ? 'text-black text-xl' : 'text-gray-800 text-base'
+                      }`}>
+                        {(index + 1).toString().padStart(2, '0')}
+                    </span>
+
+                    <h2 className={`font-sora transition-all duration-300 font-medium tracking-tight !leading-tight ${
+                        activeTab.id === service.id 
+                          ? 'text-xl sm:text-2xl 4xl:text-3xl font-semibold text-black' 
+                          : 'text-base sm:text-lg  4xl:text-2xl text-gray-800'
+                        }`}>
+                        {service.name}
+                    </h2>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            
+            <div className="w-full xl:w-3/5 flex flex-col justify-start items-start">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab.id}
+                  className="w-full flex flex-col gap-5"
+                >
+
+                  <div className="relative w-full h-[250px] sm:h-[450px] 4xl:h-[600px] overflow-hidden rounded-2xl bg-gray-100">
+                    <motion.img 
+                      variants={jumpImageVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      src={`/api/services/media/${activeTab.image}`}
+                      alt={activeTab.name} 
+                      className="w-full h-full object-cover transition-all duration-500"
+                    />
+                  </div>
+
+                 
+                  <div className="relative z-0 px-2">
+                  
                     <SplitText 
-                      text={servicios.name} 
+                      text={activeTab.name} 
                       className="font-sora text-black text-2xl sm:text-3xl 4xl:text-4xl font-semibold tracking-tight mb-4 !leading-tight"
                       // CAMBIO: Delay reducido a 0.3s (antes 0.5) para que aparezca apenas entra la imagen
                       delay={0.3}  
@@ -152,30 +210,18 @@ const TabPanel = ( {servicios} ) => {
                       >
                           <HtmlContent
                               className="font-dmsans text-black text-base 2xl:text-lg 4xl:text-xl"
-                              html={servicios?.description}
+                              html={activeTab?.description}
                           />
                       </motion.div>
                     </div>
-                </div>
+
+                  </div>
+
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-
-            <div className="w-full lg:w-1/2">
-              <div className="relative w-full h-[250px] sm:h-[450px] 4xl:h-[600px] overflow-hidden rounded-2xl bg-gray-100">
-                <motion.img 
-                  variants={jumpImageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  src={`/api/services/media/${servicios.image}`}
-                  alt={servicios.name} 
-                  className="w-full h-full object-cover transition-all duration-500"
-                />
-              </div>
-            </div>
-            
-          </motion.div>
-        </AnimatePresence>
+          </div>
 
       </div>
     </section>

@@ -23,9 +23,12 @@ class ServicesController extends BasicController
     public $reactRootView = 'public';
 
     public function setReactViewProperties(Request $request)
-    {
-        $servicios = Services::where('status', true)->where('visible', true)->orderBy('created_at', 'asc')->get();
-     
+    {   
+        $servicios = Services::where('slug', $request->slug)->where('status', true)->where('visible', true)->first();
+        // $servicios = Services::where('status', true)->where('visible', true)->orderBy('created_at', 'asc')->get();
+        if (!$servicios) {
+            abort(404);
+        }
         return [
             'servicios' => $servicios
         ];

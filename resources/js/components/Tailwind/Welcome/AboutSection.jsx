@@ -36,7 +36,7 @@ const AboutSection = ({dataAbout}) => {
 
     return (
 
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden mt-[70px]">
             <div className="relative w-full px-[5%] 4xl:px-[8%] gap-10 xl:gap-16 flex flex-col items-center py-10 xl:py-20">
 
                     {!!firstSection?.visible && (

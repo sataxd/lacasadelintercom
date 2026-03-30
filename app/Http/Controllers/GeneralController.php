@@ -10,6 +10,7 @@ use App\Models\dxDataGrid;
 use App\Models\General;
 use App\Models\Indicator;
 use App\Models\Post;
+use App\Models\Services;
 use App\Models\Slider;
 use App\Models\Social;
 use Exception;
@@ -58,6 +59,26 @@ class GeneralController extends BasicController
         $response = new Response();
         try {
             $data = Post::where('status',true)->get();
+            $response->data = $data;
+            $response->status = 200;
+            $response->message = 'Operacion correcta';
+        } catch (\Throwable $th) {
+
+            $response->status = 400;
+            $response->message = $th->getMessage();
+        } finally {
+            return response(
+                $response->toArray(),
+                $response->status
+            );
+        }
+    }
+
+    public function getServices(Request $request): HttpResponse|ResponseFactory
+    {
+        $response = new Response();
+        try {
+            $data = Services::where('status',true)->where('visible', true)->get();
             $response->data = $data;
             $response->status = 200;
             $response->message = 'Operacion correcta';

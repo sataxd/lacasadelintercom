@@ -51,7 +51,8 @@ const Header = ({
 
     const [isScrolled, setIsScrolled] = useState(false);
     const [showMobileSubMenu, setShowMobileSubMenu] = useState(false);    
-
+    const [showMobileServicesMenu, setShowMobileServicesMenu] = useState(false);
+    
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 1);
@@ -199,6 +200,22 @@ const Header = ({
 
         fetchBlogs();
     }, []); 
+
+    const [servicios, setServicios] = useState([]);
+
+    useEffect(() => {
+        const fetchServicios = async () => {
+            try {
+                // Asegúrate de tener este método getServices() en tu GeneralRest
+                const data = await generalRest.getServices(); 
+                setServicios(data);
+            } catch (error) {
+                console.error("Error fetching services:", error);
+            }
+        };
+
+        fetchServicios();
+    }, []);
 
     const TikTok = socials.find((social) => social.description === "TikTok");
     const WhatsApp = socials.find(
@@ -367,7 +384,38 @@ const Header = ({
                                         </div>
                                     </div>
                                 </div>
-                                <a href="/servicio-tecnico">Servicio Técnico</a>
+                               
+                                {/* <a href="/servicio-tecnico">Servicio Técnico</a> */}
+                                <div className="relative group h-full flex items-center cursor-pointer">
+                                    <a className="flex items-center gap-2">
+                                        Servicios
+                                        {/* Solo mostrar la flecha si hay servicios */}
+                                        {servicios && servicios.length > 0 && (
+                                            <i className="fa-solid fa-chevron-down text-[0.6em] transition-transform duration-300 group-hover:rotate-180"></i>
+                                        )}
+                                    </a>
+                                    {servicios && servicios.length > 0 && (
+                                        <div className="absolute top-[80%] left-0 min-w-[240px] 4xl:min-w-[300px] pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 z-50 text-left">
+                                            <div className="bg-white rounded-[12px] shadow-xl overflow-hidden">
+                                                <ul className="flex flex-col">
+                                                    {servicios.map((item, index) => (
+                                                        <li key={index}>
+                                                            <a
+                                                                // Usamos el slug dinámico aquí
+                                                                href={`/servicio/${item.slug}`} 
+                                                                className="tracking-tight block px-5 py-3 4xl:py-4 font-dmsans text-lg 4xl:text-xl text-black bg-gradient-to-r from-transparent to-transparent hover:from-[#00000017] hover:to-transparent transition-colors font-medium"
+                                                            >
+                                                                {item.name}
+                                                            </a>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>                
+                                
+
                                 {blogs.length > 0 && (
                                     <a href="/blog">Blog</a>
                                 )}
@@ -506,10 +554,44 @@ const Header = ({
 
                             {/* Servicio Técnico */}
                             <li className="border-b border-white/10">
+                                <div className="w-full flex justify-between items-center px-8 py-5 hover:bg-white/5 transition-colors">
+                                    <a className="font-dmsans">
+                                        Servicios
+                                    </a>
+                                    {/* Botón para desplegar solo si hay servicios en la BD */}
+                                    {servicios && servicios.length > 0 && (
+                                        <button 
+                                            onClick={() => setShowMobileServicesMenu(!showMobileServicesMenu)}
+                                            className=""
+                                        >
+                                            <i className={`fa-solid fa-chevron-down text-base transition-transform duration-300 ${showMobileServicesMenu ? 'rotate-180' : ''}`}></i>
+                                        </button>
+                                    )}
+                                </div>
+                                
+                                {servicios && servicios.length > 0 && (
+                                    <div className={`overflow-hidden transition-all duration-300 ease-in-out bg-[#141414] ${showMobileServicesMenu ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                        <ul className="flex flex-col border-l-2 border-red-600 ml-4">
+                                            {servicios.map((item, index) => (
+                                                <li key={index}>
+                                                    <a 
+                                                        href={`/servicio/${item.slug}`} 
+                                                        className="block px-8 py-4 text-base text-gray-300 hover:text-white hover:bg-white/5"
+                                                    >
+                                                        {item.name}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </li>
+
+                            {/* <li className="border-b border-white/10">
                                 <a className="block px-8 py-5 hover:bg-white/5 transition-colors" href="/servicio-tecnico">
                                     Servicio Técnico
                                 </a>
-                            </li>
+                            </li> */}
 
                             {/* Blog */}
                             {blogs.length > 0 && (
@@ -845,6 +927,7 @@ const Header = ({
                                         })}
                                     </div>
                                 )}
+                                
                                 {/* Total y botón de Checkout */}
                                 {totalPrecio > 0 && (
                                     <div className="  w-full mt-8">

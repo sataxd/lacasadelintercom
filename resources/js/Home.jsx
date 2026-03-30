@@ -12,7 +12,6 @@ import Footer from "./components/Tailwind/Footer";
 import { CarritoContext, CarritoProvider } from "./context/CarritoContext";
 import ItemsRest from "./actions/ItemRest";
 import Slider from "./components/Home/Slider";
-import AboutSection from "./components/Tailwind/Welcome/AboutSection";
 import CategoriesSection from "./components/Tailwind/Welcome/CategoriesSection";
 import ServiceTecnical from "./components/Tailwind/Welcome/ServiceTecnical";
 import Marquesina from "./components/Tailwind/Welcome/Marquesina";
@@ -52,8 +51,6 @@ const Home = ({
 
             <div className="relative z-10">
                 
-                <AboutSection dataAbout={dataAbout} />
-
                 <CategoriesSection category={category} dataAbout={dataAbout} />
 
                 <ServiceTecnical dataAbout={dataAbout} />

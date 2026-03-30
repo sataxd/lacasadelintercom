@@ -12,7 +12,7 @@ import ContactSection from "./components/Tailwind/Welcome/ContactSection";
 import TabPanel from "./components/Tailwind/Services/TabPanel";
 
 const Services = ({generals, showSlogan = true, servicios}) => {
-    
+   
   return <>
 
     <Header
@@ -21,6 +21,7 @@ const Services = ({generals, showSlogan = true, servicios}) => {
     </Header>
 
     <TabPanel servicios={servicios} />
+    
     
     <Footer />
    
