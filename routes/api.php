@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Admin\SliderController as AdminSliderController;
 use App\Http\Controllers\Admin\TestimonyController as AdminTestimonyController;
 use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionController;
+use App\Http\Controllers\Admin\CategoryPostController as AdminCategoryPostController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\SubcategoryController as AdminSubcategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
@@ -290,12 +291,19 @@ Route::middleware('auth')->group(function () {
         Route::patch('/categories/status', [AdminCategoryController::class, 'status']);
         Route::patch('/categories/{field}', [AdminCategoryController::class, 'boolean']);
         Route::delete('/categories/{id}', [AdminCategoryController::class, 'delete']);
-
+        
         Route::post('/subcategories', [AdminSubcategoryController::class, 'save']);
         Route::post('/subcategories/paginate', [AdminSubcategoryController::class, 'paginate']);
         Route::patch('/subcategories/status', [AdminSubcategoryController::class, 'status']);
         Route::patch('/subcategories/{field}', [AdminSubcategoryController::class, 'boolean']);
         Route::delete('/subcategories/{id}', [AdminSubcategoryController::class, 'delete']);
+
+        Route::post('/categoriespost', [AdminCategoryPostController::class, 'save']);
+        Route::post('/categoriespost/paginate', [AdminCategoryPostController::class, 'paginate']);
+        Route::patch('/categoriespost/status', [AdminCategoryPostController::class, 'status']);
+        Route::patch('/categoriespost/{field}', [AdminCategoryPostController::class, 'boolean']);
+        Route::delete('/categoriespost/{id}', [AdminCategoryPostController::class, 'delete']);
+
 
         Route::post('/faqs', [AdminFaqController::class, 'save']);
         Route::post('/faqs/paginate', [AdminFaqController::class, 'paginate']);

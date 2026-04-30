@@ -12,17 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('category_posts', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('name');
-            $table->longText('summary')->nullable();
             $table->longText('description')->nullable();
-            $table->string('image')->nullable();
-            $table->date('post_date')->nullable();
-            $table->foreignUuid('category_id')
-                ->nullable()
-                ->constrained('category_posts')
-                ->nullOnDelete();
+            $table->string('slug')->nullable();
+            $table->boolean('visible')->default(true);
             $table->boolean('status')->default(true)->nullable();
             $table->timestamps();
         });
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('category_posts');
     }
 };

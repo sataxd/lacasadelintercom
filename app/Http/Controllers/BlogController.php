@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\CategoryPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,13 +14,13 @@ class BlogController extends BasicController
 
     public function setReactViewProperties(Request $request)
     {
-        $categories = Category::select([
-            DB::raw('DISTINCT(categories.id)'),
-            'categories.name'
+        $categories = CategoryPost::select([
+            DB::raw('DISTINCT(category_posts.id)'),
+            'category_posts.name'
         ])
-            ->join('posts', 'posts.category_id', 'categories.id')
-            ->where('categories.visible', true)
-            ->where('categories.status', true)
+            ->join('posts', 'posts.category_id', 'category_posts.id')
+            ->where('category_posts.visible', true)
+            ->where('category_posts.status', true)
             ->get();
         return [
             'categories' => $categories

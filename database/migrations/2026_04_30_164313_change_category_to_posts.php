@@ -7,11 +7,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
-    {
+    {   
+        Schema::disableForeignKeyConstraints();
+        // 1. Eliminamos la tabla si ya existe para limpiar llaves foráneas antiguas
+        Schema::dropIfExists('posts');
+
+        Schema::enableForeignKeyConstraints();
+        // 2. Creamos la tabla con la nueva estructura
         Schema::create('posts', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('name');
@@ -19,20 +22,19 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
             $table->date('post_date')->nullable();
+            
             $table->foreignUuid('category_id')
                 ->nullable()
-                ->constrained('category_posts')
+                ->constrained('category_posts') 
                 ->nullOnDelete();
+
             $table->boolean('status')->default(true)->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+         Schema::dropIfExists('posts');
     }
 };

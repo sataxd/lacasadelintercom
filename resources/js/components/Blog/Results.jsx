@@ -18,7 +18,7 @@ const Results = ({ filter }) => {
     ];
     if (filter.category) {
       filter2search.push([
-        'category.id', '=', filter.category
+        'category_id', '=', filter.category
       ])
     }
 

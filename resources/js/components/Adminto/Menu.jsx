@@ -179,6 +179,12 @@ const Menu = ({ session, hasRole, salesCount }) => {
                                     title="Blog"
                                     icon="mdi mdi-cube"
                                 >
+                                    <MenuItem
+                                        href="/admin/category_post"
+                                        icon="mdi mdi-clipboard-list-outline"
+                                    >
+                                        Categorías
+                                    </MenuItem>
 
                                     <MenuItem
                                     href="/admin/tags"

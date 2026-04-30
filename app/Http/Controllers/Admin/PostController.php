@@ -19,7 +19,7 @@ class PostController extends BasicController
 
     public function setPaginationInstance(string $model)
     {
-        return $model::with(['category', 'tags']);
+        return $model::with(['category_posts', 'tags']);
     }
 
     public function afterSave(Request $request, object $jpa)
