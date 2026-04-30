@@ -27,6 +27,7 @@ class Post extends Model
     {
         return $this->hasOne(CategoryPost::class, 'id', 'category_id');
     }
+    
 
     public function tags() {
         return $this->hasManyThrough(Tag::class, PostTag::class, 'post_id', 'id', 'id', 'tag_id');
