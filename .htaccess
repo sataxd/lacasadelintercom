@@ -1,6 +1,11 @@
-RewriteEngine on
-RewriteCond %{REQUEST_URI} !^public
-RewriteRule ^(.*)$ public/$1 [L]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Evita que Apache redirija externamente a la carpeta física /public/
+    RewriteRule ^$ public/index.php [L]
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the â€œea-php81â€ package as the default â€œPHPâ€ programming language.
