@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Permitir rastreo de imágenes y recursos multimedia públicos
+Allow: /api/*/media/*
+
+# Rutas privadas, de sistema y checkout
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /my-account
+Disallow: /confirm-email/*
+Disallow: /confirmation/*
+
+Sitemap: https://casadelintercom.com/sitemap.xml
