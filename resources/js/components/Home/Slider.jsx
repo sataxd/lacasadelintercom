@@ -180,7 +180,8 @@ const Slider = ({ items }) => {
                                     loop
                                     muted
                                     playsInline
-                                    preload="auto"
+                                    preload="metadata"
+                                    poster={slider?.image ? `/api/sliders/media/${slider.image}` : undefined}
                                     disablePictureInPicture
                                     disableRemotePlayback
                                 >

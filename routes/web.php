@@ -164,3 +164,7 @@ Route::middleware(['can:Admin', 'auth'])->prefix('admin')->group(function () {
 
 
 Route::get('/mailing/new-formula', fn() => view('mailing.new-formula'));
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});

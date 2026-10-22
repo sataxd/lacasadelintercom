@@ -2049,7 +2049,7 @@
     ]
   },
   "resources/js/Home.jsx": {
-    "file": "assets/Home-_7lhUwud.js",
+    "file": "assets/Home-Cp-xE22F.js",
     "name": "Home",
     "src": "resources/js/Home.jsx",
     "isEntry": true,
@@ -2753,7 +2753,7 @@
     ]
   },
   "resources/js/components/Adminto/Dx/DxButton.jsx": {
-    "file": "assets/DxButton-l0sNRNKZ.js",
+    "file": "assets/DxButton-DP2rzg_V.js",
     "name": "DxButton",
     "src": "resources/js/components/Adminto/Dx/DxButton.jsx",
     "isEntry": true
@@ -2831,7 +2831,7 @@
     ]
   },
   "resources/js/components/Adminto/form/CheckboxFormGroup.jsx": {
-    "file": "assets/CheckboxFormGroup-ClxeGkIS.js",
+    "file": "assets/CheckboxFormGroup-uOWZuDyS.js",
     "name": "CheckboxFormGroup",
     "src": "resources/js/components/Adminto/form/CheckboxFormGroup.jsx",
     "isEntry": true,
@@ -2934,7 +2934,7 @@
     ]
   },
   "resources/js/components/Adminto/form/TextareaFormGroup.jsx": {
-    "file": "assets/TextareaFormGroup-uOWZuDyS.js",
+    "file": "assets/TextareaFormGroup-ClxeGkIS.js",
     "name": "TextareaFormGroup",
     "src": "resources/js/components/Adminto/form/TextareaFormGroup.jsx",
     "isEntry": true,
@@ -3143,7 +3143,7 @@
     ]
   },
   "resources/js/components/DataGrid.jsx": {
-    "file": "assets/DataGrid-uOWZuDyS.js",
+    "file": "assets/DataGrid-ClxeGkIS.js",
     "name": "DataGrid",
     "src": "resources/js/components/DataGrid.jsx",
     "isEntry": true,
@@ -3428,7 +3428,7 @@
     ]
   },
   "resources/js/components/Table.jsx": {
-    "file": "assets/Table-ClxeGkIS.js",
+    "file": "assets/Table-uOWZuDyS.js",
     "name": "Table",
     "src": "resources/js/components/Table.jsx",
     "isEntry": true,
@@ -3478,7 +3478,7 @@
     ]
   },
   "resources/js/components/Tailwind/DataGrid.jsx": {
-    "file": "assets/DataGrid-ClxeGkIS.js",
+    "file": "assets/DataGrid-uOWZuDyS.js",
     "name": "DataGrid",
     "src": "resources/js/components/Tailwind/DataGrid.jsx",
     "isEntry": true,
@@ -3780,7 +3780,7 @@
     ]
   },
   "resources/js/components/Tailwind/Table.jsx": {
-    "file": "assets/Table-uOWZuDyS.js",
+    "file": "assets/Table-ClxeGkIS.js",
     "name": "Table",
     "src": "resources/js/components/Tailwind/Table.jsx",
     "isEntry": true,
@@ -4054,30 +4054,32 @@
     ]
   },
   "resources/js/components/Test/Fragrance.jsx": {
-    "file": "assets/Fragrance-uOWZuDyS.js",
+    "file": "assets/Fragrance-DH-RYrC3.js",
     "name": "Fragrance",
     "src": "resources/js/components/Test/Fragrance.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/components/About/AboutHeader.jsx",
+      "_tippy-react.esm-CHhA99mn.js",
+      "_index-B80Lgev0.js",
+      "_index-DO3Aws4m.js"
+    ]
+  },
+  "resources/js/components/Test/HairGoals.jsx": {
+    "file": "assets/HairGoals-uOWZuDyS.js",
+    "name": "HairGoals",
+    "src": "resources/js/components/Test/HairGoals.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/components/About/AboutHeader.jsx",
       "_index-B80Lgev0.js"
     ]
   },
-  "resources/js/components/Test/HairGoals.jsx": {
-    "file": "assets/HairGoals-Pqu0qlsw.js",
-    "name": "HairGoals",
-    "src": "resources/js/components/Test/HairGoals.jsx",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/components/About/AboutHeader.jsx",
-      "_index-B80Lgev0.js"
-    ]
-  },
   "resources/js/components/Test/HairType.jsx": {
-    "file": "assets/HairType-D4XKIVGc.js",
+    "file": "assets/HairType-CpPx52vs.js",
     "name": "HairType",
     "src": "resources/js/components/Test/HairType.jsx",
-    "isDynamicEntry": true,
+    "isEntry": true,
     "imports": [
       "resources/js/components/About/AboutHeader.jsx",
       "_index-B80Lgev0.js",
@@ -4087,10 +4089,10 @@
     ]
   },
   "resources/js/components/Test/Main.jsx": {
-    "file": "assets/Main-uOWZuDyS.js",
+    "file": "assets/Main-BZiqHNWT.js",
     "name": "Main",
     "src": "resources/js/components/Test/Main.jsx",
-    "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "resources/js/components/About/AboutHeader.jsx",
       "_index-B80Lgev0.js"
@@ -4202,13 +4204,13 @@
     ]
   },
   "resources/js/components/dx/DxButton.jsx": {
-    "file": "assets/DxButton-DP2rzg_V.js",
+    "file": "assets/DxButton-l0sNRNKZ.js",
     "name": "DxButton",
     "src": "resources/js/components/dx/DxButton.jsx",
     "isEntry": true
   },
   "resources/js/components/form/CheckboxFormGroup.jsx": {
-    "file": "assets/CheckboxFormGroup-uOWZuDyS.js",
+    "file": "assets/CheckboxFormGroup-ClxeGkIS.js",
     "name": "CheckboxFormGroup",
     "src": "resources/js/components/form/CheckboxFormGroup.jsx",
     "isEntry": true,
@@ -4270,7 +4272,7 @@
     ]
   },
   "resources/js/components/form/TextareaFormGroup.jsx": {
-    "file": "assets/TextareaFormGroup-ClxeGkIS.js",
+    "file": "assets/TextareaFormGroup-uOWZuDyS.js",
     "name": "TextareaFormGroup",
     "src": "resources/js/components/form/TextareaFormGroup.jsx",
     "isEntry": true,
